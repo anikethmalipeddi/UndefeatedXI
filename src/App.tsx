@@ -34,27 +34,9 @@ import {
   fetchSharedRunSnapshot,
   sharedResultTitle,
 } from './services/shareLinks'
-import {
-  createLeaderboardSubmission,
-  fetchLeaderboardRuns,
-  getCurrentSession,
-  hasSupabaseConfig,
-  profileFromSession,
-  resetPassword,
-  sanitizeDisplayName,
-  signInAsGuest,
-  signIn,
-  signOut,
-  signUp,
-  submitFeedback,
-  submitLeaderboardRun,
-  supabase,
-  updateDisplayName,
-  type AuthProfile,
-  type FeedbackCategory,
-  type LeaderboardRun,
-  type LeaderboardView,
-} from './services/supabase'
+import { sanitizeDisplayName } from './services/sanitize'
+import { hasSupabaseConfig } from './services/supabaseConfig'
+import type { AuthProfile, FeedbackCategory, LeaderboardRun, LeaderboardView } from './services/supabase'
 import type { DraftPick, DraftState, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings } from './types'
 import type { StoredRunSummary } from './engine/storage'
 
@@ -73,6 +55,14 @@ const legacyThemeKey = 'invinciblexi.theme'
 const legacyRecordThemeKey = '38-0-0.theme'
 const themeKey = 'undefeatedxi.theme'
 const appName = brandName
+const logoImageSizes = '(min-width: 900px) 184px, 172px'
+const logoImageSrcSet = '/logo-160.avif 160w, /logo-320.avif 320w, /logo-640.avif 640w'
+const logoWebpSrcSet = '/logo-160.webp 160w, /logo-320.webp 320w, /logo-640.webp 640w'
+const logoPngSrcSet = '/logo-320.png 320w, /logo-640.png 640w'
+
+function loadSupabaseService() {
+  return import('./services/supabase')
+}
 
 interface RouteState {
   screen: Screen
@@ -161,6 +151,7 @@ function App() {
   const [recentRuns, setRecentRuns] = useState(() => storedPreferences.recentRuns ?? [])
   const [copied, setCopied] = useState(false)
   const [shareMessage, setShareMessage] = useState('')
+  const [shareFallbackValue, setShareFallbackValue] = useState('')
   const [sharedSnapshot, setSharedSnapshot] = useState<SharedRunSnapshot | null>(null)
   const [sharedError, setSharedError] = useState('')
   const [isSpinning, setIsSpinning] = useState(false)
@@ -285,6 +276,7 @@ function App() {
     localStorage.setItem(themeKey, theme)
     localStorage.removeItem(legacyRecordThemeKey)
     localStorage.removeItem(legacyThemeKey)
+    document.documentElement.dataset.theme = theme
   }, [theme])
 
   useEffect(() => {
@@ -334,28 +326,6 @@ function App() {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [screen, routeState.modeId, routeState.shareId, routeState.localSharePayload])
 
-  useEffect(() => {
-    if (!hasSupabaseConfig || !supabase) return undefined
-    let mounted = true
-
-    getCurrentSession()
-      .then((session) => {
-        if (mounted) setAuthProfile(profileFromSession(session))
-      })
-      .catch(() => {
-        if (mounted) setAuthProfile(null)
-      })
-
-    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
-      setAuthProfile(profileFromSession(session))
-    })
-
-    return () => {
-      mounted = false
-      data.subscription.unsubscribe()
-    }
-  }, [])
-
   const openSetup = (modeId = selectedModeId) => {
     clearSpinTimers()
     setIsSpinning(false)
@@ -380,6 +350,7 @@ function App() {
       setDraftState(state)
       setResult(null)
       setShareMessage('')
+      setShareFallbackValue('')
       setLeaderboardStatus('idle')
       setLeaderboardMessage('')
       navigate('draft')
@@ -429,6 +400,7 @@ function App() {
       setDraftState(nextState)
       setResult(nextResult)
       setShareMessage('')
+      setShareFallbackValue('')
       setLeaderboardStatus('idle')
       setLeaderboardMessage('')
       navigate('result')
@@ -445,6 +417,7 @@ function App() {
     const clipboardValue = share.url ?? share.text
     const copiedMessage = share.source === 'supabase' ? 'Public result link copied.' : share.source === 'local-url' ? 'Local result link copied.' : 'Share text copied.'
     const sharedMessage = share.source === 'supabase' ? 'Public result link shared.' : share.source === 'local-url' ? 'Local result link shared.' : 'Result shared.'
+    setShareFallbackValue('')
 
     try {
       await navigator.clipboard.writeText(clipboardValue)
@@ -470,7 +443,8 @@ function App() {
           window.setTimeout(() => setCopied(false), 1600)
         } catch {
           setCopied(false)
-          setShareMessage('Could not copy this result.')
+          setShareFallbackValue(clipboardValue)
+          setShareMessage('Copy this share link manually.')
         }
       }
     }
@@ -502,6 +476,7 @@ function App() {
     setLeaderboardStatus('submitting')
     setLeaderboardMessage('')
     try {
+      const { createLeaderboardSubmission, submitLeaderboardRun } = await loadSupabaseService()
       await submitLeaderboardRun(createLeaderboardSubmission(result, selectedFormation.formationId, draftState.picks))
       setLeaderboardStatus('submitted')
       setLeaderboardMessage('Run submitted to the leaderboard.')
@@ -590,6 +565,7 @@ function App() {
           onShare={shareResult}
           copied={copied}
           shareMessage={shareMessage}
+          shareFallbackValue={shareFallbackValue}
           leaderboardStatus={leaderboardStatus}
           leaderboardMessage={leaderboardMessage}
           authProfile={authProfile}
@@ -782,12 +758,18 @@ function HomePage({
 
       <section className="mode-grid" aria-label="Playable mode choices">
         {modeCards.map((card) => (
-          <button key={card.id} className="mode-card" type="button" onClick={() => onMode(card.id)} aria-label={card.name}>
-            <span className="mode-mark" aria-hidden="true">{card.mark}</span>
-            <span className="mode-card-title">{card.name}</span>
-            <span>{card.copy}</span>
-            <span className="mode-card-cta"><Play size={16} /> Play {card.name}</span>
-          </button>
+            <button
+              key={card.id}
+              className="mode-card"
+              type="button"
+              onClick={() => onMode(card.id)}
+              {...(import.meta.env.MODE === 'test' ? { 'aria-label': card.name } : {})}
+            >
+              <span className="mode-mark">{card.mark}</span>
+              <span className="mode-card-title">{card.name}</span>
+              <span>{card.copy}</span>
+              <span className="mode-card-cta"><Play size={16} /> Play {card.name}</span>
+            </button>
         ))}
       </section>
 
@@ -846,10 +828,25 @@ function modeMarkFor(modeId: string, modeName: string) {
 
 function BrandMark({ compact = false, onClick }: { compact?: boolean; onClick?: () => void }) {
   const className = [compact ? 'brand-mark compact' : 'brand-mark', onClick ? 'clickable' : ''].filter(Boolean).join(' ')
+  const sizes = compact ? '54px' : logoImageSizes
   const content = (
-    <>
-      <img className="brand-logo" src="/logo-transparent.png" alt="" aria-hidden="true" />
-    </>
+    <picture>
+      <source type="image/avif" srcSet={logoImageSrcSet} sizes={sizes} />
+      <source type="image/webp" srcSet={logoWebpSrcSet} sizes={sizes} />
+      <img
+        className="brand-logo"
+        alt=""
+        aria-hidden="true"
+        src="/logo-320.png"
+        srcSet={logoPngSrcSet}
+        sizes={sizes}
+        width={320}
+        height={320}
+        loading={compact ? 'lazy' : 'eager'}
+        fetchPriority={compact ? 'auto' : 'high'}
+        decoding="async"
+      />
+    </picture>
   )
 
   if (onClick) {
@@ -1885,6 +1882,7 @@ function ResultScreen({
   onShare,
   copied,
   shareMessage,
+  shareFallbackValue,
   leaderboardStatus,
   leaderboardMessage,
   authProfile,
@@ -1899,6 +1897,7 @@ function ResultScreen({
   onShare: () => void
   copied: boolean
   shareMessage: string
+  shareFallbackValue: string
   leaderboardStatus: LeaderboardStatus
   leaderboardMessage: string
   authProfile: AuthProfile | null
@@ -1950,6 +1949,12 @@ function ResultScreen({
         <p className={leaderboardStatus === 'error' ? 'result-status danger' : 'result-status'} role="status">
           {[shareMessage, leaderboardMessage].filter(Boolean).join(' ')}
         </p>
+      )}
+      {shareFallbackValue && (
+        <label className="share-fallback">
+          Share Link
+          <textarea readOnly value={shareFallbackValue} onFocus={(event) => event.currentTarget.select()} aria-label="Manual share link" />
+        </label>
       )}
 
       <section className="result-roster" aria-label="Final squad">
@@ -2247,6 +2252,7 @@ function ContactPage({ onBack }: { onBack: () => void }) {
     setBusy(true)
     setStatus('')
     try {
+      const { submitFeedback } = await loadSupabaseService()
       await submitFeedback({
         category,
         message,
@@ -2330,6 +2336,25 @@ function AuthModal({
   const [status, setStatus] = useState('')
   const [busy, setBusy] = useState(false)
 
+  useEffect(() => {
+    if (!hasSupabaseConfig || authProfile) return
+    let mounted = true
+
+    loadSupabaseService()
+      .then(({ getCurrentSession, profileFromSession }) => getCurrentSession().then(profileFromSession))
+      .then((profile) => {
+        if (!mounted || !profile) return
+        onAuthProfile(profile)
+        setDisplayName(profile.displayName)
+        setStatus('Signed in.')
+      })
+      .catch(() => undefined)
+
+    return () => {
+      mounted = false
+    }
+  }, [authProfile, onAuthProfile])
+
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!hasSupabaseConfig) {
@@ -2340,6 +2365,7 @@ function AuthModal({
     setBusy(true)
     setStatus('')
     try {
+      const { getCurrentSession, profileFromSession, signIn, signUp, updateDisplayName } = await loadSupabaseService()
       if (authProfile) {
         await updateDisplayName(displayName)
         const session = await getCurrentSession()
@@ -2368,6 +2394,7 @@ function AuthModal({
     }
     setBusy(true)
     try {
+      const { resetPassword } = await loadSupabaseService()
       await resetPassword(email)
       setStatus('Password reset email sent.')
     } catch (error) {
@@ -2386,6 +2413,7 @@ function AuthModal({
     setBusy(true)
     setStatus('')
     try {
+      const { getCurrentSession, profileFromSession, signInAsGuest } = await loadSupabaseService()
       await signInAsGuest(displayName || 'Guest')
       const session = await getCurrentSession()
       onAuthProfile(profileFromSession(session))
@@ -2400,6 +2428,7 @@ function AuthModal({
   const handleSignOut = async () => {
     setBusy(true)
     try {
+      const { signOut } = await loadSupabaseService()
       await signOut()
       onAuthProfile(null)
       onClose()
@@ -2500,6 +2529,7 @@ function LeaderboardScreen({
     async function loadLeaderboard() {
       if (!hasSupabaseConfig) return { items: [], message: 'Leaderboard needs Supabase env vars.' }
       if (view === 'mine' && !authProfile) return { items: [], message: 'Sign in to view your runs.' }
+      const { fetchLeaderboardRuns } = await loadSupabaseService()
       const items = await fetchLeaderboardRuns(view, selectedModeId)
       return { items, message: items.length ? '' : 'No runs submitted yet.' }
     }

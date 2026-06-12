@@ -1,7 +1,7 @@
 import { brandVersion } from '../brand'
 import { formatRecord } from '../engine/share'
 import { scoreRun } from '../engine/storage'
-import { hasSupabaseConfig, supabase } from './supabase'
+import { hasSupabaseConfig } from './supabaseConfig'
 import type { DraftPick, Ratings, SharedPickSnapshot, SharedRunSnapshot, ShareResult, RunResult, TeamRatings } from '../types'
 
 function getPlayerInitials(name: string): string {
@@ -303,7 +303,9 @@ export function decodeLocalSharedRun(payload: string): SharedRunSnapshot | null 
 }
 
 export async function fetchSharedRunSnapshot(shareId: string): Promise<SharedRunSnapshot | null> {
-  if (!hasSupabaseConfig || !supabase || !/^[a-zA-Z0-9_-]{8,64}$/.test(shareId)) return null
+  if (!hasSupabaseConfig || !/^[a-zA-Z0-9_-]{8,64}$/.test(shareId)) return null
+  const { supabase } = await import('./supabase')
+  if (!supabase) return null
   const { data, error } = await supabase
     .from('shared_runs')
     .select('snapshot')
@@ -320,8 +322,10 @@ export async function createShareLink(snapshot: SharedRunSnapshot, text: string)
   const localUrl = localResultUrl(snapshot)
   if (issues.some((issue) => issue !== 'Snapshot too large.')) return { text, source: 'text-fallback' }
 
-  if (issues.length === 0 && hasSupabaseConfig && supabase) {
+  if (issues.length === 0 && hasSupabaseConfig) {
     try {
+      const { supabase } = await import('./supabase')
+      if (!supabase) throw new Error('Supabase is not configured.')
       const { data, error } = await supabase.functions.invoke('share-run', { body: snapshot })
       const shareId = typeof data?.share_id === 'string' ? data.share_id : typeof data?.shareId === 'string' ? data.shareId : ''
       if (!error && shareId) {

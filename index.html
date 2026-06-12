@@ -2,9 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/logo-transparent.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        try {
+          const theme = localStorage.getItem('undefeatedxi.theme') || localStorage.getItem('38-0-0.theme') || localStorage.getItem('invinciblexi.theme')
+          document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light'
+        } catch {
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="preload"
+      as="image"
+      href="/logo-320.avif"
+      type="image/avif"
+      fetchpriority="high"
+      imagesrcset="/logo-160.avif 160w, /logo-320.avif 320w, /logo-640.avif 640w"
+      imagesizes="(min-width: 900px) 184px, 172px"
+    />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/fira-sans-latin-900.woff2" crossorigin />
     <meta
       name="description"
       content="UndefeatedXI is a football-history draft game. Spin clubs, nations, and eras, draft legends, and chase 38-0-0."

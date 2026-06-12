@@ -5,10 +5,17 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
+const hostname = typeof window === 'undefined' ? '' : window.location.hostname
+const shouldRenderVercelInsights = hostname !== 'localhost' && hostname !== '127.0.0.1' && hostname !== '::1'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-    <Analytics />
-    <SpeedInsights />
+    {shouldRenderVercelInsights && (
+      <>
+        <Analytics />
+        <SpeedInsights />
+      </>
+    )}
   </StrictMode>,
 )

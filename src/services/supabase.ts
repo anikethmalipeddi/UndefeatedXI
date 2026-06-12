@@ -1,12 +1,11 @@
 import { createClient, type Session, type SupabaseClient } from '@supabase/supabase-js'
 import type { DraftPick, RunResult } from '../types'
 import { scoreRun, summarizeRun } from '../engine/storage'
+import { hasSupabaseConfig, supabaseAnonKey, supabaseUrl } from './supabaseConfig'
+import { sanitizeDisplayName } from './sanitize'
 
-const viteEnv = import.meta.env ?? {}
-const supabaseUrl = viteEnv.VITE_SUPABASE_URL as string | undefined
-const supabaseAnonKey = viteEnv.VITE_SUPABASE_ANON_KEY as string | undefined
-
-export const hasSupabaseConfig = viteEnv.MODE !== 'test' && Boolean(supabaseUrl && supabaseAnonKey)
+export { hasSupabaseConfig } from './supabaseConfig'
+export { sanitizeDisplayName } from './sanitize'
 
 export const supabase: SupabaseClient | null = hasSupabaseConfig
   ? createClient(supabaseUrl as string, supabaseAnonKey as string, {
@@ -68,10 +67,6 @@ export interface FeedbackSubmission {
   modeId?: string
   runId?: string
   pageUrl?: string
-}
-
-export function sanitizeDisplayName(value: string): string {
-  return value.replace(/[^\p{L}\p{N}\s._-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 32)
 }
 
 function sanitizeOptionalText(value: string | undefined, limit: number): string | null {
