@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import type { DraftPick, PlayerContext, Ratings } from '../types'
+import type { DraftPick, ModeConfig, PlayerContext, Ratings } from '../types'
 import { formations } from '../data/formations'
 import { getModeConfig, modeConfigs, publicModeConfigs } from '../data/modes'
 import { playerContexts } from '../data/playerContexts'
@@ -510,6 +510,96 @@ describe('draft engine', () => {
     expect(selected.picks).toHaveLength(baseState.draftSlots.length)
     expect(selected.picks.at(-1)?.slot.slotId).toBe('bench_fb')
     expect(selected.picks.at(-1)?.player.personId).toBe(benchPlayer.personId)
+  })
+
+  it('can complete the final World Cup 3-4-3 slot with the current roll player', () => {
+    const mode = getModeConfig('world_cup')
+    const baseState = createDraftState(mode, '3-4-3')
+    const openSlot = baseState.draftSlots.find((slot) => slot.slotId === 'cb3')
+    const finalPlayer = playerContexts.find((player) => player.contextId === 'rated_q133903_netherlands_2010s')
+    if (!openSlot || !finalPlayer) throw new Error('Missing World Cup final-slot regression setup')
+
+    const usedPeople = new Set<string>([finalPlayer.personId])
+    const picks = baseState.draftSlots.filter((slot) => slot.slotId !== openSlot.slotId).map((slot, index) => {
+      const player = playerContexts.find((candidate) => slotMatchesPlayer(slot, candidate) && modeMatchesPlayer(mode, candidate) && !usedPeople.has(candidate.personId))
+      if (!player) throw new Error(`Missing filler for ${slot.label}`)
+      usedPeople.add(player.personId)
+      return {
+        round: index + 1,
+        slot,
+        roll: { team: { label: player.teamName, teamType: player.teamType }, era: player.eraLabel },
+        player,
+      }
+    })
+    const state = {
+      ...baseState,
+      roundIndex: picks.length,
+      picks,
+      currentRoll: { team: { label: 'Netherlands', teamType: 'nation' as const }, era: '2010s' },
+      currentOptions: [],
+      currentRollPool: [],
+    }
+
+    const selected = selectPlayerForSlot(state, finalPlayer, openSlot.slotId)
+
+    expect(selected.picks).toHaveLength(baseState.draftSlots.length)
+    expect(selected.picks.at(-1)?.slot.slotId).toBe('cb3')
+    expect(selected.picks.at(-1)?.player.contextId).toBe(finalPlayer.contextId)
+    expect(isDraftComplete(selected)).toBe(true)
+  })
+
+  it('can complete the final visible roll-pool pick in every public mode', () => {
+    const formationId = '4-3-3'
+    const rollEraForMode = (mode: ModeConfig, player: PlayerContext) => (
+      mode.rollDimensions.includes('european_era')
+        ? mode.eraPool.find((era) => era.startsWith(player.decade)) ?? player.eraLabel
+        : player.eraLabel
+    )
+    const playerFitsRollDimension = (mode: ModeConfig, player: PlayerContext) => {
+      if (mode.rollDimensions.includes('nation')) return player.teamType === 'nation'
+      if (mode.rollDimensions.includes('club')) return player.teamType === 'club'
+      return true
+    }
+
+    for (const mode of publicModeConfigs.filter((item) => item.allowedFormations.includes(formationId))) {
+      const baseState = createDraftState(mode, formationId)
+      const openSlot = baseState.draftSlots.at(-1)
+      if (!openSlot) throw new Error(`Missing final slot for ${mode.modeId}`)
+      const finalPlayer = playerContexts.find((player) => slotMatchesPlayer(openSlot, player) && modeMatchesPlayer(mode, player) && playerFitsRollDimension(mode, player))
+      if (!finalPlayer) throw new Error(`Missing final visible option for ${mode.modeId}`)
+
+      const usedPeople = new Set<string>([finalPlayer.personId])
+      const picks = baseState.draftSlots.filter((slot) => slot.slotId !== openSlot.slotId).map((slot, index) => {
+        const player = playerContexts.find((candidate) => (
+          slotMatchesPlayer(slot, candidate) &&
+          modeMatchesPlayer(mode, candidate) &&
+          playerFitsRollDimension(mode, candidate) &&
+          !usedPeople.has(candidate.personId)
+        ))
+        if (!player) throw new Error(`Missing ${mode.modeId} filler for ${slot.label}`)
+        usedPeople.add(player.personId)
+        return {
+          round: index + 1,
+          slot,
+          roll: { team: { label: player.teamName, teamType: player.teamType }, era: rollEraForMode(mode, player) },
+          player,
+        }
+      })
+      const state = {
+        ...baseState,
+        roundIndex: picks.length,
+        picks,
+        currentRoll: { team: { label: finalPlayer.teamName, teamType: finalPlayer.teamType }, era: rollEraForMode(mode, finalPlayer) },
+        currentOptions: [],
+        currentRollPool: [finalPlayer],
+      }
+
+      const selected = selectPlayerForSlot(state, finalPlayer, openSlot.slotId)
+
+      expect(selected.picks, `${mode.modeId} did not accept the final ${openSlot.label}`).toHaveLength(baseState.draftSlots.length)
+      expect(selected.picks.at(-1)?.player.contextId).toBe(finalPlayer.contextId)
+      expect(isDraftComplete(selected), `${mode.modeId} did not complete after final ${openSlot.label}`).toBe(true)
+    }
   })
 
   it('can complete a default draft for every configured ready or demo mode', () => {

@@ -373,13 +373,15 @@ function minimumRemainingCoverage(mode: ModeConfig, openSlots: FormationSlot[], 
 }
 
 export function selectPlayerForSlot(state: DraftState, player: PlayerContext, slotId?: string): DraftState {
+  const mode = getModeConfig(state.modeId)
   const roll = state.currentRoll
   const targetIndex = state.draftSlots.findIndex((slot) => slot.slotId === slotId)
   const slot = targetIndex >= 0 ? state.draftSlots[targetIndex] : undefined
   if (!slot || !roll) return state
   const isVisibleRollPlayer = state.currentRollPool?.some((option) => option.contextId === player.contextId || option.personId === player.personId) ?? false
   const isSelectableOption = state.currentOptions.some((option) => option.contextId === player.contextId || option.personId === player.personId)
-  if (!isVisibleRollPlayer && !isSelectableOption) return state
+  const isCurrentRollPlayer = modeMatchesPlayer(mode, player) && teamMatches(mode, roll, player) && eraMatches(mode, roll, player)
+  if (!isVisibleRollPlayer && !isSelectableOption && !isCurrentRollPlayer) return state
   if (state.picks.some((pick) => pick.player.personId === player.personId)) return state
   if (state.picks.some((pick) => pick.slot.slotId === slot.slotId)) return state
   if (!slotMatchesPlayer(slot, player)) return state
