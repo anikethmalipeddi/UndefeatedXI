@@ -1,0 +1,184 @@
+{
+  "generatedBy": "scripts/generate-data.ts",
+  "generatedAt": "2026-06-11T18:26:59.709Z",
+  "note": "Online source reachability and API summaries for UndefeatedXI data inputs.",
+  "sourceStatus": [
+    {
+      "label": "OpenFootball players",
+      "url": "https://github.com/openfootball/players",
+      "apiUrl": "https://api.github.com/repos/openfootball/players",
+      "role": "identity and public-domain player reference",
+      "status": 200,
+      "statusText": "OK",
+      "apiStatus": 200,
+      "apiStatusText": "OK",
+      "apiSummary": {
+        "stars": 27,
+        "forks": 12,
+        "defaultBranch": "master",
+        "updatedAt": "2025-11-23T20:16:47Z"
+      },
+      "checkedAt": "2026-06-11T18:26:59.709Z"
+    },
+    {
+      "label": "OpenFootball football.json",
+      "url": "https://github.com/openfootball/football.json",
+      "apiUrl": "https://api.github.com/repos/openfootball/football.json",
+      "role": "competition and match-data reference",
+      "status": 200,
+      "statusText": "OK",
+      "apiStatus": 200,
+      "apiStatusText": "OK",
+      "apiSummary": {
+        "stars": 952,
+        "forks": 205,
+        "defaultBranch": "master",
+        "updatedAt": "2026-06-11T18:03:44Z"
+      },
+      "checkedAt": "2026-06-11T18:26:59.709Z"
+    },
+    {
+      "label": "Wikidata SPARQL",
+      "url": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/en-gb",
+      "apiUrl": "https://query.wikidata.org/sparql?query=SELECT%20%3Fplayer%20%3FplayerLabel%20%3FbirthYear%20WHERE%20%7B%0A%20%20VALUES%20%3Fplayer%20%7B%20wd%3AQ615%20wd%3AQ11571%20wd%3AQ39444%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fplayer%20wdt%3AP569%20%3Fdob.%20BIND(YEAR(%3Fdob)%20AS%20%3FbirthYear)%20%7D%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%7D&format=json",
+      "role": "clubs, nations, dates, aliases, and membership facts",
+      "status": 200,
+      "statusText": "OK",
+      "apiStatus": 200,
+      "apiStatusText": "OK",
+      "apiSummary": {
+        "sampleBindings": [
+          "Lionel Messi",
+          "Cristiano Ronaldo",
+          "Ronaldinho"
+        ]
+      },
+      "checkedAt": "2026-06-11T18:26:59.709Z"
+    },
+    {
+      "label": "Football-Data.co.uk",
+      "url": "https://www.football-data.co.uk/data",
+      "apiUrl": "https://www.football-data.co.uk/mmz4281/2526/E0.csv",
+      "role": "league result calibration reference",
+      "status": 200,
+      "statusText": "OK",
+      "apiStatus": 200,
+      "apiStatusText": "OK",
+      "apiSummary": {
+        "rows": 381,
+        "columns": [
+          "Div",
+          "Date",
+          "Time",
+          "HomeTeam",
+          "AwayTeam",
+          "FTHG",
+          "FTAG",
+          "FTR",
+          "HTHG",
+          "HTAG",
+          "HTR",
+          "Referee"
+        ]
+      },
+      "checkedAt": "2026-06-11T18:26:59.709Z"
+    },
+    {
+      "label": "StatsBomb open data",
+      "url": "https://github.com/statsbomb/open-data",
+      "apiUrl": "https://raw.githubusercontent.com/statsbomb/open-data/master/data/competitions.json",
+      "role": "modern event-data calibration reference where attribution is acceptable",
+      "status": 200,
+      "statusText": "OK",
+      "apiStatus": 200,
+      "apiStatusText": "OK",
+      "apiSummary": {
+        "records": 80,
+        "sampleCompetitions": [
+          "1. Bundesliga 2023/2024",
+          "1. Bundesliga 2015/2016",
+          "African Cup of Nations 2023",
+          "Champions League 2018/2019",
+          "Champions League 2017/2018"
+        ]
+      },
+      "checkedAt": "2026-06-11T18:26:59.709Z"
+    },
+    {
+      "label": "EA SPORTS FC ratings",
+      "url": "https://www.ea.com/en/games/ea-sports-fc/ratings",
+      "apiUrl": "https://www.ea.com/en/games/ea-sports-fc/ratings/leagues-ratings/premier-league/13",
+      "role": "official current-player rating calibration reference",
+      "status": 200,
+      "statusText": "OK",
+      "apiStatus": 200,
+      "apiStatusText": "OK",
+      "apiSummary": {
+        "sampledPage": "Premier League ratings",
+        "players": [
+          {
+            "player": "Mohamed Salah",
+            "ratings": {
+              "OVR": 91,
+              "PAC": 89,
+              "SHO": 88,
+              "PAS": 86,
+              "DRI": 90,
+              "DEF": 45,
+              "PHY": 76
+            }
+          },
+          {
+            "player": "Rodri",
+            "ratings": {
+              "OVR": 90,
+              "PAC": 65,
+              "SHO": 80,
+              "PAS": 86,
+              "DRI": 84,
+              "DEF": 86,
+              "PHY": 85
+            }
+          },
+          {
+            "player": "Virgil van Dijk",
+            "ratings": {
+              "OVR": 90,
+              "PAC": 73,
+              "SHO": 60,
+              "PAS": 72,
+              "DRI": 72,
+              "DEF": 90,
+              "PHY": 87
+            }
+          },
+          {
+            "player": "Erling Haaland",
+            "ratings": {
+              "OVR": 90,
+              "PAC": 86,
+              "SHO": 91,
+              "PAS": 70,
+              "DRI": 80,
+              "DEF": 45,
+              "PHY": 88
+            }
+          },
+          {
+            "player": "Alisson",
+            "ratings": {
+              "OVR": 89,
+              "PAC": 86,
+              "SHO": 85,
+              "PAS": 86,
+              "DRI": 89,
+              "DEF": 56,
+              "PHY": 90
+            }
+          }
+        ]
+      },
+      "checkedAt": "2026-06-11T18:26:59.709Z"
+    }
+  ]
+}

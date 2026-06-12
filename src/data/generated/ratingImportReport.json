@@ -1,0 +1,1048 @@
+{
+  "generatedBy": "scripts/import-rating-contexts.ts",
+  "generatedAt": "2026-06-11T18:26:44.953Z",
+  "inputFolder": "data/external/ratings",
+  "targetPerExactRoll": "top-50-source-backed-or-legacy-proxy",
+  "minimumReportCoverage": 50,
+  "sourceFiles": [
+    {
+      "file": "data/external/ratings/fc24/male_players.csv",
+      "sourceLabel": "EA/SoFIFA CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-24-complete-player-dataset",
+      "schemaDetected": "ea-sofifa-career"
+    },
+    {
+      "file": "data/external/ratings/fc24/male_teams.csv",
+      "sourceLabel": "EA/SoFIFA CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-24-complete-player-dataset",
+      "schemaDetected": "ea-sofifa-career"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 10 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 11 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 12 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 13 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 14 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 15 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 16 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 17 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 18 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 19 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/fut10_20/Fifa 20 Fut Players.csv",
+      "sourceLabel": "FIFA 10-20 FUT CSV snapshot",
+      "sourceUrl": "https://www.kaggle.com/datasets/mohammedessam97/fifa-1020-fut-players-dataset",
+      "schemaDetected": "fut-card"
+    },
+    {
+      "file": "data/external/ratings/legacy_proxy/old_era_legacy_proxy_ratings.csv",
+      "sourceLabel": "Approved public historical numeric rating proxy",
+      "sourceUrl": "local CSV with per-row source_url provenance",
+      "schemaDetected": "legacy-proxy"
+    }
+  ],
+  "wikidataFacts": 33712,
+  "ratingRows": 361869,
+  "generatedLegacyProxyRows": 14324,
+  "matchedPlayers": 6139,
+  "generatedPeople": 10310,
+  "generatedContexts": 20090,
+  "confidenceCounts": {
+    "legacy-proxy": 14442,
+    "icon-hero": 447,
+    "exact-team-era": 3230,
+    "player-era": 1971
+  },
+  "highProfileRolls": [
+    {
+      "modeId": "world_xi",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "world_xi",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "world_xi",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "world_xi",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "premier_league",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "champions_league",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s UCL",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "champions_league",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s UCL",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "world_cup",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "world_cup",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "ball_knowledge",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "ball_knowledge",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "ball_knowledge",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "ball_knowledge",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "english_top_flight",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "laliga",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "mls",
+      "team": "LA Galaxy",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 97,
+      "matchedCandidates": 238,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 15,
+        "ATT": 9,
+        "DEF": 18,
+        "GK": 8
+      },
+      "confidenceCounts": {
+        "exact-team-era": 35,
+        "legacy-proxy": 15
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "mls",
+      "team": "Inter Miami",
+      "teamType": "club",
+      "era": "2020s",
+      "facts": 22,
+      "matchedCandidates": 29,
+      "generatedContexts": 22,
+      "positionGroups": {
+        "MID": 8,
+        "DEF": 11,
+        "ATT": 2,
+        "GK": 1
+      },
+      "confidenceCounts": {
+        "exact-team-era": 14,
+        "legacy-proxy": 8
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "classic_european_cup",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "classic_european_cup",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "classic_european_cup",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "classic_european_cup",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "euros",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "copa_america",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "club_world_cup",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "club_world_cup",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "club_world_cup",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "club_world_cup",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "one_club",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "one_club",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "nation_xi",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "nation_xi",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "era_lock",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "era_lock",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "era_lock",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "era_lock",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "chaos",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "chaos",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "chaos",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "chaos",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    },
+    {
+      "modeId": "manager",
+      "team": "Barcelona",
+      "teamType": "club",
+      "era": "2010s",
+      "facts": 93,
+      "matchedCandidates": 367,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 8,
+        "DEF": 18,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "exact-team-era": 43,
+        "icon-hero": 2,
+        "legacy-proxy": 5
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "manager",
+      "team": "Manchester United",
+      "teamType": "club",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 185,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "MID": 20,
+        "ATT": 11,
+        "DEF": 15,
+        "GK": 4
+      },
+      "confidenceCounts": {
+        "icon-hero": 6,
+        "exact-team-era": 18,
+        "legacy-proxy": 26
+      },
+      "missingExamples": []
+    },
+    {
+      "modeId": "manager",
+      "team": "Brazil",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 180,
+      "matchedCandidates": 202,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "DEF": 17,
+        "ATT": 8,
+        "MID": 23,
+        "GK": 2
+      },
+      "confidenceCounts": {
+        "icon-hero": 1,
+        "player-era": 14,
+        "legacy-proxy": 35
+      },
+      "missingExamples": [
+        "Léo Lima"
+      ]
+    },
+    {
+      "modeId": "manager",
+      "team": "England",
+      "teamType": "nation",
+      "era": "2000s",
+      "facts": 101,
+      "matchedCandidates": 161,
+      "generatedContexts": 50,
+      "positionGroups": {
+        "ATT": 10,
+        "MID": 17,
+        "DEF": 18,
+        "GK": 5
+      },
+      "confidenceCounts": {
+        "icon-hero": 7,
+        "player-era": 39,
+        "legacy-proxy": 4
+      },
+      "missingExamples": [
+        "Thomas Burn"
+      ]
+    }
+  ]
+}

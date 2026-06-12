@@ -1,0 +1,3586 @@
+{
+  "generatedBy": "scripts/import-rating-contexts.ts",
+  "generatedAt": "2026-06-11T18:26:44.953Z",
+  "policy": {
+    "generatedProxyMetricMax": 92,
+    "generatedProxyBigGameMax": 91,
+    "note": "Caps apply only to Wikidata appearance-model proxy rows. EA/FUT/Icon/Hero and manually reviewed legacy proxy rows may exceed them."
+  },
+  "summary": {
+    "totalContexts": 20090,
+    "generatedProxyContexts": 14324,
+    "tierCounts": {
+      "legend-candidate": 1302,
+      "star": 1687,
+      "important": 2634,
+      "regular": 4883,
+      "fringe": 3818
+    },
+    "metricDistribution": {
+      "attack": {
+        "p50": 66,
+        "p75": 72,
+        "p90": 77,
+        "p95": 79,
+        "p99": 82,
+        "max": 87
+      },
+      "creation": {
+        "p50": 65,
+        "p75": 73,
+        "p90": 77,
+        "p95": 79,
+        "p99": 81,
+        "max": 84
+      },
+      "control": {
+        "p50": 67,
+        "p75": 73,
+        "p90": 76,
+        "p95": 78,
+        "p99": 80,
+        "max": 84
+      },
+      "defense": {
+        "p50": 70,
+        "p75": 75,
+        "p90": 78,
+        "p95": 80,
+        "p99": 82,
+        "max": 84
+      },
+      "goalkeeping": {
+        "p50": 3,
+        "p75": 3,
+        "p90": 4,
+        "p95": 71,
+        "p99": 76,
+        "max": 81
+      },
+      "physical": {
+        "p50": 71,
+        "p75": 74,
+        "p90": 76,
+        "p95": 77,
+        "p99": 79,
+        "max": 83
+      },
+      "press": {
+        "p50": 69,
+        "p75": 73,
+        "p90": 76,
+        "p95": 77,
+        "p99": 79,
+        "max": 81
+      },
+      "bigGame": {
+        "p50": 73,
+        "p75": 76,
+        "p90": 78,
+        "p95": 80,
+        "p99": 82,
+        "max": 86
+      }
+    }
+  },
+  "violations": [],
+  "topGeneratedProxyRatings": {
+    "attack": [
+      {
+        "player": "Ronaldinho",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "LW",
+        "tier": "star",
+        "rating": 87
+      },
+      {
+        "player": "Carlos Orejuela",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 86
+      },
+      {
+        "player": "Carlos Orejuela",
+        "team": "Real Madrid",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 86
+      },
+      {
+        "player": "Mauro Icardi",
+        "team": "Inter",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 86
+      },
+      {
+        "player": "Sergio Agüero",
+        "team": "Atletico Madrid",
+        "era": "2010s",
+        "position": "CF",
+        "tier": "star",
+        "rating": 86
+      },
+      {
+        "player": "Andy Cole",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Edinson Cavani",
+        "team": "PSG",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Esteban Paredes",
+        "team": "Chile",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Giovane Élber",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Jan Koller",
+        "team": "Borussia Dortmund",
+        "era": "2000s",
+        "position": "CF",
+        "tier": "star",
+        "rating": 85
+      },
+      {
+        "player": "Óscar Cardozo",
+        "team": "Benfica",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Óscar Cardozo",
+        "team": "Benfica",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Rivaldo",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 85
+      },
+      {
+        "player": "Roy Makaay",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 85
+      },
+      {
+        "player": "Samuel Eto'o",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Álvaro Recoba",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Carsten Jancker",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Claudio Pizarro",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Diego Forlán",
+        "team": "Atletico Madrid",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Edin Džeko",
+        "team": "Roma",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Fernando Morientes",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Freddie Ljungberg",
+        "team": "Arsenal",
+        "era": "2000s",
+        "position": "LW",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Javier Saviola",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Jimmy Floyd Hasselbaink",
+        "team": "Chelsea",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Julio Ricardo Cruz",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      }
+    ],
+    "creation": [
+      {
+        "player": "Adam Lallana",
+        "team": "Liverpool",
+        "era": "2020s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Hakim Ziyech",
+        "team": "Ajax",
+        "era": "2020s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Mesut Özil",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Andrei Kanchelskis",
+        "team": "Manchester United",
+        "era": "1990s",
+        "position": "RM",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "David Beckham",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Guti",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Guti",
+        "team": "Real Madrid",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Kaká",
+        "team": "AC Milan",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Mehmet Scholl",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Ole Gunnar Solskjær",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Patricio Toranzo",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Patricio Toranzo",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Ronaldinho",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "LW",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "Thomas Häßler",
+        "team": "Germany",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "Xavi Hernández",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Xavi Hernández",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Ahmed Hassan",
+        "team": "Egypt",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Ahmed Hassan",
+        "team": "Egypt",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Alessio Tacchinardi",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Andreas Möller",
+        "team": "Borussia Dortmund",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Andrés Iniesta",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Antonio Conte",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Bernd Schneider",
+        "team": "Bayer Leverkusen",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Christian Giménez",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Danny Murphy",
+        "team": "Liverpool",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 82
+      }
+    ],
+    "control": [
+      {
+        "player": "Ronaldinho",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "LW",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Adam Lallana",
+        "team": "Liverpool",
+        "era": "2020s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "Hakim Ziyech",
+        "team": "Ajax",
+        "era": "2020s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "Mesut Özil",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "Sergio Agüero",
+        "team": "Atletico Madrid",
+        "era": "2010s",
+        "position": "CF",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "Andrei Kanchelskis",
+        "team": "Manchester United",
+        "era": "1990s",
+        "position": "RM",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "David Beckham",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Guti",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Guti",
+        "team": "Real Madrid",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Jan Koller",
+        "team": "Borussia Dortmund",
+        "era": "2000s",
+        "position": "CF",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Kaká",
+        "team": "AC Milan",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Mehmet Scholl",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Ole Gunnar Solskjær",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Patricio Toranzo",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Patricio Toranzo",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Thomas Häßler",
+        "team": "Germany",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Xavi Hernández",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Xavi Hernández",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Ahmed Hassan",
+        "team": "Egypt",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Ahmed Hassan",
+        "team": "Egypt",
+        "era": "2010s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Alessio Tacchinardi",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Andreas Möller",
+        "team": "Borussia Dortmund",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Andrés Iniesta",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Antonio Conte",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Bernd Schneider",
+        "team": "Bayer Leverkusen",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "legend-candidate",
+        "rating": 81
+      }
+    ],
+    "defense": [
+      {
+        "player": "Abelardo Fernández",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Andy Robertson",
+        "team": "Liverpool",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Andy Robertson",
+        "team": "Liverpool",
+        "era": "2020s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Ashley Young",
+        "team": "Manchester United",
+        "era": "2020s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Bixente Lizarazu",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Ciro Ferrara",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Daniel Alves",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Denis Irwin",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Gerard Piqué",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Iván Helguera",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Joël Veltman",
+        "team": "Ajax",
+        "era": "2020s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "John Arne Riise",
+        "team": "Liverpool",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "John Heitinga",
+        "team": "Ajax",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Kakha Kaladze",
+        "team": "AC Milan",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Kakha Kaladze",
+        "team": "AC Milan",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Maicon",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Maicon",
+        "team": "Inter",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Manuel Sanchís Hontiyuelo",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Marcelo Vieira",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Mark Iuliano",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Markus Babbel",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Rafael Márquez",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Ronald Araújo",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Sami Hyypiä",
+        "team": "Liverpool",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Samuel Kuffour",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      }
+    ],
+    "goalkeeping": [
+      {
+        "player": "Francesco Toldo",
+        "team": "Inter",
+        "era": "2010s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Agustín Orion",
+        "team": "Boca Juniors",
+        "era": "2020s",
+        "position": "GK",
+        "tier": "important",
+        "rating": 80
+      },
+      {
+        "player": "Dida",
+        "team": "AC Milan",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 79
+      },
+      {
+        "player": "Iker Casillas",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Júlio César",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Oliver Kahn",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Pepe Reina",
+        "team": "Liverpool",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Pepe Reina",
+        "team": "Liverpool",
+        "era": "2010s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Sebastiano Rossi",
+        "team": "AC Milan",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Víctor Valdés",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Fabien Barthez",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Fernando Muslera",
+        "team": "Uruguay",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Helton",
+        "team": "Porto",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "Iker Casillas",
+        "team": "Spain",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Jerzy Dudek",
+        "team": "Liverpool",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Joe Hart",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "José Francisco Molina",
+        "team": "Atletico Madrid",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Manuel Almunia",
+        "team": "Arsenal",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Nicky Weaver",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Wolfgang de Beer",
+        "team": "Borussia Dortmund",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Andoni Zubizarreta",
+        "team": "Barcelona",
+        "era": "1980s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 77
+      },
+      {
+        "player": "Andoni Zubizarreta",
+        "team": "Barcelona",
+        "era": "1990s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 77
+      },
+      {
+        "player": "Angelo Peruzzi",
+        "team": "Juventus",
+        "era": "1990s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 77
+      },
+      {
+        "player": "Bodo Illgner",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "important",
+        "rating": 77
+      },
+      {
+        "player": "Bruce Grobbelaar",
+        "team": "Liverpool",
+        "era": "1980s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 77
+      }
+    ],
+    "physical": [
+      {
+        "player": "Carlos Orejuela",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Carlos Orejuela",
+        "team": "Real Madrid",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Mauro Icardi",
+        "team": "Inter",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Andy Cole",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Edinson Cavani",
+        "team": "PSG",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Esteban Paredes",
+        "team": "Chile",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Giovane Élber",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Óscar Cardozo",
+        "team": "Benfica",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Óscar Cardozo",
+        "team": "Benfica",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Rivaldo",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Roy Makaay",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 82
+      },
+      {
+        "player": "Samuel Eto'o",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Álvaro Recoba",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Carsten Jancker",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Claudio Pizarro",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Diego Forlán",
+        "team": "Atletico Madrid",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Edin Džeko",
+        "team": "Roma",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Fernando Morientes",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Javier Saviola",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Jimmy Floyd Hasselbaink",
+        "team": "Chelsea",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Julio Ricardo Cruz",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Klaas-Jan Huntelaar",
+        "team": "Ajax",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Luis Enrique",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Mário Jardel",
+        "team": "Porto",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Pedro",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 81
+      }
+    ],
+    "press": [
+      {
+        "player": "Abelardo Fernández",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Andy Robertson",
+        "team": "Liverpool",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Andy Robertson",
+        "team": "Liverpool",
+        "era": "2020s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Ashley Young",
+        "team": "Manchester United",
+        "era": "2020s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Bixente Lizarazu",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Ciro Ferrara",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Daniel Alves",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Denis Irwin",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Gerard Piqué",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Iván Helguera",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Joël Veltman",
+        "team": "Ajax",
+        "era": "2020s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "John Arne Riise",
+        "team": "Liverpool",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "John Heitinga",
+        "team": "Ajax",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Kakha Kaladze",
+        "team": "AC Milan",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Kakha Kaladze",
+        "team": "AC Milan",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Maicon",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Maicon",
+        "team": "Inter",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Manuel Sanchís Hontiyuelo",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Marcelo Vieira",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Mark Iuliano",
+        "team": "Juventus",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Markus Babbel",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Michael Tarnat",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "LB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Rafael Márquez",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Ronald Araújo",
+        "team": "Barcelona",
+        "era": "2010s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Sami Hyypiä",
+        "team": "Liverpool",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "legend-candidate",
+        "rating": 81
+      }
+    ],
+    "bigGame": [
+      {
+        "player": "Carlos Orejuela",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 86
+      },
+      {
+        "player": "Carlos Orejuela",
+        "team": "Real Madrid",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 86
+      },
+      {
+        "player": "Mauro Icardi",
+        "team": "Inter",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 86
+      },
+      {
+        "player": "Andy Cole",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Edinson Cavani",
+        "team": "PSG",
+        "era": "2020s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Esteban Paredes",
+        "team": "Chile",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Giovane Élber",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Óscar Cardozo",
+        "team": "Benfica",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Óscar Cardozo",
+        "team": "Benfica",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Samuel Eto'o",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Álvaro Recoba",
+        "team": "Inter",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Claudio Pizarro",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Fernando Morientes",
+        "team": "Real Madrid",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Luis Enrique",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Mário Jardel",
+        "team": "Porto",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Pedro",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Rivaldo",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Ronaldinho",
+        "team": "Barcelona",
+        "era": "2000s",
+        "position": "LW",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Roy Makaay",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Alessandro Altobelli",
+        "team": "Inter",
+        "era": "1980s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Alexander Zickler",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Andy Cole",
+        "team": "Manchester United",
+        "era": "1990s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Carsten Jancker",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "David Beckham",
+        "team": "Manchester United",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Diego Forlán",
+        "team": "Atletico Madrid",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 83
+      }
+    ]
+  },
+  "sampleRolls": [
+    {
+      "team": "Egypt",
+      "era": "1950s",
+      "generatedProxyContexts": 2,
+      "players": [
+        {
+          "player": "Ad-Diba",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Hamada Emam",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 72,
+            "creation": 62,
+            "control": 64,
+            "defense": 43,
+            "goalkeeping": 3,
+            "physical": 69,
+            "press": 56,
+            "bigGame": 70
+          }
+        }
+      ]
+    },
+    {
+      "team": "Brazil",
+      "era": "1950s",
+      "generatedProxyContexts": 20,
+      "players": [
+        {
+          "player": "Ademir de Menezes",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 77,
+            "creation": 67,
+            "control": 69,
+            "defense": 48,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 61,
+            "bigGame": 75
+          }
+        },
+        {
+          "player": "Baltazar",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 76,
+            "creation": 66,
+            "control": 68,
+            "defense": 47,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 60,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "Gilmar",
+          "position": "GK",
+          "tier": "important",
+          "ratings": {
+            "attack": 19,
+            "creation": 44,
+            "control": 51,
+            "defense": 54,
+            "goalkeeping": 73,
+            "physical": 58,
+            "press": 44,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Jair da Rosa Pinto",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 68,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Zizinho",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 68,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Chinesinho",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Evaristo de Macedo",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Júlio Botelho",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Paulo Valentim",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Servílio de Jesus Filho",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Tesourinha",
+          "position": "CM",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 66,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Rui Campos",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 51,
+            "creation": 59,
+            "control": 60,
+            "defense": 75,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 72,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Zózimo",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 51,
+            "creation": 59,
+            "control": 60,
+            "defense": 75,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 72,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Augusto da Costa",
+          "position": "CB",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 50,
+            "creation": 58,
+            "control": 59,
+            "defense": 74,
+            "goalkeeping": 3,
+            "physical": 69,
+            "press": 71,
+            "bigGame": 70
+          }
+        },
+        {
+          "player": "Canário",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 72,
+            "creation": 62,
+            "control": 64,
+            "defense": 43,
+            "goalkeeping": 3,
+            "physical": 69,
+            "press": 56,
+            "bigGame": 70
+          }
+        },
+        {
+          "player": "Danilo Alvim",
+          "position": "CM",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 63,
+            "creation": 72,
+            "control": 71,
+            "defense": 68,
+            "goalkeeping": 3,
+            "physical": 68,
+            "press": 67,
+            "bigGame": 70
+          }
+        },
+        {
+          "player": "Gino Orlando",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 72,
+            "creation": 62,
+            "control": 64,
+            "defense": 43,
+            "goalkeeping": 3,
+            "physical": 69,
+            "press": 56,
+            "bigGame": 70
+          }
+        },
+        {
+          "player": "Alfredo dos Santos",
+          "position": "CM",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 63,
+            "creation": 71,
+            "control": 70,
+            "defense": 67,
+            "goalkeeping": 3,
+            "physical": 67,
+            "press": 66,
+            "bigGame": 69
+          }
+        },
+        {
+          "player": "Altair",
+          "position": "CB",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 49,
+            "creation": 57,
+            "control": 58,
+            "defense": 73,
+            "goalkeeping": 3,
+            "physical": 68,
+            "press": 70,
+            "bigGame": 69
+          }
+        },
+        {
+          "player": "Canhoteiro",
+          "position": "CM",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 62,
+            "creation": 71,
+            "control": 70,
+            "defense": 67,
+            "goalkeeping": 3,
+            "physical": 67,
+            "press": 66,
+            "bigGame": 69
+          }
+        }
+      ]
+    },
+    {
+      "team": "AC Milan",
+      "era": "1950s",
+      "generatedProxyContexts": 20,
+      "players": [
+        {
+          "player": "Gunnar Nordahl",
+          "position": "ST",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 82,
+            "creation": 72,
+            "control": 74,
+            "defense": 53,
+            "goalkeeping": 4,
+            "physical": 79,
+            "press": 66,
+            "bigGame": 82
+          }
+        },
+        {
+          "player": "José Altafini",
+          "position": "ST",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 82,
+            "creation": 72,
+            "control": 74,
+            "defense": 53,
+            "goalkeeping": 4,
+            "physical": 79,
+            "press": 66,
+            "bigGame": 82
+          }
+        },
+        {
+          "player": "Renzo Burini",
+          "position": "ST",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 81,
+            "creation": 71,
+            "control": 73,
+            "defense": 52,
+            "goalkeeping": 4,
+            "physical": 78,
+            "press": 65,
+            "bigGame": 81
+          }
+        },
+        {
+          "player": "Carlo Annovazzi",
+          "position": "CM",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 72,
+            "creation": 79,
+            "control": 78,
+            "defense": 75,
+            "goalkeeping": 4,
+            "physical": 75,
+            "press": 74,
+            "bigGame": 79
+          }
+        },
+        {
+          "player": "Nils Liedholm",
+          "position": "CM",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 71,
+            "creation": 79,
+            "control": 78,
+            "defense": 75,
+            "goalkeeping": 4,
+            "physical": 75,
+            "press": 74,
+            "bigGame": 79
+          }
+        },
+        {
+          "player": "Carlo Galli",
+          "position": "ST",
+          "tier": "star",
+          "ratings": {
+            "attack": 79,
+            "creation": 69,
+            "control": 71,
+            "defense": 50,
+            "goalkeeping": 4,
+            "physical": 76,
+            "press": 63,
+            "bigGame": 78
+          }
+        },
+        {
+          "player": "Gunnar Gren",
+          "position": "ST",
+          "tier": "star",
+          "ratings": {
+            "attack": 79,
+            "creation": 69,
+            "control": 71,
+            "defense": 50,
+            "goalkeeping": 4,
+            "physical": 76,
+            "press": 63,
+            "bigGame": 78
+          }
+        },
+        {
+          "player": "Juan Alberto Schiaffino",
+          "position": "CM",
+          "tier": "star",
+          "ratings": {
+            "attack": 71,
+            "creation": 79,
+            "control": 78,
+            "defense": 75,
+            "goalkeeping": 4,
+            "physical": 75,
+            "press": 74,
+            "bigGame": 78
+          }
+        },
+        {
+          "player": "Amleto Frignani",
+          "position": "CM",
+          "tier": "star",
+          "ratings": {
+            "attack": 70,
+            "creation": 78,
+            "control": 77,
+            "defense": 74,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 73,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Andrea Bonomi",
+          "position": "CB",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 55,
+            "creation": 63,
+            "control": 64,
+            "defense": 79,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 76,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Cesare Maldini",
+          "position": "CB",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 55,
+            "creation": 63,
+            "control": 64,
+            "defense": 79,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 76,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Lorenzo Buffon",
+          "position": "GK",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 20,
+            "creation": 46,
+            "control": 53,
+            "defense": 55,
+            "goalkeeping": 75,
+            "physical": 60,
+            "press": 46,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Omero Tognon",
+          "position": "CM",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 68,
+            "creation": 77,
+            "control": 76,
+            "defense": 73,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 72,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Alfio Fontana",
+          "position": "CB",
+          "tier": "star",
+          "ratings": {
+            "attack": 55,
+            "creation": 63,
+            "control": 64,
+            "defense": 79,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 76,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Arturo Silvestri",
+          "position": "CB",
+          "tier": "star",
+          "ratings": {
+            "attack": 55,
+            "creation": 63,
+            "control": 64,
+            "defense": 79,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 76,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Ernesto Grillo",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 78,
+            "creation": 68,
+            "control": 70,
+            "defense": 49,
+            "goalkeeping": 3,
+            "physical": 75,
+            "press": 62,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Francesco Zagatti",
+          "position": "CM",
+          "tier": "star",
+          "ratings": {
+            "attack": 68,
+            "creation": 77,
+            "control": 76,
+            "defense": 73,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 72,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Gastone Bean",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 78,
+            "creation": 68,
+            "control": 70,
+            "defense": 49,
+            "goalkeeping": 3,
+            "physical": 75,
+            "press": 62,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Mario Bergamaschi",
+          "position": "CM",
+          "tier": "star",
+          "ratings": {
+            "attack": 68,
+            "creation": 77,
+            "control": 76,
+            "defense": 73,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 72,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Eros Beraldo",
+          "position": "CB",
+          "tier": "star",
+          "ratings": {
+            "attack": 54,
+            "creation": 62,
+            "control": 63,
+            "defense": 78,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 75,
+            "bigGame": 75
+          }
+        }
+      ]
+    },
+    {
+      "team": "Real Madrid",
+      "era": "1950s",
+      "generatedProxyContexts": 20,
+      "players": [
+        {
+          "player": "Luis Molowny",
+          "position": "ST",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 81,
+            "creation": 71,
+            "control": 73,
+            "defense": 52,
+            "goalkeeping": 4,
+            "physical": 78,
+            "press": 65,
+            "bigGame": 81
+          }
+        },
+        {
+          "player": "Pahiño",
+          "position": "ST",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 81,
+            "creation": 71,
+            "control": 73,
+            "defense": 52,
+            "goalkeeping": 4,
+            "physical": 78,
+            "press": 65,
+            "bigGame": 81
+          }
+        },
+        {
+          "player": "Sabino Barinaga Alberdi",
+          "position": "ST",
+          "tier": "star",
+          "ratings": {
+            "attack": 81,
+            "creation": 71,
+            "control": 73,
+            "defense": 52,
+            "goalkeeping": 4,
+            "physical": 78,
+            "press": 65,
+            "bigGame": 80
+          }
+        },
+        {
+          "player": "Roque Olsen",
+          "position": "ST",
+          "tier": "star",
+          "ratings": {
+            "attack": 80,
+            "creation": 70,
+            "control": 72,
+            "defense": 51,
+            "goalkeeping": 4,
+            "physical": 77,
+            "press": 64,
+            "bigGame": 79
+          }
+        },
+        {
+          "player": "José Iglesias Fernández",
+          "position": "CM",
+          "tier": "star",
+          "ratings": {
+            "attack": 70,
+            "creation": 78,
+            "control": 77,
+            "defense": 74,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 73,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Juan Alonso",
+          "position": "GK",
+          "tier": "legend-candidate",
+          "ratings": {
+            "attack": 20,
+            "creation": 46,
+            "control": 53,
+            "defense": 55,
+            "goalkeeping": 75,
+            "physical": 60,
+            "press": 46,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Joaquín Navarro Perona",
+          "position": "CB",
+          "tier": "star",
+          "ratings": {
+            "attack": 55,
+            "creation": 63,
+            "control": 64,
+            "defense": 79,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 76,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Pachín",
+          "position": "CB",
+          "tier": "star",
+          "ratings": {
+            "attack": 55,
+            "creation": 63,
+            "control": 64,
+            "defense": 79,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 76,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Enrique Mateos",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 77,
+            "creation": 67,
+            "control": 69,
+            "defense": 48,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 61,
+            "bigGame": 75
+          }
+        },
+        {
+          "player": "Manuel Bueno Cabral",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 77,
+            "creation": 67,
+            "control": 69,
+            "defense": 48,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 61,
+            "bigGame": 75
+          }
+        },
+        {
+          "player": "Rafael Lesmes",
+          "position": "CB",
+          "tier": "star",
+          "ratings": {
+            "attack": 54,
+            "creation": 62,
+            "control": 63,
+            "defense": 78,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 75,
+            "bigGame": 75
+          }
+        },
+        {
+          "player": "Clemente Fernández López",
+          "position": "CB",
+          "tier": "star",
+          "ratings": {
+            "attack": 53,
+            "creation": 61,
+            "control": 62,
+            "defense": 77,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 74,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "Jesús Herrera Alonso",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 76,
+            "creation": 66,
+            "control": 68,
+            "defense": 47,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 60,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "José Luis Pérez-Paya",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 75,
+            "creation": 65,
+            "control": 67,
+            "defense": 46,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 59,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Juan Santisteban",
+          "position": "CM",
+          "tier": "important",
+          "ratings": {
+            "attack": 66,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Pedro Casado",
+          "position": "CB",
+          "tier": "important",
+          "ratings": {
+            "attack": 53,
+            "creation": 61,
+            "control": 62,
+            "defense": 77,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 74,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Ramón Marsal",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 67,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Ángel Atienza",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 52,
+            "creation": 60,
+            "control": 61,
+            "defense": 76,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 73,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Antonio Ruiz Cervilla",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 65,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Canário",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 74,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        }
+      ]
+    },
+    {
+      "team": "England",
+      "era": "1960s",
+      "generatedProxyContexts": 20,
+      "players": [
+        {
+          "player": "Roy Race",
+          "position": "ST",
+          "tier": "star",
+          "ratings": {
+            "attack": 78,
+            "creation": 68,
+            "control": 70,
+            "defense": 49,
+            "goalkeeping": 3,
+            "physical": 75,
+            "press": 62,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Jimmy Greaves",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 78,
+            "creation": 68,
+            "control": 70,
+            "defense": 49,
+            "goalkeeping": 3,
+            "physical": 75,
+            "press": 62,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Johnny Haynes",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 76,
+            "creation": 66,
+            "control": 68,
+            "defense": 47,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 60,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "Francis Lee",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 75,
+            "creation": 65,
+            "control": 67,
+            "defense": 46,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 59,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Bobby Smith",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Bryan Douglas",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 66,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Colin Bell",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 66,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Derek Kevan",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Emlyn Hughes",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 52,
+            "creation": 60,
+            "control": 61,
+            "defense": 76,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 73,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Gerry Hitchens",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Johnny Byrne",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Ron Flowers",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 66,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Alan Mullery",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 64,
+            "creation": 73,
+            "control": 72,
+            "defense": 69,
+            "goalkeeping": 3,
+            "physical": 69,
+            "press": 68,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Alan Peacock",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 72,
+            "creation": 63,
+            "control": 65,
+            "defense": 44,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 57,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Bobby Robson",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 72,
+            "creation": 63,
+            "control": 65,
+            "defense": 44,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 57,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Frank Wignall",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 72,
+            "creation": 63,
+            "control": 65,
+            "defense": 44,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 57,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Fred Pickering",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 72,
+            "creation": 63,
+            "control": 65,
+            "defense": 44,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 57,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Jimmy Armfield",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 51,
+            "creation": 59,
+            "control": 60,
+            "defense": 75,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 72,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "John Connelly",
+          "position": "CM",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 65,
+            "creation": 73,
+            "control": 72,
+            "defense": 69,
+            "goalkeeping": 3,
+            "physical": 69,
+            "press": 68,
+            "bigGame": 71
+          }
+        },
+        {
+          "player": "Norman Hunter",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 51,
+            "creation": 59,
+            "control": 60,
+            "defense": 75,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 72,
+            "bigGame": 71
+          }
+        }
+      ]
+    },
+    {
+      "team": "Cameroon",
+      "era": "1990s",
+      "generatedProxyContexts": 20,
+      "players": [
+        {
+          "player": "Samuel Eto'o",
+          "position": "ST",
+          "tier": "star",
+          "ratings": {
+            "attack": 80,
+            "creation": 70,
+            "control": 72,
+            "defense": 51,
+            "goalkeeping": 4,
+            "physical": 77,
+            "press": 64,
+            "bigGame": 79
+          }
+        },
+        {
+          "player": "Patrick Mboma",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 79,
+            "creation": 69,
+            "control": 71,
+            "defense": 50,
+            "goalkeeping": 4,
+            "physical": 76,
+            "press": 63,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Roger Milla",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 79,
+            "creation": 69,
+            "control": 71,
+            "defense": 50,
+            "goalkeeping": 4,
+            "physical": 76,
+            "press": 63,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Geremi",
+          "position": "CB",
+          "tier": "important",
+          "ratings": {
+            "attack": 56,
+            "creation": 64,
+            "control": 65,
+            "defense": 80,
+            "goalkeeping": 3,
+            "physical": 75,
+            "press": 77,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Rigobert Song",
+          "position": "CB",
+          "tier": "important",
+          "ratings": {
+            "attack": 56,
+            "creation": 64,
+            "control": 65,
+            "defense": 80,
+            "goalkeeping": 3,
+            "physical": 75,
+            "press": 77,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Emmanuel Kundé",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 55,
+            "creation": 62,
+            "control": 63,
+            "defense": 78,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 75,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "François Omam-Biyik",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 76,
+            "creation": 66,
+            "control": 68,
+            "defense": 47,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 60,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "Jacques Songo'o",
+          "position": "GK",
+          "tier": "important",
+          "ratings": {
+            "attack": 19,
+            "creation": 45,
+            "control": 52,
+            "defense": 54,
+            "goalkeeping": 74,
+            "physical": 59,
+            "press": 45,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "Thomas N'Kono",
+          "position": "GK",
+          "tier": "important",
+          "ratings": {
+            "attack": 19,
+            "creation": 45,
+            "control": 52,
+            "defense": 54,
+            "goalkeeping": 74,
+            "physical": 59,
+            "press": 45,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "André Kana Biyik",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 67,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Bernard Tchoutang",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 75,
+            "creation": 65,
+            "control": 67,
+            "defense": 46,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 59,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Joël Epalle",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 75,
+            "creation": 65,
+            "control": 67,
+            "defense": 46,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 59,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Pierre Womé",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 53,
+            "creation": 61,
+            "control": 62,
+            "defense": 77,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 74,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Raymond Kalla",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 53,
+            "creation": 61,
+            "control": 62,
+            "defense": 77,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 74,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Salomon Olembé",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 66,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Alioum Boukar",
+          "position": "GK",
+          "tier": "regular",
+          "ratings": {
+            "attack": 19,
+            "creation": 43,
+            "control": 50,
+            "defense": 53,
+            "goalkeeping": 72,
+            "physical": 57,
+            "press": 43,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "David Embé",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Émile Mbouh",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 65,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Emmanuel Maboang",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Jean-Jacques Missé-Missé",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        }
+      ]
+    },
+    {
+      "team": "Algeria",
+      "era": "1980s",
+      "generatedProxyContexts": 20,
+      "players": [
+        {
+          "player": "Rabah Madjer",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 79,
+            "creation": 69,
+            "control": 71,
+            "defense": 50,
+            "goalkeeping": 4,
+            "physical": 76,
+            "press": 63,
+            "bigGame": 77
+          }
+        },
+        {
+          "player": "Djamel Menad",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 78,
+            "creation": 68,
+            "control": 70,
+            "defense": 49,
+            "goalkeeping": 3,
+            "physical": 75,
+            "press": 62,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Lakhdar Belloumi",
+          "position": "CM",
+          "tier": "important",
+          "ratings": {
+            "attack": 70,
+            "creation": 78,
+            "control": 77,
+            "defense": 74,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 73,
+            "bigGame": 76
+          }
+        },
+        {
+          "player": "Salah Assad",
+          "position": "ST",
+          "tier": "regular",
+          "ratings": {
+            "attack": 77,
+            "creation": 67,
+            "control": 69,
+            "defense": 48,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 61,
+            "bigGame": 75
+          }
+        },
+        {
+          "player": "Tedj Bensaoula",
+          "position": "ST",
+          "tier": "important",
+          "ratings": {
+            "attack": 77,
+            "creation": 67,
+            "control": 69,
+            "defense": 48,
+            "goalkeeping": 3,
+            "physical": 74,
+            "press": 61,
+            "bigGame": 75
+          }
+        },
+        {
+          "player": "Mahmoud Guendouz",
+          "position": "CB",
+          "tier": "important",
+          "ratings": {
+            "attack": 54,
+            "creation": 62,
+            "control": 63,
+            "defense": 78,
+            "goalkeeping": 3,
+            "physical": 73,
+            "press": 75,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "Moussa Saïb",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 67,
+            "creation": 76,
+            "control": 75,
+            "defense": 72,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 71,
+            "bigGame": 74
+          }
+        },
+        {
+          "player": "Ali Bencheikh",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 67,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Ali Fergani",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 66,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Chaâbane Merzekane",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 53,
+            "creation": 61,
+            "control": 62,
+            "defense": 77,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 74,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Hocine Yahi",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 67,
+            "creation": 75,
+            "control": 74,
+            "defense": 71,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 70,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Mustapha Kouici",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 53,
+            "creation": 61,
+            "control": 62,
+            "defense": 77,
+            "goalkeeping": 3,
+            "physical": 72,
+            "press": 74,
+            "bigGame": 73
+          }
+        },
+        {
+          "player": "Abdelkader Horr",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 52,
+            "creation": 60,
+            "control": 61,
+            "defense": 76,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 73,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Djamel Amani",
+          "position": "CM",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 66,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Djamel Zidane",
+          "position": "ST",
+          "tier": "fringe",
+          "ratings": {
+            "attack": 73,
+            "creation": 64,
+            "control": 66,
+            "defense": 45,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 58,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Fodil Megharia",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 52,
+            "creation": 60,
+            "control": 61,
+            "defense": 76,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 73,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Mehdi Cerbah",
+          "position": "GK",
+          "tier": "regular",
+          "ratings": {
+            "attack": 19,
+            "creation": 43,
+            "control": 50,
+            "defense": 53,
+            "goalkeeping": 72,
+            "physical": 57,
+            "press": 43,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Mohamed Chaïb",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 52,
+            "creation": 60,
+            "control": 61,
+            "defense": 76,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 73,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Mohamed Kaci-Said",
+          "position": "CM",
+          "tier": "regular",
+          "ratings": {
+            "attack": 65,
+            "creation": 74,
+            "control": 73,
+            "defense": 70,
+            "goalkeeping": 3,
+            "physical": 70,
+            "press": 69,
+            "bigGame": 72
+          }
+        },
+        {
+          "player": "Mohamed Khedis",
+          "position": "CB",
+          "tier": "regular",
+          "ratings": {
+            "attack": 52,
+            "creation": 60,
+            "control": 61,
+            "defense": 76,
+            "goalkeeping": 3,
+            "physical": 71,
+            "press": 73,
+            "bigGame": 72
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">UndefeatedXI logo</title>
+  <desc id="desc">A green and navy football crest for UndefeatedXI.</desc>
+  <defs>
+    <linearGradient id="navy" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#102433"/>
+      <stop offset="1" stop-color="#061423"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2f7f36"/>
+      <stop offset="1" stop-color="#155c2a"/>
+    </linearGradient>
+    <linearGradient id="cream" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff9e7"/>
+      <stop offset="1" stop-color="#efe4c4"/>
+    </linearGradient>
+  </defs>
+  <path fill="#2d7b35" d="M512 54c217 0 394 171 404 386h78c24 0 44 20 44 44v204c0 24-20 44-44 44h-55L561 970c-30 19-68 19-98 0L85 732H30c-24 0-44-20-44-44V484c0-24 20-44 44-44h78C118 225 295 54 512 54Z"/>
+  <path fill="url(#navy)" d="M512 91c199 0 360 161 360 360v24h100v220H895L541 917c-18 11-42 11-60 0L127 695H50V475h100v-24c0-199 161-360 362-360Z"/>
+  <circle cx="512" cy="335" r="208" fill="url(#cream)"/>
+  <path fill="#071726" d="M512 126c115 0 208 93 208 208 0 20-3 39-8 57l-67-2-43-61-75 25-55-58-88 10-47 63 10 62-43 15a208 208 0 0 1 208-319Zm-18 196-73 8-39 53 7 69 68 40 71-8 47-66-18-68-63-28Zm132-5-42 17 20 71 56 39 39-4c3-15 5-31 5-47l-78-76Z"/>
+  <rect x="86" y="450" width="852" height="226" rx="42" fill="url(#navy)"/>
+  <text x="512" y="595" text-anchor="middle" fill="url(#cream)" font-family="Fira Sans, Arial Black, sans-serif" font-size="132" font-weight="900">UNDEFEATEDXI</text>
+  <rect x="198" y="695" width="628" height="112" rx="12" fill="url(#green)"/>
+  <text x="512" y="775" text-anchor="middle" fill="url(#cream)" font-family="Fira Sans, Arial Black, sans-serif" font-size="64" font-weight="900">EST. 2026</text>
+</svg>

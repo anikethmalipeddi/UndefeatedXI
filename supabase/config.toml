@@ -1,0 +1,7 @@
+project_id = "undefeatedxi"
+
+[functions.submit-run]
+verify_jwt = true
+
+[functions.share-run]
+verify_jwt = false

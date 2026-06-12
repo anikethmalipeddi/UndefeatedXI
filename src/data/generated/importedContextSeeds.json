@@ -1,0 +1,5752 @@
+{
+  "generatedAt": "2026-06-11T18:26:59.709Z",
+  "totalSeeds": 132,
+  "seeds": [
+    {
+      "id": "shilton_nottingham_forest_1970s",
+      "name": "Peter Shilton",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Nottingham Forest",
+      "league": "English Top Flight",
+      "country": "England",
+      "start": 1977,
+      "end": 1982,
+      "decade": "1970s",
+      "era": "1970s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "classic_european_cup"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Organizer",
+        "European champion"
+      ],
+      "overall": 92,
+      "overrides": {
+        "goalkeeping": 96,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Nottingham Forest goalkeeper during the club's European Cup-winning peak.",
+      "competitions": [
+        "English Top Flight",
+        "European Cup"
+      ]
+    },
+    {
+      "id": "seaman_arsenal_1990s",
+      "name": "David Seaman",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Arsenal",
+      "league": "English Top Flight",
+      "country": "England",
+      "start": 1990,
+      "end": 2003,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Consistency",
+        "Back-four keeper"
+      ],
+      "overall": 91,
+      "overrides": {
+        "goalkeeping": 95,
+        "bigGame": 89
+      },
+      "confidence": "High",
+      "notes": "Arsenal and England keeper across the late First Division and Premier League eras.",
+      "competitions": [
+        "English Top Flight",
+        "Premier League"
+      ]
+    },
+    {
+      "id": "hansen_liverpool_1980s",
+      "name": "Alan Hansen",
+      "nationality": "Scotland",
+      "teamType": "club",
+      "team": "Liverpool",
+      "league": "English Top Flight",
+      "country": "England",
+      "start": 1977,
+      "end": 1991,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "classic_european_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Ball-playing CB",
+        "Line leader",
+        "Title dynasty"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 94,
+        "control": 82,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Liverpool defensive leader in a dominant English and European period.",
+      "competitions": [
+        "English Top Flight",
+        "European Cup"
+      ]
+    },
+    {
+      "id": "campbell_arsenal_2000s",
+      "name": "Sol Campbell",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Arsenal",
+      "league": "Premier League",
+      "country": "England",
+      "start": 2001,
+      "end": 2006,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Stopper",
+        "Recovery pace",
+        "Invincible defender"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 94,
+        "physical": 92,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Arsenal Invincibles center-back and England international.",
+      "competitions": [
+        "Premier League"
+      ]
+    },
+    {
+      "id": "pearce_nottingham_forest_1990s",
+      "name": "Stuart Pearce",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Nottingham Forest",
+      "league": "English Top Flight",
+      "country": "England",
+      "start": 1985,
+      "end": 1997,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Aggressive fullback",
+        "Set pieces",
+        "Leader"
+      ],
+      "overall": 89,
+      "overrides": {
+        "defense": 88,
+        "physical": 88,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "Nottingham Forest and England left-back reference.",
+      "competitions": [
+        "English Top Flight",
+        "Premier League"
+      ]
+    },
+    {
+      "id": "irwin_manchester_united_1990s",
+      "name": "Denis Irwin",
+      "nationality": "Ireland",
+      "teamType": "club",
+      "team": "Manchester United",
+      "league": "Premier League",
+      "country": "England",
+      "start": 1990,
+      "end": 2002,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league",
+        "champions_league"
+      ],
+      "positions": [
+        "LB",
+        "RB",
+        "LWB"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Two-footed fullback",
+        "Set pieces",
+        "Reliable defender"
+      ],
+      "overall": 90,
+      "overrides": {
+        "defense": 88,
+        "creation": 76,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Manchester United fullback across domestic and European trophy seasons.",
+      "competitions": [
+        "Premier League",
+        "UCL"
+      ]
+    },
+    {
+      "id": "gary_neville_united_1990s",
+      "name": "Gary Neville",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Manchester United",
+      "league": "Premier League",
+      "country": "England",
+      "start": 1992,
+      "end": 2011,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league",
+        "champions_league"
+      ],
+      "positions": [
+        "RB",
+        "RWB"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Defensive fullback",
+        "Overlap",
+        "Back-four organizer"
+      ],
+      "overall": 88,
+      "overrides": {
+        "defense": 88,
+        "press": 82,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Manchester United right-back and Champions League winner.",
+      "competitions": [
+        "Premier League",
+        "UCL"
+      ]
+    },
+    {
+      "id": "beckham_united_1990s",
+      "name": "David Beckham",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Manchester United",
+      "league": "Premier League",
+      "country": "England",
+      "start": 1992,
+      "end": 2003,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league",
+        "champions_league"
+      ],
+      "positions": [
+        "RM",
+        "RW",
+        "CM"
+      ],
+      "primary": [
+        "RM"
+      ],
+      "roles": [
+        "Crossing",
+        "Set pieces",
+        "Wide creator"
+      ],
+      "overall": 91,
+      "overrides": {
+        "creation": 95,
+        "control": 86,
+        "press": 82,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Manchester United wide creator and 1999 treble piece.",
+      "competitions": [
+        "Premier League",
+        "UCL"
+      ]
+    },
+    {
+      "id": "giggs_united_1990s",
+      "name": "Ryan Giggs",
+      "nationality": "Wales",
+      "teamType": "club",
+      "team": "Manchester United",
+      "league": "Premier League",
+      "country": "England",
+      "start": 1990,
+      "end": 2014,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league",
+        "champions_league"
+      ],
+      "positions": [
+        "LM",
+        "LW",
+        "CM"
+      ],
+      "primary": [
+        "LM"
+      ],
+      "roles": [
+        "Wide creator",
+        "Dribbler",
+        "Transition runner"
+      ],
+      "overall": 92,
+      "overrides": {
+        "attack": 86,
+        "creation": 91,
+        "control": 88,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Manchester United left-sided creator across multiple title eras.",
+      "competitions": [
+        "Premier League",
+        "UCL"
+      ]
+    },
+    {
+      "id": "barnes_liverpool_1980s",
+      "name": "John Barnes",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Liverpool",
+      "league": "English Top Flight",
+      "country": "England",
+      "start": 1987,
+      "end": 1997,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight"
+      ],
+      "positions": [
+        "LW",
+        "LM",
+        "AM"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Dribbler",
+        "Wide creator",
+        "Carrier"
+      ],
+      "overall": 92,
+      "overrides": {
+        "attack": 89,
+        "creation": 91,
+        "control": 88
+      },
+      "confidence": "High",
+      "notes": "Liverpool left-sided attacker and late First Division star.",
+      "competitions": [
+        "English Top Flight"
+      ]
+    },
+    {
+      "id": "souness_liverpool_1980s",
+      "name": "Graeme Souness",
+      "nationality": "Scotland",
+      "teamType": "club",
+      "team": "Liverpool",
+      "league": "English Top Flight",
+      "country": "England",
+      "start": 1978,
+      "end": 1984,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "classic_european_cup"
+      ],
+      "positions": [
+        "DM",
+        "CM"
+      ],
+      "primary": [
+        "DM"
+      ],
+      "roles": [
+        "Ball-winner",
+        "Leader",
+        "Tempo setter"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 90,
+        "control": 88,
+        "physical": 91,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "Liverpool midfield leader in domestic and European Cup success.",
+      "competitions": [
+        "English Top Flight",
+        "European Cup"
+      ]
+    },
+    {
+      "id": "dalglish_liverpool_1980s",
+      "name": "Kenny Dalglish",
+      "nationality": "Scotland",
+      "teamType": "club",
+      "team": "Liverpool",
+      "league": "English Top Flight",
+      "country": "England",
+      "start": 1977,
+      "end": 1990,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "classic_european_cup"
+      ],
+      "positions": [
+        "CF",
+        "ST",
+        "AM"
+      ],
+      "primary": [
+        "CF"
+      ],
+      "roles": [
+        "Link forward",
+        "Creator",
+        "Big-game scorer"
+      ],
+      "overall": 95,
+      "overrides": {
+        "attack": 93,
+        "creation": 92,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Liverpool all-time forward across title and European Cup teams.",
+      "competitions": [
+        "English Top Flight",
+        "European Cup"
+      ]
+    },
+    {
+      "id": "shearer_blackburn_1990s",
+      "name": "Alan Shearer",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "Blackburn",
+      "league": "Premier League",
+      "country": "England",
+      "start": 1992,
+      "end": 1996,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league"
+      ],
+      "positions": [
+        "ST"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Box finisher",
+        "Aerial threat",
+        "Penalty taker"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 97,
+        "physical": 88,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Blackburn title-winning striker and Premier League scoring benchmark.",
+      "competitions": [
+        "Premier League"
+      ]
+    },
+    {
+      "id": "cantona_united_1990s",
+      "name": "Eric Cantona",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Manchester United",
+      "league": "Premier League",
+      "country": "England",
+      "start": 1992,
+      "end": 1997,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "english_top_flight",
+        "premier_league"
+      ],
+      "positions": [
+        "CF",
+        "ST",
+        "AM"
+      ],
+      "primary": [
+        "CF"
+      ],
+      "roles": [
+        "Second striker",
+        "Creator",
+        "Aura"
+      ],
+      "overall": 93,
+      "overrides": {
+        "attack": 91,
+        "creation": 90,
+        "control": 88,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Manchester United catalyst in the early Premier League title run.",
+      "competitions": [
+        "Premier League"
+      ]
+    },
+    {
+      "id": "barthez_marseille_1990s",
+      "name": "Fabien Barthez",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Marseille",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 1992,
+      "end": 1995,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Sweeper keeper",
+        "Shot-stopper",
+        "European champion"
+      ],
+      "overall": 91,
+      "overrides": {
+        "goalkeeping": 94,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Marseille goalkeeper in the 1993 European Cup-winning side.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "lloris_lyon_2000s",
+      "name": "Hugo Lloris",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Lyon",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2008,
+      "end": 2012,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Reflex keeper",
+        "Sweeper keeper",
+        "Captain"
+      ],
+      "overall": 90,
+      "overrides": {
+        "goalkeeping": 94,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "Lyon and France goalkeeper reference for late-2000s Ligue 1.",
+      "competitions": [
+        "Ligue 1"
+      ]
+    },
+    {
+      "id": "thiago_silva_psg_2010s",
+      "name": "Thiago Silva",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2012,
+      "end": 2020,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Cover defender",
+        "Ball-playing CB",
+        "Line leader"
+      ],
+      "overall": 94,
+      "overrides": {
+        "defense": 96,
+        "control": 78,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "PSG defensive leader and modern Ligue 1 benchmark center-back.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "marquinhos_psg_2010s",
+      "name": "Marquinhos",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2013,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "CB",
+        "RB",
+        "DM"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Versatile defender",
+        "Recovery pace",
+        "Build-up"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 93,
+        "control": 80,
+        "press": 82
+      },
+      "confidence": "High",
+      "notes": "PSG defender covering center-back, right-back, and midfield needs.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "thuram_monaco_1990s",
+      "name": "Lilian Thuram",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Monaco",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 1991,
+      "end": 1996,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1"
+      ],
+      "positions": [
+        "RB",
+        "CB",
+        "RWB"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Lockdown fullback",
+        "Duel winner",
+        "Recovery pace"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 93,
+        "physical": 88,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Monaco version of a French defensive great.",
+      "competitions": [
+        "Ligue 1"
+      ]
+    },
+    {
+      "id": "maxwell_psg_2010s",
+      "name": "Maxwell",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2012,
+      "end": 2017,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "LB",
+        "LWB"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Overlap",
+        "Possession fullback",
+        "Wide support"
+      ],
+      "overall": 88,
+      "overrides": {
+        "defense": 84,
+        "creation": 78,
+        "control": 80
+      },
+      "confidence": "High",
+      "notes": "PSG left-back in the club's domestic dominance era.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "juninho_lyon_2000s",
+      "name": "Juninho Pernambucano",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "Lyon",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2001,
+      "end": 2009,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "CM",
+        "AM",
+        "DM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Set pieces",
+        "Tempo setter",
+        "Long passing"
+      ],
+      "overall": 93,
+      "overrides": {
+        "creation": 95,
+        "control": 92,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Lyon midfield icon and free-kick benchmark.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "verratti_psg_2010s",
+      "name": "Marco Verratti",
+      "nationality": "Italy",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2012,
+      "end": 2023,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "CM",
+        "DM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Press resistance",
+        "Controller",
+        "Ball-winner"
+      ],
+      "overall": 91,
+      "overrides": {
+        "control": 94,
+        "creation": 88,
+        "press": 84
+      },
+      "confidence": "High",
+      "notes": "PSG midfield controller through the 2010s.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "rai_psg_1990s",
+      "name": "Rai",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 1993,
+      "end": 1998,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1"
+      ],
+      "positions": [
+        "AM",
+        "CM"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Creator",
+        "Late runner",
+        "Captain"
+      ],
+      "overall": 90,
+      "overrides": {
+        "attack": 84,
+        "creation": 90,
+        "control": 88
+      },
+      "confidence": "High",
+      "notes": "PSG playmaker and 1990s Ligue 1 reference.",
+      "competitions": [
+        "Ligue 1"
+      ]
+    },
+    {
+      "id": "ginola_psg_1990s",
+      "name": "David Ginola",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 1992,
+      "end": 1995,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1"
+      ],
+      "positions": [
+        "LW",
+        "LM",
+        "AM"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Dribbler",
+        "Wide creator",
+        "Flair"
+      ],
+      "overall": 89,
+      "overrides": {
+        "attack": 86,
+        "creation": 89,
+        "control": 87
+      },
+      "confidence": "High",
+      "notes": "PSG left-sided creator in the 1990s.",
+      "competitions": [
+        "Ligue 1"
+      ]
+    },
+    {
+      "id": "di_maria_psg_2010s",
+      "name": "Angel Di Maria",
+      "nationality": "Argentina",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2015,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "RW",
+        "RM",
+        "AM",
+        "LW"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Wide creator",
+        "Final ball",
+        "Transition runner"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 88,
+        "creation": 92,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "PSG creator and Champions League finalist.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "mbappe_psg_2020s",
+      "name": "Kylian Mbappe",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2017,
+      "end": 2024,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "ST",
+        "LW",
+        "RW"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Elite scorer",
+        "Transition runner",
+        "Wide threat"
+      ],
+      "overall": 96,
+      "overrides": {
+        "attack": 99,
+        "physical": 92,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "PSG attacking reference and France superstar.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "ibrahimovic_psg_2010s",
+      "name": "Zlatan Ibrahimovic",
+      "nationality": "Sweden",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2012,
+      "end": 2016,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Complete striker",
+        "Aerial threat",
+        "Creator"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 96,
+        "creation": 82,
+        "physical": 90
+      },
+      "confidence": "High",
+      "notes": "PSG scoring and chance-creation hub.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "papin_marseille_1990s",
+      "name": "Jean-Pierre Papin",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Marseille",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 1986,
+      "end": 1992,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "classic_european_cup"
+      ],
+      "positions": [
+        "ST"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Box finisher",
+        "Volley specialist",
+        "European scorer"
+      ],
+      "overall": 93,
+      "overrides": {
+        "attack": 96,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Marseille striker and early-1990s Ligue 1 scoring icon.",
+      "competitions": [
+        "Ligue 1",
+        "European Cup"
+      ]
+    },
+    {
+      "id": "howard_colorado_2010s",
+      "name": "Tim Howard",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Colorado Rapids",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2016,
+      "end": 2019,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Box command",
+        "Veteran"
+      ],
+      "overall": 86,
+      "overrides": {
+        "goalkeeping": 90,
+        "bigGame": 86
+      },
+      "confidence": "High",
+      "notes": "USMNT goalkeeper context for MLS mode.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "guzan_atlanta_2010s",
+      "name": "Brad Guzan",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Atlanta United",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2017,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Organizer",
+        "MLS Cup keeper"
+      ],
+      "overall": 84,
+      "overrides": {
+        "goalkeeping": 88,
+        "bigGame": 86
+      },
+      "confidence": "High",
+      "notes": "Atlanta United goalkeeper and MLS Cup winner.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "zimmerman_nashville_2020s",
+      "name": "Walker Zimmerman",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Nashville SC",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2020,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Aerial defender",
+        "Duel winner",
+        "Line leader"
+      ],
+      "overall": 84,
+      "overrides": {
+        "defense": 87,
+        "physical": 86
+      },
+      "confidence": "High",
+      "notes": "MLS defender of the year level center-back.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "marshall_columbus_2010s",
+      "name": "Chad Marshall",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Columbus Crew",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2004,
+      "end": 2013,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Box defender",
+        "Aerial control",
+        "Consistency"
+      ],
+      "overall": 84,
+      "overrides": {
+        "defense": 87,
+        "physical": 85
+      },
+      "confidence": "High",
+      "notes": "MLS center-back benchmark across Columbus and Seattle years.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "beasley_houston_2010s",
+      "name": "DaMarcus Beasley",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Houston Dynamo",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2014,
+      "end": 2019,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM",
+        "LW"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Two-way left side",
+        "Recovery pace",
+        "Wide runner"
+      ],
+      "overall": 84,
+      "overrides": {
+        "defense": 82,
+        "creation": 78,
+        "physical": 86
+      },
+      "confidence": "High",
+      "notes": "Veteran left-sided MLS and USMNT option.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "yedlin_seattle_2010s",
+      "name": "DeAndre Yedlin",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Seattle Sounders",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2013,
+      "end": 2014,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "RM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Recovery pace",
+        "Overlap",
+        "Transition runner"
+      ],
+      "overall": 83,
+      "overrides": {
+        "defense": 80,
+        "physical": 88,
+        "press": 82
+      },
+      "confidence": "High",
+      "notes": "Seattle right-back and USMNT wide defender.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "zusi_sporting_kc_2010s",
+      "name": "Graham Zusi",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Sporting KC",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2009,
+      "end": 2023,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "RM",
+        "CM"
+      ],
+      "primary": [
+        "RM"
+      ],
+      "roles": [
+        "Crossing",
+        "Set pieces",
+        "Wide utility"
+      ],
+      "overall": 84,
+      "overrides": {
+        "creation": 86,
+        "press": 78,
+        "bigGame": 84
+      },
+      "confidence": "High",
+      "notes": "Sporting KC wide creator and converted fullback.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "bradley_toronto_2010s",
+      "name": "Michael Bradley",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Toronto FC",
+      "league": "MLS",
+      "country": "Canada",
+      "start": 2014,
+      "end": 2023,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "DM",
+        "CM"
+      ],
+      "primary": [
+        "DM"
+      ],
+      "roles": [
+        "Controller",
+        "Ball-winner",
+        "Organizer"
+      ],
+      "overall": 86,
+      "overrides": {
+        "control": 86,
+        "defense": 82,
+        "press": 82
+      },
+      "confidence": "High",
+      "notes": "Toronto FC captain and MLS Cup-winning midfield anchor.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "valderrama_tampa_bay_1990s",
+      "name": "Carlos Valderrama",
+      "nationality": "Colombia",
+      "teamType": "club",
+      "team": "Tampa Bay Mutiny",
+      "league": "MLS",
+      "country": "United States",
+      "start": 1996,
+      "end": 1997,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "AM",
+        "CM"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Creator",
+        "Tempo setter",
+        "Final ball"
+      ],
+      "overall": 88,
+      "overrides": {
+        "creation": 92,
+        "control": 90,
+        "physical": 62
+      },
+      "confidence": "High",
+      "notes": "Early MLS playmaking icon.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "beckham_la_galaxy_2010s",
+      "name": "David Beckham",
+      "nationality": "England",
+      "teamType": "club",
+      "team": "LA Galaxy",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2007,
+      "end": 2012,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "RM",
+        "CM",
+        "RW"
+      ],
+      "primary": [
+        "RM"
+      ],
+      "roles": [
+        "Crossing",
+        "Set pieces",
+        "Tempo changer"
+      ],
+      "overall": 86,
+      "overrides": {
+        "creation": 90,
+        "control": 84,
+        "bigGame": 86
+      },
+      "confidence": "High",
+      "notes": "LA Galaxy star and MLS Cup winner.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "donovan_la_galaxy_2000s",
+      "name": "Landon Donovan",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "LA Galaxy",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2005,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "RW",
+        "AM",
+        "CF",
+        "ST"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Transition runner",
+        "Creator",
+        "Clutch scorer"
+      ],
+      "overall": 89,
+      "overrides": {
+        "attack": 88,
+        "creation": 87,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "MLS attacking icon and LA Galaxy winner.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "vela_lafc_2010s",
+      "name": "Carlos Vela",
+      "nationality": "Mexico",
+      "teamType": "club",
+      "team": "LAFC",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2018,
+      "end": 2024,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "RW",
+        "CF",
+        "ST"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Wide scorer",
+        "Creator",
+        "Record-setter"
+      ],
+      "overall": 88,
+      "overrides": {
+        "attack": 90,
+        "creation": 87,
+        "control": 86
+      },
+      "confidence": "High",
+      "notes": "LAFC MVP-level attacker.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "messi_inter_miami_2020s",
+      "name": "Lionel Messi",
+      "nationality": "Argentina",
+      "teamType": "club",
+      "team": "Inter Miami",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2023,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "RW",
+        "AM",
+        "CF"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Creator",
+        "Elite scorer",
+        "Set pieces"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 91,
+        "creation": 94,
+        "control": 91,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Inter Miami version used for MLS mode context.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "josef_martinez_atlanta_2010s",
+      "name": "Josef Martinez",
+      "nationality": "Venezuela",
+      "teamType": "club",
+      "team": "Atlanta United",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2017,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "ST"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Box finisher",
+        "Pressing striker",
+        "Record scorer"
+      ],
+      "overall": 87,
+      "overrides": {
+        "attack": 90,
+        "press": 76,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "Atlanta United MLS Cup striker and scoring record threat.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "robbie_keane_la_galaxy_2010s",
+      "name": "Robbie Keane",
+      "nationality": "Ireland",
+      "teamType": "club",
+      "team": "LA Galaxy",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2011,
+      "end": 2016,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Box finisher",
+        "Link forward",
+        "Big-game scorer"
+      ],
+      "overall": 87,
+      "overrides": {
+        "attack": 89,
+        "creation": 75,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "LA Galaxy striker and MLS Cup winner.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "schmeichel_denmark_1990s",
+      "name": "Peter Schmeichel",
+      "nationality": "Denmark",
+      "teamType": "nation",
+      "team": "Denmark",
+      "country": "Denmark",
+      "start": 1987,
+      "end": 2001,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Box commander",
+        "Tournament keeper"
+      ],
+      "overall": 95,
+      "overrides": {
+        "goalkeeping": 98,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Denmark 1992 European Championship-winning goalkeeper.",
+      "competitions": [
+        "Euros"
+      ]
+    },
+    {
+      "id": "casillas_spain_2010s",
+      "name": "Iker Casillas",
+      "nationality": "Spain",
+      "teamType": "nation",
+      "team": "Spain",
+      "country": "Spain",
+      "start": 2000,
+      "end": 2016,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Captain",
+        "Tournament keeper"
+      ],
+      "overall": 95,
+      "overrides": {
+        "goalkeeping": 98,
+        "bigGame": 97
+      },
+      "confidence": "High",
+      "notes": "Spain captain across Euro 2008, World Cup 2010, and Euro 2012.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "ramos_spain_2010s",
+      "name": "Sergio Ramos",
+      "nationality": "Spain",
+      "teamType": "nation",
+      "team": "Spain",
+      "country": "Spain",
+      "start": 2005,
+      "end": 2021,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CB",
+        "RB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Stopper",
+        "Aerial threat",
+        "Tournament defender"
+      ],
+      "overall": 94,
+      "overrides": {
+        "defense": 94,
+        "physical": 88,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Spain defender during the 2008-2012 international dynasty.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "chiellini_italy_2020s",
+      "name": "Giorgio Chiellini",
+      "nationality": "Italy",
+      "teamType": "nation",
+      "team": "Italy",
+      "country": "Italy",
+      "start": 2004,
+      "end": 2022,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Stopper",
+        "Leader",
+        "Duel winner"
+      ],
+      "overall": 93,
+      "overrides": {
+        "defense": 96,
+        "physical": 88,
+        "bigGame": 95
+      },
+      "confidence": "High",
+      "notes": "Italy Euro 2020 defensive leader.",
+      "competitions": [
+        "Euros"
+      ]
+    },
+    {
+      "id": "alba_spain_2010s",
+      "name": "Jordi Alba",
+      "nationality": "Spain",
+      "teamType": "nation",
+      "team": "Spain",
+      "country": "Spain",
+      "start": 2011,
+      "end": 2023,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Overlap",
+        "Cutback provider",
+        "Recovery pace"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 68,
+        "creation": 84,
+        "defense": 82,
+        "physical": 88
+      },
+      "confidence": "High",
+      "notes": "Spain left-back and Euro 2012 final scorer.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "lahm_germany_2010s",
+      "name": "Philipp Lahm",
+      "nationality": "Germany",
+      "teamType": "nation",
+      "team": "Germany",
+      "country": "Germany",
+      "start": 2004,
+      "end": 2014,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "LB",
+        "DM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Inverted fullback",
+        "Controller",
+        "Defensive IQ"
+      ],
+      "overall": 94,
+      "overrides": {
+        "defense": 92,
+        "control": 90,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "Germany captain and tournament fullback reference.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "busquets_spain_2010s",
+      "name": "Sergio Busquets",
+      "nationality": "Spain",
+      "teamType": "nation",
+      "team": "Spain",
+      "country": "Spain",
+      "start": 2009,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "DM",
+        "CM"
+      ],
+      "primary": [
+        "DM"
+      ],
+      "roles": [
+        "Controller",
+        "Press resistance",
+        "Screen"
+      ],
+      "overall": 95,
+      "overrides": {
+        "control": 98,
+        "defense": 88,
+        "press": 86,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "Spain pivot during the 2010 and 2012 trophy run.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "modric_croatia_2010s",
+      "name": "Luka Modric",
+      "nationality": "Croatia",
+      "teamType": "nation",
+      "team": "Croatia",
+      "country": "Croatia",
+      "start": 2006,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CM",
+        "AM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Controller",
+        "Carrier",
+        "Big-game passer"
+      ],
+      "overall": 96,
+      "overrides": {
+        "control": 97,
+        "creation": 94,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Croatia midfield leader across major tournaments.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "platini_france_1980s",
+      "name": "Michel Platini",
+      "nationality": "France",
+      "teamType": "nation",
+      "team": "France",
+      "country": "France",
+      "start": 1976,
+      "end": 1987,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros"
+      ],
+      "positions": [
+        "AM",
+        "CM"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Creator",
+        "Scoring midfielder",
+        "Set pieces"
+      ],
+      "overall": 97,
+      "overrides": {
+        "attack": 94,
+        "creation": 98,
+        "control": 95,
+        "bigGame": 98
+      },
+      "confidence": "High",
+      "notes": "France Euro 1984 tournament-defining creator.",
+      "competitions": [
+        "Euros"
+      ]
+    },
+    {
+      "id": "figo_portugal_2000s",
+      "name": "Luis Figo",
+      "nationality": "Portugal",
+      "teamType": "nation",
+      "team": "Portugal",
+      "country": "Portugal",
+      "start": 1991,
+      "end": 2006,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "RW",
+        "RM",
+        "AM"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Wide creator",
+        "Dribbler",
+        "Final ball"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 90,
+        "creation": 95,
+        "control": 92,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Portugal Golden Generation wide creator.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "ronaldo_portugal_2010s",
+      "name": "Cristiano Ronaldo",
+      "nationality": "Portugal",
+      "teamType": "nation",
+      "team": "Portugal",
+      "country": "Portugal",
+      "start": 2003,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "LW",
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Elite scorer",
+        "Aerial threat",
+        "Tournament leader"
+      ],
+      "overall": 97,
+      "overrides": {
+        "attack": 100,
+        "physical": 92,
+        "bigGame": 98
+      },
+      "confidence": "High",
+      "notes": "Portugal captain and Euro 2016-winning talisman.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "van_basten_netherlands_1980s",
+      "name": "Marco van Basten",
+      "nationality": "Netherlands",
+      "teamType": "nation",
+      "team": "Netherlands",
+      "country": "Netherlands",
+      "start": 1983,
+      "end": 1992,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros"
+      ],
+      "positions": [
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Complete striker",
+        "Volley specialist",
+        "Tournament finisher"
+      ],
+      "overall": 96,
+      "overrides": {
+        "attack": 98,
+        "bigGame": 97
+      },
+      "confidence": "High",
+      "notes": "Netherlands Euro 1988 striker.",
+      "competitions": [
+        "Euros"
+      ]
+    },
+    {
+      "id": "fillol_argentina_1970s",
+      "name": "Ubaldo Fillol",
+      "nationality": "Argentina",
+      "teamType": "nation",
+      "team": "Argentina",
+      "country": "Argentina",
+      "start": 1974,
+      "end": 1985,
+      "decade": "1970s",
+      "era": "1970s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Tournament keeper",
+        "Reflexes"
+      ],
+      "overall": 92,
+      "overrides": {
+        "goalkeeping": 96,
+        "bigGame": 93
+      },
+      "confidence": "Legend estimate",
+      "notes": "Argentina 1978 World Cup-winning goalkeeper.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "chilavert_paraguay_1990s",
+      "name": "Jose Luis Chilavert",
+      "nationality": "Paraguay",
+      "teamType": "nation",
+      "team": "Paraguay",
+      "country": "Paraguay",
+      "start": 1989,
+      "end": 2003,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Set pieces",
+        "Leader"
+      ],
+      "overall": 91,
+      "overrides": {
+        "goalkeeping": 94,
+        "creation": 58,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Paraguay goalkeeper and set-piece specialist.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "roberto_carlos_brazil_2000s",
+      "name": "Roberto Carlos",
+      "nationality": "Brazil",
+      "teamType": "nation",
+      "team": "Brazil",
+      "country": "Brazil",
+      "start": 1992,
+      "end": 2006,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Attacking fullback",
+        "Set pieces",
+        "Power runner"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 76,
+        "defense": 88,
+        "physical": 94,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "Brazil left-back and World Cup winner.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "cafu_brazil_2000s",
+      "name": "Cafu",
+      "nationality": "Brazil",
+      "teamType": "nation",
+      "team": "Brazil",
+      "country": "Brazil",
+      "start": 1990,
+      "end": 2006,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "RM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Two-way fullback",
+        "Overlap",
+        "Captain"
+      ],
+      "overall": 94,
+      "overrides": {
+        "defense": 88,
+        "creation": 82,
+        "physical": 91,
+        "bigGame": 95
+      },
+      "confidence": "High",
+      "notes": "Brazil captain and right-back benchmark.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "figueroa_chile_1970s",
+      "name": "Elias Figueroa",
+      "nationality": "Chile",
+      "teamType": "nation",
+      "team": "Chile",
+      "country": "Chile",
+      "start": 1966,
+      "end": 1982,
+      "decade": "1970s",
+      "era": "1970s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Libero",
+        "Aerial defender",
+        "Line leader"
+      ],
+      "overall": 93,
+      "overrides": {
+        "defense": 96,
+        "control": 80,
+        "bigGame": 93
+      },
+      "confidence": "Legend estimate",
+      "notes": "Chile and South American defensive great.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "godin_uruguay_2010s",
+      "name": "Diego Godin",
+      "nationality": "Uruguay",
+      "teamType": "nation",
+      "team": "Uruguay",
+      "country": "Uruguay",
+      "start": 2005,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Box defender",
+        "Aerial threat",
+        "Leader"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 94,
+        "physical": 88,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Uruguay captain and Copa America winner.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "mascherano_argentina_2010s",
+      "name": "Javier Mascherano",
+      "nationality": "Argentina",
+      "teamType": "nation",
+      "team": "Argentina",
+      "country": "Argentina",
+      "start": 2003,
+      "end": 2018,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "DM",
+        "CB",
+        "CM"
+      ],
+      "primary": [
+        "DM"
+      ],
+      "roles": [
+        "Ball-winner",
+        "Screen",
+        "Tournament tackler"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 91,
+        "control": 84,
+        "press": 90,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "Argentina midfield and defensive anchor.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "riquelme_argentina_2000s",
+      "name": "Juan Roman Riquelme",
+      "nationality": "Argentina",
+      "teamType": "nation",
+      "team": "Argentina",
+      "country": "Argentina",
+      "start": 1997,
+      "end": 2008,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "AM",
+        "CM"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Creator",
+        "Tempo setter",
+        "Set pieces"
+      ],
+      "overall": 94,
+      "overrides": {
+        "creation": 97,
+        "control": 94,
+        "physical": 62,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Argentina playmaker and Copa America-era creator.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "zico_brazil_1980s",
+      "name": "Zico",
+      "nationality": "Brazil",
+      "teamType": "nation",
+      "team": "Brazil",
+      "country": "Brazil",
+      "start": 1976,
+      "end": 1986,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "AM",
+        "CM"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Creator",
+        "Scoring midfielder",
+        "Set pieces"
+      ],
+      "overall": 96,
+      "overrides": {
+        "attack": 92,
+        "creation": 98,
+        "control": 95,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "Brazil playmaker and South American attacking icon.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "messi_argentina_2020s",
+      "name": "Lionel Messi",
+      "nationality": "Argentina",
+      "teamType": "nation",
+      "team": "Argentina",
+      "country": "Argentina",
+      "start": 2005,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "RW",
+        "AM",
+        "CF"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Creator",
+        "Elite scorer",
+        "Tournament carry"
+      ],
+      "overall": 99,
+      "overrides": {
+        "attack": 99,
+        "creation": 100,
+        "control": 98,
+        "bigGame": 100
+      },
+      "confidence": "High",
+      "notes": "Argentina Copa America and World Cup-winning version.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "neymar_brazil_2010s",
+      "name": "Neymar",
+      "nationality": "Brazil",
+      "teamType": "nation",
+      "team": "Brazil",
+      "country": "Brazil",
+      "start": 2010,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "LW",
+        "AM",
+        "CF"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Dribbler",
+        "Creator",
+        "Wide scorer"
+      ],
+      "overall": 95,
+      "overrides": {
+        "attack": 94,
+        "creation": 96,
+        "control": 94,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Brazil attacking reference across Copa America and World Cup cycles.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "suarez_uruguay_2010s",
+      "name": "Luis Suarez",
+      "nationality": "Uruguay",
+      "teamType": "nation",
+      "team": "Uruguay",
+      "country": "Uruguay",
+      "start": 2007,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Complete striker",
+        "Pressing forward",
+        "Street finisher"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 97,
+        "creation": 78,
+        "press": 82,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Uruguay striker and Copa America winner.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "el_hadary_egypt_2000s",
+      "name": "Essam El Hadary",
+      "nationality": "Egypt",
+      "teamType": "nation",
+      "team": "Egypt",
+      "country": "Egypt",
+      "start": 1996,
+      "end": 2018,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Penalty presence",
+        "Tournament keeper"
+      ],
+      "overall": 90,
+      "overrides": {
+        "goalkeeping": 94,
+        "bigGame": 95
+      },
+      "confidence": "High",
+      "notes": "Egypt AFCON dynasty goalkeeper.",
+      "competitions": [
+        "AFCON"
+      ]
+    },
+    {
+      "id": "bell_cameroon_1980s",
+      "name": "Joseph-Antoine Bell",
+      "nationality": "Cameroon",
+      "teamType": "nation",
+      "team": "Cameroon",
+      "country": "Cameroon",
+      "start": 1977,
+      "end": 1994,
+      "decade": "1980s",
+      "era": "1980s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Box command",
+        "African great"
+      ],
+      "overall": 88,
+      "overrides": {
+        "goalkeeping": 92,
+        "bigGame": 89
+      },
+      "confidence": "Legend estimate",
+      "notes": "Cameroon goalkeeper and African football reference.",
+      "competitions": [
+        "AFCON"
+      ]
+    },
+    {
+      "id": "song_cameroon_2000s",
+      "name": "Rigobert Song",
+      "nationality": "Cameroon",
+      "teamType": "nation",
+      "team": "Cameroon",
+      "country": "Cameroon",
+      "start": 1993,
+      "end": 2010,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Stopper",
+        "Leader",
+        "Tournament defender"
+      ],
+      "overall": 88,
+      "overrides": {
+        "defense": 90,
+        "physical": 86,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Cameroon captain and AFCON winner.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "koulibaly_senegal_2020s",
+      "name": "Kalidou Koulibaly",
+      "nationality": "Senegal",
+      "teamType": "nation",
+      "team": "Senegal",
+      "country": "Senegal",
+      "start": 2015,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Stopper",
+        "Recovery pace",
+        "Line leader"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 94,
+        "physical": 90,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Senegal AFCON-winning captain.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "taiwo_nigeria_2000s",
+      "name": "Taye Taiwo",
+      "nationality": "Nigeria",
+      "teamType": "nation",
+      "team": "Nigeria",
+      "country": "Nigeria",
+      "start": 2004,
+      "end": 2012,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Power fullback",
+        "Set pieces",
+        "Overlap"
+      ],
+      "overall": 86,
+      "overrides": {
+        "defense": 82,
+        "physical": 90,
+        "attack": 68
+      },
+      "confidence": "High",
+      "notes": "Nigeria left-back and Marseille-era power runner.",
+      "competitions": [
+        "AFCON"
+      ]
+    },
+    {
+      "id": "hakimi_morocco_2020s",
+      "name": "Achraf Hakimi",
+      "nationality": "Morocco",
+      "teamType": "nation",
+      "team": "Morocco",
+      "country": "Morocco",
+      "start": 2016,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "RM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Attacking fullback",
+        "Recovery pace",
+        "Transition runner"
+      ],
+      "overall": 90,
+      "overrides": {
+        "attack": 74,
+        "defense": 84,
+        "physical": 92,
+        "press": 84
+      },
+      "confidence": "High",
+      "notes": "Morocco right-back and World Cup semifinalist.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "geremi_cameroon_2000s",
+      "name": "Geremi",
+      "nationality": "Cameroon",
+      "teamType": "nation",
+      "team": "Cameroon",
+      "country": "Cameroon",
+      "start": 1996,
+      "end": 2010,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "RM",
+        "RB",
+        "CM"
+      ],
+      "primary": [
+        "RM"
+      ],
+      "roles": [
+        "Set pieces",
+        "Two-way wide player",
+        "Utility"
+      ],
+      "overall": 87,
+      "overrides": {
+        "creation": 86,
+        "defense": 78,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "Cameroon AFCON winner and wide utility player.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "yaya_toure_ivory_coast_2010s",
+      "name": "Yaya Toure",
+      "nationality": "Ivory Coast",
+      "teamType": "nation",
+      "team": "Ivory Coast",
+      "country": "Ivory Coast",
+      "start": 2004,
+      "end": 2016,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "CM",
+        "DM",
+        "AM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Carrier",
+        "Controller",
+        "Power runner"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 82,
+        "creation": 90,
+        "control": 91,
+        "physical": 95
+      },
+      "confidence": "High",
+      "notes": "Ivory Coast midfielder and AFCON winner.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "essien_ghana_2000s",
+      "name": "Michael Essien",
+      "nationality": "Ghana",
+      "teamType": "nation",
+      "team": "Ghana",
+      "country": "Ghana",
+      "start": 2002,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "DM",
+        "CM",
+        "RB"
+      ],
+      "primary": [
+        "DM"
+      ],
+      "roles": [
+        "Ball-winner",
+        "Carrier",
+        "Duel winner"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 88,
+        "control": 86,
+        "physical": 93,
+        "press": 88
+      },
+      "confidence": "High",
+      "notes": "Ghana midfield force and World Cup-era leader.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "okocha_nigeria_2000s",
+      "name": "Jay-Jay Okocha",
+      "nationality": "Nigeria",
+      "teamType": "nation",
+      "team": "Nigeria",
+      "country": "Nigeria",
+      "start": 1993,
+      "end": 2006,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "AM",
+        "RM",
+        "CM"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Dribbler",
+        "Creator",
+        "Set pieces"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 84,
+        "creation": 94,
+        "control": 93,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Nigeria creative icon and AFCON star.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "abedi_pele_ghana_1990s",
+      "name": "Abedi Pele",
+      "nationality": "Ghana",
+      "teamType": "nation",
+      "team": "Ghana",
+      "country": "Ghana",
+      "start": 1982,
+      "end": 1998,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon"
+      ],
+      "positions": [
+        "AM",
+        "LW",
+        "LM"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Creator",
+        "Dribbler",
+        "Wide playmaker"
+      ],
+      "overall": 92,
+      "overrides": {
+        "attack": 86,
+        "creation": 93,
+        "control": 91,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Ghana attacking great and African Footballer of the Year icon.",
+      "competitions": [
+        "AFCON"
+      ]
+    },
+    {
+      "id": "mane_senegal_2020s",
+      "name": "Sadio Mane",
+      "nationality": "Senegal",
+      "teamType": "nation",
+      "team": "Senegal",
+      "country": "Senegal",
+      "start": 2012,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "LW",
+        "RW",
+        "ST"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Pressing forward",
+        "Wide scorer",
+        "Tournament leader"
+      ],
+      "overall": 93,
+      "overrides": {
+        "attack": 94,
+        "press": 88,
+        "physical": 88,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "Senegal AFCON-winning attacker.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "salah_egypt_2020s",
+      "name": "Mohamed Salah",
+      "nationality": "Egypt",
+      "teamType": "nation",
+      "team": "Egypt",
+      "country": "Egypt",
+      "start": 2011,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "RW",
+        "ST"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Elite scorer",
+        "Transition runner",
+        "Wide finisher"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 97,
+        "creation": 84,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Egypt attacking talisman.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "mahrez_algeria_2010s",
+      "name": "Riyad Mahrez",
+      "nationality": "Algeria",
+      "teamType": "nation",
+      "team": "Algeria",
+      "country": "Algeria",
+      "start": 2014,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon"
+      ],
+      "positions": [
+        "RW",
+        "AM",
+        "RM"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Inverted winger",
+        "Creator",
+        "Set pieces"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 90,
+        "creation": 90,
+        "control": 89,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Algeria AFCON-winning captain and right-sided creator.",
+      "competitions": [
+        "AFCON"
+      ]
+    },
+    {
+      "id": "drogba_ivory_coast_2000s",
+      "name": "Didier Drogba",
+      "nationality": "Ivory Coast",
+      "teamType": "nation",
+      "team": "Ivory Coast",
+      "country": "Ivory Coast",
+      "start": 2002,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "ST"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Target striker",
+        "Big-game scorer",
+        "Aerial threat"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 96,
+        "physical": 94,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "Ivory Coast striker and African football icon.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "etoo_cameroon_2000s",
+      "name": "Samuel Eto'o",
+      "nationality": "Cameroon",
+      "teamType": "nation",
+      "team": "Cameroon",
+      "country": "Cameroon",
+      "start": 1997,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Elite scorer",
+        "Channel runner",
+        "Tournament finisher"
+      ],
+      "overall": 95,
+      "overrides": {
+        "attack": 97,
+        "physical": 88,
+        "bigGame": 95
+      },
+      "confidence": "High",
+      "notes": "Cameroon striker and AFCON winner.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "casillas_real_madrid_2010s",
+      "name": "Iker Casillas",
+      "nationality": "Spain",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 1999,
+      "end": 2015,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Captain",
+        "European keeper"
+      ],
+      "overall": 95,
+      "overrides": {
+        "goalkeeping": 98,
+        "bigGame": 97
+      },
+      "confidence": "High",
+      "notes": "Real Madrid captain and Champions League/Club World Cup-era keeper.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "ederson_city_2020s",
+      "name": "Ederson",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "Manchester City",
+      "league": "Premier League",
+      "country": "England",
+      "start": 2017,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "premier_league"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Sweeper keeper",
+        "Distribution",
+        "High-line keeper"
+      ],
+      "overall": 92,
+      "overrides": {
+        "goalkeeping": 94,
+        "control": 82,
+        "creation": 70,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Manchester City treble-era goalkeeper.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "Premier League"
+      ]
+    },
+    {
+      "id": "marcelo_real_madrid_2010s",
+      "name": "Marcelo",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2007,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Attacking fullback",
+        "Dribbler",
+        "Combination play"
+      ],
+      "overall": 93,
+      "overrides": {
+        "attack": 74,
+        "creation": 86,
+        "defense": 82,
+        "control": 88,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "Real Madrid left-back in a Champions League dynasty.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "carvajal_real_madrid_2010s",
+      "name": "Dani Carvajal",
+      "nationality": "Spain",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2013,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "RB",
+        "RWB"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Two-way fullback",
+        "Big-game defender",
+        "Overlap"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 88,
+        "press": 86,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "Real Madrid right-back across multiple Champions League wins.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "van_dijk_liverpool_2010s",
+      "name": "Virgil van Dijk",
+      "nationality": "Netherlands",
+      "teamType": "club",
+      "team": "Liverpool",
+      "league": "Premier League",
+      "country": "England",
+      "start": 2018,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "premier_league"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Line leader",
+        "Aerial control",
+        "Recovery pace"
+      ],
+      "overall": 96,
+      "overrides": {
+        "defense": 98,
+        "control": 82,
+        "physical": 93,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "Liverpool Champions League and Club World Cup-winning center-back.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "Premier League"
+      ]
+    },
+    {
+      "id": "pique_barcelona_2010s",
+      "name": "Gerard Pique",
+      "nationality": "Spain",
+      "teamType": "club",
+      "team": "Barcelona",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2008,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Ball-playing CB",
+        "Aerial defender",
+        "Possession base"
+      ],
+      "overall": 93,
+      "overrides": {
+        "defense": 93,
+        "control": 86,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "Barcelona center-back in Champions League and Club World Cup-winning sides.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "kroos_real_madrid_2010s",
+      "name": "Toni Kroos",
+      "nationality": "Germany",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2014,
+      "end": 2024,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "CM",
+        "DM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Controller",
+        "Long passing",
+        "Tempo setter"
+      ],
+      "overall": 95,
+      "overrides": {
+        "creation": 96,
+        "control": 98,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "Real Madrid midfield controller in the Champions League dynasty.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "modric_real_madrid_2010s",
+      "name": "Luka Modric",
+      "nationality": "Croatia",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2012,
+      "end": 2026,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "CM",
+        "AM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Controller",
+        "Carrier",
+        "Press resistance"
+      ],
+      "overall": 96,
+      "overrides": {
+        "creation": 95,
+        "control": 97,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Real Madrid midfield engine and Champions League final regular.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "kante_chelsea_2020s",
+      "name": "N'Golo Kante",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Chelsea",
+      "league": "Premier League",
+      "country": "England",
+      "start": 2016,
+      "end": 2023,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "premier_league"
+      ],
+      "positions": [
+        "DM",
+        "CM"
+      ],
+      "primary": [
+        "DM"
+      ],
+      "roles": [
+        "Ball-winner",
+        "Pressing",
+        "Transition stopper"
+      ],
+      "overall": 94,
+      "overrides": {
+        "defense": 94,
+        "control": 86,
+        "press": 96,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Chelsea Champions League and Club World Cup midfield force.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "Premier League"
+      ]
+    },
+    {
+      "id": "bernardo_city_2020s",
+      "name": "Bernardo Silva",
+      "nationality": "Portugal",
+      "teamType": "club",
+      "team": "Manchester City",
+      "league": "Premier League",
+      "country": "England",
+      "start": 2017,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "premier_league"
+      ],
+      "positions": [
+        "RM",
+        "RW",
+        "CM",
+        "AM"
+      ],
+      "primary": [
+        "RM"
+      ],
+      "roles": [
+        "Press resistance",
+        "Wide creator",
+        "Controller"
+      ],
+      "overall": 93,
+      "overrides": {
+        "creation": 92,
+        "control": 94,
+        "press": 88,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Manchester City treble-era midfielder and wide creator.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "Premier League"
+      ]
+    },
+    {
+      "id": "vinicius_real_madrid_2020s",
+      "name": "Vinicius Junior",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2018,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "LW",
+        "ST"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Dribbler",
+        "Wide scorer",
+        "Big-game winger"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 95,
+        "creation": 88,
+        "physical": 88,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Real Madrid Champions League match-winner and Club World Cup attacker.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "bale_real_madrid_2010s",
+      "name": "Gareth Bale",
+      "nationality": "Wales",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2013,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "RW",
+        "LW",
+        "ST"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Power winger",
+        "Big-game scorer",
+        "Transition runner"
+      ],
+      "overall": 93,
+      "overrides": {
+        "attack": 94,
+        "physical": 92,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Real Madrid Champions League final scorer and Club World Cup attacker.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "benzema_real_madrid_2010s",
+      "name": "Karim Benzema",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2009,
+      "end": 2023,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Complete striker",
+        "Link forward",
+        "Big-game scorer"
+      ],
+      "overall": 95,
+      "overrides": {
+        "attack": 97,
+        "creation": 82,
+        "control": 84,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Real Madrid Champions League and Club World Cup striker.",
+      "competitions": [
+        "UCL",
+        "Club World Cup",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "abidal_lyon_2000s",
+      "name": "Eric Abidal",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Lyon",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2004,
+      "end": 2007,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "CB"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Defensive fullback",
+        "Recovery pace",
+        "Left-side balance"
+      ],
+      "overall": 90,
+      "overrides": {
+        "defense": 90,
+        "physical": 88,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "Lyon title-era left-back before Barcelona and France tournament roles.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "lizarazu_bordeaux_1990s",
+      "name": "Bixente Lizarazu",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Bordeaux",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 1988,
+      "end": 1996,
+      "decade": "1990s",
+      "era": "1990s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Two-way fullback",
+        "Overlap",
+        "Tournament defender"
+      ],
+      "overall": 90,
+      "overrides": {
+        "defense": 88,
+        "creation": 80,
+        "physical": 88,
+        "bigGame": 89
+      },
+      "confidence": "High",
+      "notes": "Bordeaux and France left-back reference with elite wide defensive value.",
+      "competitions": [
+        "Ligue 1"
+      ]
+    },
+    {
+      "id": "morrow_toronto_2010s",
+      "name": "Justin Morrow",
+      "nationality": "United States",
+      "teamType": "club",
+      "team": "Toronto FC",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2014,
+      "end": 2021,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Wingback",
+        "Wide runner",
+        "Playoff reliability"
+      ],
+      "overall": 84,
+      "overrides": {
+        "defense": 84,
+        "physical": 86,
+        "press": 84,
+        "bigGame": 82
+      },
+      "confidence": "High",
+      "notes": "Toronto FC title-era left-sided defender and wingback.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "davies_vancouver_2010s",
+      "name": "Alphonso Davies",
+      "nationality": "Canada",
+      "teamType": "club",
+      "team": "Vancouver Whitecaps",
+      "league": "MLS",
+      "country": "Canada",
+      "start": 2016,
+      "end": 2018,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "LM",
+        "LW",
+        "LWB",
+        "LB"
+      ],
+      "primary": [
+        "LM"
+      ],
+      "roles": [
+        "Explosive runner",
+        "Left-side threat",
+        "Transition outlet"
+      ],
+      "overall": 85,
+      "overrides": {
+        "attack": 78,
+        "creation": 82,
+        "physical": 94,
+        "press": 84
+      },
+      "confidence": "Medium",
+      "notes": "Vancouver teenage breakout used for MLS left-lane coverage, not Bayern peak.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "valeri_portland_2010s",
+      "name": "Diego Valeri",
+      "nationality": "Argentina",
+      "teamType": "club",
+      "team": "Portland Timbers",
+      "league": "MLS",
+      "country": "United States",
+      "start": 2013,
+      "end": 2021,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "mls"
+      ],
+      "positions": [
+        "AM",
+        "LM",
+        "LW"
+      ],
+      "primary": [
+        "AM"
+      ],
+      "roles": [
+        "Creator",
+        "Set pieces",
+        "Playoff attacker"
+      ],
+      "overall": 87,
+      "overrides": {
+        "attack": 82,
+        "creation": 89,
+        "control": 87,
+        "bigGame": 86
+      },
+      "confidence": "High",
+      "notes": "Portland creator and MLS MVP-level attacking midfielder.",
+      "competitions": [
+        "MLS"
+      ]
+    },
+    {
+      "id": "beckham_england_2000s",
+      "name": "David Beckham",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1996,
+      "end": 2009,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "RM",
+        "RW",
+        "CM"
+      ],
+      "primary": [
+        "RM"
+      ],
+      "roles": [
+        "Wide creator",
+        "Set pieces",
+        "Crossing"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 78,
+        "creation": 94,
+        "control": 86,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "England right-sided creator across Euro and World Cup cycles.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "seaman_england_2000s",
+      "name": "David Seaman",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1988,
+      "end": 2002,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "GK"
+      ],
+      "primary": [
+        "GK"
+      ],
+      "roles": [
+        "Shot-stopper",
+        "Back-four keeper",
+        "Tournament veteran"
+      ],
+      "overall": 88,
+      "overrides": {
+        "goalkeeping": 91,
+        "bigGame": 86
+      },
+      "confidence": "Medium",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England keeper into the 2002 World Cup cycle, included to give 2000s England national rolls real goalkeeper coverage.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "cole_england_2000s",
+      "name": "Ashley Cole",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 2001,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "LB",
+        "LWB"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Lockdown fullback",
+        "Recovery pace",
+        "Big-game defender"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 92,
+        "physical": 87,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England left-back reference across the 2002, 2006 and 2010 World Cup cycles.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "campbell_england_2000s",
+      "name": "Sol Campbell",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1996,
+      "end": 2007,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Stopper",
+        "Recovery pace",
+        "Tournament defender"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 93,
+        "physical": 92,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England center-back across Euro 2000, World Cup 2002, Euro 2004 and World Cup 2006 squads.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "ferdinand_england_2000s",
+      "name": "Rio Ferdinand",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1997,
+      "end": 2011,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Ball-playing CB",
+        "Cover defender",
+        "Recovery pace"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 94,
+        "control": 78,
+        "physical": 86,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England ball-playing center-back across the 2002 and 2006 World Cup cycles.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "terry_england_2000s",
+      "name": "John Terry",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 2003,
+      "end": 2012,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CB"
+      ],
+      "primary": [
+        "CB"
+      ],
+      "roles": [
+        "Box defender",
+        "Aerial threat",
+        "Leader"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 94,
+        "physical": 88,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England defensive leader through Euro 2004, World Cup 2006 and World Cup 2010.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "gary_neville_england_2000s",
+      "name": "Gary Neville",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1995,
+      "end": 2007,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "RWB"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Reliable fullback",
+        "Crossing support",
+        "Back-four balance"
+      ],
+      "overall": 88,
+      "overrides": {
+        "defense": 87,
+        "creation": 76,
+        "press": 82,
+        "bigGame": 87
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England right-back across Euro and World Cup squads in the late 1990s and 2000s.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "scholes_england_2000s",
+      "name": "Paul Scholes",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1997,
+      "end": 2004,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CM",
+        "AM",
+        "LM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Controller",
+        "Long passing",
+        "Late runs"
+      ],
+      "overall": 90,
+      "overrides": {
+        "attack": 78,
+        "creation": 91,
+        "control": 92,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England midfield technician through the 2002 World Cup and Euro 2004 cycle.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "gerrard_england_2000s",
+      "name": "Steven Gerrard",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 2000,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CM",
+        "AM",
+        "DM",
+        "RM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Box-to-box",
+        "Big-game shot",
+        "Captain"
+      ],
+      "overall": 92,
+      "overrides": {
+        "attack": 82,
+        "creation": 88,
+        "control": 87,
+        "physical": 88,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England all-action midfielder across 2000s tournament squads.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "lampard_england_2000s",
+      "name": "Frank Lampard",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1999,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "CM",
+        "AM"
+      ],
+      "primary": [
+        "CM"
+      ],
+      "roles": [
+        "Late runner",
+        "Scoring midfielder",
+        "Set pieces"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 85,
+        "creation": 85,
+        "control": 84,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England goalscoring midfielder across Euro 2004, World Cup 2006 and World Cup 2010.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "joe_cole_england_2000s",
+      "name": "Joe Cole",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 2001,
+      "end": 2010,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "LW",
+        "RW",
+        "AM",
+        "LM"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Dribbler",
+        "Wide creator",
+        "Tournament spark"
+      ],
+      "overall": 88,
+      "overrides": {
+        "attack": 84,
+        "creation": 86,
+        "control": 88,
+        "bigGame": 86
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England wide attacker and creative option across Euro and World Cup squads.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "owen_england_2000s",
+      "name": "Michael Owen",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 1998,
+      "end": 2008,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "ST",
+        "CF"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Explosive finisher",
+        "Channel runner",
+        "Tournament scorer"
+      ],
+      "overall": 90,
+      "overrides": {
+        "attack": 92,
+        "physical": 85,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England striker across the 1998 breakthrough and 2000s tournament cycles.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "rooney_england_2000s",
+      "name": "Wayne Rooney",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 2003,
+      "end": 2018,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "ST",
+        "CF",
+        "AM",
+        "LW"
+      ],
+      "primary": [
+        "CF"
+      ],
+      "roles": [
+        "Complete forward",
+        "Pressing",
+        "Creator"
+      ],
+      "overall": 92,
+      "overrides": {
+        "attack": 91,
+        "creation": 86,
+        "press": 86,
+        "physical": 87,
+        "bigGame": 89
+      },
+      "confidence": "High",
+      "sourceLabels": [
+        "Wikidata SPARQL",
+        "OpenFootball players",
+        "Manual legend curation"
+      ],
+      "notes": "England forward from Euro 2004 breakout through the 2006 and 2010 World Cup cycles.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "sorin_argentina_2000s",
+      "name": "Juan Pablo Sorin",
+      "nationality": "Argentina",
+      "teamType": "nation",
+      "team": "Argentina",
+      "country": "Argentina",
+      "start": 1995,
+      "end": 2006,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Attacking fullback",
+        "Wide engine",
+        "Captain"
+      ],
+      "overall": 89,
+      "overrides": {
+        "attack": 68,
+        "creation": 82,
+        "defense": 84,
+        "physical": 88,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "Argentina left-sided defender and wingback across Copa America and World Cup cycles.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "zanetti_argentina_2000s",
+      "name": "Javier Zanetti",
+      "nationality": "Argentina",
+      "teamType": "nation",
+      "team": "Argentina",
+      "country": "Argentina",
+      "start": 1994,
+      "end": 2011,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "LB",
+        "DM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Two-way fullback",
+        "Engine",
+        "Wide security"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 90,
+        "control": 84,
+        "physical": 91,
+        "press": 88,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Argentina all-phase fullback and Copa America veteran.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "dani_alves_brazil_2010s",
+      "name": "Dani Alves",
+      "nationality": "Brazil",
+      "teamType": "nation",
+      "team": "Brazil",
+      "country": "Brazil",
+      "start": 2006,
+      "end": 2022,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "copa_america",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "RM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Attacking fullback",
+        "Controller",
+        "Wide creator"
+      ],
+      "overall": 92,
+      "overrides": {
+        "attack": 70,
+        "creation": 88,
+        "defense": 84,
+        "control": 88,
+        "bigGame": 90
+      },
+      "confidence": "High",
+      "notes": "Brazil right-back and Copa America-winning fullback context.",
+      "competitions": [
+        "Copa America",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "assou_ekotto_cameroon_2010s",
+      "name": "Benoit Assou-Ekotto",
+      "nationality": "Cameroon",
+      "teamType": "nation",
+      "team": "Cameroon",
+      "country": "Cameroon",
+      "start": 2009,
+      "end": 2014,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "LB",
+        "LWB"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Left back",
+        "Wide defender",
+        "Recovery pace"
+      ],
+      "overall": 84,
+      "overrides": {
+        "defense": 84,
+        "physical": 84,
+        "bigGame": 82
+      },
+      "confidence": "High",
+      "notes": "Cameroon left-back used to deepen AFCON left-side coverage.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "boka_ivory_coast_2000s",
+      "name": "Arthur Boka",
+      "nationality": "Ivory Coast",
+      "teamType": "nation",
+      "team": "Ivory Coast",
+      "country": "Ivory Coast",
+      "start": 2004,
+      "end": 2014,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "afcon",
+        "world_cup"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "LM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Left back",
+        "Wide engine",
+        "Set-piece option"
+      ],
+      "overall": 84,
+      "overrides": {
+        "defense": 83,
+        "creation": 76,
+        "physical": 86,
+        "bigGame": 82
+      },
+      "confidence": "High",
+      "notes": "Ivory Coast left-back across AFCON and World Cup squads.",
+      "competitions": [
+        "AFCON",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "lahm_bayern_club_world_cup_2010s",
+      "name": "Philipp Lahm",
+      "nationality": "Germany",
+      "teamType": "club",
+      "team": "Bayern Munich",
+      "league": "Bundesliga",
+      "country": "Germany",
+      "start": 2012,
+      "end": 2014,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "bundesliga"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "LB",
+        "DM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Inverted fullback",
+        "Controller",
+        "Captain"
+      ],
+      "overall": 94,
+      "overrides": {
+        "defense": 91,
+        "control": 90,
+        "creation": 82,
+        "bigGame": 93
+      },
+      "confidence": "High",
+      "notes": "Bayern treble captain and Club World Cup fullback/control context.",
+      "competitions": [
+        "Club World Cup",
+        "UCL",
+        "Bundesliga"
+      ]
+    },
+    {
+      "id": "alaba_bayern_club_world_cup_2010s",
+      "name": "David Alaba",
+      "nationality": "Austria",
+      "teamType": "club",
+      "team": "Bayern Munich",
+      "league": "Bundesliga",
+      "country": "Germany",
+      "start": 2011,
+      "end": 2021,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "bundesliga"
+      ],
+      "positions": [
+        "LB",
+        "LWB",
+        "CB",
+        "CM"
+      ],
+      "primary": [
+        "LB"
+      ],
+      "roles": [
+        "Two-way fullback",
+        "Ball progression",
+        "Back-line cover"
+      ],
+      "overall": 92,
+      "overrides": {
+        "defense": 88,
+        "creation": 84,
+        "control": 86,
+        "physical": 88,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Bayern Club World Cup winner and left-back/center-back hybrid.",
+      "competitions": [
+        "Club World Cup",
+        "UCL",
+        "Bundesliga"
+      ]
+    },
+    {
+      "id": "messi_barcelona_2010s",
+      "name": "Lionel Messi",
+      "nationality": "Argentina",
+      "teamType": "club",
+      "team": "Barcelona",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2008,
+      "end": 2021,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "RW",
+        "CF",
+        "AM"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Creator",
+        "Elite scorer",
+        "Club world champion"
+      ],
+      "overall": 100,
+      "overrides": {
+        "attack": 100,
+        "creation": 100,
+        "control": 98,
+        "bigGame": 96
+      },
+      "confidence": "High",
+      "notes": "Barcelona Club World Cup-winning attacker merged onto the curated peak context.",
+      "competitions": [
+        "Club World Cup",
+        "UCL",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "neymar_barcelona_2010s",
+      "name": "Neymar",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "Barcelona",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2013,
+      "end": 2017,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "LW",
+        "RW",
+        "AM"
+      ],
+      "primary": [
+        "LW"
+      ],
+      "roles": [
+        "Dribbler",
+        "Creator",
+        "Club world champion"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 93,
+        "creation": 94,
+        "control": 90,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Barcelona MSN-era Club World Cup attacker merged onto the curated peak context.",
+      "competitions": [
+        "Club World Cup",
+        "UCL",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "suarez_barcelona_2010s",
+      "name": "Luis Suarez",
+      "nationality": "Uruguay",
+      "teamType": "club",
+      "team": "Barcelona",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2014,
+      "end": 2020,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "ST",
+        "CF",
+        "RW"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Elite scorer",
+        "Link play",
+        "Club world champion"
+      ],
+      "overall": 94,
+      "overrides": {
+        "attack": 97,
+        "creation": 80,
+        "press": 78,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Barcelona Club World Cup striker merged onto the curated peak context.",
+      "competitions": [
+        "Club World Cup",
+        "UCL",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "rodrygo_real_madrid_2020s",
+      "name": "Rodrygo",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "Real Madrid",
+      "league": "LaLiga",
+      "country": "Spain",
+      "start": 2019,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "club_world_cup",
+        "champions_league",
+        "laliga"
+      ],
+      "positions": [
+        "RW",
+        "LW",
+        "CF"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Wide scorer",
+        "Big-game runner",
+        "Flexible forward"
+      ],
+      "overall": 90,
+      "overrides": {
+        "attack": 90,
+        "creation": 84,
+        "control": 86,
+        "bigGame": 92
+      },
+      "confidence": "High",
+      "notes": "Real Madrid Club World Cup and Champions League wide-forward context.",
+      "competitions": [
+        "Club World Cup",
+        "UCL",
+        "LaLiga"
+      ]
+    },
+    {
+      "id": "giuly_monaco_2000s",
+      "name": "Ludovic Giuly",
+      "nationality": "France",
+      "teamType": "club",
+      "team": "Monaco",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 1998,
+      "end": 2004,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "RW",
+        "RM",
+        "CF",
+        "AM"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Right-sided attacker",
+        "Runner",
+        "European finalist"
+      ],
+      "overall": 88,
+      "overrides": {
+        "attack": 86,
+        "creation": 84,
+        "press": 78,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "Monaco right-sided attacker and 2004 Champions League finalist.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "lucas_moura_psg_2010s",
+      "name": "Lucas Moura",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2013,
+      "end": 2018,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "RW",
+        "RM",
+        "LW"
+      ],
+      "primary": [
+        "RW"
+      ],
+      "roles": [
+        "Dribbler",
+        "Wide runner",
+        "Transition threat"
+      ],
+      "overall": 87,
+      "overrides": {
+        "attack": 84,
+        "creation": 82,
+        "physical": 88,
+        "press": 78
+      },
+      "confidence": "High",
+      "notes": "PSG wide attacker used to deepen Ligue 1 right-side draft coverage.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "dani_alves_psg_2010s",
+      "name": "Dani Alves",
+      "nationality": "Brazil",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2017,
+      "end": 2019,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "RM"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Attacking fullback",
+        "Wide creator",
+        "Title veteran"
+      ],
+      "overall": 89,
+      "overrides": {
+        "attack": 70,
+        "creation": 86,
+        "defense": 82,
+        "control": 86,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "PSG right-back context for late-career Ligue 1 title sides.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "cavani_psg_2010s",
+      "name": "Edinson Cavani",
+      "nationality": "Uruguay",
+      "teamType": "club",
+      "team": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "start": 2013,
+      "end": 2020,
+      "decade": "2010s",
+      "era": "2010s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "ligue_1",
+        "champions_league"
+      ],
+      "positions": [
+        "ST",
+        "CF",
+        "RW"
+      ],
+      "primary": [
+        "ST"
+      ],
+      "roles": [
+        "Box finisher",
+        "Pressing forward",
+        "Wide-channel runner"
+      ],
+      "overall": 91,
+      "overrides": {
+        "attack": 94,
+        "press": 84,
+        "physical": 86,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "PSG record-scoring forward with enough wide-channel work for draft flexibility.",
+      "competitions": [
+        "Ligue 1",
+        "UCL"
+      ]
+    },
+    {
+      "id": "zambrotta_italy_2000s",
+      "name": "Gianluca Zambrotta",
+      "nationality": "Italy",
+      "teamType": "nation",
+      "team": "Italy",
+      "country": "Italy",
+      "start": 1999,
+      "end": 2010,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "LB",
+        "LWB"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Two-way fullback",
+        "Wide balance",
+        "Tournament defender"
+      ],
+      "overall": 91,
+      "overrides": {
+        "defense": 89,
+        "creation": 80,
+        "physical": 88,
+        "bigGame": 91
+      },
+      "confidence": "High",
+      "notes": "Italy tournament fullback across Euros and the 2006 World Cup-winning cycle.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "thuram_france_2000s",
+      "name": "Lilian Thuram",
+      "nationality": "France",
+      "teamType": "nation",
+      "team": "France",
+      "country": "France",
+      "start": 1994,
+      "end": 2008,
+      "decade": "2000s",
+      "era": "2000s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "CB",
+        "RWB"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Lockdown defender",
+        "Recovery pace",
+        "Tournament leader"
+      ],
+      "overall": 93,
+      "overrides": {
+        "defense": 94,
+        "physical": 90,
+        "bigGame": 94
+      },
+      "confidence": "High",
+      "notes": "France right-back and center-back across Euro-winning and World Cup finalist sides.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    },
+    {
+      "id": "walker_england_2020s",
+      "name": "Kyle Walker",
+      "nationality": "England",
+      "teamType": "nation",
+      "team": "England",
+      "country": "England",
+      "start": 2011,
+      "end": 2026,
+      "decade": "2020s",
+      "era": "2020s",
+      "modes": [
+        "world_xi",
+        "ball_knowledge",
+        "euros",
+        "world_cup"
+      ],
+      "positions": [
+        "RB",
+        "RWB",
+        "CB"
+      ],
+      "primary": [
+        "RB"
+      ],
+      "roles": [
+        "Recovery pace",
+        "Wide stopper",
+        "Back-three cover"
+      ],
+      "overall": 89,
+      "overrides": {
+        "defense": 88,
+        "physical": 94,
+        "press": 84,
+        "bigGame": 88
+      },
+      "confidence": "High",
+      "notes": "England right-back and wide center-back across recent Euro runs.",
+      "competitions": [
+        "Euros",
+        "World Cup"
+      ]
+    }
+  ]
+}

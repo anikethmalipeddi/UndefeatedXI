@@ -1,0 +1,243 @@
+{
+  "generatedBy": "scripts/generate-data.ts",
+  "generatedAt": "2026-06-11T18:26:59.709Z",
+  "note": "Small normalized public-source snapshots used as reproducible reference inputs; playable contexts remain curated in src/data/playerContexts.ts with per-context provenance expanded in contextProvenance.json.",
+  "samples": [
+    {
+      "source": "OpenFootball players",
+      "status": 200,
+      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "fileCount": 190,
+      "samplePaths": [
+        "LICENSE.md",
+        "README.md",
+        "africa/algeria/dz.players.txt",
+        "africa/angola/ao.players.txt",
+        "africa/benin/bj.players.txt",
+        "africa/burkina-faso/bf.players.txt",
+        "africa/burundi/bi.players.txt",
+        "africa/cabo-verde/cv.players.txt",
+        "africa/cameroon/cm.players.txt",
+        "africa/central-african-republic/cf.players.txt",
+        "africa/chad/td.players.txt",
+        "africa/comoros/km.players.txt"
+      ]
+    },
+    {
+      "source": "OpenFootball football.json",
+      "status": 200,
+      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "fileCount": 282,
+      "samplePaths": [
+        "2010-11/at.1.json",
+        "2010-11/at.2.json",
+        "2010-11/de.1.json",
+        "2010-11/en.1.json",
+        "2010-11/en.2.json",
+        "2010-11/en.3.json",
+        "2010-11/en.4.json",
+        "2011-12/at.1.json",
+        "2011-12/at.2.json",
+        "2011-12/de.1.json",
+        "2011-12/en.1.json",
+        "2011-12/en.2.json"
+      ]
+    },
+    {
+      "source": "Wikidata SPARQL",
+      "status": 200,
+      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "samplePeople": [
+        {
+          "qid": "Q615",
+          "name": "Lionel Messi",
+          "birthYear": 1987
+        },
+        {
+          "qid": "Q11571",
+          "name": "Cristiano Ronaldo",
+          "birthYear": 1985
+        },
+        {
+          "qid": "Q39444",
+          "name": "Ronaldinho",
+          "birthYear": 1980
+        }
+      ]
+    },
+    {
+      "source": "Football-Data.co.uk",
+      "status": 200,
+      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "sampleCompetition": "Premier League E0 2025-26 CSV",
+      "columns": [
+        "Div",
+        "Date",
+        "Time",
+        "HomeTeam",
+        "AwayTeam",
+        "FTHG",
+        "FTAG",
+        "FTR",
+        "HTHG",
+        "HTAG",
+        "HTR",
+        "Referee",
+        "HS",
+        "AS",
+        "HST",
+        "AST",
+        "HF",
+        "AF"
+      ],
+      "sampleRows": [
+        [
+          "E0",
+          "15/08/2025",
+          "20:00",
+          "Liverpool",
+          "Bournemouth",
+          "4",
+          "2",
+          "H"
+        ],
+        [
+          "E0",
+          "16/08/2025",
+          "12:30",
+          "Aston Villa",
+          "Newcastle",
+          "0",
+          "0",
+          "D"
+        ],
+        [
+          "E0",
+          "16/08/2025",
+          "15:00",
+          "Brighton",
+          "Fulham",
+          "1",
+          "1",
+          "D"
+        ]
+      ]
+    },
+    {
+      "source": "StatsBomb open data",
+      "status": 200,
+      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "competitionCount": 80,
+      "sampleCompetitions": [
+        {
+          "competition": "1. Bundesliga",
+          "season": "2023/2024",
+          "gender": "male"
+        },
+        {
+          "competition": "1. Bundesliga",
+          "season": "2015/2016",
+          "gender": "male"
+        },
+        {
+          "competition": "African Cup of Nations",
+          "season": "2023",
+          "gender": "male"
+        },
+        {
+          "competition": "Champions League",
+          "season": "2018/2019",
+          "gender": "male"
+        },
+        {
+          "competition": "Champions League",
+          "season": "2017/2018",
+          "gender": "male"
+        },
+        {
+          "competition": "Champions League",
+          "season": "2016/2017",
+          "gender": "male"
+        },
+        {
+          "competition": "Champions League",
+          "season": "2015/2016",
+          "gender": "male"
+        },
+        {
+          "competition": "Champions League",
+          "season": "2014/2015",
+          "gender": "male"
+        }
+      ]
+    },
+    {
+      "source": "EA SPORTS FC ratings",
+      "status": 200,
+      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "note": "Official current-player page sampled as a calibration reference only; no bulk player database is copied into the app.",
+      "players": [
+        {
+          "player": "Mohamed Salah",
+          "ratings": {
+            "OVR": 91,
+            "PAC": 89,
+            "SHO": 88,
+            "PAS": 86,
+            "DRI": 90,
+            "DEF": 45,
+            "PHY": 76
+          }
+        },
+        {
+          "player": "Rodri",
+          "ratings": {
+            "OVR": 90,
+            "PAC": 65,
+            "SHO": 80,
+            "PAS": 86,
+            "DRI": 84,
+            "DEF": 86,
+            "PHY": 85
+          }
+        },
+        {
+          "player": "Virgil van Dijk",
+          "ratings": {
+            "OVR": 90,
+            "PAC": 73,
+            "SHO": 60,
+            "PAS": 72,
+            "DRI": 72,
+            "DEF": 90,
+            "PHY": 87
+          }
+        },
+        {
+          "player": "Erling Haaland",
+          "ratings": {
+            "OVR": 90,
+            "PAC": 86,
+            "SHO": 91,
+            "PAS": 70,
+            "DRI": 80,
+            "DEF": 45,
+            "PHY": 88
+          }
+        },
+        {
+          "player": "Alisson",
+          "ratings": {
+            "OVR": 89,
+            "PAC": 86,
+            "SHO": 85,
+            "PAS": 86,
+            "DRI": 89,
+            "DEF": 56,
+            "PHY": 90
+          }
+        }
+      ]
+    }
+  ]
+}

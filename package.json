@@ -1,0 +1,53 @@
+{
+  "name": "undefeatedxi",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "data:generate": "tsx scripts/generate-data.ts",
+    "data:ratings": "tsx scripts/import-rating-contexts.ts",
+    "data:all": "npm run data:ratings && npm run data:generate && npm run data:coverage",
+    "data:audit": "node scripts/source-audit.mjs",
+    "data:wikidata-facts": "tsx scripts/import-wikidata-facts.ts",
+    "data:coverage": "tsx scripts/coverage-report.ts",
+    "smoke:supabase": "tsx scripts/smoke-supabase-flow.ts",
+    "supabase:login": "npx supabase@latest login",
+    "supabase:link": "npx supabase@latest link",
+    "supabase:db:push": "npx supabase@latest db push",
+    "supabase:function:submit": "npx supabase@latest functions deploy submit-run",
+    "supabase:function:share": "npx supabase@latest functions deploy share-run",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.108.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "jsdom": "^29.1.1",
+    "tsx": "^4.22.4",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12",
+    "vitest": "^4.1.8"
+  }
+}
