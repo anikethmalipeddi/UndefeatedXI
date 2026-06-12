@@ -59,8 +59,35 @@ export interface LeaderboardSubmission {
   shareText: string
 }
 
+export type FeedbackCategory = 'bug' | 'player_data' | 'feature' | 'general'
+
+export interface FeedbackSubmission {
+  category: FeedbackCategory
+  message: string
+  contactEmail?: string
+  modeId?: string
+  runId?: string
+  pageUrl?: string
+}
+
 export function sanitizeDisplayName(value: string): string {
   return value.replace(/[^\p{L}\p{N}\s._-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 32)
+}
+
+function sanitizeOptionalText(value: string | undefined, limit: number): string | null {
+  const clean = value?.replace(/\s+/g, ' ').trim().slice(0, limit) ?? ''
+  return clean || null
+}
+
+function sanitizeFeedbackMessage(value: string): string {
+  return value.replace(/\s+/g, ' ').trim().slice(0, 2000)
+}
+
+function sanitizeFeedbackEmail(value: string | undefined): string | null {
+  const clean = value?.trim().slice(0, 254) ?? ''
+  if (!clean) return null
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean)) throw new Error('Enter a valid email or leave it blank.')
+  return clean
 }
 
 export function profileFromSession(session: Session | null): AuthProfile | null {
@@ -205,4 +232,28 @@ export async function fetchLeaderboardRuns(view: LeaderboardView, modeId?: strin
   const { data, error } = await query
   if (error) throw error
   return (data ?? []) as LeaderboardRun[]
+}
+
+export async function submitFeedback(payload: FeedbackSubmission): Promise<void> {
+  if (!supabase) throw new Error('Feedback is not configured on this build.')
+
+  const message = sanitizeFeedbackMessage(payload.message)
+  if (message.length < 8) throw new Error('Feedback must be at least 8 characters.')
+
+  const contactEmail = sanitizeFeedbackEmail(payload.contactEmail)
+  const { data: userData } = await supabase.auth.getUser()
+  const { error } = await supabase
+    .from('feedback_submissions')
+    .insert({
+      category: payload.category,
+      message,
+      contact_email: contactEmail,
+      mode_id: sanitizeOptionalText(payload.modeId, 64),
+      run_id: sanitizeOptionalText(payload.runId, 32),
+      page_url: sanitizeOptionalText(payload.pageUrl, 500),
+      user_agent: typeof navigator === 'undefined' ? null : sanitizeOptionalText(navigator.userAgent, 500),
+      user_id: userData.user?.id ?? null,
+    })
+
+  if (error) throw error
 }

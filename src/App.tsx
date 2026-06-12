@@ -46,10 +46,12 @@ import {
   signIn,
   signOut,
   signUp,
+  submitFeedback,
   submitLeaderboardRun,
   supabase,
   updateDisplayName,
   type AuthProfile,
+  type FeedbackCategory,
   type LeaderboardRun,
   type LeaderboardView,
 } from './services/supabase'
@@ -2224,6 +2226,40 @@ function SimplePage({ title, onBack }: { title: string; onBack: () => void }) {
 }
 
 function ContactPage({ onBack }: { onBack: () => void }) {
+  const [category, setCategory] = useState<FeedbackCategory>('bug')
+  const [message, setMessage] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
+  const [status, setStatus] = useState('')
+  const [busy, setBusy] = useState(false)
+  const messageLength = message.trim().length
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!hasSupabaseConfig) {
+      setStatus('Feedback is not configured on this local build.')
+      return
+    }
+
+    setBusy(true)
+    setStatus('')
+    try {
+      await submitFeedback({
+        category,
+        message,
+        contactEmail,
+        pageUrl: typeof window === 'undefined' ? undefined : window.location.href,
+      })
+      setMessage('')
+      setContactEmail('')
+      setCategory('bug')
+      setStatus('Feedback sent. Thank you.')
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : 'Could not send feedback.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
   return (
     <main className="text-page">
       <button className="button ghost" type="button" onClick={onBack}>
@@ -2231,6 +2267,45 @@ function ContactPage({ onBack }: { onBack: () => void }) {
       </button>
       <h1>Feedback</h1>
       <p>Send mode ideas, player corrections, and rating arguments. The data model keeps source notes and confidence labels so every improvement has somewhere to land.</p>
+      <form className="feedback-form panel" onSubmit={submit}>
+        <label>
+          Category
+          <select value={category} onChange={(event) => setCategory(event.target.value as FeedbackCategory)}>
+            <option value="bug">Bug</option>
+            <option value="player_data">Player data</option>
+            <option value="feature">Feature idea</option>
+            <option value="general">General</option>
+          </select>
+        </label>
+        <label>
+          Feedback
+          <textarea
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            maxLength={2000}
+            minLength={8}
+            required
+            placeholder="What happened? What should be changed?"
+          />
+        </label>
+        <label>
+          Email optional
+          <input
+            value={contactEmail}
+            onChange={(event) => setContactEmail(event.target.value)}
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+          />
+        </label>
+        <div className="feedback-actions">
+          <small>{messageLength}/2000</small>
+          <button className="button primary" type="submit" disabled={busy || messageLength < 8}>
+            {busy ? 'Sending' : 'Send Feedback'}
+          </button>
+        </div>
+        {status && <p className={status.includes('sent') ? 'form-status success' : 'form-status'} role="status">{status}</p>}
+      </form>
       <section className="source-list">
         <h2>Data Sources</h2>
         {sourceNotes.map((source) => (

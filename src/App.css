@@ -407,12 +407,14 @@ main {
   color: var(--ui-muted);
 }
 
-.auth-form {
+.auth-form,
+.feedback-form {
   display: grid;
   gap: 12px;
 }
 
-.auth-form label {
+.auth-form label,
+.feedback-form label {
   display: grid;
   gap: 6px;
   color: var(--ui-muted);
@@ -420,7 +422,10 @@ main {
   font-weight: 900;
 }
 
-.auth-form input {
+.auth-form input,
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
   width: 100%;
   min-height: 44px;
   padding: 0 12px;
@@ -430,6 +435,40 @@ main {
   color: var(--ui-fg);
   font: inherit;
   font-weight: 700;
+}
+
+.feedback-form {
+  margin-block: 4px 18px;
+}
+
+.feedback-form textarea {
+  min-height: 150px;
+  padding: 12px;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.feedback-form select {
+  appearance: none;
+}
+
+.feedback-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.feedback-actions small,
+.form-status {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.form-status.success {
+  color: var(--ui-brand);
 }
 
 .auth-status {

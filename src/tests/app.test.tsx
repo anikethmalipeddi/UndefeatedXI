@@ -131,6 +131,19 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'How to Play' })).toBeInTheDocument()
   })
 
+  it('shows and validates the feedback form', async () => {
+    const user = userEvent.setup()
+    window.location.hash = '#/contact'
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Feedback' })).toBeInTheDocument()
+    await user.selectOptions(screen.getByLabelText('Category'), 'player_data')
+    await user.type(screen.getByLabelText('Feedback'), 'Messi should have a better classic Barcelona card.')
+    await user.click(screen.getByRole('button', { name: /Send Feedback/i }))
+
+    expect(await screen.findByRole('status')).toHaveTextContent('Feedback is not configured on this local build.')
+  })
+
   it('updates hash routes when choosing modes', async () => {
     const user = userEvent.setup()
     render(<App />)
