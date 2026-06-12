@@ -59,6 +59,11 @@ describe('mode configs', () => {
     }
   })
 
+  it('gives Ball Knowledge one team reroll and one era reroll', () => {
+    const mode = getModeConfig('ball_knowledge')
+    expect(mode.rerollRules).toEqual({ team: 1, era: 1, full: 0 })
+  })
+
   it('keeps public modes data-playable', () => {
     expect(publicModeConfigs.length).toBeGreaterThanOrEqual(9)
     for (const mode of modeConfigs.filter((item) => item.status === 'public')) {

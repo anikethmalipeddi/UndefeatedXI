@@ -201,7 +201,7 @@ export const modeConfigs: ModeConfig[] = [
     trophyCondition: 'finish first',
     perfectionCondition: 'win all 38 matches',
     invincibleCondition: 'zero losses',
-    rerollRules: noRerolls,
+    rerollRules: classicRerolls,
     opponentDistribution: 'elite',
     resultGradeScale: 'domestic_38',
     shareTextTemplate: 'My 38-0-0 Ball Knowledge run went {record}.',

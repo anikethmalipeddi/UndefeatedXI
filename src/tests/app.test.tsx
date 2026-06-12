@@ -170,6 +170,14 @@ describe('App', () => {
     await findDraftRound(1)
     await user.click(screen.getByRole('button', { name: /Spin/i }))
 
+    const teamReroll = await screen.findByRole('button', { name: /^Team$/i })
+    const eraReroll = screen.getByRole('button', { name: /^Era$/i })
+    expect(teamReroll).toBeEnabled()
+    expect(eraReroll).toBeEnabled()
+    await user.click(teamReroll)
+    expect(await screen.findByRole('button', { name: /^Team$/i })).toBeDisabled()
+    await user.click(screen.getByRole('button', { name: /^Era$/i }))
+    expect(await screen.findByRole('button', { name: /^Era$/i })).toBeDisabled()
     expect((await screen.findAllByText(/Stats hidden/i)).length).toBeGreaterThan(0)
   })
 
