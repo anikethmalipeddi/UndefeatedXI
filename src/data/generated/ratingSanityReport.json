@@ -1,42 +1,42 @@
 {
   "generatedBy": "scripts/import-rating-contexts.ts",
-  "generatedAt": "2026-06-11T18:26:44.953Z",
+  "generatedAt": "2026-06-12T23:08:04.171Z",
   "policy": {
     "generatedProxyMetricMax": 92,
     "generatedProxyBigGameMax": 91,
     "note": "Caps apply only to Wikidata appearance-model proxy rows. EA/FUT/Icon/Hero and manually reviewed legacy proxy rows may exceed them."
   },
   "summary": {
-    "totalContexts": 20090,
-    "generatedProxyContexts": 14324,
+    "totalContexts": 21894,
+    "generatedProxyContexts": 15000,
     "tierCounts": {
-      "legend-candidate": 1302,
-      "star": 1687,
-      "important": 2634,
-      "regular": 4883,
-      "fringe": 3818
+      "legend-candidate": 1826,
+      "star": 2352,
+      "important": 3535,
+      "regular": 4552,
+      "fringe": 2735
     },
     "metricDistribution": {
       "attack": {
-        "p50": 66,
-        "p75": 72,
-        "p90": 77,
-        "p95": 79,
+        "p50": 67,
+        "p75": 73,
+        "p90": 78,
+        "p95": 80,
         "p99": 82,
         "max": 87
       },
       "creation": {
-        "p50": 65,
-        "p75": 73,
-        "p90": 77,
+        "p50": 66,
+        "p75": 74,
+        "p90": 78,
         "p95": 79,
         "p99": 81,
         "max": 84
       },
       "control": {
-        "p50": 67,
+        "p50": 68,
         "p75": 73,
-        "p90": 76,
+        "p90": 77,
         "p95": 78,
         "p99": 80,
         "max": 84
@@ -44,21 +44,21 @@
       "defense": {
         "p50": 70,
         "p75": 75,
-        "p90": 78,
+        "p90": 79,
         "p95": 80,
         "p99": 82,
         "max": 84
       },
       "goalkeeping": {
         "p50": 3,
-        "p75": 3,
+        "p75": 4,
         "p90": 4,
         "p95": 71,
         "p99": 76,
-        "max": 81
+        "max": 80
       },
       "physical": {
-        "p50": 71,
+        "p50": 72,
         "p75": 74,
         "p90": 76,
         "p95": 77,
@@ -74,9 +74,9 @@
         "max": 81
       },
       "bigGame": {
-        "p50": 73,
-        "p75": 76,
-        "p90": 78,
+        "p50": 74,
+        "p75": 77,
+        "p90": 79,
         "p95": 80,
         "p99": 82,
         "max": 86
@@ -93,6 +93,14 @@
         "position": "LW",
         "tier": "star",
         "rating": 87
+      },
+      {
+        "player": "Aritz Aduriz",
+        "team": "Athletic Bilbao",
+        "era": "2020s",
+        "position": "CF",
+        "tier": "legend-candidate",
+        "rating": 86
       },
       {
         "player": "Carlos Orejuela",
@@ -151,10 +159,50 @@
         "rating": 85
       },
       {
+        "player": "Fernando Llorente",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
+        "position": "CF",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Fernando Llorente",
+        "team": "Athletic Bilbao",
+        "era": "2010s",
+        "position": "CF",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Gabriel Batistuta",
+        "team": "Fiorentina",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
         "player": "Giovane Élber",
         "team": "Bayern Munich",
         "era": "2000s",
         "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Harry Kane",
+        "team": "Tottenham",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Ismael Urzaiz",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
+        "position": "CF",
         "tier": "legend-candidate",
         "rating": 85
       },
@@ -207,83 +255,35 @@
         "rating": 85
       },
       {
-        "player": "Álvaro Recoba",
-        "team": "Inter",
+        "player": "Shaun Goater",
+        "team": "Manchester City",
         "era": "2000s",
         "position": "ST",
         "tier": "legend-candidate",
-        "rating": 84
+        "rating": 85
       },
       {
-        "player": "Carsten Jancker",
-        "team": "Bayern Munich",
+        "player": "Álvaro Negredo",
+        "team": "Sevilla",
         "era": "2000s",
         "position": "ST",
         "tier": "star",
         "rating": 84
       },
       {
-        "player": "Claudio Pizarro",
-        "team": "Bayern Munich",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "legend-candidate",
-        "rating": 84
-      },
-      {
-        "player": "Diego Forlán",
-        "team": "Atletico Madrid",
+        "player": "Álvaro Negredo",
+        "team": "Sevilla",
         "era": "2010s",
         "position": "ST",
         "tier": "star",
         "rating": 84
       },
       {
-        "player": "Edin Džeko",
-        "team": "Roma",
-        "era": "2020s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Fernando Morientes",
-        "team": "Real Madrid",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "legend-candidate",
-        "rating": 84
-      },
-      {
-        "player": "Freddie Ljungberg",
-        "team": "Arsenal",
-        "era": "2000s",
-        "position": "LW",
-        "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Javier Saviola",
-        "team": "Barcelona",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Jimmy Floyd Hasselbaink",
-        "team": "Chelsea",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Julio Ricardo Cruz",
+        "player": "Álvaro Recoba",
         "team": "Inter",
         "era": "2000s",
         "position": "ST",
-        "tier": "star",
+        "tier": "legend-candidate",
         "rating": 84
       }
     ],
@@ -294,6 +294,22 @@
         "era": "2020s",
         "position": "AM",
         "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Bernd Schneider",
+        "team": "Bayer Leverkusen",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Florent Malouda",
+        "team": "Lyon",
+        "era": "2000s",
+        "position": "LM",
+        "tier": "important",
         "rating": 84
       },
       {
@@ -329,6 +345,14 @@
         "rating": 83
       },
       {
+        "player": "David Silva",
+        "team": "Manchester City",
+        "era": "2020s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
         "player": "Guti",
         "team": "Real Madrid",
         "era": "2000s",
@@ -337,11 +361,11 @@
         "rating": 83
       },
       {
-        "player": "Guti",
-        "team": "Real Madrid",
-        "era": "2010s",
-        "position": "CM",
-        "tier": "legend-candidate",
+        "player": "Kai Havertz",
+        "team": "Bayer Leverkusen",
+        "era": "2020s",
+        "position": "AM",
+        "tier": "important",
         "rating": 83
       },
       {
@@ -350,6 +374,14 @@
         "era": "2000s",
         "position": "CM",
         "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Kevin Horlock",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
         "rating": 83
       },
       {
@@ -377,9 +409,9 @@
         "rating": 83
       },
       {
-        "player": "Patricio Toranzo",
-        "team": "Barcelona",
-        "era": "2010s",
+        "player": "Phil Foden",
+        "team": "Manchester City",
+        "era": "2020s",
         "position": "CM",
         "tier": "legend-candidate",
         "rating": 83
@@ -409,14 +441,6 @@
         "rating": 83
       },
       {
-        "player": "Xavi Hernández",
-        "team": "Barcelona",
-        "era": "2010s",
-        "position": "CM",
-        "tier": "legend-candidate",
-        "rating": 83
-      },
-      {
         "player": "Ahmed Hassan",
         "team": "Egypt",
         "era": "2000s",
@@ -441,6 +465,14 @@
         "rating": 82
       },
       {
+        "player": "André Ayew",
+        "team": "Marseille",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
+        "rating": 82
+      },
+      {
         "player": "Andreas Möller",
         "team": "Borussia Dortmund",
         "era": "2000s",
@@ -454,38 +486,6 @@
         "era": "2000s",
         "position": "CM",
         "tier": "legend-candidate",
-        "rating": 82
-      },
-      {
-        "player": "Antonio Conte",
-        "team": "Juventus",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "legend-candidate",
-        "rating": 82
-      },
-      {
-        "player": "Bernd Schneider",
-        "team": "Bayer Leverkusen",
-        "era": "2000s",
-        "position": "AM",
-        "tier": "legend-candidate",
-        "rating": 82
-      },
-      {
-        "player": "Christian Giménez",
-        "team": "Real Madrid",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "star",
-        "rating": 82
-      },
-      {
-        "player": "Danny Murphy",
-        "team": "Liverpool",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "star",
         "rating": 82
       }
     ],
@@ -504,6 +504,30 @@
         "era": "2020s",
         "position": "AM",
         "tier": "star",
+        "rating": 83
+      },
+      {
+        "player": "Aritz Aduriz",
+        "team": "Athletic Bilbao",
+        "era": "2020s",
+        "position": "CF",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Bernd Schneider",
+        "team": "Bayer Leverkusen",
+        "era": "2000s",
+        "position": "AM",
+        "tier": "legend-candidate",
+        "rating": 83
+      },
+      {
+        "player": "Florent Malouda",
+        "team": "Lyon",
+        "era": "2000s",
+        "position": "LM",
+        "tier": "important",
         "rating": 83
       },
       {
@@ -547,6 +571,30 @@
         "rating": 82
       },
       {
+        "player": "David Silva",
+        "team": "Manchester City",
+        "era": "2020s",
+        "position": "CM",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Fernando Llorente",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
+        "position": "CF",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Fernando Llorente",
+        "team": "Athletic Bilbao",
+        "era": "2010s",
+        "position": "CF",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
         "player": "Guti",
         "team": "Real Madrid",
         "era": "2000s",
@@ -555,10 +603,10 @@
         "rating": 82
       },
       {
-        "player": "Guti",
-        "team": "Real Madrid",
-        "era": "2010s",
-        "position": "CM",
+        "player": "Ismael Urzaiz",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
+        "position": "CF",
         "tier": "legend-candidate",
         "rating": 82
       },
@@ -571,11 +619,27 @@
         "rating": 82
       },
       {
+        "player": "Kai Havertz",
+        "team": "Bayer Leverkusen",
+        "era": "2020s",
+        "position": "AM",
+        "tier": "important",
+        "rating": 82
+      },
+      {
         "player": "Kaká",
         "team": "AC Milan",
         "era": "2000s",
         "position": "CM",
         "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Kevin Horlock",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "CM",
+        "tier": "star",
         "rating": 82
       },
       {
@@ -603,9 +667,9 @@
         "rating": 82
       },
       {
-        "player": "Patricio Toranzo",
-        "team": "Barcelona",
-        "era": "2010s",
+        "player": "Phil Foden",
+        "team": "Manchester City",
+        "era": "2020s",
         "position": "CM",
         "tier": "legend-candidate",
         "rating": 82
@@ -625,70 +689,6 @@
         "position": "CM",
         "tier": "legend-candidate",
         "rating": 82
-      },
-      {
-        "player": "Xavi Hernández",
-        "team": "Barcelona",
-        "era": "2010s",
-        "position": "CM",
-        "tier": "legend-candidate",
-        "rating": 82
-      },
-      {
-        "player": "Ahmed Hassan",
-        "team": "Egypt",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Ahmed Hassan",
-        "team": "Egypt",
-        "era": "2010s",
-        "position": "CM",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Alessio Tacchinardi",
-        "team": "Juventus",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "legend-candidate",
-        "rating": 81
-      },
-      {
-        "player": "Andreas Möller",
-        "team": "Borussia Dortmund",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Andrés Iniesta",
-        "team": "Barcelona",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "legend-candidate",
-        "rating": 81
-      },
-      {
-        "player": "Antonio Conte",
-        "team": "Juventus",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "legend-candidate",
-        "rating": 81
-      },
-      {
-        "player": "Bernd Schneider",
-        "team": "Bayer Leverkusen",
-        "era": "2000s",
-        "position": "AM",
-        "tier": "legend-candidate",
-        "rating": 81
       }
     ],
     "defense": [
@@ -698,14 +698,6 @@
         "era": "2000s",
         "position": "CB",
         "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Andy Robertson",
-        "team": "Liverpool",
-        "era": "2010s",
-        "position": "CB",
-        "tier": "legend-candidate",
         "rating": 84
       },
       {
@@ -749,6 +741,14 @@
         "rating": 84
       },
       {
+        "player": "Darijo Srna",
+        "team": "Croatia",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
         "player": "Denis Irwin",
         "team": "Manchester United",
         "era": "2000s",
@@ -762,6 +762,14 @@
         "era": "2000s",
         "position": "CB",
         "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Gerard Wiekens",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
         "rating": 84
       },
       {
@@ -805,25 +813,9 @@
         "rating": 84
       },
       {
-        "player": "Kakha Kaladze",
-        "team": "AC Milan",
-        "era": "2010s",
-        "position": "CB",
-        "tier": "star",
-        "rating": 84
-      },
-      {
         "player": "Maicon",
         "team": "Inter",
         "era": "2000s",
-        "position": "CB",
-        "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Maicon",
-        "team": "Inter",
-        "era": "2010s",
         "position": "CB",
         "tier": "star",
         "rating": 84
@@ -861,19 +853,11 @@
         "rating": 84
       },
       {
-        "player": "Rafael Márquez",
-        "team": "Barcelona",
-        "era": "2010s",
+        "player": "Óscar de Marcos",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
         "position": "CB",
-        "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Ronald Araújo",
-        "team": "Barcelona",
-        "era": "2010s",
-        "position": "CB",
-        "tier": "star",
+        "tier": "legend-candidate",
         "rating": 84
       },
       {
@@ -891,17 +875,25 @@
         "position": "CB",
         "tier": "star",
         "rating": 84
+      },
+      {
+        "player": "Tzibi",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
+      },
+      {
+        "player": "Willy Sagnol",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 84
       }
     ],
     "goalkeeping": [
-      {
-        "player": "Francesco Toldo",
-        "team": "Inter",
-        "era": "2010s",
-        "position": "GK",
-        "tier": "star",
-        "rating": 81
-      },
       {
         "player": "Agustín Orion",
         "team": "Boca Juniors",
@@ -919,8 +911,24 @@
         "rating": 79
       },
       {
+        "player": "Hans-Jörg Butt",
+        "team": "Bayer Leverkusen",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 79
+      },
+      {
         "player": "Iker Casillas",
         "team": "Real Madrid",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Joe Hart",
+        "team": "Manchester City",
         "era": "2000s",
         "position": "GK",
         "tier": "legend-candidate",
@@ -932,6 +940,14 @@
         "era": "2000s",
         "position": "GK",
         "tier": "legend-candidate",
+        "rating": 79
+      },
+      {
+        "player": "Nicky Weaver",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
         "rating": 79
       },
       {
@@ -951,35 +967,59 @@
         "rating": 79
       },
       {
-        "player": "Pepe Reina",
-        "team": "Liverpool",
-        "era": "2010s",
-        "position": "GK",
-        "tier": "legend-candidate",
-        "rating": 79
-      },
-      {
-        "player": "Sebastiano Rossi",
-        "team": "AC Milan",
+        "player": "Alberto López Fernández",
+        "team": "Real Sociedad",
         "era": "2000s",
         "position": "GK",
         "tier": "legend-candidate",
-        "rating": 79
+        "rating": 78
       },
       {
-        "player": "Víctor Valdés",
-        "team": "Barcelona",
-        "era": "2000s",
-        "position": "GK",
-        "tier": "legend-candidate",
-        "rating": 79
-      },
-      {
-        "player": "Fabien Barthez",
-        "team": "Manchester United",
+        "player": "Andrés Palop",
+        "team": "Sevilla",
         "era": "2000s",
         "position": "GK",
         "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Angelo Peruzzi",
+        "team": "Lazio",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Anthony Lopez",
+        "team": "Lyon",
+        "era": "2010s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "Anthony Lopez",
+        "team": "Lyon",
+        "era": "2020s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "Claudio Bravo",
+        "team": "Real Sociedad",
+        "era": "2010s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "Danijel Subašić",
+        "team": "Monaco",
+        "era": "2020s",
+        "position": "GK",
+        "tier": "legend-candidate",
         "rating": 78
       },
       {
@@ -991,8 +1031,48 @@
         "rating": 78
       },
       {
+        "player": "Flavio Roma",
+        "team": "Monaco",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "star",
+        "rating": 78
+      },
+      {
+        "player": "Francesco Toldo",
+        "team": "Fiorentina",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "Gorka Iraizoz",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "Grégory Coupet",
+        "team": "Lyon",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
         "player": "Helton",
         "team": "Porto",
+        "era": "2000s",
+        "position": "GK",
+        "tier": "legend-candidate",
+        "rating": 78
+      },
+      {
+        "player": "Ian Walker",
+        "team": "Tottenham",
         "era": "2000s",
         "position": "GK",
         "tier": "legend-candidate",
@@ -1013,86 +1093,6 @@
         "position": "GK",
         "tier": "star",
         "rating": 78
-      },
-      {
-        "player": "Joe Hart",
-        "team": "Manchester City",
-        "era": "2000s",
-        "position": "GK",
-        "tier": "legend-candidate",
-        "rating": 78
-      },
-      {
-        "player": "José Francisco Molina",
-        "team": "Atletico Madrid",
-        "era": "2000s",
-        "position": "GK",
-        "tier": "star",
-        "rating": 78
-      },
-      {
-        "player": "Manuel Almunia",
-        "team": "Arsenal",
-        "era": "2000s",
-        "position": "GK",
-        "tier": "star",
-        "rating": 78
-      },
-      {
-        "player": "Nicky Weaver",
-        "team": "Manchester City",
-        "era": "2000s",
-        "position": "GK",
-        "tier": "star",
-        "rating": 78
-      },
-      {
-        "player": "Wolfgang de Beer",
-        "team": "Borussia Dortmund",
-        "era": "2000s",
-        "position": "GK",
-        "tier": "star",
-        "rating": 78
-      },
-      {
-        "player": "Andoni Zubizarreta",
-        "team": "Barcelona",
-        "era": "1980s",
-        "position": "GK",
-        "tier": "legend-candidate",
-        "rating": 77
-      },
-      {
-        "player": "Andoni Zubizarreta",
-        "team": "Barcelona",
-        "era": "1990s",
-        "position": "GK",
-        "tier": "legend-candidate",
-        "rating": 77
-      },
-      {
-        "player": "Angelo Peruzzi",
-        "team": "Juventus",
-        "era": "1990s",
-        "position": "GK",
-        "tier": "star",
-        "rating": 77
-      },
-      {
-        "player": "Bodo Illgner",
-        "team": "Real Madrid",
-        "era": "2000s",
-        "position": "GK",
-        "tier": "important",
-        "rating": 77
-      },
-      {
-        "player": "Bruce Grobbelaar",
-        "team": "Liverpool",
-        "era": "1980s",
-        "position": "GK",
-        "tier": "legend-candidate",
-        "rating": 77
       }
     ],
     "physical": [
@@ -1145,8 +1145,24 @@
         "rating": 82
       },
       {
+        "player": "Gabriel Batistuta",
+        "team": "Fiorentina",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
         "player": "Giovane Élber",
         "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Harry Kane",
+        "team": "Tottenham",
         "era": "2000s",
         "position": "ST",
         "tier": "legend-candidate",
@@ -1193,6 +1209,30 @@
         "rating": 82
       },
       {
+        "player": "Shaun Goater",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 82
+      },
+      {
+        "player": "Álvaro Negredo",
+        "team": "Sevilla",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Álvaro Negredo",
+        "team": "Sevilla",
+        "era": "2010s",
+        "position": "ST",
+        "tier": "star",
+        "rating": 81
+      },
+      {
         "player": "Álvaro Recoba",
         "team": "Inter",
         "era": "2000s",
@@ -1212,6 +1252,14 @@
         "player": "Claudio Pizarro",
         "team": "Bayern Munich",
         "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "David Villa",
+        "team": "Valencia",
+        "era": "2010s",
         "position": "ST",
         "tier": "legend-candidate",
         "rating": 81
@@ -1241,59 +1289,11 @@
         "rating": 81
       },
       {
-        "player": "Javier Saviola",
-        "team": "Barcelona",
-        "era": "2000s",
+        "player": "Frédéric Kanouté",
+        "team": "Sevilla",
+        "era": "2010s",
         "position": "ST",
         "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Jimmy Floyd Hasselbaink",
-        "team": "Chelsea",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Julio Ricardo Cruz",
-        "team": "Inter",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Klaas-Jan Huntelaar",
-        "team": "Ajax",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Luis Enrique",
-        "team": "Barcelona",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "legend-candidate",
-        "rating": 81
-      },
-      {
-        "player": "Mário Jardel",
-        "team": "Porto",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "legend-candidate",
-        "rating": 81
-      },
-      {
-        "player": "Pedro",
-        "team": "Barcelona",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "legend-candidate",
         "rating": 81
       }
     ],
@@ -1304,14 +1304,6 @@
         "era": "2000s",
         "position": "CB",
         "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Andy Robertson",
-        "team": "Liverpool",
-        "era": "2010s",
-        "position": "CB",
-        "tier": "legend-candidate",
         "rating": 81
       },
       {
@@ -1355,6 +1347,14 @@
         "rating": 81
       },
       {
+        "player": "Darijo Srna",
+        "team": "Croatia",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
         "player": "Denis Irwin",
         "team": "Manchester United",
         "era": "2000s",
@@ -1368,6 +1368,14 @@
         "era": "2000s",
         "position": "CB",
         "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Gerard Wiekens",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
         "rating": 81
       },
       {
@@ -1411,25 +1419,9 @@
         "rating": 81
       },
       {
-        "player": "Kakha Kaladze",
-        "team": "AC Milan",
-        "era": "2010s",
-        "position": "CB",
-        "tier": "star",
-        "rating": 81
-      },
-      {
         "player": "Maicon",
         "team": "Inter",
         "era": "2000s",
-        "position": "CB",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Maicon",
-        "team": "Inter",
-        "era": "2010s",
         "position": "CB",
         "tier": "star",
         "rating": 81
@@ -1475,19 +1467,11 @@
         "rating": 81
       },
       {
-        "player": "Rafael Márquez",
-        "team": "Barcelona",
-        "era": "2010s",
+        "player": "Óscar de Marcos",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
         "position": "CB",
-        "tier": "star",
-        "rating": 81
-      },
-      {
-        "player": "Ronald Araújo",
-        "team": "Barcelona",
-        "era": "2010s",
-        "position": "CB",
-        "tier": "star",
+        "tier": "legend-candidate",
         "rating": 81
       },
       {
@@ -1496,6 +1480,22 @@
         "era": "2000s",
         "position": "CB",
         "tier": "legend-candidate",
+        "rating": 81
+      },
+      {
+        "player": "Samuel Kuffour",
+        "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
+        "rating": 81
+      },
+      {
+        "player": "Tzibi",
+        "team": "Athletic Bilbao",
+        "era": "2000s",
+        "position": "CB",
+        "tier": "star",
         "rating": 81
       }
     ],
@@ -1549,8 +1549,24 @@
         "rating": 85
       },
       {
+        "player": "Gabriel Batistuta",
+        "team": "Fiorentina",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
         "player": "Giovane Élber",
         "team": "Bayern Munich",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
+        "player": "Harry Kane",
+        "team": "Tottenham",
         "era": "2000s",
         "position": "ST",
         "tier": "legend-candidate",
@@ -1581,6 +1597,14 @@
         "rating": 85
       },
       {
+        "player": "Shaun Goater",
+        "team": "Manchester City",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 85
+      },
+      {
         "player": "Álvaro Recoba",
         "team": "Inter",
         "era": "2000s",
@@ -1589,9 +1613,25 @@
         "rating": 84
       },
       {
+        "player": "Aritz Aduriz",
+        "team": "Athletic Bilbao",
+        "era": "2020s",
+        "position": "CF",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
         "player": "Claudio Pizarro",
         "team": "Bayern Munich",
         "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "David Villa",
+        "team": "Valencia",
+        "era": "2010s",
         "position": "ST",
         "tier": "legend-candidate",
         "rating": 84
@@ -1608,6 +1648,22 @@
         "player": "Luis Enrique",
         "team": "Barcelona",
         "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Mamadou Niang Babacar Ndiaye",
+        "team": "Marseille",
+        "era": "2000s",
+        "position": "ST",
+        "tier": "legend-candidate",
+        "rating": 84
+      },
+      {
+        "player": "Mamadou Niang Babacar Ndiaye",
+        "team": "Marseille",
+        "era": "2010s",
         "position": "ST",
         "tier": "legend-candidate",
         "rating": 84
@@ -1643,62 +1699,6 @@
         "position": "LW",
         "tier": "star",
         "rating": 84
-      },
-      {
-        "player": "Roy Makaay",
-        "team": "Bayern Munich",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 84
-      },
-      {
-        "player": "Alessandro Altobelli",
-        "team": "Inter",
-        "era": "1980s",
-        "position": "ST",
-        "tier": "legend-candidate",
-        "rating": 83
-      },
-      {
-        "player": "Alexander Zickler",
-        "team": "Bayern Munich",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "legend-candidate",
-        "rating": 83
-      },
-      {
-        "player": "Andy Cole",
-        "team": "Manchester United",
-        "era": "1990s",
-        "position": "ST",
-        "tier": "legend-candidate",
-        "rating": 83
-      },
-      {
-        "player": "Carsten Jancker",
-        "team": "Bayern Munich",
-        "era": "2000s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 83
-      },
-      {
-        "player": "David Beckham",
-        "team": "Manchester United",
-        "era": "2000s",
-        "position": "CM",
-        "tier": "legend-candidate",
-        "rating": 83
-      },
-      {
-        "player": "Diego Forlán",
-        "team": "Atletico Madrid",
-        "era": "2010s",
-        "position": "ST",
-        "tier": "star",
-        "rating": 83
       }
     ]
   },
@@ -1743,7 +1743,7 @@
     {
       "team": "Brazil",
       "era": "1950s",
-      "generatedProxyContexts": 20,
+      "generatedProxyContexts": 16,
       "players": [
         {
           "player": "Ademir de Menezes",
@@ -1983,66 +1983,6 @@
             "physical": 68,
             "press": 67,
             "bigGame": 70
-          }
-        },
-        {
-          "player": "Gino Orlando",
-          "position": "ST",
-          "tier": "fringe",
-          "ratings": {
-            "attack": 72,
-            "creation": 62,
-            "control": 64,
-            "defense": 43,
-            "goalkeeping": 3,
-            "physical": 69,
-            "press": 56,
-            "bigGame": 70
-          }
-        },
-        {
-          "player": "Alfredo dos Santos",
-          "position": "CM",
-          "tier": "fringe",
-          "ratings": {
-            "attack": 63,
-            "creation": 71,
-            "control": 70,
-            "defense": 67,
-            "goalkeeping": 3,
-            "physical": 67,
-            "press": 66,
-            "bigGame": 69
-          }
-        },
-        {
-          "player": "Altair",
-          "position": "CB",
-          "tier": "fringe",
-          "ratings": {
-            "attack": 49,
-            "creation": 57,
-            "control": 58,
-            "defense": 73,
-            "goalkeeping": 3,
-            "physical": 68,
-            "press": 70,
-            "bigGame": 69
-          }
-        },
-        {
-          "player": "Canhoteiro",
-          "position": "CM",
-          "tier": "fringe",
-          "ratings": {
-            "attack": 62,
-            "creation": 71,
-            "control": 70,
-            "defense": 67,
-            "goalkeeping": 3,
-            "physical": 67,
-            "press": 66,
-            "bigGame": 69
           }
         }
       ]

@@ -3,6 +3,7 @@ import { modeConfigs } from '../data/modes'
 import { playerContexts } from '../data/playerContexts'
 import { getDraftSlots } from '../data/squad'
 import { modeMatchesPlayer, slotMatchesPlayer } from './eligibility'
+import { incompleteTeamsForMode, playableTeamsForMode, summarizeModeRollCoverage } from './rollCoverage'
 import type { FormationSlot, ModeConfig, ModeValidation } from '../types'
 
 function coverageForSlot(mode: ModeConfig, slot: FormationSlot, strictMode: boolean): number {
@@ -21,6 +22,12 @@ export function validateMode(mode: ModeConfig): ModeValidation {
   const issues: string[] = []
   const contextCount = playerContexts.filter((player) => modeMatchesPlayer(mode, player, true)).length
   const allowedFormations = formations.filter((formation) => mode.allowedFormations.includes(formation.formationId))
+  const rollCoverage = summarizeModeRollCoverage(mode, playerContexts)
+  const playableTeams = playableTeamsForMode(mode, rollCoverage, playerContexts)
+  const playableRolls = rollCoverage
+    .filter((roll) => roll.playable && playableTeams.some((team) => team.teamType === roll.team.teamType && team.label === roll.team.label))
+    .map((roll) => ({ team: roll.team, era: roll.era }))
+  const incompleteTeams = incompleteTeamsForMode(mode, rollCoverage, playerContexts)
 
   for (const formation of allowedFormations) {
     const draftSlots = getDraftSlots(mode, formation)
@@ -42,7 +49,11 @@ export function validateMode(mode: ModeConfig): ModeValidation {
     }
   }
 
-  const playable = contextCount > 0 && issues.length === 0
+  if (playableTeams.length === 0) {
+    issues.push('No team or nation has enough live roll depth.')
+  }
+
+  const playable = contextCount > 0 && issues.length === 0 && playableTeams.length > 0
   const demoPlayable = Object.values(demoFormationCoverage).every((formation) => Object.values(formation).every((coverage) => coverage >= 2))
 
   return {
@@ -51,6 +62,10 @@ export function validateMode(mode: ModeConfig): ModeValidation {
     playable,
     demoPlayable,
     readiness: playable ? 'ready' : demoPlayable ? 'demo' : 'thin',
+    playableTeams,
+    playableRolls,
+    incompleteTeams,
+    rollCoverage,
     slotCoverage,
     demoSlotCoverage,
     formationCoverage,

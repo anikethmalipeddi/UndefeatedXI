@@ -1,13 +1,40 @@
 import { getFormation } from '../data/formations'
 import { getModeConfig } from '../data/modes'
-import { playerContexts } from '../data/playerContexts'
 import { getDraftSlots } from '../data/squad'
 import { createRng, makeRunId, randomPick, weightedShuffle } from './random'
 import { eraMatches, filterEligiblePlayers, modeMatchesPlayer, playerOptionScore, slotMatchesPlayer, teamMatches } from './eligibility'
+import { rollCoverageMeetsDepth, summarizeRollPool } from './rollCoverage'
 import type { DraftState, FormationSlot, ModeConfig, PlayerContext, RerollCounts, RollResult, SpecialSelection } from '../types'
 
 const minimumRollPoolSize = 4
 const minimumSelectableOptions = 2
+
+let draftPlayerContexts: PlayerContext[] = []
+let playersByTeamEra = new Map<string, PlayerContext[]>()
+
+function buildPlayersByTeamEra(players: PlayerContext[]): Map<string, PlayerContext[]> {
+  return players.reduce((index, player) => {
+    for (const era of indexErasForPlayer(player)) {
+      const key = rollIndexKey(player.teamType, player.teamName, era)
+      const values = index.get(key) ?? []
+      values.push(player)
+      index.set(key, values)
+    }
+    return index
+  }, new Map<string, PlayerContext[]>())
+}
+
+export function configureDraftPlayerContexts(players: PlayerContext[]): void {
+  draftPlayerContexts = players
+  playersByTeamEra = buildPlayersByTeamEra(players)
+}
+
+function getDraftPlayerContexts(): PlayerContext[] {
+  if (draftPlayerContexts.length === 0) {
+    throw new Error('Draft player contexts have not been loaded.')
+  }
+  return draftPlayerContexts
+}
 
 export function createDraftState(mode: ModeConfig, formationId: string, specialSelection?: SpecialSelection): DraftState {
   const rerolls = { ...mode.rerollRules }
@@ -32,9 +59,10 @@ export function createDraftState(mode: ModeConfig, formationId: string, specialS
 function prioritizeDraftSlots(mode: ModeConfig, slots: FormationSlot[]): FormationSlot[] {
   const starters = slots.filter((slot) => slot.squadRole !== 'bench')
   const bench = slots.filter((slot) => slot.squadRole === 'bench')
+  const players = getDraftPlayerContexts()
   const coverage = new Map(starters.map((slot) => [
     slot.slotId,
-    playerContexts.filter((player) => {
+    players.filter((player) => {
       if (!slotMatchesPlayer(slot, player)) return false
       if (!modeMatchesPlayer(mode, player)) return false
       return true
@@ -71,21 +99,21 @@ function indexErasForPlayer(player: PlayerContext): string[] {
   return Array.from(new Set([player.decade, player.eraLabel].filter(Boolean)))
 }
 
-const playersByTeamEra = playerContexts.reduce((index, player) => {
-  for (const era of indexErasForPlayer(player)) {
-    const key = rollIndexKey(player.teamType, player.teamName, era)
-    const players = index.get(key) ?? []
-    players.push(player)
-    index.set(key, players)
-  }
-  return index
-}, new Map<string, PlayerContext[]>())
-
 function indexedRollPlayers(mode: ModeConfig, state: DraftState, roll: RollResult): PlayerContext[] {
   const eraKey = mode.rollDimensions.includes('european_era') ? roll.era.slice(0, 5) : roll.era
   const taken = takenPlayerIds(state)
   return uniquePlayers((playersByTeamEra.get(rollIndexKey(roll.team.teamType, roll.team.label, eraKey)) ?? []).filter((player) => {
     if (taken.has(player.contextId) || taken.has(player.personId)) return false
+    if (!modeMatchesPlayer(mode, player)) return false
+    if (!teamMatches(mode, roll, player)) return false
+    if (!eraMatches(mode, roll, player)) return false
+    return true
+  }))
+}
+
+function initialIndexedRollPlayers(mode: ModeConfig, roll: RollResult): PlayerContext[] {
+  const eraKey = mode.rollDimensions.includes('european_era') ? roll.era.slice(0, 5) : roll.era
+  return uniquePlayers((playersByTeamEra.get(rollIndexKey(roll.team.teamType, roll.team.label, eraKey)) ?? []).filter((player) => {
     if (!modeMatchesPlayer(mode, player)) return false
     if (!teamMatches(mode, roll, player)) return false
     if (!eraMatches(mode, roll, player)) return false
@@ -178,6 +206,8 @@ function playableRolls(mode: ModeConfig, state: DraftState, slots: FormationSlot
   }
   return Array.from(rollByKey.values())
     .map((roll) => {
+      const initialPool = initialIndexedRollPlayers(mode, roll)
+      if (!rollCoverageMeetsDepth(summarizeRollPool(roll.team, roll.era, initialPool))) return undefined
       const pool = indexedRollPlayers(mode, state, roll)
       const candidates = pool.filter((player) => slots.some((slot) => slotMatchesPlayer(slot, player)))
       if (candidates.length === 0) return undefined
@@ -228,7 +258,7 @@ function rollForPlayerContext(player: PlayerContext): RollResult {
 function optionsForPlayerContextRoll(mode: ModeConfig, state: DraftState, slots: FormationSlot[], roll: RollResult): PlayerContext[] {
   const rng = createRng(`${state.seed}:${state.roundIndex}:${roll.team.teamType}:${roll.team.label}:${roll.era}:context-options`)
   const taken = takenPlayerIds(state)
-  const candidates = playerContexts.filter((player) => {
+  const candidates = getDraftPlayerContexts().filter((player) => {
     if (taken.has(player.contextId) || taken.has(player.personId)) return false
     if (slotsForPlayer(slots, player).length === 0) return false
     if (!modeMatchesPlayer(mode, player)) return false
@@ -256,7 +286,7 @@ function contextRollFallback(
       team: state.specialSelection?.fixedTeam ?? preserve?.team ?? mode.teamPool[0],
       era: state.specialSelection?.fixedEra ?? preserve?.era ?? mode.eraPool[0],
     },
-    players: playerContexts,
+    players: getDraftPlayerContexts(),
     takenContextIds: taken,
     loosenTeam: !state.specialSelection?.fixedTeam && !preserve?.team,
     loosenEra: !state.specialSelection?.fixedEra && !preserve?.era,
@@ -384,7 +414,7 @@ function minimumRemainingCoverage(mode: ModeConfig, openSlots: FormationSlot[], 
 
   return Math.min(
     ...remainingSlots.map((slot) =>
-      playerContexts.filter((candidate) => {
+      getDraftPlayerContexts().filter((candidate) => {
         if (takenContextIds.has(candidate.contextId) || takenContextIds.has(candidate.personId)) return false
         if (!slotMatchesPlayer(slot, candidate)) return false
         if (!modeMatchesPlayer(mode, candidate)) return false

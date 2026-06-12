@@ -21,6 +21,7 @@ import { type CSSProperties, type FormEvent, useEffect, useMemo, useRef, useStat
 import './App.css'
 import { brandName, targetRecordLabel } from './brand'
 import { defaultFormationId, formations, getFormation } from './data/formations'
+import { loadModePlayerContexts } from './data/modeContextLoader'
 import { defaultModeId, previewModeConfigs, publicModeConfigs, getModeConfig } from './data/modes'
 import coverageReport from './data/generated/coverageReport.json'
 import { isBenchSlot } from './data/squad'
@@ -37,7 +38,7 @@ import {
 import { sanitizeDisplayName } from './services/sanitize'
 import { hasSupabaseConfig } from './services/supabaseConfig'
 import type { AuthProfile, FeedbackCategory, LeaderboardRun, LeaderboardView } from './services/supabase'
-import type { DraftPick, DraftState, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings } from './types'
+import type { DraftPick, DraftState, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings, TeamRollOption } from './types'
 import type { StoredRunSummary } from './engine/storage'
 
 type Screen = 'home' | 'how' | 'setup' | 'draft' | 'result' | 'sharedResult' | 'privacy' | 'contact' | 'leaderboard'
@@ -79,6 +80,11 @@ function publicModeIsReady(modeId: string): boolean {
   return modeValidations.find((validation) => validation.modeId === modeId)?.playable ?? false
 }
 
+function liveTeamsForMode(mode: ModeConfig): TeamRollOption[] {
+  const validation = modeValidations.find((item) => item.modeId === mode.modeId)
+  return validation?.playableTeams?.length ? validation.playableTeams : mode.teamPool
+}
+
 function isDraftCompleteState(state: DraftState): boolean {
   return state.picks.length >= state.draftSlots.length
 }
@@ -113,9 +119,9 @@ function routeFor(screen: Screen, modeId?: string): string {
   return `#/${screen}`
 }
 
-function defaultSpecialSelection(mode: ModeConfig): SpecialSelection {
+function defaultSpecialSelection(mode: ModeConfig, teams = liveTeamsForMode(mode)): SpecialSelection {
   if (mode.specialSetup === 'fixed_club' || mode.specialSetup === 'fixed_nation') {
-    return { fixedTeam: mode.teamPool[0] }
+    return { fixedTeam: teams[0] ?? mode.teamPool[0] }
   }
 
   if (mode.specialSetup === 'fixed_era') {
@@ -125,9 +131,10 @@ function defaultSpecialSelection(mode: ModeConfig): SpecialSelection {
   return {}
 }
 
-function normalizeSpecialSelection(mode: ModeConfig, selection: SpecialSelection): SpecialSelection {
+function normalizeSpecialSelection(mode: ModeConfig, selection: SpecialSelection, teams = liveTeamsForMode(mode)): SpecialSelection {
   if (mode.specialSetup === 'fixed_club' || mode.specialSetup === 'fixed_nation') {
-    return { fixedTeam: selection.fixedTeam ?? mode.teamPool[0] }
+    const matchingLiveTeam = teams.find((team) => team.label === selection.fixedTeam?.label && team.teamType === selection.fixedTeam?.teamType)
+    return { fixedTeam: matchingLiveTeam ?? teams[0] ?? mode.teamPool[0] }
   }
 
   if (mode.specialSetup === 'fixed_era') {
@@ -173,12 +180,14 @@ function App() {
   const [leaderboardMessage, setLeaderboardMessage] = useState('')
   const [isDraftLoading, setIsDraftLoading] = useState(false)
   const draftEngineRef = useRef<Promise<typeof import('./engine/draft')> | null>(null)
+  const modePlayerContextRef = useRef(new Map<string, Promise<PlayerContext[]>>())
   const spinIntervalRef = useRef<number | undefined>(undefined)
   const spinTimeoutRef = useRef<number | undefined>(undefined)
 
   const selectedMode = getModeConfig(selectedModeId)
   const selectedFormation = getFormation(selectedFormationId)
-  const activeSpecialSelection = normalizeSpecialSelection(selectedMode, specialSelection)
+  const selectedLiveTeams = liveTeamsForMode(selectedMode)
+  const activeSpecialSelection = normalizeSpecialSelection(selectedMode, specialSelection, selectedLiveTeams)
   const validationsByMode = useMemo(() => new Map(modeValidations.map((validation) => [validation.modeId, validation])), [])
 
   const navigate = (nextScreen: Screen, routeModeId = selectedModeId) => {
@@ -206,16 +215,24 @@ function App() {
     return draftEngineRef.current
   }
 
-  const preloadDraftEngine = () => {
-    void loadDraftEngine().catch(() => undefined)
+  const loadDraftRuntime = async (modeId = selectedModeId) => {
+    const contextsPromise = modePlayerContextRef.current.get(modeId) ?? loadModePlayerContexts(modeId)
+    modePlayerContextRef.current.set(modeId, contextsPromise)
+    const [engine, contexts] = await Promise.all([loadDraftEngine(), contextsPromise])
+    engine.configureDraftPlayerContexts(contexts)
+    return engine
   }
 
-  const randomSpinRoll = (mode: ModeConfig, scope: RollSpinScope, currentRoll?: DraftState['currentRoll'], specialSelection?: SpecialSelection) => ({
+  const preloadDraftEngine = (modeId = selectedModeId) => {
+    void loadDraftRuntime(modeId).catch(() => undefined)
+  }
+
+  const randomSpinRoll = (mode: ModeConfig, scope: RollSpinScope, currentRoll?: DraftState['currentRoll'], specialSelection?: SpecialSelection, teams = liveTeamsForMode(mode)) => ({
     team:
       specialSelection?.fixedTeam?.label
         ?? (scope === 'era' && currentRoll
           ? currentRoll.team.label
-          : randomPick(mode.teamPool)?.label ?? '...'),
+          : randomPick(teams)?.label ?? '...'),
     era:
       specialSelection?.fixedEra
         ?? (scope === 'team' && currentRoll
@@ -225,11 +242,12 @@ function App() {
 
   const animateSpin = (mode: ModeConfig, reveal: () => DraftState | Promise<DraftState>, scope: RollSpinScope = 'full', currentRoll?: DraftState['currentRoll'], specialSelection?: SpecialSelection) => {
     clearSpinTimers()
+    const teams = liveTeamsForMode(mode)
     setIsSpinning(true)
-    setSpinningRoll(randomSpinRoll(mode, scope, currentRoll, specialSelection))
+    setSpinningRoll(randomSpinRoll(mode, scope, currentRoll, specialSelection, teams))
 
     spinIntervalRef.current = window.setInterval(() => {
-      setSpinningRoll(randomSpinRoll(mode, scope, currentRoll, specialSelection))
+      setSpinningRoll(randomSpinRoll(mode, scope, currentRoll, specialSelection, teams))
     }, 78)
 
     spinTimeoutRef.current = window.setTimeout(() => {
@@ -343,7 +361,7 @@ function App() {
     setDraftState(null)
     setResult(null)
     navigate('setup', modeId)
-    preloadDraftEngine()
+    preloadDraftEngine(modeId)
   }
 
   const startDraft = async () => {
@@ -353,7 +371,7 @@ function App() {
     setSpinningRoll(null)
     setIsDraftLoading(true)
     try {
-      const { createDraftState } = await loadDraftEngine()
+      const { createDraftState } = await loadDraftRuntime(selectedMode.modeId)
       const state = createDraftState(selectedMode, selectedFormation.formationId, activeSpecialSelection)
       setDraftState(state)
       setResult(null)
@@ -370,7 +388,7 @@ function App() {
   const handleSpin = () => {
     if (!draftState || isSpinning || draftState.currentRoll) return
     animateSpin(selectedMode, async () => {
-      const { spinForSlot } = await loadDraftEngine()
+      const { spinForSlot } = await loadDraftRuntime(selectedMode.modeId)
       return spinForSlot(selectedMode, draftState)
     }, 'full', draftState.currentRoll, draftState.specialSelection)
   }
@@ -380,14 +398,14 @@ function App() {
     if (type === 'team' && draftState.specialSelection?.fixedTeam) return
     if (type === 'era' && draftState.specialSelection?.fixedEra) return
     animateSpin(selectedMode, async () => {
-      const { reroll } = await loadDraftEngine()
+      const { reroll } = await loadDraftRuntime(selectedMode.modeId)
       return reroll(selectedMode, draftState, type)
     }, type, draftState.currentRoll, draftState.specialSelection)
   }
 
   const handleSelect = async (player: PlayerContext, slotId?: string) => {
     if (!draftState || isSpinning) return
-    const { isDraftComplete, selectPlayerForSlot } = await loadDraftEngine()
+    const { isDraftComplete, selectPlayerForSlot } = await loadDraftRuntime(selectedMode.modeId)
     const nextState = selectPlayerForSlot(draftState, player, slotId)
 
     if (isDraftComplete(nextState)) {
@@ -537,11 +555,13 @@ function App() {
           selectedModeId={selectedModeId}
           selectedFormationId={selectedFormationId}
           specialSelection={activeSpecialSelection}
+          liveTeams={selectedLiveTeams}
           validationsByMode={validationsByMode}
           onMode={(modeId) => {
             setSelectedModeId(modeId)
             setSpecialSelection(defaultSpecialSelection(getModeConfig(modeId)))
             navigate('setup', modeId)
+            preloadDraftEngine(modeId)
           }}
           onFormation={setSelectedFormationId}
           onSpecialSelection={setSpecialSelection}
@@ -554,6 +574,7 @@ function App() {
         <DraftScreen
           key={`${draftState.roundIndex}:${draftState.currentRoll?.team.label ?? 'none'}:${draftState.currentRoll?.team.teamType ?? 'none'}:${draftState.currentRoll?.era ?? 'none'}`}
           mode={selectedMode}
+          liveTeams={selectedLiveTeams}
           formation={selectedFormation}
           draftState={draftState}
           isSpinning={isSpinning}
@@ -897,6 +918,7 @@ function SetupScreen({
   selectedModeId,
   selectedFormationId,
   specialSelection,
+  liveTeams,
   validationsByMode,
   onMode,
   onFormation,
@@ -909,6 +931,7 @@ function SetupScreen({
   selectedModeId: string
   selectedFormationId: string
   specialSelection: SpecialSelection
+  liveTeams: TeamRollOption[]
   validationsByMode: Map<string, ModeValidation>
   onMode: (modeId: string) => void
   onFormation: (formationId: string) => void
@@ -981,6 +1004,7 @@ function SetupScreen({
           {selectedMode.specialSetup && (
             <SpecialModeControls
               mode={selectedMode}
+              teams={liveTeams}
               selection={specialSelection}
               onSelection={onSpecialSelection}
             />
@@ -1012,10 +1036,12 @@ function SetupScreen({
 
 function SpecialModeControls({
   mode,
+  teams,
   selection,
   onSelection,
 }: {
   mode: ModeConfig
+  teams: TeamRollOption[]
   selection: SpecialSelection
   onSelection: (selection: SpecialSelection) => void
 }) {
@@ -1025,7 +1051,7 @@ function SpecialModeControls({
       <section className="special-controls" aria-label={label}>
         <h2>{label}</h2>
         <div className="special-grid">
-          {mode.teamPool.map((team) => (
+          {teams.map((team) => (
             <button
               key={team.label}
               type="button"
@@ -1061,6 +1087,7 @@ function SpecialModeControls({
 
 function DraftScreen({
   mode,
+  liveTeams,
   formation,
   draftState,
   isSpinning,
@@ -1072,6 +1099,7 @@ function DraftScreen({
   onChangeMode,
 }: {
   mode: ModeConfig
+  liveTeams: TeamRollOption[]
   formation: ReturnType<typeof getFormation>
   draftState: DraftState
   isSpinning: boolean
@@ -1093,7 +1121,7 @@ function DraftScreen({
   const hasActiveRoll = Boolean(draftState.currentRoll)
   const lockedTeam = draftState.specialSelection?.fixedTeam
   const lockedEra = draftState.specialSelection?.fixedEra
-  const startingTeam = lockedTeam ?? mode.teamPool.find((team) => team.label === 'Manchester United') ?? mode.teamPool[0]
+  const startingTeam = lockedTeam ?? liveTeams.find((team) => team.label === 'Manchester United') ?? liveTeams[0] ?? mode.teamPool[0]
   const startingEra = lockedEra ?? (mode.eraPool.includes('1990s') ? '1990s' : mode.eraPool[0])
   const reelTeam = abbreviateTeamName(lockedTeam?.label ?? spinningRoll?.team ?? draftState.currentRoll?.team.label ?? startingTeam?.label ?? 'World XI')
   const reelEra = lockedEra ?? spinningRoll?.era ?? draftState.currentRoll?.era ?? startingEra ?? '2010s'

@@ -8,7 +8,8 @@ const ratingsRoot = 'data/external/ratings'
 const generatedDir = 'src/data/generated'
 const checkedAt = new Date().toISOString()
 const currentYear = 2026
-const minimumReportCoverage = 50
+const targetContextsPerExactRoll = 32
+const minimumReportCoverage = targetContextsPerExactRoll
 
 const ratingSources = [
   {
@@ -273,8 +274,13 @@ const teamAliases: Record<string, string[]> = {
   'Atlanta United': ['Atlanta United', 'Atlanta United FC'],
   'Atletico Madrid': ['Atletico Madrid', 'Atlético Madrid', 'Atlético de Madrid'],
   Arsenal: ['Arsenal', 'Arsenal FC'],
+  'Aston Villa': ['Aston Villa', 'Aston Villa FC'],
+  'Athletic Bilbao': ['Athletic Bilbao', 'Athletic Club'],
   Barcelona: ['Barcelona', 'FC Barcelona', 'F.C. Barcelona', 'Fc Barcelona'],
   Benfica: ['Benfica', 'SL Benfica'],
+  Bournemouth: ['Bournemouth', 'AFC Bournemouth'],
+  Brentford: ['Brentford', 'Brentford FC'],
+  Brighton: ['Brighton', 'Brighton & Hove Albion', 'Brighton and Hove Albion'],
   Blackburn: ['Blackburn', 'Blackburn Rovers'],
   'Bayern Munich': ['Bayern Munich', 'FC Bayern Munich', 'FC Bayern München', 'Bayern München'],
   'Bayer Leverkusen': ['Bayer Leverkusen', 'Bayer 04 Leverkusen'],
@@ -286,7 +292,10 @@ const teamAliases: Record<string, string[]> = {
   'Colorado Rapids': ['Colorado Rapids'],
   'Columbus Crew': ['Columbus Crew'],
   'DC United': ['DC United', 'D.C. United', 'D.C. Utd'],
+  'Deportivo La Coruna': ['Deportivo La Coruna', 'Deportivo La Coruña', 'Deportivo de La Coruña'],
+  'Eintracht Frankfurt': ['Eintracht Frankfurt', 'Frankfurt'],
   Everton: ['Everton', 'Everton FC'],
+  Fiorentina: ['Fiorentina', 'ACF Fiorentina'],
   Hamburg: ['Hamburg', 'Hamburger SV'],
   'Houston Dynamo': ['Houston Dynamo', 'Houston Dynamo FC'],
   Inter: ['Inter', 'Inter Milan', 'Internazionale', 'Inter Milano', 'FC Internazionale Milano'],
@@ -294,6 +303,10 @@ const teamAliases: Record<string, string[]> = {
   Juventus: ['Juventus', 'Juventus FC'],
   LAFC: ['LAFC', 'Los Angeles FC'],
   'LA Galaxy': ['LA Galaxy', 'Los Angeles Galaxy'],
+  Lazio: ['Lazio', 'SS Lazio'],
+  Leicester: ['Leicester', 'Leicester City'],
+  Lens: ['Lens', 'RC Lens'],
+  Lille: ['Lille', 'LOSC Lille'],
   Liverpool: ['Liverpool', 'Liverpool FC'],
   Lyon: ['Lyon', 'Olympique Lyonnais'],
   Marseille: ['Marseille', 'Olympique de Marseille'],
@@ -301,27 +314,41 @@ const teamAliases: Record<string, string[]> = {
   'Manchester United': ['Manchester United', 'Manchester Utd', 'Man United', 'Man Utd', 'Manchester United FC'],
   Monaco: ['Monaco', 'AS Monaco'],
   Napoli: ['Napoli', 'SSC Napoli', 'Naples'],
+  Nantes: ['Nantes', 'FC Nantes'],
   Nashville: ['Nashville', 'Nashville SC'],
   'Nashville SC': ['Nashville', 'Nashville SC'],
   'New York Red Bulls': ['New York Red Bulls', 'NY Red Bulls'],
+  Newcastle: ['Newcastle', 'Newcastle United'],
   'Nottingham Forest': ['Nottingham Forest', 'Nottingham Forest FC'],
+  Parma: ['Parma', 'Parma Calcio'],
   PSG: ['PSG', 'Paris Saint-Germain', 'Paris Saint Germain', 'Paris Saint-Germain FC'],
   Porto: ['Porto', 'FC Porto'],
   'Portland Timbers': ['Portland Timbers'],
   'Real Madrid': ['Real Madrid', 'Real Madrid CF', 'Real Madrid C.F.'],
+  'Real Betis': ['Real Betis', 'Betis'],
+  'Real Sociedad': ['Real Sociedad'],
   'River Plate': ['River Plate', 'CA River Plate'],
   Roma: ['Roma', 'AS Roma', 'Rome'],
+  Rennes: ['Rennes', 'Stade Rennais'],
+  Sampdoria: ['Sampdoria', 'UC Sampdoria'],
   Santos: ['Santos', 'Santos FC'],
+  'Schalke 04': ['Schalke 04', 'FC Schalke 04', 'Schalke'],
   Seattle: ['Seattle Sounders', 'Seattle Sounders FC'],
   'Seattle Sounders': ['Seattle Sounders', 'Seattle Sounders FC'],
   Sevilla: ['Sevilla', 'Sevilla FC'],
   'Sporting KC': ['Sporting KC', 'Sporting Kansas City'],
   'Saint-Etienne': ['Saint-Etienne', 'Saint Etienne', 'AS Saint-Étienne', 'AS Saint-Etienne'],
+  Stuttgart: ['Stuttgart', 'VfB Stuttgart'],
   Tottenham: ['Tottenham', 'Tottenham Hotspur', 'Spurs'],
+  Torino: ['Torino', 'Torino FC'],
   'Toronto FC': ['Toronto FC'],
   Valencia: ['Valencia', 'Valencia CF'],
   'Vancouver Whitecaps': ['Vancouver Whitecaps', 'Vancouver Whitecaps FC'],
+  Villarreal: ['Villarreal', 'Villarreal CF'],
   'Werder Bremen': ['Werder Bremen', 'SV Werder Bremen'],
+  'West Ham': ['West Ham', 'West Ham United'],
+  Wolfsburg: ['Wolfsburg', 'VfL Wolfsburg'],
+  Wolves: ['Wolves', 'Wolverhampton Wanderers'],
 }
 
 const countryAliases: Record<string, string[]> = {
@@ -334,6 +361,13 @@ const countryAliases: Record<string, string[]> = {
   'Ivory Coast': ['Ivory Coast', "Cote d'Ivoire", 'Côte d’Ivoire'],
   Netherlands: ['Netherlands', 'Holland'],
   Ireland: ['Ireland', 'Republic of Ireland'],
+  'Burkina Faso': ['Burkina Faso'],
+  'Czech Republic': ['Czech Republic', 'Czechia'],
+  'DR Congo': ['DR Congo', 'Democratic Republic of the Congo', 'Congo DR', 'Congo-Kinshasa'],
+  Mexico: ['Mexico'],
+  Russia: ['Russia', 'Soviet Union'],
+  Serbia: ['Serbia', 'Yugoslavia', 'Serbia and Montenegro'],
+  'South Korea': ['South Korea', 'Korea Republic', 'Republic of Korea'],
 }
 
 function aliasesForTeam(label: string): Set<string> {
@@ -742,6 +776,8 @@ function teamStrengthBonus(teamLabel: string): number {
     'England',
     'Portugal',
     'Uruguay',
+    'Belgium',
+    'Croatia',
     'Real Madrid',
     'Barcelona',
     'AC Milan',
@@ -751,13 +787,16 @@ function teamStrengthBonus(teamLabel: string): number {
     'Juventus',
     'Inter',
     'Ajax',
+    'Manchester City',
   ])
   const strong = new Set([
-    'Belgium',
-    'Croatia',
     'Chile',
     'Colombia',
     'Paraguay',
+    'Mexico',
+    'United States',
+    'Japan',
+    'South Korea',
     'Egypt',
     'Cameroon',
     'Senegal',
@@ -766,13 +805,38 @@ function teamStrengthBonus(teamLabel: string): number {
     'Nigeria',
     'Algeria',
     'Morocco',
+    'Tunisia',
+    'South Africa',
+    'Mali',
+    'DR Congo',
+    'Denmark',
+    'Czech Republic',
+    'Greece',
+    'Sweden',
+    'Turkey',
+    'Poland',
+    'Switzerland',
+    'Austria',
+    'Ukraine',
+    'Serbia',
+    'Russia',
     'Arsenal',
     'Chelsea',
-    'Manchester City',
+    'Tottenham',
     'Borussia Dortmund',
+    'Bayer Leverkusen',
     'Napoli',
     'Roma',
+    'Lazio',
+    'Fiorentina',
     'PSG',
+    'Marseille',
+    'Lyon',
+    'Monaco',
+    'Valencia',
+    'Sevilla',
+    'Athletic Bilbao',
+    'Real Sociedad',
     'Benfica',
     'Porto',
     'Atletico Madrid',
@@ -1234,7 +1298,7 @@ function uniqueCandidatesForRoll(candidates: ContextCandidate[]): ContextCandida
 
   return Array.from(byContext.values())
     .sort((left, right) => right.row.overall - left.row.overall || right.sourceRank - left.sourceRank || right.row.gameYear - left.row.gameYear)
-    .slice(0, 50)
+    .slice(0, targetContextsPerExactRoll)
 }
 
 function positionGroupFor(positions: Position[]): 'GK' | 'DEF' | 'MID' | 'ATT' | 'UNK' {
@@ -1492,7 +1556,7 @@ const importReport = {
   generatedBy: 'scripts/import-rating-contexts.ts',
   generatedAt: checkedAt,
   inputFolder: ratingsRoot,
-  targetPerExactRoll: 'top-50-source-backed-or-legacy-proxy',
+  targetPerExactRoll: `top-${targetContextsPerExactRoll}-source-backed-or-legacy-proxy`,
   minimumReportCoverage,
   sourceFiles,
   wikidataFacts: facts.length,
@@ -1548,7 +1612,7 @@ const missingReport = {
   generatedBy: 'scripts/import-rating-contexts.ts',
   generatedAt: checkedAt,
   note: 'Rolls with sparse generatedContexts are missing EA/FC, Icon/Hero, or approved legacy-proxy rating rows. Thin rolls are reported here and gated from public gameplay when below the draft-depth threshold.',
-  targetPerExactRoll: 'top-50-source-backed-or-legacy-proxy',
+  targetPerExactRoll: `top-${targetContextsPerExactRoll}-source-backed-or-legacy-proxy`,
   minimumReportCoverage,
   rolls: rollReports
     .filter((roll) => Number(roll.generatedContexts) < minimumReportCoverage)

@@ -1,6 +1,6 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { ratingFor, ratingMethodology } from '../src/data/ratingModel'
-import type { DataConfidence, Person, PlayerContext, Position, Ratings, SourceNote, TeamType } from '../src/types'
+import type { DataConfidence, ModeConfig, Person, PlayerContext, Position, Ratings, SourceNote, TeamType } from '../src/types'
 
 interface SourceDefinition {
   label: string
@@ -124,7 +124,8 @@ function importedContextsFor(seeds: ImportedContextSeed[]): PlayerContext[] {
     ratings: ratingFor(seed.primary[0], seed.overall, seed.overrides),
     peakWindow: `${seed.start}-${seed.end}`,
     dataConfidence: seed.confidence ?? 'Medium',
-    sourceNotes: seed.sourceLabels ?? ['Wikidata SPARQL', 'OpenFootball players', 'Manual legend curation'],
+    ratingSourceConfidence: 'legacy-proxy',
+    sourceNotes: ['Legacy proxy: manual sourced context', ...(seed.sourceLabels ?? ['Wikidata SPARQL', 'OpenFootball players', 'Manual legend curation'])],
     historicalNotes: seed.notes,
   }))
 }
@@ -435,15 +436,70 @@ function playableContextFor(player: PlayerContext) {
   }
 }
 
+async function writeModeContextModules(
+  modes: ModeConfig[],
+  contexts: PlayerContext[],
+  modeMatchesPlayer: (mode: ModeConfig, player: PlayerContext, strictMode?: boolean) => boolean,
+): Promise<void> {
+  const modeContextDir = 'src/data/generated/modeContexts'
+  await rm(modeContextDir, { recursive: true, force: true })
+  await mkdir(modeContextDir, { recursive: true })
+
+  const loaders: string[] = []
+  const moduleBySignature = new Map<string, string>()
+  for (const mode of modes) {
+    const teamKeys = new Set(mode.teamPool.map((team) => `${team.teamType}:${team.label}`))
+    const modeContexts = contexts.filter((player) => modeMatchesPlayer(mode, player, false) && teamKeys.has(`${player.teamType}:${player.teamName}`))
+    const signature = JSON.stringify(modeContexts.map((context) => context.contextId))
+    const moduleName = moduleBySignature.get(signature) ?? mode.modeId
+    if (!moduleBySignature.has(signature)) {
+      moduleBySignature.set(signature, moduleName)
+      await writeFile(
+        `${modeContextDir}/${moduleName}.ts`,
+        [
+          "import type { PlayerContext } from '../../../types'",
+          '',
+          `const modePlayerContextsJson = ${JSON.stringify(JSON.stringify(modeContexts))}`,
+          '',
+          'export const modePlayerContexts = JSON.parse(modePlayerContextsJson) as PlayerContext[]',
+          '',
+        ].join('\n'),
+      )
+    }
+    loaders.push(`  ${JSON.stringify(mode.modeId)}: () => import('./${moduleName}'),`)
+  }
+
+  await writeFile(
+    `${modeContextDir}/index.ts`,
+    [
+      "import type { PlayerContext } from '../../../types'",
+      '',
+      'const modeLoaders = {',
+      ...loaders,
+      '} satisfies Record<string, () => Promise<{ modePlayerContexts: PlayerContext[] }>>',
+      '',
+      'export async function loadGeneratedModePlayerContexts(modeId: string): Promise<PlayerContext[]> {',
+      "  const loader = modeLoaders[modeId as keyof typeof modeLoaders] ?? modeLoaders['world_xi']",
+      '  const module = await loader()',
+      '  return module.modePlayerContexts',
+      '}',
+      '',
+    ].join('\n'),
+  )
+}
+
 const importedSeeds = await loadImportedSeeds()
 await writeImportedContextModule(importedSeeds)
 
-const [{ modeConfigs }, { playerContexts }, { sourceNotes }, { modeValidations }] = await Promise.all([
+const [{ modeConfigs }, { playerContexts }, { sourceNotes }, { modeValidations }, { modeMatchesPlayer }] = await Promise.all([
   import('../src/data/modes'),
   import('../src/data/playerContexts'),
   import('../src/data/sourceNotes'),
   import('../src/engine/validation'),
+  import('../src/engine/eligibility'),
 ])
+
+await writeModeContextModules(modeConfigs, playerContexts, modeMatchesPlayer)
 
 const sourceStatus = await Promise.all(
   sources.map(async (source) => {
@@ -505,6 +561,9 @@ const contextProvenance = {
     playable: modeValidations.find((validation) => validation.modeId === mode.modeId)?.playable ?? false,
     demoPlayable: modeValidations.find((validation) => validation.modeId === mode.modeId)?.demoPlayable ?? false,
     readiness: modeValidations.find((validation) => validation.modeId === mode.modeId)?.readiness ?? 'thin',
+    playableTeams: modeValidations.find((validation) => validation.modeId === mode.modeId)?.playableTeams ?? [],
+    playableRolls: modeValidations.find((validation) => validation.modeId === mode.modeId)?.playableRolls ?? [],
+    incompleteTeams: modeValidations.find((validation) => validation.modeId === mode.modeId)?.incompleteTeams ?? [],
   })),
   contexts: playerContexts.map(contextProvenanceFor),
 }

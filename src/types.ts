@@ -435,12 +435,38 @@ export interface ShareResult {
   source: 'supabase' | 'local-url' | 'text-fallback'
 }
 
+export interface RollCoverageSummary {
+  team: TeamRollOption
+  era: string
+  total: number
+  gk: number
+  def: number
+  mid: number
+  att: number
+  playable: boolean
+  issues: string[]
+}
+
+export interface PlayableRollSummary {
+  team: TeamRollOption
+  era: string
+}
+
+export interface IncompleteTeamSummary {
+  team: TeamRollOption
+  reasons: string[]
+}
+
 export interface ModeValidation {
   modeId: string
   contextCount: number
   playable: boolean
   demoPlayable: boolean
   readiness: 'ready' | 'thin' | 'demo'
+  playableTeams: TeamRollOption[]
+  playableRolls: PlayableRollSummary[]
+  incompleteTeams: IncompleteTeamSummary[]
+  rollCoverage: RollCoverageSummary[]
   slotCoverage: Record<string, number>
   demoSlotCoverage: Record<string, number>
   formationCoverage: Record<string, Record<string, number>>

@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { modeConfigs } from '../src/data/modes'
 import type { Position, TeamRollOption, TeamType } from '../src/types'
 
@@ -72,6 +72,7 @@ interface CoverageEntry {
 const generatedAt = new Date().toISOString()
 const currentYear = new Date().getUTCFullYear()
 const userAgent = 'UndefeatedXI source facts importer'
+const maxFetchRetries = 3
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => {
@@ -83,7 +84,9 @@ const manualQids: Record<string, string> = {
   'club:AC Milan': 'Q1543',
   'club:Ajax': 'Q81888',
   'club:Arsenal': 'Q9617',
+  'club:Aston Villa': 'Q18711',
   'club:Atletico Madrid': 'Q8701',
+  'club:Athletic Bilbao': 'Q8687',
   'club:Barcelona': 'Q7156',
   'club:Bayer Leverkusen': 'Q104761',
   'club:Bayern Munich': 'Q15789',
@@ -92,16 +95,27 @@ const manualQids: Record<string, string> = {
   'club:Boca Juniors': 'Q170703',
   'club:Bordeaux': 'Q172476',
   'club:Borussia Dortmund': 'Q41420',
+  'club:Borussia Monchengladbach': 'Q101959',
+  'club:Bournemouth': 'Q19568',
+  'club:Brentford': 'Q19571',
+  'club:Brighton': 'Q19453',
   'club:Chelsea': 'Q9616',
   'club:Columbus Crew': 'Q457163',
   'club:DC United': 'Q238593',
+  'club:Deportivo La Coruna': 'Q8760',
+  'club:Eintracht Frankfurt': 'Q38245',
   'club:Hamburg': 'Q51974',
   'club:Houston Dynamo': 'Q328313',
+  'club:Fiorentina': 'Q2052',
   'club:Inter': 'Q631',
   'club:Inter Miami': 'Q16844931',
   'club:Juventus': 'Q1422',
+  'club:Lazio': 'Q2609',
   'club:LA Galaxy': 'Q204357',
   'club:LAFC': 'Q18380286',
+  'club:Leicester': 'Q19481',
+  'club:Lens': 'Q191843',
+  'club:Lille': 'Q19516',
   'club:Liverpool': 'Q1130849',
   'club:Lyon': 'Q704',
   'club:Marseille': 'Q132885',
@@ -109,20 +123,35 @@ const manualQids: Record<string, string> = {
   'club:Manchester United': 'Q18656',
   'club:Monaco': 'Q180305',
   'club:Napoli': 'Q2641',
+  'club:Nantes': 'Q192071',
   'club:Nashville SC': 'Q24185298',
+  'club:New York Red Bulls': 'Q204220',
+  'club:Newcastle': 'Q18716',
   'club:PSG': 'Q483020',
+  'club:Parma': 'Q2693',
   'club:Porto': 'Q128446',
   'club:Real Madrid': 'Q8682',
+  'club:Real Betis': 'Q8723',
+  'club:Real Sociedad': 'Q10315',
   'club:River Plate': 'Q15799',
+  'club:Rennes': 'Q19509',
   'club:Roma': 'Q2739',
   'club:Saint-Etienne': 'Q19521',
+  'club:Sampdoria': 'Q1457',
   'club:Santos': 'Q80955',
+  'club:Schalke 04': 'Q32494',
   'club:Seattle Sounders': 'Q632511',
   'club:Tampa Bay Mutiny': 'Q421009',
+  'club:Stuttgart': 'Q4512',
+  'club:Torino': 'Q2768',
   'club:Toronto FC': 'Q327238',
   'club:Tottenham': 'Q18741',
   'club:Vancouver Whitecaps': 'Q196107',
+  'club:Villarreal': 'Q12297',
   'club:Werder Bremen': 'Q51976',
+  'club:West Ham': 'Q18747',
+  'club:Wolfsburg': 'Q101859',
+  'club:Wolves': 'Q19500',
   'nation:Argentina': 'Q79800',
   'nation:Brazil': 'Q83459',
   'nation:England': 'Q47762',
@@ -229,10 +258,19 @@ async function fetchJson<T>(url: string, attempt = 0): Promise<T> {
       accept: 'application/json',
       'user-agent': userAgent,
     },
+    signal: AbortSignal.timeout(45000),
+  }).catch((error) => {
+    if (attempt < maxFetchRetries) return undefined
+    throw error
   })
 
+  if (!response) {
+    await sleep(1400 * (attempt + 1))
+    return fetchJson<T>(url, attempt + 1)
+  }
+
   if (!response.ok) {
-    if ((response.status === 429 || response.status >= 500) && attempt < 5) {
+    if ((response.status === 429 || response.status >= 500) && attempt < maxFetchRetries) {
       const retryAfter = Number(response.headers.get('retry-after'))
       const waitMs = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 1200 * (attempt + 1)
       await sleep(waitMs)
@@ -242,11 +280,18 @@ async function fetchJson<T>(url: string, attempt = 0): Promise<T> {
     throw new Error(`${response.status} ${response.statusText} for ${url}`)
   }
 
-  const text = await response.text()
+  const text = await response.text().catch((error) => {
+    if (attempt < maxFetchRetries) return undefined
+    throw error
+  })
+  if (!text) {
+    await sleep(1400 * (attempt + 1))
+    return fetchJson<T>(url, attempt + 1)
+  }
   try {
     return JSON.parse(text) as T
   } catch (error) {
-    if (attempt < 5) {
+    if (attempt < maxFetchRetries) {
       await sleep(1400 * (attempt + 1))
       return fetchJson<T>(url, attempt + 1)
     }
@@ -254,6 +299,13 @@ async function fetchJson<T>(url: string, attempt = 0): Promise<T> {
     const preview = text.slice(0, 240).replace(/\s+/g, ' ')
     throw new Error(`Could not parse JSON response for ${url}: ${preview}`, { cause: error })
   }
+}
+
+async function loadCachedResolutions(): Promise<Map<string, TeamResolution>> {
+  const raw = await readFile('src/data/generated/wikidataMembershipFacts.json', 'utf8').catch(() => '')
+  if (!raw) return new Map()
+  const parsed = JSON.parse(raw) as { teamResolutions?: TeamResolution[] }
+  return new Map((parsed.teamResolutions ?? []).map((resolution) => [resolution.key, resolution]))
 }
 
 async function resolveTeam(team: TeamRollOption): Promise<TeamResolution> {
@@ -299,10 +351,11 @@ async function resolveTeam(team: TeamRollOption): Promise<TeamResolution> {
 async function queryMembershipFacts(resolutions: TeamResolution[]): Promise<SparqlBinding[]> {
   const resolved = resolutions.filter((resolution) => resolution.qid)
   const bindings: SparqlBinding[] = []
-  const chunkSize = 8
+  const chunkSize = 3
 
   for (let index = 0; index < resolved.length; index += chunkSize) {
     const chunk = resolved.slice(index, index + chunkSize)
+    console.log(`Querying Wikidata memberships ${index + 1}-${Math.min(index + chunk.length, resolved.length)} of ${resolved.length}...`)
     const values = chunk.map((resolution) => `wd:${resolution.qid}`).join(' ')
     const query = `
 SELECT ?team ?teamLabel ?player ?playerLabel ?positionLabel ?start ?end ?matches ?goals ?birthYear ?countryLabel WHERE {
@@ -431,9 +484,20 @@ function coverageForModes(facts: MembershipFact[], resolutions: TeamResolution[]
 }
 
 const teams = allTeams()
+const cachedResolutions = await loadCachedResolutions()
 const resolutions: TeamResolution[] = []
-for (const team of teams) {
-  resolutions.push(await resolveTeam(team))
+for (let index = 0; index < teams.length; index += 1) {
+  const team = teams[index]
+  const manualQid = manualQids[keyFor(team)]
+  const cached = cachedResolutions.get(keyFor(team))
+  if (manualQid) {
+    resolutions.push(await resolveTeam(team))
+  } else if (cached?.qid) {
+    resolutions.push({ ...cached, label: team.label, teamType: team.teamType, status: 'resolved' })
+  } else {
+    console.log(`Resolving ${index + 1}/${teams.length}: ${keyFor(team)}`)
+    resolutions.push(await resolveTeam(team))
+  }
   await sleep(150)
 }
 

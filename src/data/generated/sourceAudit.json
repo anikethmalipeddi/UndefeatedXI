@@ -1,6 +1,6 @@
 {
   "generatedBy": "scripts/generate-data.ts",
-  "generatedAt": "2026-06-11T18:26:59.709Z",
+  "generatedAt": "2026-06-12T23:08:31.252Z",
   "note": "Online source reachability and API summaries for UndefeatedXI data inputs.",
   "sourceStatus": [
     {
@@ -18,7 +18,7 @@
         "defaultBranch": "master",
         "updatedAt": "2025-11-23T20:16:47Z"
       },
-      "checkedAt": "2026-06-11T18:26:59.709Z"
+      "checkedAt": "2026-06-12T23:08:31.252Z"
     },
     {
       "label": "OpenFootball football.json",
@@ -30,20 +30,20 @@
       "apiStatus": 200,
       "apiStatusText": "OK",
       "apiSummary": {
-        "stars": 952,
-        "forks": 205,
+        "stars": 958,
+        "forks": 206,
         "defaultBranch": "master",
-        "updatedAt": "2026-06-11T18:03:44Z"
+        "updatedAt": "2026-06-12T22:11:11Z"
       },
-      "checkedAt": "2026-06-11T18:26:59.709Z"
+      "checkedAt": "2026-06-12T23:08:31.252Z"
     },
     {
       "label": "Wikidata SPARQL",
       "url": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/en-gb",
       "apiUrl": "https://query.wikidata.org/sparql?query=SELECT%20%3Fplayer%20%3FplayerLabel%20%3FbirthYear%20WHERE%20%7B%0A%20%20VALUES%20%3Fplayer%20%7B%20wd%3AQ615%20wd%3AQ11571%20wd%3AQ39444%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fplayer%20wdt%3AP569%20%3Fdob.%20BIND(YEAR(%3Fdob)%20AS%20%3FbirthYear)%20%7D%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%7D&format=json",
       "role": "clubs, nations, dates, aliases, and membership facts",
-      "status": 200,
-      "statusText": "OK",
+      "status": 429,
+      "statusText": "Too many requests (620f469)",
       "apiStatus": 200,
       "apiStatusText": "OK",
       "apiSummary": {
@@ -53,7 +53,7 @@
           "Ronaldinho"
         ]
       },
-      "checkedAt": "2026-06-11T18:26:59.709Z"
+      "checkedAt": "2026-06-12T23:08:31.252Z"
     },
     {
       "label": "Football-Data.co.uk",
@@ -81,7 +81,7 @@
           "Referee"
         ]
       },
-      "checkedAt": "2026-06-11T18:26:59.709Z"
+      "checkedAt": "2026-06-12T23:08:31.252Z"
     },
     {
       "label": "StatsBomb open data",
@@ -102,7 +102,7 @@
           "Champions League 2017/2018"
         ]
       },
-      "checkedAt": "2026-06-11T18:26:59.709Z"
+      "checkedAt": "2026-06-12T23:08:31.252Z"
     },
     {
       "label": "EA SPORTS FC ratings",
@@ -178,7 +178,7 @@
           }
         ]
       },
-      "checkedAt": "2026-06-11T18:26:59.709Z"
+      "checkedAt": "2026-06-12T23:08:31.252Z"
     }
   ]
 }

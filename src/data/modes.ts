@@ -11,6 +11,65 @@ const noRerolls: RerollCounts = { team: 0, era: 0, full: 0 }
 const clubs = (...labels: string[]): TeamRollOption[] => labels.map((label) => ({ label, teamType: 'club' }))
 const nations = (...labels: string[]): TeamRollOption[] => labels.map((label) => ({ label, teamType: 'nation' }))
 
+const premierLeagueClubs = clubs(
+  'Arsenal',
+  'Chelsea',
+  'Liverpool',
+  'Manchester United',
+  'Manchester City',
+  'Tottenham',
+  'Everton',
+  'Aston Villa',
+  'Newcastle',
+  'West Ham',
+  'Blackburn',
+  'Leicester',
+  'Nottingham Forest',
+  'Bournemouth',
+  'Brighton',
+  'Brentford',
+  'Wolves',
+)
+
+const englishTopFlightClubs = clubs(
+  'Manchester United',
+  'Liverpool',
+  'Nottingham Forest',
+  'Everton',
+  'Arsenal',
+  'Chelsea',
+  'Blackburn',
+  'Aston Villa',
+  'Newcastle',
+  'West Ham',
+  'Leicester',
+  'Tottenham',
+  'Manchester City',
+)
+
+const laligaClubs = clubs('Barcelona', 'Real Madrid', 'Atletico Madrid', 'Valencia', 'Sevilla', 'Villarreal', 'Real Sociedad', 'Athletic Bilbao', 'Deportivo La Coruna', 'Real Betis')
+const serieAClubs = clubs('AC Milan', 'Juventus', 'Inter', 'Roma', 'Napoli', 'Lazio', 'Fiorentina', 'Parma', 'Sampdoria', 'Torino')
+const bundesligaClubs = clubs('Bayern Munich', 'Borussia Dortmund', 'Bayer Leverkusen', 'Schalke 04', 'Hamburg', 'Werder Bremen', 'Stuttgart', 'Borussia Monchengladbach', 'Wolfsburg', 'Eintracht Frankfurt')
+const ligue1Clubs = clubs('PSG', 'Marseille', 'Lyon', 'Monaco', 'Saint-Etienne', 'Bordeaux', 'Lille', 'Nantes', 'Rennes', 'Lens')
+const mlsClubs = clubs(
+  'LA Galaxy',
+  'Inter Miami',
+  'DC United',
+  'Seattle Sounders',
+  'Atlanta United',
+  'Colorado Rapids',
+  'Nashville SC',
+  'Columbus Crew',
+  'Houston Dynamo',
+  'Sporting KC',
+  'Toronto FC',
+  'Tampa Bay Mutiny',
+  'LAFC',
+  'Vancouver Whitecaps',
+  'Portland Timbers',
+  'New York Red Bulls',
+)
+
 const majorClubs = clubs(
   'Barcelona',
   'Real Madrid',
@@ -36,7 +95,7 @@ const majorClubs = clubs(
   'River Plate',
 )
 
-const majorNations = nations(
+const worldCupNations = nations(
   'Brazil',
   'Argentina',
   'France',
@@ -49,7 +108,103 @@ const majorNations = nations(
   'Uruguay',
   'Belgium',
   'Croatia',
+  'Mexico',
+  'United States',
+  'Japan',
+  'South Korea',
+  'Morocco',
+  'Cameroon',
+  'Nigeria',
+  'Ghana',
+  'Senegal',
+  'Ivory Coast',
+  'Denmark',
+  'Chile',
+  'Colombia',
+  'Paraguay',
 )
+
+const eurosNations = nations(
+  'France',
+  'Germany',
+  'Spain',
+  'Italy',
+  'Netherlands',
+  'England',
+  'Portugal',
+  'Denmark',
+  'Croatia',
+  'Belgium',
+  'Czech Republic',
+  'Greece',
+  'Sweden',
+  'Turkey',
+  'Poland',
+  'Switzerland',
+  'Austria',
+  'Ukraine',
+  'Serbia',
+  'Russia',
+)
+
+const copaAmericaNations = nations(
+  'Brazil',
+  'Argentina',
+  'Uruguay',
+  'Chile',
+  'Colombia',
+  'Paraguay',
+  'Peru',
+  'Ecuador',
+  'Bolivia',
+  'Venezuela',
+  'Mexico',
+  'United States',
+)
+
+const afconNations = nations(
+  'Egypt',
+  'Cameroon',
+  'Senegal',
+  'Ivory Coast',
+  'Ghana',
+  'Nigeria',
+  'Algeria',
+  'Morocco',
+  'Tunisia',
+  'South Africa',
+  'Mali',
+  'DR Congo',
+  'Zambia',
+  'Burkina Faso',
+)
+
+const nationXiNations = nations(
+  'Brazil',
+  'Argentina',
+  'France',
+  'Germany',
+  'Spain',
+  'Italy',
+  'England',
+  'Netherlands',
+  'Portugal',
+  'Uruguay',
+  'Belgium',
+  'Croatia',
+  'Mexico',
+  'United States',
+  'Japan',
+  'South Korea',
+  'Morocco',
+  'Cameroon',
+  'Nigeria',
+  'Ghana',
+  'Senegal',
+  'Ivory Coast',
+)
+
+const majorNations = worldCupNations
 
 const decades = ['1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s', '2020s']
 const modernDecades = ['1990s', '2000s', '2010s', '2020s']
@@ -59,10 +214,11 @@ const knockoutModeIds = new Set(['classic_european_cup', 'euros', 'copa_america'
 const sevenMatchTournamentModeIds = new Set(['euros', 'copa_america', 'afcon', 'club_world_cup', 'nation_xi'])
 
 function tournamentTeamPoolFor(modeId: string, modeType: ModeConfig['modeType']): TeamRollOption[] {
-  if (modeId === 'euros') return nations('France', 'Germany', 'Spain', 'Italy', 'Netherlands', 'England', 'Portugal', 'Denmark', 'Croatia')
-  if (modeId === 'copa_america') return nations('Brazil', 'Argentina', 'Uruguay', 'Chile', 'Colombia', 'Paraguay')
-  if (modeId === 'afcon') return nations('Egypt', 'Cameroon', 'Senegal', 'Ivory Coast', 'Ghana', 'Nigeria', 'Algeria', 'Morocco')
-  if (modeId === 'nation_xi') return nations('Brazil', 'Argentina', 'France', 'Germany', 'Spain', 'Italy', 'England')
+  if (modeId === 'classic_european_cup' || modeId === 'club_world_cup') return majorClubs
+  if (modeId === 'euros') return eurosNations
+  if (modeId === 'copa_america') return copaAmericaNations
+  if (modeId === 'afcon') return afconNations
+  if (modeId === 'nation_xi') return nationXiNations
   if (modeType === 'international_tournament' || modeType === 'nation_history') return majorNations
   return [...majorClubs, ...majorNations]
 }
@@ -121,7 +277,7 @@ export const modeConfigs: ModeConfig[] = [
     opponentDistribution: 'league',
     resultGradeScale: 'domestic_38',
     shareTextTemplate: 'My 38-0-0 went {record} in Premier League Mode.',
-    teamPool: clubs('Arsenal', 'Chelsea', 'Liverpool', 'Manchester United', 'Manchester City', 'Tottenham'),
+    teamPool: premierLeagueClubs,
     eraPool: modernDecades,
   },
   {
@@ -234,16 +390,16 @@ export const modeConfigs: ModeConfig[] = [
     opponentDistribution: 'league',
     resultGradeScale: 'domestic_38',
     shareTextTemplate: 'My English Top Flight 38-0-0 went {record}.',
-    teamPool: clubs('Manchester United', 'Liverpool', 'Nottingham Forest', 'Everton', 'Arsenal', 'Chelsea', 'Blackburn'),
+    teamPool: englishTopFlightClubs,
     eraPool: decades,
   },
-  ...[
-    ['laliga', 'LaLiga', 'LaLiga legends chasing league perfection.', 'Barcelona,Real Madrid,Atletico Madrid,Valencia,Sevilla'],
-    ['serie_a', 'Serie A', 'Italian football icons chasing an unbeaten season.', 'AC Milan,Juventus,Inter,Roma,Napoli'],
-    ['bundesliga', 'Bundesliga', 'German top-flight legends chasing 34-0-0.', 'Bayern Munich,Borussia Dortmund,Hamburg,Werder Bremen,Bayer Leverkusen'],
-    ['ligue_1', 'Ligue 1', 'French league legends across eras.', 'PSG,Marseille,Lyon,Monaco,Saint-Etienne,Bordeaux'],
-    ['mls', 'MLS', 'Regular-season perfection with playoff pressure.', 'LA Galaxy,Inter Miami,DC United,Seattle Sounders,Atlanta United,Colorado Rapids,Nashville SC,Columbus Crew,Houston Dynamo,Sporting KC,Toronto FC,Tampa Bay Mutiny,LAFC,Vancouver Whitecaps,Portland Timbers'],
-  ].map(([modeId, modeName, shortDescription, teamList]) => ({
+  ...([
+    ['laliga', 'LaLiga', 'LaLiga legends chasing league perfection.', laligaClubs],
+    ['serie_a', 'Serie A', 'Italian football icons chasing an unbeaten season.', serieAClubs],
+    ['bundesliga', 'Bundesliga', 'German top-flight legends chasing 34-0-0.', bundesligaClubs],
+    ['ligue_1', 'Ligue 1', 'French league legends across eras.', ligue1Clubs],
+    ['mls', 'MLS', 'Regular-season perfection with playoff pressure.', mlsClubs],
+  ] satisfies Array<[string, string, string, TeamRollOption[]]>).map(([modeId, modeName, shortDescription, teamPool]) => ({
     modeId,
     modeName,
     shortDescription,
@@ -268,7 +424,7 @@ export const modeConfigs: ModeConfig[] = [
     opponentDistribution: 'league' as const,
     resultGradeScale: 'domestic_38',
     shareTextTemplate: `My ${modeName} 38-0-0 went {record}.`,
-    teamPool: clubs(...teamList.split(',')),
+    teamPool: teamPool as TeamRollOption[],
     eraPool: modernDecades,
   })),
   ...[

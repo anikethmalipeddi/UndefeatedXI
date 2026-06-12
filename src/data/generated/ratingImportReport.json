@@ -1,9 +1,9 @@
 {
   "generatedBy": "scripts/import-rating-contexts.ts",
-  "generatedAt": "2026-06-11T18:26:44.953Z",
+  "generatedAt": "2026-06-12T23:08:04.171Z",
   "inputFolder": "data/external/ratings",
-  "targetPerExactRoll": "top-50-source-backed-or-legacy-proxy",
-  "minimumReportCoverage": 50,
+  "targetPerExactRoll": "top-32-source-backed-or-legacy-proxy",
+  "minimumReportCoverage": 32,
   "sourceFiles": [
     {
       "file": "data/external/ratings/fc24/male_players.csv",
@@ -90,17 +90,17 @@
       "schemaDetected": "legacy-proxy"
     }
   ],
-  "wikidataFacts": 33712,
+  "wikidataFacts": 56416,
   "ratingRows": 361869,
-  "generatedLegacyProxyRows": 14324,
-  "matchedPlayers": 6139,
-  "generatedPeople": 10310,
-  "generatedContexts": 20090,
+  "generatedLegacyProxyRows": 15000,
+  "matchedPlayers": 9371,
+  "generatedPeople": 11286,
+  "generatedContexts": 21894,
   "confidenceCounts": {
-    "legacy-proxy": 14442,
-    "icon-hero": 447,
-    "exact-team-era": 3230,
-    "player-era": 1971
+    "legacy-proxy": 15118,
+    "icon-hero": 535,
+    "exact-team-era": 3713,
+    "player-era": 2528
   },
   "highProfileRolls": [
     {
@@ -110,17 +110,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -131,17 +130,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -152,17 +151,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -175,17 +174,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"
@@ -198,17 +196,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -219,17 +217,16 @@
       "era": "2010s UCL",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -240,17 +237,17 @@
       "era": "2000s UCL",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -261,17 +258,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -284,17 +281,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"
@@ -307,17 +303,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -328,17 +323,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -349,17 +344,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -372,17 +367,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"
@@ -395,17 +389,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -416,17 +410,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -437,16 +430,16 @@
       "era": "2010s",
       "facts": 97,
       "matchedCandidates": 238,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 15,
-        "ATT": 9,
-        "DEF": 18,
-        "GK": 8
+        "MID": 11,
+        "ATT": 7,
+        "DEF": 11,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 35,
-        "legacy-proxy": 15
+        "exact-team-era": 24,
+        "legacy-proxy": 8
       },
       "missingExamples": []
     },
@@ -477,17 +470,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -498,65 +490,19 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
-      },
-      "confidenceCounts": {
-        "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
-      },
-      "missingExamples": []
-    },
-    {
-      "modeId": "classic_european_cup",
-      "team": "Brazil",
-      "teamType": "nation",
-      "era": "2000s",
-      "facts": 180,
-      "matchedCandidates": 202,
-      "generatedContexts": 50,
-      "positionGroups": {
-        "DEF": 17,
+        "MID": 14,
         "ATT": 8,
-        "MID": 23,
+        "DEF": 8,
         "GK": 2
       },
       "confidenceCounts": {
-        "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "icon-hero": 6,
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
-      "missingExamples": [
-        "Léo Lima"
-      ]
-    },
-    {
-      "modeId": "classic_european_cup",
-      "team": "England",
-      "teamType": "nation",
-      "era": "2000s",
-      "facts": 101,
-      "matchedCandidates": 161,
-      "generatedContexts": 50,
-      "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
-      },
-      "confidenceCounts": {
-        "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
-      },
-      "missingExamples": [
-        "Thomas Burn"
-      ]
+      "missingExamples": []
     },
     {
       "modeId": "euros",
@@ -565,17 +511,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"
@@ -588,17 +533,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -611,17 +556,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -632,65 +576,19 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
-      },
-      "confidenceCounts": {
-        "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
-      },
-      "missingExamples": []
-    },
-    {
-      "modeId": "club_world_cup",
-      "team": "Brazil",
-      "teamType": "nation",
-      "era": "2000s",
-      "facts": 180,
-      "matchedCandidates": 202,
-      "generatedContexts": 50,
-      "positionGroups": {
-        "DEF": 17,
+        "MID": 14,
         "ATT": 8,
-        "MID": 23,
+        "DEF": 8,
         "GK": 2
       },
       "confidenceCounts": {
-        "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "icon-hero": 6,
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
-      "missingExamples": [
-        "Léo Lima"
-      ]
-    },
-    {
-      "modeId": "club_world_cup",
-      "team": "England",
-      "teamType": "nation",
-      "era": "2000s",
-      "facts": 101,
-      "matchedCandidates": 161,
-      "generatedContexts": 50,
-      "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
-      },
-      "confidenceCounts": {
-        "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
-      },
-      "missingExamples": [
-        "Thomas Burn"
-      ]
+      "missingExamples": []
     },
     {
       "modeId": "one_club",
@@ -699,17 +597,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -720,17 +617,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -741,17 +638,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -764,17 +661,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"
@@ -787,17 +683,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -808,17 +703,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -829,17 +724,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -852,17 +747,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"
@@ -875,17 +769,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -896,17 +789,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -917,17 +810,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -940,17 +833,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"
@@ -963,17 +855,16 @@
       "era": "2010s",
       "facts": 93,
       "matchedCandidates": 367,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 8,
-        "DEF": 18,
-        "GK": 4
+        "MID": 13,
+        "ATT": 6,
+        "DEF": 10,
+        "GK": 3
       },
       "confidenceCounts": {
-        "exact-team-era": 43,
-        "icon-hero": 2,
-        "legacy-proxy": 5
+        "exact-team-era": 30,
+        "icon-hero": 2
       },
       "missingExamples": []
     },
@@ -984,17 +875,17 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 185,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "MID": 20,
-        "ATT": 11,
-        "DEF": 15,
-        "GK": 4
+        "MID": 14,
+        "ATT": 8,
+        "DEF": 8,
+        "GK": 2
       },
       "confidenceCounts": {
         "icon-hero": 6,
-        "exact-team-era": 18,
-        "legacy-proxy": 26
+        "exact-team-era": 16,
+        "legacy-proxy": 10
       },
       "missingExamples": []
     },
@@ -1005,17 +896,17 @@
       "era": "2000s",
       "facts": 180,
       "matchedCandidates": 202,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "DEF": 17,
-        "ATT": 8,
-        "MID": 23,
-        "GK": 2
+        "DEF": 12,
+        "ATT": 7,
+        "MID": 12,
+        "GK": 1
       },
       "confidenceCounts": {
         "icon-hero": 1,
-        "player-era": 14,
-        "legacy-proxy": 35
+        "player-era": 11,
+        "legacy-proxy": 20
       },
       "missingExamples": [
         "Léo Lima"
@@ -1028,17 +919,16 @@
       "era": "2000s",
       "facts": 101,
       "matchedCandidates": 161,
-      "generatedContexts": 50,
+      "generatedContexts": 32,
       "positionGroups": {
-        "ATT": 10,
-        "MID": 17,
-        "DEF": 18,
-        "GK": 5
+        "ATT": 6,
+        "MID": 10,
+        "DEF": 12,
+        "GK": 4
       },
       "confidenceCounts": {
         "icon-hero": 7,
-        "player-era": 39,
-        "legacy-proxy": 4
+        "player-era": 25
       },
       "missingExamples": [
         "Thomas Burn"

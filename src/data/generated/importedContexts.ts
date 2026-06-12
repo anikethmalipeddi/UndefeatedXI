@@ -203,11 +203,11 @@ export const importedPeople: Person[] = [
     "aliases": [],
     "nationality": "France",
     "primaryRoles": [
-      "Reflex keeper",
+      "Shot-stopper",
       "Sweeper keeper",
-      "Captain"
+      "Leader"
     ],
-    "notes": "Lyon and France goalkeeper reference for late-2000s Ligue 1."
+    "notes": "LAFC goalkeeper context from the club's 2020s era."
   },
   {
     "personId": "thiago_silva",
@@ -399,10 +399,10 @@ export const importedPeople: Person[] = [
     "nationality": "United States",
     "primaryRoles": [
       "Aerial defender",
-      "Duel winner",
-      "Line leader"
+      "Line leader",
+      "Set-piece threat"
     ],
-    "notes": "MLS defender of the year level center-back."
+    "notes": "Nashville defensive leader and MLS Best XI level center-back."
   },
   {
     "personId": "chad_marshall",
@@ -502,11 +502,11 @@ export const importedPeople: Person[] = [
     "aliases": [],
     "nationality": "Mexico",
     "primaryRoles": [
-      "Wide scorer",
       "Creator",
-      "Record-setter"
+      "Elite scorer",
+      "Inverted winger"
     ],
-    "notes": "LAFC MVP-level attacker."
+    "notes": "LAFC attacking icon and MVP-level creator."
   },
   {
     "personId": "lionel_messi",
@@ -517,9 +517,9 @@ export const importedPeople: Person[] = [
     "primaryRoles": [
       "Creator",
       "Elite scorer",
-      "Club world champion"
+      "Set pieces"
     ],
-    "notes": "Barcelona Club World Cup-winning attacker merged onto the curated peak context."
+    "notes": "Inter Miami star-era attacking reference."
   },
   {
     "personId": "josef_martinez",
@@ -593,11 +593,11 @@ export const importedPeople: Person[] = [
     "aliases": [],
     "nationality": "Italy",
     "primaryRoles": [
-      "Stopper",
-      "Leader",
-      "Duel winner"
+      "Line leader",
+      "Box defender",
+      "Veteran organizer"
     ],
-    "notes": "Italy Euro 2020 defensive leader."
+    "notes": "LAFC veteran center-back and title-era organizer."
   },
   {
     "personId": "jordi_alba",
@@ -606,11 +606,11 @@ export const importedPeople: Person[] = [
     "aliases": [],
     "nationality": "Spain",
     "primaryRoles": [
-      "Overlap",
-      "Cutback provider",
-      "Recovery pace"
+      "Attacking fullback",
+      "Wide creator",
+      "Recovery runner"
     ],
-    "notes": "Spain left-back and Euro 2012 final scorer."
+    "notes": "Inter Miami attacking left-back context from the club's star era."
   },
   {
     "personId": "philipp_lahm",
@@ -634,9 +634,9 @@ export const importedPeople: Person[] = [
     "primaryRoles": [
       "Controller",
       "Press resistance",
-      "Screen"
+      "Defensive screen"
     ],
-    "notes": "Spain pivot during the 2010 and 2012 trophy run."
+    "notes": "Inter Miami midfield controller context."
   },
   {
     "personId": "luka_modric",
@@ -840,11 +840,11 @@ export const importedPeople: Person[] = [
     "aliases": [],
     "nationality": "Uruguay",
     "primaryRoles": [
-      "Elite scorer",
-      "Link play",
-      "Club world champion"
+      "Box finisher",
+      "Link forward",
+      "Big-game striker"
     ],
-    "notes": "Barcelona Club World Cup striker merged onto the curated peak context."
+    "notes": "Inter Miami center-forward context."
   },
   {
     "personId": "essam_el_hadary",
@@ -1534,6 +1534,383 @@ export const importedPeople: Person[] = [
       "Back-three cover"
     ],
     "notes": "England right-back and wide center-back across recent Euro runs."
+  },
+  {
+    "personId": "joe_willis",
+    "displayName": "Joe Willis",
+    "fullName": "Joe Willis",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Shot-stopper",
+      "Box command",
+      "MLS veteran"
+    ],
+    "notes": "Nashville starting goalkeeper context for the club's MLS era."
+  },
+  {
+    "personId": "dave_romney",
+    "displayName": "Dave Romney",
+    "fullName": "Dave Romney",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Cover defender",
+      "Back-line balance",
+      "Durable starter"
+    ],
+    "notes": "Nashville early MLS center-back with left-side flexibility."
+  },
+  {
+    "personId": "daniel_lovitz",
+    "displayName": "Daniel Lovitz",
+    "fullName": "Daniel Lovitz",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Wide defender",
+      "Crossing support",
+      "Defensive balance"
+    ],
+    "notes": "Nashville left-back context with steady MLS minutes."
+  },
+  {
+    "personId": "shaq_moore",
+    "displayName": "Shaq Moore",
+    "fullName": "Shaq Moore",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Two-way fullback",
+      "Wide runner",
+      "Recovery pace"
+    ],
+    "notes": "Nashville and USMNT right-back profile for modern MLS rolls."
+  },
+  {
+    "personId": "dax_mccarty",
+    "displayName": "Dax McCarty",
+    "fullName": "Dax McCarty",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Ball-winner",
+      "Organizer",
+      "Tempo setter"
+    ],
+    "notes": "Veteran Nashville holding midfielder and MLS organizer."
+  },
+  {
+    "personId": "anibal_godoy",
+    "displayName": "Anibal Godoy",
+    "fullName": "Anibal Godoy",
+    "aliases": [],
+    "nationality": "Panama",
+    "primaryRoles": [
+      "Ball-winner",
+      "Connector",
+      "Duel winner"
+    ],
+    "notes": "Nashville central midfielder with defensive coverage."
+  },
+  {
+    "personId": "sean_davis",
+    "displayName": "Sean Davis",
+    "fullName": "Sean Davis",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Connector",
+      "Pressing midfielder",
+      "Second-ball winner"
+    ],
+    "notes": "Nashville central midfield depth context."
+  },
+  {
+    "personId": "brian_anunga",
+    "displayName": "Brian Anunga",
+    "fullName": "Brian Anunga",
+    "aliases": [],
+    "nationality": "Cameroon",
+    "primaryRoles": [
+      "Ball-winner",
+      "Physical midfielder",
+      "Rotation piece"
+    ],
+    "notes": "Nashville defensive-midfield coverage for MLS draft depth."
+  },
+  {
+    "personId": "hany_mukhtar",
+    "displayName": "Hany Mukhtar",
+    "fullName": "Hany Mukhtar",
+    "aliases": [],
+    "nationality": "Germany",
+    "primaryRoles": [
+      "Creator",
+      "Transition scorer",
+      "MVP-level attacker"
+    ],
+    "notes": "Nashville attacking centerpiece and MLS MVP-level creator."
+  },
+  {
+    "personId": "randall_leal",
+    "displayName": "Randall Leal",
+    "fullName": "Randall Leal",
+    "aliases": [],
+    "nationality": "Costa Rica",
+    "primaryRoles": [
+      "Wide creator",
+      "Carrier",
+      "Final-third connector"
+    ],
+    "notes": "Nashville wide attacking context from the early MLS seasons."
+  },
+  {
+    "personId": "jacob_shaffelburg",
+    "displayName": "Jacob Shaffelburg",
+    "fullName": "Jacob Shaffelburg",
+    "aliases": [],
+    "nationality": "Canada",
+    "primaryRoles": [
+      "Wide runner",
+      "Direct winger",
+      "Transition outlet"
+    ],
+    "notes": "Nashville left-sided runner and Canada international profile."
+  },
+  {
+    "personId": "alex_muyl",
+    "displayName": "Alex Muyl",
+    "fullName": "Alex Muyl",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Pressing winger",
+      "Wingback cover",
+      "Work-rate player"
+    ],
+    "notes": "Nashville right-sided utility profile."
+  },
+  {
+    "personId": "cj_sapong",
+    "displayName": "CJ Sapong",
+    "fullName": "CJ Sapong",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Target forward",
+      "Pressing striker",
+      "Box presence"
+    ],
+    "notes": "Nashville striker context with MLS veteran scoring history."
+  },
+  {
+    "personId": "sam_surridge",
+    "displayName": "Sam Surridge",
+    "fullName": "Sam Surridge",
+    "aliases": [],
+    "nationality": "England",
+    "primaryRoles": [
+      "Box finisher",
+      "Penalty-box striker",
+      "Aerial target"
+    ],
+    "notes": "Nashville modern center-forward option."
+  },
+  {
+    "personId": "teal_bunbury",
+    "displayName": "Teal Bunbury",
+    "fullName": "Teal Bunbury",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Forward depth",
+      "Wide-channel runner",
+      "Veteran finisher"
+    ],
+    "notes": "Nashville forward depth and wide-forward coverage."
+  },
+  {
+    "personId": "drake_callender",
+    "displayName": "Drake Callender",
+    "fullName": "Drake Callender",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Shot-stopper",
+      "Penalty presence",
+      "Modern keeper"
+    ],
+    "notes": "Inter Miami starting goalkeeper context."
+  },
+  {
+    "personId": "diego_gomez",
+    "displayName": "Diego Gomez",
+    "fullName": "Diego Gomez",
+    "aliases": [],
+    "nationality": "Paraguay",
+    "primaryRoles": [
+      "Box-to-box",
+      "Carrier",
+      "Pressing midfielder"
+    ],
+    "notes": "Inter Miami energetic midfield context."
+  },
+  {
+    "personId": "jack_maher",
+    "displayName": "Jack Maher",
+    "fullName": "Jack Maher",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Center-back depth",
+      "Aerial defender",
+      "Back-line cover"
+    ],
+    "notes": "Nashville center-back context for modern MLS depth."
+  },
+  {
+    "personId": "lukas_macnaughton",
+    "displayName": "Lukas MacNaughton",
+    "fullName": "Lukas MacNaughton",
+    "aliases": [],
+    "nationality": "Canada",
+    "primaryRoles": [
+      "Stopper",
+      "Back-line depth",
+      "Duel defender"
+    ],
+    "notes": "Nashville center-back and Canada international profile."
+  },
+  {
+    "personId": "fafa_picault",
+    "displayName": "Fafa Picault",
+    "fullName": "Fafa Picault",
+    "aliases": [],
+    "nationality": "Haiti",
+    "primaryRoles": [
+      "Wide runner",
+      "Pressing forward",
+      "Transition outlet"
+    ],
+    "notes": "Nashville wide-forward context with pace and pressing."
+  },
+  {
+    "personId": "diego_palacios",
+    "displayName": "Diego Palacios",
+    "fullName": "Diego Palacios",
+    "aliases": [],
+    "nationality": "Ecuador",
+    "primaryRoles": [
+      "Wide defender",
+      "Overlap runner",
+      "Recovery pace"
+    ],
+    "notes": "LAFC title-era left-back context."
+  },
+  {
+    "personId": "ryan_hollingshead",
+    "displayName": "Ryan Hollingshead",
+    "fullName": "Ryan Hollingshead",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Two-way fullback",
+      "Back-post threat",
+      "Wide balance"
+    ],
+    "notes": "LAFC fullback context with both-side coverage."
+  },
+  {
+    "personId": "jesus_murillo",
+    "displayName": "Jesus Murillo",
+    "fullName": "Jesus Murillo",
+    "aliases": [],
+    "nationality": "Colombia",
+    "primaryRoles": [
+      "Stopper",
+      "Duel defender",
+      "Back-line anchor"
+    ],
+    "notes": "LAFC center-back coverage for 2020s MLS rolls."
+  },
+  {
+    "personId": "ilie_sanchez",
+    "displayName": "Ilie Sanchez",
+    "fullName": "Ilie Sanchez",
+    "aliases": [],
+    "nationality": "Spain",
+    "primaryRoles": [
+      "Controller",
+      "Defensive screen",
+      "Build-up passer"
+    ],
+    "notes": "LAFC midfield organizer and defensive connector."
+  },
+  {
+    "personId": "kellyn_acosta",
+    "displayName": "Kellyn Acosta",
+    "fullName": "Kellyn Acosta",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Box-to-box",
+      "Set pieces",
+      "Ball-winner"
+    ],
+    "notes": "LAFC title-season central midfielder."
+  },
+  {
+    "personId": "eduard_atuesta",
+    "displayName": "Eduard Atuesta",
+    "fullName": "Eduard Atuesta",
+    "aliases": [],
+    "nationality": "Colombia",
+    "primaryRoles": [
+      "Controller",
+      "Set pieces",
+      "Progressive passer"
+    ],
+    "notes": "LAFC central playmaker profile."
+  },
+  {
+    "personId": "timothy_tillman",
+    "displayName": "Timothy Tillman",
+    "fullName": "Timothy Tillman",
+    "aliases": [],
+    "nationality": "United States",
+    "primaryRoles": [
+      "Connector",
+      "Carrier",
+      "Pressing midfielder"
+    ],
+    "notes": "LAFC midfield depth and connector context."
+  },
+  {
+    "personId": "denis_bouanga",
+    "displayName": "Denis Bouanga",
+    "fullName": "Denis Bouanga",
+    "aliases": [],
+    "nationality": "Gabon",
+    "primaryRoles": [
+      "Wide scorer",
+      "Transition runner",
+      "Direct attacker"
+    ],
+    "notes": "LAFC high-volume scorer and 2020s attacking reference."
+  },
+  {
+    "personId": "cristian_arango",
+    "displayName": "Cristian Arango",
+    "fullName": "Cristian Arango",
+    "aliases": [],
+    "nationality": "Colombia",
+    "primaryRoles": [
+      "Box finisher",
+      "Pressing striker",
+      "Penalty-box mover"
+    ],
+    "notes": "LAFC title-era center-forward context."
   }
 ]
 
@@ -1594,7 +1971,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1977-1982",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -1657,7 +2036,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1990-2003",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -1720,7 +2101,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1977-1991",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -1777,7 +2160,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2001-2006",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -1845,7 +2230,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1985-1997",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -1914,7 +2301,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1990-2002",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -1981,7 +2370,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1992-2011",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2050,7 +2441,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1992-2003",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2119,7 +2512,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1990-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2180,7 +2575,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1987-1997",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2246,7 +2643,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1978-1984",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2314,7 +2713,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1977-1990",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2371,7 +2772,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1992-1996",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2433,7 +2836,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1992-1997",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2496,7 +2901,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1992-1995",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2552,7 +2959,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2008-2012",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2615,7 +3024,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2012-2020",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2683,7 +3094,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2744,7 +3157,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1991-1996",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2810,7 +3225,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2012-2017",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2878,7 +3295,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2001-2009",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -2944,7 +3363,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2012-2023",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3003,7 +3424,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1993-1998",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3064,7 +3487,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1992-1995",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3134,7 +3559,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2015-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3202,7 +3629,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2017-2024",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3268,7 +3697,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2012-2016",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3331,7 +3762,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1986-1992",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3387,7 +3820,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2016-2019",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3443,7 +3878,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2017-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3499,7 +3936,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2020-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3555,7 +3994,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2004-2013",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3618,7 +4059,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2014-2019",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3679,7 +4122,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3742,7 +4187,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2009-2023",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3801,7 +4248,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2014-2023",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3860,7 +4309,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1996-1997",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3921,7 +4372,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2007-2012",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -3984,7 +4437,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2005-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4045,7 +4500,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2018-2024",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4106,7 +4563,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2023-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4162,7 +4621,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2017-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4221,7 +4682,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2011-2016",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4276,7 +4739,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1987-2001",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4338,7 +4803,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2000-2016",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4403,7 +4870,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2005-2021",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4458,7 +4927,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2004-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4525,7 +4996,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2011-2023",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4592,7 +5065,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2004-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4657,7 +5132,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2009-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4722,7 +5199,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2006-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4780,7 +5259,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1976-1987",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4847,7 +5328,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1991-2006",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4914,7 +5397,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2003-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -4972,7 +5457,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1983-1992",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5034,7 +5521,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1974-1985",
     "dataConfidence": "Legend estimate",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5096,7 +5585,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1989-2003",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5163,7 +5654,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1992-2006",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5230,7 +5723,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1990-2006",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5292,7 +5787,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1966-1982",
     "dataConfidence": "Legend estimate",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5354,7 +5851,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2005-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5421,7 +5920,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2003-2018",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5486,7 +5987,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1997-2008",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5551,7 +6054,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1976-1986",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5618,7 +6123,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2005-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5685,7 +6192,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2010-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5750,7 +6259,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2007-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5805,7 +6316,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1996-2018",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5860,7 +6373,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1977-1994",
     "dataConfidence": "Legend estimate",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5922,7 +6437,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1993-2010",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -5984,7 +6501,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2015-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6044,7 +6563,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2004-2012",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6111,7 +6632,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2016-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6178,7 +6701,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1996-2010",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6245,7 +6770,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2004-2016",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6312,7 +6839,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2002-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6379,7 +6908,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1993-2006",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6439,7 +6970,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1982-1998",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6506,7 +7039,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2012-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6571,7 +7106,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2011-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6631,7 +7168,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2014-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6693,7 +7232,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2002-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6758,7 +7299,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1997-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6828,7 +7371,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1999-2015",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6898,7 +7443,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2017-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -6973,7 +7520,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2007-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7046,7 +7595,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7116,7 +7667,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2018-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7186,7 +7739,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2008-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7259,7 +7814,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2014-2024",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7332,7 +7889,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2012-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7405,7 +7964,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2016-2023",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7482,7 +8043,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2017-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7555,7 +8118,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2018-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7630,7 +8195,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7703,7 +8270,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2009-2023",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7771,7 +8340,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2004-2007",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7832,7 +8403,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1988-1996",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7893,7 +8466,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2014-2021",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -7956,7 +8531,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2016-2018",
     "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8017,7 +8594,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2021",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8084,7 +8663,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1996-2009",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8146,7 +8727,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1988-2002",
     "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8211,7 +8794,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2001-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8273,7 +8858,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1996-2007",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8335,7 +8922,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1997-2011",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8397,7 +8986,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2003-2012",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8462,7 +9053,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1995-2007",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8529,7 +9122,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1997-2004",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8598,7 +9193,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2000-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8663,7 +9260,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1999-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8732,7 +9331,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2001-2010",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8797,7 +9398,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1998-2008",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8866,7 +9469,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2003-2018",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -8933,7 +9538,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1995-2006",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9002,7 +9609,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1994-2011",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9069,7 +9678,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2006-2022",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9134,7 +9745,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2009-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9201,7 +9814,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2004-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9278,7 +9893,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2012-2014",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9355,7 +9972,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2011-2021",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9430,7 +10049,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2008-2021",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9505,7 +10126,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2017",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9580,7 +10203,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2014-2020",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9655,7 +10280,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2019-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9725,7 +10352,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1998-2004",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9793,7 +10422,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2018",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9861,7 +10492,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2017-2019",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9929,7 +10562,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2013-2020",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -9998,7 +10633,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1999-2010",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -10065,7 +10702,9 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "1994-2008",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
@@ -10132,11 +10771,2194 @@ export const importedPlayerContexts: PlayerContext[] = [
     },
     "peakWindow": "2011-2026",
     "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
     "sourceNotes": [
+      "Legacy proxy: manual sourced context",
       "Wikidata SPARQL",
       "OpenFootball players",
       "Manual legend curation"
     ],
     "historicalNotes": "England right-back and wide center-back across recent Euro runs."
+  },
+  {
+    "contextId": "joe_willis_nashville_2020s",
+    "personId": "joe_willis",
+    "displayName": "Joe Willis",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "GK"
+    ],
+    "primaryPositions": [
+      "GK"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Shot-stopper",
+      "Box command",
+      "MLS veteran"
+    ],
+    "ratings": {
+      "attack": 15,
+      "creation": 35,
+      "control": 48,
+      "defense": 51,
+      "goalkeeping": 76,
+      "physical": 65,
+      "press": 40,
+      "bigGame": 72
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville starting goalkeeper context for the club's MLS era."
+  },
+  {
+    "contextId": "walker_zimmerman_nashville_2020s",
+    "personId": "walker_zimmerman",
+    "displayName": "Walker Zimmerman",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CB"
+    ],
+    "primaryPositions": [
+      "CB"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Aerial defender",
+      "Line leader",
+      "Set-piece threat"
+    ],
+    "ratings": {
+      "attack": 31,
+      "creation": 51,
+      "control": 59,
+      "defense": 80,
+      "goalkeeping": 4,
+      "physical": 82,
+      "press": 62,
+      "bigGame": 77
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville defensive leader and MLS Best XI level center-back."
+  },
+  {
+    "contextId": "dave_romney_nashville_2020s",
+    "personId": "dave_romney",
+    "displayName": "Dave Romney",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2022,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CB",
+      "LB"
+    ],
+    "primaryPositions": [
+      "CB"
+    ],
+    "secondaryPositions": [
+      "LB"
+    ],
+    "roleTags": [
+      "Cover defender",
+      "Back-line balance",
+      "Durable starter"
+    ],
+    "ratings": {
+      "attack": 29,
+      "creation": 47,
+      "control": 54,
+      "defense": 75,
+      "goalkeeping": 3,
+      "physical": 74,
+      "press": 57,
+      "bigGame": 71
+    },
+    "peakWindow": "2020-2022",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville early MLS center-back with left-side flexibility."
+  },
+  {
+    "contextId": "daniel_lovitz_nashville_2020s",
+    "personId": "daniel_lovitz",
+    "displayName": "Daniel Lovitz",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "LB",
+      "LWB"
+    ],
+    "primaryPositions": [
+      "LB"
+    ],
+    "secondaryPositions": [
+      "LWB"
+    ],
+    "roleTags": [
+      "Wide defender",
+      "Crossing support",
+      "Defensive balance"
+    ],
+    "ratings": {
+      "attack": 45,
+      "creation": 68,
+      "control": 57,
+      "defense": 74,
+      "goalkeeping": 4,
+      "physical": 73,
+      "press": 64,
+      "bigGame": 64
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville left-back context with steady MLS minutes."
+  },
+  {
+    "contextId": "shaq_moore_nashville_2020s",
+    "personId": "shaq_moore",
+    "displayName": "Shaq Moore",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "RB",
+      "RWB"
+    ],
+    "primaryPositions": [
+      "RB"
+    ],
+    "secondaryPositions": [
+      "RWB"
+    ],
+    "roleTags": [
+      "Two-way fullback",
+      "Wide runner",
+      "Recovery pace"
+    ],
+    "ratings": {
+      "attack": 46,
+      "creation": 55,
+      "control": 58,
+      "defense": 73,
+      "goalkeeping": 4,
+      "physical": 78,
+      "press": 74,
+      "bigGame": 65
+    },
+    "peakWindow": "2022-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville and USMNT right-back profile for modern MLS rolls."
+  },
+  {
+    "contextId": "dax_mccarty_nashville_2020s",
+    "personId": "dax_mccarty",
+    "displayName": "Dax McCarty",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2023,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "DM",
+      "CM"
+    ],
+    "primaryPositions": [
+      "DM"
+    ],
+    "secondaryPositions": [
+      "CM"
+    ],
+    "roleTags": [
+      "Ball-winner",
+      "Organizer",
+      "Tempo setter"
+    ],
+    "ratings": {
+      "attack": 41,
+      "creation": 61,
+      "control": 76,
+      "defense": 76,
+      "goalkeeping": 3,
+      "physical": 70,
+      "press": 75,
+      "bigGame": 75
+    },
+    "peakWindow": "2020-2023",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Veteran Nashville holding midfielder and MLS organizer."
+  },
+  {
+    "contextId": "anibal_godoy_nashville_2020s",
+    "personId": "anibal_godoy",
+    "displayName": "Anibal Godoy",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "DM",
+      "CM"
+    ],
+    "primaryPositions": [
+      "DM"
+    ],
+    "secondaryPositions": [
+      "CM"
+    ],
+    "roleTags": [
+      "Ball-winner",
+      "Connector",
+      "Duel winner"
+    ],
+    "ratings": {
+      "attack": 40,
+      "creation": 60,
+      "control": 73,
+      "defense": 74,
+      "goalkeeping": 3,
+      "physical": 76,
+      "press": 70,
+      "bigGame": 68
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville central midfielder with defensive coverage."
+  },
+  {
+    "contextId": "sean_davis_nashville_2020s",
+    "personId": "sean_davis",
+    "displayName": "Sean Davis",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CM",
+      "DM"
+    ],
+    "primaryPositions": [
+      "CM"
+    ],
+    "secondaryPositions": [
+      "DM"
+    ],
+    "roleTags": [
+      "Connector",
+      "Pressing midfielder",
+      "Second-ball winner"
+    ],
+    "ratings": {
+      "attack": 54,
+      "creation": 69,
+      "control": 73,
+      "defense": 70,
+      "goalkeeping": 3,
+      "physical": 64,
+      "press": 75,
+      "bigGame": 67
+    },
+    "peakWindow": "2022-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville central midfield depth context."
+  },
+  {
+    "contextId": "brian_anunga_nashville_2020s",
+    "personId": "brian_anunga",
+    "displayName": "Brian Anunga",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "DM",
+      "CM"
+    ],
+    "primaryPositions": [
+      "DM"
+    ],
+    "secondaryPositions": [
+      "CM"
+    ],
+    "roleTags": [
+      "Ball-winner",
+      "Physical midfielder",
+      "Rotation piece"
+    ],
+    "ratings": {
+      "attack": 38,
+      "creation": 57,
+      "control": 68,
+      "defense": 72,
+      "goalkeeping": 3,
+      "physical": 76,
+      "press": 72,
+      "bigGame": 65
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville defensive-midfield coverage for MLS draft depth."
+  },
+  {
+    "contextId": "hany_mukhtar_nashville_2020s",
+    "personId": "hany_mukhtar",
+    "displayName": "Hany Mukhtar",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "AM",
+      "CF",
+      "LW"
+    ],
+    "primaryPositions": [
+      "AM"
+    ],
+    "secondaryPositions": [
+      "CF",
+      "LW"
+    ],
+    "roleTags": [
+      "Creator",
+      "Transition scorer",
+      "MVP-level attacker"
+    ],
+    "ratings": {
+      "attack": 82,
+      "creation": 84,
+      "control": 82,
+      "defense": 39,
+      "goalkeeping": 4,
+      "physical": 65,
+      "press": 62,
+      "bigGame": 82
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville attacking centerpiece and MLS MVP-level creator."
+  },
+  {
+    "contextId": "randall_leal_nashville_2020s",
+    "personId": "randall_leal",
+    "displayName": "Randall Leal",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2024,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "AM"
+    ],
+    "primaryPositions": [
+      "LW"
+    ],
+    "secondaryPositions": [
+      "RW",
+      "AM"
+    ],
+    "roleTags": [
+      "Wide creator",
+      "Carrier",
+      "Final-third connector"
+    ],
+    "ratings": {
+      "attack": 75,
+      "creation": 76,
+      "control": 75,
+      "defense": 32,
+      "goalkeeping": 3,
+      "physical": 66,
+      "press": 59,
+      "bigGame": 69
+    },
+    "peakWindow": "2020-2024",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville wide attacking context from the early MLS seasons."
+  },
+  {
+    "contextId": "jacob_shaffelburg_nashville_2020s",
+    "personId": "jacob_shaffelburg",
+    "displayName": "Jacob Shaffelburg",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "LW",
+      "LM"
+    ],
+    "primaryPositions": [
+      "LW"
+    ],
+    "secondaryPositions": [
+      "LM"
+    ],
+    "roleTags": [
+      "Wide runner",
+      "Direct winger",
+      "Transition outlet"
+    ],
+    "ratings": {
+      "attack": 75,
+      "creation": 71,
+      "control": 67,
+      "defense": 32,
+      "goalkeeping": 3,
+      "physical": 79,
+      "press": 75,
+      "bigGame": 69
+    },
+    "peakWindow": "2022-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville left-sided runner and Canada international profile."
+  },
+  {
+    "contextId": "alex_muyl_nashville_2020s",
+    "personId": "alex_muyl",
+    "displayName": "Alex Muyl",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "RM",
+      "RW",
+      "RB"
+    ],
+    "primaryPositions": [
+      "RM"
+    ],
+    "secondaryPositions": [
+      "RW",
+      "RB"
+    ],
+    "roleTags": [
+      "Pressing winger",
+      "Wingback cover",
+      "Work-rate player"
+    ],
+    "ratings": {
+      "attack": 60,
+      "creation": 65,
+      "control": 62,
+      "defense": 68,
+      "goalkeeping": 3,
+      "physical": 75,
+      "press": 78,
+      "bigGame": 64
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville right-sided utility profile."
+  },
+  {
+    "contextId": "cj_sapong_nashville_2020s",
+    "personId": "cj_sapong",
+    "displayName": "CJ Sapong",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2021,
+    "endYear": 2023,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "ST",
+      "CF"
+    ],
+    "primaryPositions": [
+      "ST"
+    ],
+    "secondaryPositions": [
+      "CF"
+    ],
+    "roleTags": [
+      "Target forward",
+      "Pressing striker",
+      "Box presence"
+    ],
+    "ratings": {
+      "attack": 74,
+      "creation": 55,
+      "control": 56,
+      "defense": 23,
+      "goalkeeping": 3,
+      "physical": 80,
+      "press": 73,
+      "bigGame": 70
+    },
+    "peakWindow": "2021-2023",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville striker context with MLS veteran scoring history."
+  },
+  {
+    "contextId": "sam_surridge_nashville_2020s",
+    "personId": "sam_surridge",
+    "displayName": "Sam Surridge",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "ST",
+      "CF"
+    ],
+    "primaryPositions": [
+      "ST"
+    ],
+    "secondaryPositions": [
+      "CF"
+    ],
+    "roleTags": [
+      "Box finisher",
+      "Penalty-box striker",
+      "Aerial target"
+    ],
+    "ratings": {
+      "attack": 77,
+      "creation": 56,
+      "control": 57,
+      "defense": 24,
+      "goalkeeping": 3,
+      "physical": 76,
+      "press": 54,
+      "bigGame": 73
+    },
+    "peakWindow": "2023-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville modern center-forward option."
+  },
+  {
+    "contextId": "teal_bunbury_nashville_2020s",
+    "personId": "teal_bunbury",
+    "displayName": "Teal Bunbury",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2024,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "ST",
+      "RW",
+      "CF"
+    ],
+    "primaryPositions": [
+      "ST"
+    ],
+    "secondaryPositions": [
+      "RW",
+      "CF"
+    ],
+    "roleTags": [
+      "Forward depth",
+      "Wide-channel runner",
+      "Veteran finisher"
+    ],
+    "ratings": {
+      "attack": 71,
+      "creation": 53,
+      "control": 54,
+      "defense": 22,
+      "goalkeeping": 3,
+      "physical": 75,
+      "press": 70,
+      "bigGame": 67
+    },
+    "peakWindow": "2022-2024",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville forward depth and wide-forward coverage."
+  },
+  {
+    "contextId": "drake_callender_inter_miami_2020s",
+    "personId": "drake_callender",
+    "displayName": "Drake Callender",
+    "teamType": "club",
+    "teamName": "Inter Miami",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Inter Miami",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "GK"
+    ],
+    "primaryPositions": [
+      "GK"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Shot-stopper",
+      "Penalty presence",
+      "Modern keeper"
+    ],
+    "ratings": {
+      "attack": 15,
+      "creation": 36,
+      "control": 49,
+      "defense": 53,
+      "goalkeeping": 78,
+      "physical": 66,
+      "press": 41,
+      "bigGame": 76
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Inter Miami starting goalkeeper context."
+  },
+  {
+    "contextId": "jordi_alba_inter_miami_2020s",
+    "personId": "jordi_alba",
+    "displayName": "Jordi Alba",
+    "teamType": "club",
+    "teamName": "Inter Miami",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Inter Miami",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "LB",
+      "LWB"
+    ],
+    "primaryPositions": [
+      "LB"
+    ],
+    "secondaryPositions": [
+      "LWB"
+    ],
+    "roleTags": [
+      "Attacking fullback",
+      "Wide creator",
+      "Recovery runner"
+    ],
+    "ratings": {
+      "attack": 51,
+      "creation": 84,
+      "control": 64,
+      "defense": 78,
+      "goalkeeping": 5,
+      "physical": 78,
+      "press": 72,
+      "bigGame": 82
+    },
+    "peakWindow": "2023-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Inter Miami attacking left-back context from the club's star era."
+  },
+  {
+    "contextId": "sergio_busquets_inter_miami_2020s",
+    "personId": "sergio_busquets",
+    "displayName": "Sergio Busquets",
+    "teamType": "club",
+    "teamName": "Inter Miami",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Inter Miami",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "DM",
+      "CM"
+    ],
+    "primaryPositions": [
+      "DM"
+    ],
+    "secondaryPositions": [
+      "CM"
+    ],
+    "roleTags": [
+      "Controller",
+      "Press resistance",
+      "Defensive screen"
+    ],
+    "ratings": {
+      "attack": 45,
+      "creation": 82,
+      "control": 88,
+      "defense": 78,
+      "goalkeeping": 4,
+      "physical": 77,
+      "press": 79,
+      "bigGame": 84
+    },
+    "peakWindow": "2023-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Inter Miami midfield controller context."
+  },
+  {
+    "contextId": "diego_gomez_inter_miami_2020s",
+    "personId": "diego_gomez",
+    "displayName": "Diego Gomez",
+    "teamType": "club",
+    "teamName": "Inter Miami",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Inter Miami",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2024,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CM",
+      "AM"
+    ],
+    "primaryPositions": [
+      "CM"
+    ],
+    "secondaryPositions": [
+      "AM"
+    ],
+    "roleTags": [
+      "Box-to-box",
+      "Carrier",
+      "Pressing midfielder"
+    ],
+    "ratings": {
+      "attack": 57,
+      "creation": 73,
+      "control": 77,
+      "defense": 60,
+      "goalkeeping": 3,
+      "physical": 79,
+      "press": 77,
+      "bigGame": 71
+    },
+    "peakWindow": "2023-2024",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Inter Miami energetic midfield context."
+  },
+  {
+    "contextId": "lionel_messi_inter_miami_2020s",
+    "personId": "lionel_messi",
+    "displayName": "Lionel Messi",
+    "teamType": "club",
+    "teamName": "Inter Miami",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Inter Miami",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "RW",
+      "CF",
+      "AM"
+    ],
+    "primaryPositions": [
+      "RW"
+    ],
+    "secondaryPositions": [
+      "CF",
+      "AM"
+    ],
+    "roleTags": [
+      "Creator",
+      "Elite scorer",
+      "Set pieces"
+    ],
+    "ratings": {
+      "attack": 91,
+      "creation": 93,
+      "control": 91,
+      "defense": 39,
+      "goalkeeping": 4,
+      "physical": 80,
+      "press": 72,
+      "bigGame": 90
+    },
+    "peakWindow": "2023-2026",
+    "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Inter Miami star-era attacking reference."
+  },
+  {
+    "contextId": "luis_suarez_inter_miami_2020s",
+    "personId": "luis_suarez",
+    "displayName": "Luis Suarez",
+    "teamType": "club",
+    "teamName": "Inter Miami",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Inter Miami",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2024,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "ST",
+      "CF"
+    ],
+    "primaryPositions": [
+      "ST"
+    ],
+    "secondaryPositions": [
+      "CF"
+    ],
+    "roleTags": [
+      "Box finisher",
+      "Link forward",
+      "Big-game striker"
+    ],
+    "ratings": {
+      "attack": 87,
+      "creation": 78,
+      "control": 65,
+      "defense": 27,
+      "goalkeeping": 4,
+      "physical": 80,
+      "press": 61,
+      "bigGame": 85
+    },
+    "peakWindow": "2024-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Inter Miami center-forward context."
+  },
+  {
+    "contextId": "hugo_lloris_lafc_2020s",
+    "personId": "hugo_lloris",
+    "displayName": "Hugo Lloris",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2024,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "GK"
+    ],
+    "primaryPositions": [
+      "GK"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Shot-stopper",
+      "Sweeper keeper",
+      "Leader"
+    ],
+    "ratings": {
+      "attack": 16,
+      "creation": 38,
+      "control": 53,
+      "defense": 56,
+      "goalkeeping": 84,
+      "physical": 71,
+      "press": 44,
+      "bigGame": 82
+    },
+    "peakWindow": "2024-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC goalkeeper context from the club's 2020s era."
+  },
+  {
+    "contextId": "jack_maher_nashville_2020s",
+    "personId": "jack_maher",
+    "displayName": "Jack Maher",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CB"
+    ],
+    "primaryPositions": [
+      "CB"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Center-back depth",
+      "Aerial defender",
+      "Back-line cover"
+    ],
+    "ratings": {
+      "attack": 28,
+      "creation": 46,
+      "control": 53,
+      "defense": 72,
+      "goalkeeping": 3,
+      "physical": 74,
+      "press": 56,
+      "bigGame": 69
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville center-back context for modern MLS depth."
+  },
+  {
+    "contextId": "lukas_macnaughton_nashville_2020s",
+    "personId": "lukas_macnaughton",
+    "displayName": "Lukas MacNaughton",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CB"
+    ],
+    "primaryPositions": [
+      "CB"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Stopper",
+      "Back-line depth",
+      "Duel defender"
+    ],
+    "ratings": {
+      "attack": 28,
+      "creation": 46,
+      "control": 53,
+      "defense": 72,
+      "goalkeeping": 3,
+      "physical": 75,
+      "press": 69,
+      "bigGame": 65
+    },
+    "peakWindow": "2023-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville center-back and Canada international profile."
+  },
+  {
+    "contextId": "fafa_picault_nashville_2020s",
+    "personId": "fafa_picault",
+    "displayName": "Fafa Picault",
+    "teamType": "club",
+    "teamName": "Nashville SC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "Nashville SC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2024,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "ST"
+    ],
+    "primaryPositions": [
+      "LW"
+    ],
+    "secondaryPositions": [
+      "RW",
+      "ST"
+    ],
+    "roleTags": [
+      "Wide runner",
+      "Pressing forward",
+      "Transition outlet"
+    ],
+    "ratings": {
+      "attack": 72,
+      "creation": 68,
+      "control": 65,
+      "defense": 31,
+      "goalkeeping": 3,
+      "physical": 78,
+      "press": 74,
+      "bigGame": 66
+    },
+    "peakWindow": "2023-2024",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "Nashville wide-forward context with pace and pressing."
+  },
+  {
+    "contextId": "giorgio_chiellini_lafc_2020s",
+    "personId": "giorgio_chiellini",
+    "displayName": "Giorgio Chiellini",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2023,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CB"
+    ],
+    "primaryPositions": [
+      "CB"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Line leader",
+      "Box defender",
+      "Veteran organizer"
+    ],
+    "ratings": {
+      "attack": 33,
+      "creation": 54,
+      "control": 62,
+      "defense": 86,
+      "goalkeeping": 4,
+      "physical": 78,
+      "press": 65,
+      "bigGame": 84
+    },
+    "peakWindow": "2022-2023",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC veteran center-back and title-era organizer."
+  },
+  {
+    "contextId": "diego_palacios_lafc_2020s",
+    "personId": "diego_palacios",
+    "displayName": "Diego Palacios",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2019,
+    "endYear": 2023,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "LB",
+      "LWB"
+    ],
+    "primaryPositions": [
+      "LB"
+    ],
+    "secondaryPositions": [
+      "LWB"
+    ],
+    "roleTags": [
+      "Wide defender",
+      "Overlap runner",
+      "Recovery pace"
+    ],
+    "ratings": {
+      "attack": 47,
+      "creation": 56,
+      "control": 60,
+      "defense": 75,
+      "goalkeeping": 4,
+      "physical": 80,
+      "press": 75,
+      "bigGame": 66
+    },
+    "peakWindow": "2019-2023",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC title-era left-back context."
+  },
+  {
+    "contextId": "ryan_hollingshead_lafc_2020s",
+    "personId": "ryan_hollingshead",
+    "displayName": "Ryan Hollingshead",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "RB",
+      "LB",
+      "RWB",
+      "LWB"
+    ],
+    "primaryPositions": [
+      "RB"
+    ],
+    "secondaryPositions": [
+      "LB",
+      "RWB",
+      "LWB"
+    ],
+    "roleTags": [
+      "Two-way fullback",
+      "Back-post threat",
+      "Wide balance"
+    ],
+    "ratings": {
+      "attack": 68,
+      "creation": 56,
+      "control": 59,
+      "defense": 74,
+      "goalkeeping": 4,
+      "physical": 77,
+      "press": 66,
+      "bigGame": 66
+    },
+    "peakWindow": "2022-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC fullback context with both-side coverage."
+  },
+  {
+    "contextId": "jesus_murillo_lafc_2020s",
+    "personId": "jesus_murillo",
+    "displayName": "Jesus Murillo",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2020,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CB"
+    ],
+    "primaryPositions": [
+      "CB"
+    ],
+    "secondaryPositions": [],
+    "roleTags": [
+      "Stopper",
+      "Duel defender",
+      "Back-line anchor"
+    ],
+    "ratings": {
+      "attack": 30,
+      "creation": 49,
+      "control": 56,
+      "defense": 77,
+      "goalkeeping": 3,
+      "physical": 79,
+      "press": 60,
+      "bigGame": 74
+    },
+    "peakWindow": "2020-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC center-back coverage for 2020s MLS rolls."
+  },
+  {
+    "contextId": "ilie_sanchez_lafc_2020s",
+    "personId": "ilie_sanchez",
+    "displayName": "Ilie Sanchez",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2025,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "DM",
+      "CM",
+      "CB"
+    ],
+    "primaryPositions": [
+      "DM"
+    ],
+    "secondaryPositions": [
+      "CM",
+      "CB"
+    ],
+    "roleTags": [
+      "Controller",
+      "Defensive screen",
+      "Build-up passer"
+    ],
+    "ratings": {
+      "attack": 41,
+      "creation": 74,
+      "control": 78,
+      "defense": 76,
+      "goalkeeping": 3,
+      "physical": 71,
+      "press": 73,
+      "bigGame": 71
+    },
+    "peakWindow": "2022-2025",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC midfield organizer and defensive connector."
+  },
+  {
+    "contextId": "kellyn_acosta_lafc_2020s",
+    "personId": "kellyn_acosta",
+    "displayName": "Kellyn Acosta",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2023,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CM",
+      "DM"
+    ],
+    "primaryPositions": [
+      "CM"
+    ],
+    "secondaryPositions": [
+      "DM"
+    ],
+    "roleTags": [
+      "Box-to-box",
+      "Set pieces",
+      "Ball-winner"
+    ],
+    "ratings": {
+      "attack": 56,
+      "creation": 72,
+      "control": 75,
+      "defense": 74,
+      "goalkeeping": 3,
+      "physical": 66,
+      "press": 76,
+      "bigGame": 75
+    },
+    "peakWindow": "2022-2023",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC title-season central midfielder."
+  },
+  {
+    "contextId": "eduard_atuesta_lafc_2020s",
+    "personId": "eduard_atuesta",
+    "displayName": "Eduard Atuesta",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2018,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CM",
+      "DM"
+    ],
+    "primaryPositions": [
+      "CM"
+    ],
+    "secondaryPositions": [
+      "DM"
+    ],
+    "roleTags": [
+      "Controller",
+      "Set pieces",
+      "Progressive passer"
+    ],
+    "ratings": {
+      "attack": 57,
+      "creation": 77,
+      "control": 79,
+      "defense": 60,
+      "goalkeeping": 3,
+      "physical": 67,
+      "press": 73,
+      "bigGame": 71
+    },
+    "peakWindow": "2018-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC central playmaker profile."
+  },
+  {
+    "contextId": "timothy_tillman_lafc_2020s",
+    "personId": "timothy_tillman",
+    "displayName": "Timothy Tillman",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2023,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "CM",
+      "AM"
+    ],
+    "primaryPositions": [
+      "CM"
+    ],
+    "secondaryPositions": [
+      "AM"
+    ],
+    "roleTags": [
+      "Connector",
+      "Carrier",
+      "Pressing midfielder"
+    ],
+    "ratings": {
+      "attack": 56,
+      "creation": 74,
+      "control": 75,
+      "defense": 59,
+      "goalkeeping": 3,
+      "physical": 66,
+      "press": 75,
+      "bigGame": 69
+    },
+    "peakWindow": "2023-2026",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC midfield depth and connector context."
+  },
+  {
+    "contextId": "carlos_vela_lafc_2020s",
+    "personId": "carlos_vela",
+    "displayName": "Carlos Vela",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2018,
+    "endYear": 2024,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "RW",
+      "CF",
+      "AM"
+    ],
+    "primaryPositions": [
+      "RW"
+    ],
+    "secondaryPositions": [
+      "CF",
+      "AM"
+    ],
+    "roleTags": [
+      "Creator",
+      "Elite scorer",
+      "Inverted winger"
+    ],
+    "ratings": {
+      "attack": 86,
+      "creation": 85,
+      "control": 84,
+      "defense": 36,
+      "goalkeeping": 4,
+      "physical": 74,
+      "press": 67,
+      "bigGame": 83
+    },
+    "peakWindow": "2018-2024",
+    "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC attacking icon and MVP-level creator."
+  },
+  {
+    "contextId": "denis_bouanga_lafc_2020s",
+    "personId": "denis_bouanga",
+    "displayName": "Denis Bouanga",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2022,
+    "endYear": 2026,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "LW",
+      "RW",
+      "ST"
+    ],
+    "primaryPositions": [
+      "LW"
+    ],
+    "secondaryPositions": [
+      "RW",
+      "ST"
+    ],
+    "roleTags": [
+      "Wide scorer",
+      "Transition runner",
+      "Direct attacker"
+    ],
+    "ratings": {
+      "attack": 85,
+      "creation": 78,
+      "control": 75,
+      "defense": 35,
+      "goalkeeping": 4,
+      "physical": 82,
+      "press": 79,
+      "bigGame": 81
+    },
+    "peakWindow": "2022-2026",
+    "dataConfidence": "High",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC high-volume scorer and 2020s attacking reference."
+  },
+  {
+    "contextId": "cristian_arango_lafc_2020s",
+    "personId": "cristian_arango",
+    "displayName": "Cristian Arango",
+    "teamType": "club",
+    "teamName": "LAFC",
+    "league": "MLS",
+    "country": "United States",
+    "competitionContexts": [
+      {
+        "competition": "MLS",
+        "team": "LAFC",
+        "eraLabel": "2020s",
+        "role": "impact"
+      }
+    ],
+    "startYear": 2021,
+    "endYear": 2022,
+    "decade": "2020s",
+    "eraLabel": "2020s",
+    "eligibleModes": [
+      "mls"
+    ],
+    "positions": [
+      "ST",
+      "CF"
+    ],
+    "primaryPositions": [
+      "ST"
+    ],
+    "secondaryPositions": [
+      "CF"
+    ],
+    "roleTags": [
+      "Box finisher",
+      "Pressing striker",
+      "Penalty-box mover"
+    ],
+    "ratings": {
+      "attack": 82,
+      "creation": 59,
+      "control": 61,
+      "defense": 25,
+      "goalkeeping": 4,
+      "physical": 78,
+      "press": 77,
+      "bigGame": 75
+    },
+    "peakWindow": "2021-2022",
+    "dataConfidence": "Medium",
+    "ratingSourceConfidence": "legacy-proxy",
+    "sourceNotes": [
+      "Legacy proxy: manual sourced context",
+      "Wikidata SPARQL",
+      "OpenFootball players",
+      "Manual legend curation"
+    ],
+    "historicalNotes": "LAFC title-era center-forward context."
   }
 ]

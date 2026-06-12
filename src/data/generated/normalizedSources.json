@@ -1,12 +1,12 @@
 {
   "generatedBy": "scripts/generate-data.ts",
-  "generatedAt": "2026-06-11T18:26:59.709Z",
+  "generatedAt": "2026-06-12T23:08:31.252Z",
   "note": "Small normalized public-source snapshots used as reproducible reference inputs; playable contexts remain curated in src/data/playerContexts.ts with per-context provenance expanded in contextProvenance.json.",
   "samples": [
     {
       "source": "OpenFootball players",
       "status": 200,
-      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "checkedAt": "2026-06-12T23:08:31.252Z",
       "fileCount": 190,
       "samplePaths": [
         "LICENSE.md",
@@ -26,7 +26,7 @@
     {
       "source": "OpenFootball football.json",
       "status": 200,
-      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "checkedAt": "2026-06-12T23:08:31.252Z",
       "fileCount": 282,
       "samplePaths": [
         "2010-11/at.1.json",
@@ -46,7 +46,7 @@
     {
       "source": "Wikidata SPARQL",
       "status": 200,
-      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "checkedAt": "2026-06-12T23:08:31.252Z",
       "samplePeople": [
         {
           "qid": "Q615",
@@ -68,7 +68,7 @@
     {
       "source": "Football-Data.co.uk",
       "status": 200,
-      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "checkedAt": "2026-06-12T23:08:31.252Z",
       "sampleCompetition": "Premier League E0 2025-26 CSV",
       "columns": [
         "Div",
@@ -126,7 +126,7 @@
     {
       "source": "StatsBomb open data",
       "status": 200,
-      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "checkedAt": "2026-06-12T23:08:31.252Z",
       "competitionCount": 80,
       "sampleCompetitions": [
         {
@@ -174,7 +174,7 @@
     {
       "source": "EA SPORTS FC ratings",
       "status": 200,
-      "checkedAt": "2026-06-11T18:26:59.709Z",
+      "checkedAt": "2026-06-12T23:08:31.252Z",
       "note": "Official current-player page sampled as a calibration reference only; no bulk player database is copied into the app.",
       "players": [
         {

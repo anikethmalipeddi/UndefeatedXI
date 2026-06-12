@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs'
 import { createClient } from '@supabase/supabase-js'
 import { getModeConfig } from '../src/data/modes'
-import { createDraftState, isDraftComplete, selectPlayer, spinForSlot } from '../src/engine/draft'
+import { playerContexts } from '../src/data/playerContexts'
+import { configureDraftPlayerContexts, createDraftState, isDraftComplete, selectPlayer, spinForSlot } from '../src/engine/draft'
 import { simulateRun } from '../src/engine/simulation'
 import { createLeaderboardSubmission } from '../src/services/supabase'
 import { createSharedRunSnapshot, validateSharedRunSnapshot } from '../src/services/shareLinks'
@@ -97,6 +98,7 @@ async function createConfirmedUser(url: string, secretKey: string, email: string
 }
 
 function createCompleteRun() {
+  configureDraftPlayerContexts(playerContexts)
   const mode = getModeConfig('world_xi')
   let state = createDraftState(mode, '4-3-3')
 
