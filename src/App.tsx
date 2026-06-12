@@ -23,7 +23,6 @@ import { brandName, targetRecordLabel } from './brand'
 import { defaultFormationId, formations, getFormation } from './data/formations'
 import { defaultModeId, previewModeConfigs, publicModeConfigs, getModeConfig } from './data/modes'
 import coverageReport from './data/generated/coverageReport.json'
-import { sourceNotes } from './data/sourceNotes'
 import { isBenchSlot } from './data/squad'
 import { slotMatchesPlayer } from './engine/eligibility'
 import { formatStoredRecord, loadPreferences, recordRun, savePreferences } from './engine/storage'
@@ -2307,15 +2306,6 @@ function ContactPage({ onBack }: { onBack: () => void }) {
         </div>
         {status && <p className={status.includes('sent') ? 'form-status success' : 'form-status'} role="status">{status}</p>}
       </form>
-      <section className="source-list">
-        <h2>Data Sources</h2>
-        {sourceNotes.map((source) => (
-          <a key={source.label} href={source.url} target="_blank" rel="noreferrer">
-            {source.label}
-            <small>{source.licenseNote}</small>
-          </a>
-        ))}
-      </section>
     </main>
   )
 }

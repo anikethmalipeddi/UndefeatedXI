@@ -572,7 +572,6 @@ main {
 .story-grid span,
 .notice,
 .history li small,
-.source-list small,
 .mode-card span:not(.mode-card-title):not(.mode-card-cta) {
   color: var(--ui-muted);
   line-height: 1.45;
@@ -885,8 +884,7 @@ main {
 .metric,
 .advanced details,
 .text-page section,
-.text-page table,
-.source-list a {
+.text-page table {
   border: 1px solid var(--ui-line);
   border-radius: var(--radius-hero);
   background: var(--ui-panel);
@@ -2327,18 +2325,6 @@ main {
   border-top: 1px solid var(--ui-line);
   text-align: left;
   vertical-align: top;
-}
-
-.source-list {
-  display: grid;
-  gap: 10px;
-}
-
-.source-list a {
-  display: grid;
-  gap: 4px;
-  padding: 13px;
-  text-decoration: none;
 }
 
 .leaderboard-page {
