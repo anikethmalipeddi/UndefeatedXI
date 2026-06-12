@@ -171,6 +171,20 @@ export async function signUp(email: string, password: string, displayName: strin
   if (error) throw error
 }
 
+export async function signInAsGuest(displayName = 'Guest'): Promise<void> {
+  if (!supabase) throw new Error('Supabase is not configured.')
+  const cleanName = sanitizeDisplayName(displayName)
+  const { error } = await supabase.auth.signInAnonymously({
+    options: { data: { display_name: cleanName || 'Guest' } },
+  })
+  if (error) {
+    if (error.code === 'anonymous_provider_disabled') {
+      throw new Error('Guest sign-in is not enabled yet. Try again after the latest Supabase config deploy.')
+    }
+    throw error
+  }
+}
+
 export async function signIn(email: string, password: string): Promise<void> {
   if (!supabase) throw new Error('Supabase is not configured.')
   const { error } = await supabase.auth.signInWithPassword({ email, password })

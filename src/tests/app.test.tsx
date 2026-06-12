@@ -223,6 +223,9 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: /Sign in/i }))
     expect(screen.getByRole('dialog', { name: /Sign in/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Continue as Guest/i })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /Continue as Guest/i }))
+    expect(await screen.findByRole('status')).toHaveTextContent('Accounts are not configured on this local build.')
     await user.click(screen.getByRole('button', { name: /Close sign in/i }))
 
     await user.click(screen.getByRole('button', { name: /Open menu/i }))

@@ -89,11 +89,11 @@ Do not add `SUPABASE_SECRET_KEY` or `SUPABASE_SERVICE_ROLE_KEY` to Vercel.
 Before sharing the deployment:
 
 1. Open the Vercel URL.
-2. Sign up with an email/password.
+2. Click Sign in, then `Continue as Guest`.
 3. Start and finish a quick run.
 4. Click `Share Link`; it should copy a `#/r/<share_id>` URL when Supabase is configured.
 5. Open that URL in a private/incognito window.
-6. Submit the run to the leaderboard while signed in.
+6. Submit the run to the leaderboard while in the guest session.
 7. Open Leaderboard and confirm the run appears.
 
 If Supabase is missing or offline, share links fall back to compact local URLs like `#/r/local/<payload>`.

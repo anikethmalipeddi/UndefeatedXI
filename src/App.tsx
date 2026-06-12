@@ -43,6 +43,7 @@ import {
   profileFromSession,
   resetPassword,
   sanitizeDisplayName,
+  signInAsGuest,
   signIn,
   signOut,
   signUp,
@@ -2382,6 +2383,26 @@ function AuthModal({
     }
   }
 
+  const handleGuestSignIn = async () => {
+    if (!hasSupabaseConfig) {
+      setStatus('Accounts are not configured on this local build.')
+      return
+    }
+
+    setBusy(true)
+    setStatus('')
+    try {
+      await signInAsGuest(displayName || 'Guest')
+      const session = await getCurrentSession()
+      onAuthProfile(profileFromSession(session))
+      onClose()
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : 'Could not start guest session.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
   const handleSignOut = async () => {
     setBusy(true)
     try {
@@ -2402,7 +2423,7 @@ function AuthModal({
           <X size={22} />
         </button>
         <h2 id="auth-title">{authProfile ? 'Account' : mode === 'signin' ? 'Sign in' : 'Create account'}</h2>
-        <p>Play stays open without an account. Sign in only for leaderboard submissions and saved public runs.</p>
+        <p>Play stays open without an account. Continue as guest to submit leaderboard runs without waiting on email.</p>
 
         <form className="auth-form" onSubmit={submit}>
           {authProfile ? (
@@ -2433,6 +2454,11 @@ function AuthModal({
           )}
           {!hasSupabaseConfig && <p className="notice">Supabase env vars are missing. Local play still works.</p>}
           {status && <p className="auth-status" role="status">{status}</p>}
+          {!authProfile && (
+            <button className="button primary full" type="button" onClick={handleGuestSignIn} disabled={busy}>
+              {busy ? 'Working' : 'Continue as Guest'}
+            </button>
+          )}
           <button className="button primary full" type="submit" disabled={busy}>
             {busy ? 'Working' : authProfile ? 'Save Profile' : mode === 'signin' ? 'Sign In' : 'Create Account'}
           </button>

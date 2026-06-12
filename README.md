@@ -70,14 +70,14 @@ The app uses one shared engine with mode configs rather than separate games per 
 
 ## Optional Supabase Features
 
-The core game runs fully client-side. Add these env vars only when you want auth, leaderboard submissions, and durable public result links:
+The core game runs fully client-side. Add these env vars only when you want guest auth, leaderboard submissions, feedback, and durable public result links:
 
 ```bash
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
 ```
 
-Supabase SQL and Edge Function source lives under `supabase/`. Never expose a service-role key in the frontend. Full setup is in [`docs/deploy-supabase-vercel.md`](docs/deploy-supabase-vercel.md).
+Supabase SQL, auth config, and Edge Function source lives under `supabase/`. Never expose a service-role key in the frontend. Full setup is in [`docs/deploy-supabase-vercel.md`](docs/deploy-supabase-vercel.md).
 
 ## Data Provenance
 
