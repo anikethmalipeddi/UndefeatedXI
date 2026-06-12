@@ -1096,6 +1096,8 @@ function DraftScreen({
   const benchSlots = draftState.draftSlots.filter((slot) => isBenchSlot(slot))
   const compatibleSlotIds = activePlayer ? openStarterSlots.filter((slot) => slotMatchesPlayer(slot, activePlayer)).map((slot) => slot.slotId) : []
   const compatibleBenchSlotIds = activePlayer ? benchSlots.filter((slot) => !draftState.picks.some((pick) => pick.slot.slotId === slot.slotId) && slotMatchesPlayer(slot, activePlayer)).map((slot) => slot.slotId) : []
+  const placingSlots = placingPlayer ? openDraftSlots.filter((slot) => slotMatchesPlayer(slot, placingPlayer)) : []
+  const quickPlaceSlot = placingSlots.length === 1 ? placingSlots[0] : undefined
   const visibleOptions = [...rollPlayers]
     .filter((player) => playerMatchesPositionFilter(player, positionFilter))
     .filter((player) => {
@@ -1105,6 +1107,14 @@ function DraftScreen({
     })
     .sort((left, right) => playerSortValue(right, playerSort) - playerSortValue(left, playerSort) || left.displayName.localeCompare(right.displayName))
   const visibleSelectableCount = visibleOptions.filter((player) => selectablePlayerIds.has(player.contextId) || selectablePersonIds.has(player.personId)).length
+
+  useEffect(() => {
+    setPreviewPlayerId(null)
+    setPlacingPlayerId(null)
+    setPositionFilter('all')
+    setPlayerSearch('')
+    setPlayerSort('best')
+  }, [draftState.roundIndex, draftState.currentRoll?.team.label, draftState.currentRoll?.team.teamType, draftState.currentRoll?.era])
 
   const startPlacement = (player: PlayerContext) => {
     if (isSpinning) return
@@ -1225,6 +1235,17 @@ function DraftScreen({
                 <div className="options-toolbar">
                   <strong>{visibleSelectableCount} selectable · {visibleOptions.length} in roll</strong>
                   <span>{placingPlayer ? `Placing ${placingPlayer.displayName}` : 'Pick, then place'}</span>
+                  {quickPlaceSlot && (
+                    <button
+                      className="quick-place-button"
+                      type="button"
+                      onClick={() => placePlayer(quickPlaceSlot.slotId)}
+                      aria-label={`Place selected player at ${quickPlaceSlot.label}`}
+                    >
+                      <Target size={15} />
+                      Place at {quickPlaceSlot.label}
+                    </button>
+                  )}
                 </div>
                 <div className="player-list">
                   {visibleOptions.length === 0 ? (

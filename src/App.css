@@ -1400,6 +1400,29 @@ main {
   text-align: right;
 }
 
+.quick-place-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--ui-brand) 58%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ui-brand) 10%, var(--ui-panel));
+  color: var(--ui-brand);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.quick-place-button:hover {
+  border-color: var(--ui-brand);
+  background: color-mix(in srgb, var(--ui-brand) 16%, var(--ui-panel));
+}
+
 .player-list {
   display: grid;
   gap: 7px;
@@ -2576,6 +2599,10 @@ main {
 
   .options-toolbar span {
     text-align: left;
+  }
+
+  .quick-place-button {
+    width: 100%;
   }
 
   .player-row {
