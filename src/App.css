@@ -74,7 +74,13 @@
 }
 
 .theme-dark .topbar {
-  background: rgba(8, 17, 12, 0.86);
+  background: #08110c;
+  border-bottom: 1px solid rgba(203, 224, 207, 0.08);
+  backdrop-filter: none;
+}
+
+html[data-theme="dark"] .topbar {
+  background: #08110c;
 }
 
 .topbar > * {
@@ -2379,6 +2385,11 @@ main {
   max-width: 840px;
 }
 
+.leaderboard-page h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
 .leaderboard-tabs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2398,6 +2409,48 @@ main {
 .leaderboard-list {
   display: grid;
   gap: 8px;
+}
+
+.leaderboard-mode-board {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--ui-line);
+}
+
+.leaderboard-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.leaderboard-mode-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: min(100%, 250px);
+}
+
+.leaderboard-mode-select select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 38px 0 12px;
+  border: 1px solid var(--ui-line);
+  border-radius: 8px;
+  background: var(--ui-panel);
+  color: var(--ui-fg);
+  cursor: pointer;
+  font-weight: 900;
+  appearance: none;
+}
+
+.leaderboard-mode-select svg {
+  position: absolute;
+  right: 12px;
+  color: var(--ui-muted);
+  pointer-events: none;
 }
 
 .leaderboard-row {
@@ -2862,6 +2915,14 @@ main {
     min-width: 0;
     padding-inline: 6px;
     font-size: 13px;
+  }
+
+  .leaderboard-section-head {
+    display: grid;
+  }
+
+  .leaderboard-mode-select {
+    width: 100%;
   }
 
   .leaderboard-row {

@@ -72,6 +72,27 @@ describe('App', () => {
     ])
   })
 
+  it('shows Premier League on both Main and Leagues mode tabs', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    const modeGrid = screen.getByRole('region', { name: /Playable mode choices/i })
+    expect(within(modeGrid).getByRole('button', { name: 'Premier League' })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('tab', { name: /^Leagues$/i }))
+    const leagueModeNames = within(modeGrid).getAllByRole('button').map((button) => button.getAttribute('aria-label'))
+
+    expect(leagueModeNames).toEqual([
+      'Premier League',
+      'English Top Flight',
+      'LaLiga',
+      'Serie A',
+      'Bundesliga',
+      'Ligue 1',
+      'MLS',
+    ])
+  })
+
   it('keeps fixed team modes visibly locked instead of animating team rerolls', async () => {
     const user = userEvent.setup()
     render(<App />)
@@ -178,6 +199,7 @@ describe('App', () => {
     expect(await screen.findByRole('button', { name: /^Team$/i })).toBeDisabled()
     await user.click(screen.getByRole('button', { name: /^Era$/i }))
     expect(await screen.findByRole('button', { name: /^Era$/i })).toBeDisabled()
+    expect(screen.queryByLabelText('Sort players')).not.toBeInTheDocument()
     expect((await screen.findAllByText(/Stats hidden/i)).length).toBeGreaterThan(0)
   })
 

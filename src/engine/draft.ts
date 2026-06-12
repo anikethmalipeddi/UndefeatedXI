@@ -59,6 +59,10 @@ function rollKey(roll: RollResult): string {
   return `${roll.team.teamType}:${roll.team.label}:${roll.era}`
 }
 
+function teamRollKey(roll: RollResult): string {
+  return `${roll.team.teamType}:${roll.team.label}`
+}
+
 function rollIndexKey(teamType: string, teamName: string, era: string): string {
   return `${teamType}:${teamName}:${era}`
 }
@@ -157,6 +161,10 @@ function rollHasEnoughDepth(candidate: Pick<PlayableRollCandidate, 'options' | '
   return candidate.pool.length >= minimumRollPoolSize && candidate.options.length >= minimumSelectableOptions
 }
 
+function optionWeightForMode(mode: ModeConfig, slots: FormationSlot[], player: PlayerContext): number {
+  return mode.hidesRatings ? 1 : bestOpenSlotScore(slots, player)
+}
+
 function playableRolls(mode: ModeConfig, state: DraftState, slots: FormationSlot[], preserve?: Partial<RollResult>): PlayableRollCandidate[] {
   const locked = lockedRollDimensions(state, preserve)
   const teams = locked.team ? [locked.team] : mode.teamPool
@@ -177,7 +185,7 @@ function playableRolls(mode: ModeConfig, state: DraftState, slots: FormationSlot
       const options = weightedShuffle(
         uniquePlayers(candidates),
         rng,
-        (player) => bestOpenSlotScore(slots, player),
+        (player) => optionWeightForMode(mode, slots, player),
       )
       const sortedPool = uniquePlayers(pool)
         .sort((left, right) => playerRollScore(right) - playerRollScore(left) || right.ratings.bigGame - left.ratings.bigGame || left.displayName.localeCompare(right.displayName))
@@ -187,13 +195,27 @@ function playableRolls(mode: ModeConfig, state: DraftState, slots: FormationSlot
     .filter(rollHasEnoughDepth)
 }
 
+function randomPlayableCandidate(candidates: PlayableRollCandidate[]): PlayableRollCandidate | undefined {
+  if (candidates.length === 0) return undefined
+  const byTeam = candidates.reduce((groups, candidate) => {
+    const key = teamRollKey(candidate.roll)
+    const group = groups.get(key) ?? []
+    group.push(candidate)
+    groups.set(key, group)
+    return groups
+  }, new Map<string, PlayableRollCandidate[]>())
+  const teamGroups = Array.from(byTeam.values())
+  const teamGroup = randomPick(teamGroups)
+  return randomPick(teamGroup)
+}
+
 function randomPlayableRoll(mode: ModeConfig, state: DraftState, slots: FormationSlot[], preserve?: Partial<RollResult>, previousRoll?: RollResult): PlayableRollCandidate | undefined {
   const playable = playableRolls(mode, state, slots, preserve)
   if (playable.length === 0) return undefined
-  if (!previousRoll) return randomPick(playable)
+  if (!previousRoll) return randomPlayableCandidate(playable)
 
   const alternatives = playable.filter((item) => rollKey(item.roll) !== rollKey(previousRoll))
-  return alternatives.length > 0 ? randomPick(alternatives) : undefined
+  return randomPlayableCandidate(alternatives)
 }
 
 function rollForPlayerContext(player: PlayerContext): RollResult {
@@ -216,7 +238,7 @@ function optionsForPlayerContextRoll(mode: ModeConfig, state: DraftState, slots:
     return true
   })
 
-  return weightedShuffle(candidates, rng, (player) => bestOpenSlotScore(slots, player))
+  return weightedShuffle(candidates, rng, (player) => optionWeightForMode(mode, slots, player))
 }
 
 function contextRollFallback(
@@ -240,7 +262,7 @@ function contextRollFallback(
     loosenEra: !state.specialSelection?.fixedEra && !preserve?.era,
   })))
   const rng = createRng(`${state.seed}:${state.roundIndex}:${seedPart}:context-fallback`)
-  const shuffledCandidates = weightedShuffle(candidates, rng, (player) => bestOpenSlotScore(slots, player))
+  const shuffledCandidates = weightedShuffle(candidates, rng, (player) => optionWeightForMode(mode, slots, player))
 
   for (const player of shuffledCandidates) {
     const playerRoll = rollForPlayerContext(player)

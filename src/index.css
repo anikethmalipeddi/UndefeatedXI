@@ -65,6 +65,7 @@ html[data-theme="dark"] {
 body {
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(238, 245, 234, 0.92)),
@@ -95,4 +96,10 @@ a {
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
+  background: inherit;
+}
+
+html[data-theme="dark"] #root {
+  background: #08110c;
 }

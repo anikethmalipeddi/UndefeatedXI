@@ -47,7 +47,7 @@ type PlayerFilter = 'all' | 'gk' | 'def' | 'mid' | 'att'
 type PlayerSort = 'best' | 'atk' | 'mid' | 'def' | 'gk' | 'big'
 type RollSpinScope = 'full' | 'team' | 'era'
 type LeaderboardStatus = 'idle' | 'submitting' | 'submitted' | 'error'
-const spinRevealMs = import.meta.env.MODE === 'test' ? 1 : 3000
+const spinRevealMs = import.meta.env.MODE === 'test' ? 1 : 2500
 const legacyRulesDismissedKey = 'invinciblexi.rules.dismissed'
 const legacyRecordRulesDismissedKey = '38-0-0.rules.dismissed'
 const rulesDismissedKey = 'undefeatedxi.rules.dismissed'
@@ -72,7 +72,7 @@ interface RouteState {
 }
 
 const mainModeIds = ['world_xi', 'ball_knowledge', 'champions_league', 'world_cup', 'premier_league', 'manager']
-const leagueModeIds = ['english_top_flight', 'laliga', 'serie_a', 'bundesliga', 'ligue_1', 'mls']
+const leagueModeIds = ['premier_league', 'english_top_flight', 'laliga', 'serie_a', 'bundesliga', 'ligue_1', 'mls']
 const modeValidations = coverageReport.modes as ModeValidation[]
 
 function publicModeIsReady(modeId: string): boolean {
@@ -277,6 +277,14 @@ function App() {
     localStorage.removeItem(legacyRecordThemeKey)
     localStorage.removeItem(legacyThemeKey)
     document.documentElement.dataset.theme = theme
+    const themeColor = theme === 'dark' ? '#08110c' : '#eef5ea'
+    let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+    if (!meta) {
+      meta = document.createElement('meta')
+      meta.name = 'theme-color'
+      document.head.appendChild(meta)
+    }
+    meta.content = themeColor
   }, [theme])
 
   useEffect(() => {
@@ -1091,8 +1099,9 @@ function DraftScreen({
   const reelEra = lockedEra ?? spinningRoll?.era ?? draftState.currentRoll?.era ?? startingEra ?? '2010s'
   const canRerollTeam = !lockedTeam
   const canRerollEra = !lockedEra
-  const placingPlayer = rollPlayersForState(draftState).find((player) => player.contextId === placingPlayerId)
-  const rollPlayers = draftState.currentRollPool?.length ? draftState.currentRollPool : draftState.currentOptions
+  const sortsPlayers = !mode.hidesRatings
+  const rollPlayers = mode.hidesRatings ? draftState.currentOptions : rollPlayersForState(draftState)
+  const placingPlayer = rollPlayers.find((player) => player.contextId === placingPlayerId)
   const previewPlayer = rollPlayers.find((player) => player.contextId === previewPlayerId)
   const activePlayer = placingPlayer ?? previewPlayer
   const selectablePlayerIds = new Set(draftState.currentOptions.map((player) => player.contextId))
@@ -1109,14 +1118,16 @@ function DraftScreen({
   const compatibleBenchSlotIds = activePlayer ? benchSlots.filter((slot) => !draftState.picks.some((pick) => pick.slot.slotId === slot.slotId) && slotMatchesPlayer(slot, activePlayer)).map((slot) => slot.slotId) : []
   const placingSlots = placingPlayer ? openDraftSlots.filter((slot) => slotMatchesPlayer(slot, placingPlayer)) : []
   const quickPlaceSlot = placingSlots.length === 1 ? placingSlots[0] : undefined
-  const visibleOptions = [...rollPlayers]
+  const filteredOptions = [...rollPlayers]
     .filter((player) => playerMatchesPositionFilter(player, positionFilter))
     .filter((player) => {
       const query = playerSearch.trim().toLowerCase()
       if (!query) return true
       return `${player.displayName} ${player.teamName} ${player.positions.join(' ')}`.toLowerCase().includes(query)
     })
-    .sort((left, right) => playerSortValue(right, playerSort) - playerSortValue(left, playerSort) || left.displayName.localeCompare(right.displayName))
+  const visibleOptions = sortsPlayers
+    ? filteredOptions.sort((left, right) => playerSortValue(right, playerSort) - playerSortValue(left, playerSort) || left.displayName.localeCompare(right.displayName))
+    : filteredOptions
   const visibleSelectableCount = visibleOptions.filter(canSelectVisiblePlayer).length
 
   const startPlacement = (player: PlayerContext) => {
@@ -1223,17 +1234,19 @@ function DraftScreen({
                       aria-label="Search players"
                     />
                   </label>
-                  <label className="player-sort">
-                    <select value={playerSort} onChange={(event) => setPlayerSort(event.target.value as PlayerSort)} aria-label="Sort players">
-                      <option value="best">Best</option>
-                      <option value="atk">ATK</option>
-                      <option value="mid">MID</option>
-                      <option value="def">DEF</option>
-                      <option value="gk">GK</option>
-                      <option value="big">BIG</option>
-                    </select>
-                    <ChevronDown size={16} aria-hidden="true" />
-                  </label>
+                  {sortsPlayers && (
+                    <label className="player-sort">
+                      <select value={playerSort} onChange={(event) => setPlayerSort(event.target.value as PlayerSort)} aria-label="Sort players">
+                        <option value="best">Best</option>
+                        <option value="atk">ATK</option>
+                        <option value="mid">MID</option>
+                        <option value="def">DEF</option>
+                        <option value="gk">GK</option>
+                        <option value="big">BIG</option>
+                      </select>
+                      <ChevronDown size={16} aria-hidden="true" />
+                    </label>
+                  )}
                 </div>
                 <div className="options-toolbar">
                   <strong>{visibleSelectableCount} selectable · {visibleOptions.length} in roll</strong>
@@ -2522,6 +2535,16 @@ function LeaderboardScreen({
   const [view, setView] = useState<LeaderboardView>('global')
   const [runs, setRuns] = useState<LeaderboardRun[]>([])
   const [status, setStatus] = useState('')
+  const leaderboardModeOptions = useMemo(() => publicModeConfigs.filter((mode) => publicModeIsReady(mode.modeId)), [])
+  const defaultLeaderboardModeId = leaderboardModeOptions.some((mode) => mode.modeId === selectedModeId)
+    ? selectedModeId
+    : leaderboardModeOptions[0]?.modeId ?? defaultModeId
+  const [modeLeaderboardModeId, setModeLeaderboardModeId] = useState(defaultLeaderboardModeId)
+  const activeModeLeaderboardId = leaderboardModeOptions.some((mode) => mode.modeId === modeLeaderboardModeId)
+    ? modeLeaderboardModeId
+    : defaultLeaderboardModeId
+  const [modeRuns, setModeRuns] = useState<LeaderboardRun[]>([])
+  const [modeStatus, setModeStatus] = useState('')
 
   useEffect(() => {
     let mounted = true
@@ -2548,6 +2571,30 @@ function LeaderboardScreen({
     }
   }, [authProfile, selectedModeId, view])
 
+  useEffect(() => {
+    let mounted = true
+
+    async function loadModeLeaderboard() {
+      if (!hasSupabaseConfig) return { items: [], message: 'Leaderboard needs Supabase env vars.' }
+      const { fetchLeaderboardRuns } = await loadSupabaseService()
+      const items = await fetchLeaderboardRuns('mode', activeModeLeaderboardId)
+      return { items, message: items.length ? '' : 'No runs submitted for this mode yet.' }
+    }
+
+    loadModeLeaderboard()
+      .then((items) => {
+        if (!mounted) return
+        setModeRuns(items.items)
+        setModeStatus(items.message)
+      })
+      .catch((error) => {
+        if (mounted) setModeStatus(error instanceof Error ? error.message : 'Could not load this mode leaderboard.')
+      })
+    return () => {
+      mounted = false
+    }
+  }, [activeModeLeaderboardId])
+
   return (
     <main className="text-page leaderboard-page">
       <button className="button ghost" type="button" onClick={onBack}>
@@ -2572,22 +2619,51 @@ function LeaderboardScreen({
         </button>
       )}
       {status && <p className="notice" role="status">{status}</p>}
-      <section className="leaderboard-list" aria-label="Leaderboard runs">
-        {runs.map((run, index) => (
-          <article key={run.run_id} className="leaderboard-row">
-            <span className="leaderboard-rank">{index + 1}</span>
-            <span>
-              <strong>{run.display_name || 'Player'}</strong>
-              <small>{run.mode_name} · {run.formation_id} · {formatStoredRecord(run.record)}</small>
-            </span>
-            <span>
-              <strong>{run.score}</strong>
-              <small>{run.grade} · OVR {run.team_rating}</small>
-            </span>
-          </article>
-        ))}
+      <LeaderboardRows runs={runs} ariaLabel="Leaderboard runs" />
+
+      <section className="leaderboard-mode-board" aria-label="Mode leaderboards">
+        <div className="leaderboard-section-head">
+          <h2>Mode Leaderboards</h2>
+          <label className="leaderboard-mode-select">
+            <select
+              value={activeModeLeaderboardId}
+              onChange={(event) => setModeLeaderboardModeId(event.target.value)}
+              aria-label="Choose leaderboard mode"
+            >
+              {leaderboardModeOptions.map((mode) => (
+                <option key={mode.modeId} value={mode.modeId}>{mode.modeName}</option>
+              ))}
+            </select>
+            <ChevronDown size={16} aria-hidden="true" />
+          </label>
+        </div>
+        {modeStatus && <p className="notice">{modeStatus}</p>}
+        <LeaderboardRows
+          runs={modeRuns}
+          ariaLabel={`${getModeConfig(activeModeLeaderboardId).modeName} leaderboard runs`}
+        />
       </section>
     </main>
+  )
+}
+
+function LeaderboardRows({ runs, ariaLabel }: { runs: LeaderboardRun[]; ariaLabel: string }) {
+  return (
+    <section className="leaderboard-list" aria-label={ariaLabel}>
+      {runs.map((run, index) => (
+        <article key={run.run_id} className="leaderboard-row">
+          <span className="leaderboard-rank">{index + 1}</span>
+          <span>
+            <strong>{run.display_name || 'Player'}</strong>
+            <small>{run.mode_name} · {run.formation_id} · {formatStoredRecord(run.record)}</small>
+          </span>
+          <span>
+            <strong>{run.score}</strong>
+            <small>{run.grade} · OVR {run.team_rating}</small>
+          </span>
+        </article>
+      ))}
+    </section>
   )
 }
 
