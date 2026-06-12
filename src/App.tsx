@@ -1096,6 +1096,11 @@ function DraftScreen({
   const openStarterSlots = formation.slots.filter((slot) => !draftState.picks.some((pick) => pick.slot.slotId === slot.slotId))
   const openDraftSlots = draftState.draftSlots.filter((slot) => !draftState.picks.some((pick) => pick.slot.slotId === slot.slotId))
   const benchSlots = draftState.draftSlots.filter((slot) => isBenchSlot(slot))
+  const canSelectForOpenSlot = (player: PlayerContext) => openDraftSlots.some((slot) => slotMatchesPlayer(slot, player))
+  const canSelectVisiblePlayer = (player: PlayerContext) => (
+    (selectablePlayerIds.has(player.contextId) || selectablePersonIds.has(player.personId) || rollPlayers.some((option) => option.contextId === player.contextId)) &&
+    canSelectForOpenSlot(player)
+  )
   const compatibleSlotIds = activePlayer ? openStarterSlots.filter((slot) => slotMatchesPlayer(slot, activePlayer)).map((slot) => slot.slotId) : []
   const compatibleBenchSlotIds = activePlayer ? benchSlots.filter((slot) => !draftState.picks.some((pick) => pick.slot.slotId === slot.slotId) && slotMatchesPlayer(slot, activePlayer)).map((slot) => slot.slotId) : []
   const placingSlots = placingPlayer ? openDraftSlots.filter((slot) => slotMatchesPlayer(slot, placingPlayer)) : []
@@ -1108,7 +1113,7 @@ function DraftScreen({
       return `${player.displayName} ${player.teamName} ${player.positions.join(' ')}`.toLowerCase().includes(query)
     })
     .sort((left, right) => playerSortValue(right, playerSort) - playerSortValue(left, playerSort) || left.displayName.localeCompare(right.displayName))
-  const visibleSelectableCount = visibleOptions.filter((player) => selectablePlayerIds.has(player.contextId) || selectablePersonIds.has(player.personId)).length
+  const visibleSelectableCount = visibleOptions.filter(canSelectVisiblePlayer).length
 
   useEffect(() => {
     setPreviewPlayerId(null)
@@ -1120,7 +1125,7 @@ function DraftScreen({
 
   const startPlacement = (player: PlayerContext) => {
     if (isSpinning) return
-    if (!selectablePlayerIds.has(player.contextId) && !selectablePersonIds.has(player.personId)) {
+    if (!canSelectVisiblePlayer(player)) {
       setPlacingPlayerId(null)
       setPreviewPlayerId(player.contextId)
       return
@@ -1258,8 +1263,8 @@ function DraftScreen({
                       player={player}
                       hiddenRatings={Boolean(mode.hidesRatings)}
                       selected={placingPlayerId === player.contextId}
-                      selectable={selectablePlayerIds.has(player.contextId) || selectablePersonIds.has(player.personId)}
-                      hasOpenSlot={openDraftSlots.some((slot) => slotMatchesPlayer(slot, player))}
+                      selectable={canSelectVisiblePlayer(player)}
+                      hasOpenSlot={canSelectForOpenSlot(player)}
                       onPreview={() => setPreviewPlayerId(player.contextId)}
                       onPreviewEnd={() => {
                         if (!placingPlayerId) setPreviewPlayerId(null)

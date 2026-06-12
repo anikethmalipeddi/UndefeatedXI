@@ -474,6 +474,44 @@ describe('draft engine', () => {
     expect(selected.picks.at(-1)?.player.personId).toBe(benchPlayer.personId)
   })
 
+  it('can place a visible Manager Mode roll-pool player into the only compatible bench slot', () => {
+    const mode = getModeConfig('manager')
+    const baseState = createDraftState(mode, '4-3-3')
+    const openBenchSlot = baseState.draftSlots.find((slot) => slot.slotId === 'bench_fb')
+    if (!openBenchSlot) throw new Error('Missing bench fullback slot')
+
+    const usedPeople = new Set<string>()
+    const filledSlots = baseState.draftSlots.filter((slot) => slot.slotId !== openBenchSlot.slotId)
+    const picks = filledSlots.map((slot, index) => {
+      const player = playerContexts.find((candidate) => slotMatchesPlayer(slot, candidate) && modeMatchesPlayer(mode, candidate) && !usedPeople.has(candidate.personId))
+      if (!player) throw new Error(`Missing filler for ${slot.label}`)
+      usedPeople.add(player.personId)
+      return {
+        round: index + 1,
+        slot,
+        roll: { team: { label: player.teamName, teamType: player.teamType }, era: player.eraLabel },
+        player,
+      }
+    })
+    const benchPlayer = playerContexts.find((player) => slotMatchesPlayer(openBenchSlot, player) && modeMatchesPlayer(mode, player) && !usedPeople.has(player.personId))
+    if (!benchPlayer) throw new Error('Missing visible bench fullback option')
+
+    const state = {
+      ...baseState,
+      roundIndex: picks.length,
+      picks,
+      currentRoll: { team: { label: benchPlayer.teamName, teamType: benchPlayer.teamType }, era: benchPlayer.eraLabel },
+      currentOptions: [],
+      currentRollPool: [benchPlayer],
+    }
+
+    const selected = selectPlayerForSlot(state, benchPlayer, openBenchSlot.slotId)
+
+    expect(selected.picks).toHaveLength(baseState.draftSlots.length)
+    expect(selected.picks.at(-1)?.slot.slotId).toBe('bench_fb')
+    expect(selected.picks.at(-1)?.player.personId).toBe(benchPlayer.personId)
+  })
+
   it('can complete a default draft for every configured ready or demo mode', () => {
     for (const mode of modeConfigs) {
       let state = createDraftState(mode, '4-3-3')

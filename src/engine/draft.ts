@@ -377,7 +377,9 @@ export function selectPlayerForSlot(state: DraftState, player: PlayerContext, sl
   const targetIndex = state.draftSlots.findIndex((slot) => slot.slotId === slotId)
   const slot = targetIndex >= 0 ? state.draftSlots[targetIndex] : undefined
   if (!slot || !roll) return state
-  if (!state.currentOptions.some((option) => option.contextId === player.contextId || option.personId === player.personId)) return state
+  const isVisibleRollPlayer = state.currentRollPool?.some((option) => option.contextId === player.contextId || option.personId === player.personId) ?? false
+  const isSelectableOption = state.currentOptions.some((option) => option.contextId === player.contextId || option.personId === player.personId)
+  if (!isVisibleRollPlayer && !isSelectableOption) return state
   if (state.picks.some((pick) => pick.player.personId === player.personId)) return state
   if (state.picks.some((pick) => pick.slot.slotId === slot.slotId)) return state
   if (!slotMatchesPlayer(slot, player)) return state
