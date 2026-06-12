@@ -197,7 +197,7 @@ describe('App', () => {
     expect(await screen.findByRole('button', { name: /Share/i })).toBeInTheDocument()
     expect(screen.getByText(/New personal best for this mode/i)).toBeInTheDocument()
     expect(screen.getByText(/Strongest unit/i)).toBeInTheDocument()
-    expect(screen.getByText(/Weakest unit/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/Weakest unit/i).length).toBeGreaterThan(0)
     await waitFor(() => {
       const stored = JSON.parse(localStorage.getItem('undefeatedxi.preferences') ?? '{}') as { recentRuns?: unknown[] }
       expect(stored.recentRuns?.length).toBeGreaterThan(0)

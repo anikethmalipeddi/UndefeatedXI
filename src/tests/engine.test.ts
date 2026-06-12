@@ -653,6 +653,53 @@ describe('simulation and sharing', () => {
     ]
   }
 
+  function controlledRatings(level: number, isGoalkeeper: boolean): Ratings {
+    return isGoalkeeper
+      ? { attack: level - 30, creation: level - 25, control: level - 15, defense: level - 8, goalkeeping: level, physical: level - 6, press: level - 16, bigGame: level }
+      : { attack: level, creation: level, control: level, defense: level, goalkeeping: 12, physical: level, press: level, bigGame: level }
+  }
+
+  function controlledXI(level: number): DraftPick[] {
+    return possessionTestXI().map((pick) => ({
+      ...pick,
+      player: {
+        ...pick.player,
+        ratings: controlledRatings(level, pick.slot.accepts.includes('GK')),
+      },
+    }))
+  }
+
+  function sampleRuns(picks: DraftPick[], modeId: string, count: number) {
+    const runs = Array.from({ length: count }, (_, index) => simulateRun(picks, modeId, `IXI-CAL-${modeId}-${count}-${index}`))
+    const totals = runs.reduce(
+      (summary, result) => {
+        const matches = result.record.wins + result.record.draws + result.record.losses
+        return {
+          matches: summary.matches + matches,
+          wins: summary.wins + result.record.wins,
+          draws: summary.draws + result.record.draws,
+          losses: summary.losses + result.record.losses,
+          perfect: summary.perfect + (result.record.wins === matches ? 1 : 0),
+          unbeaten: summary.unbeaten + (result.record.losses === 0 ? 1 : 0),
+          trophies: summary.trophies + (result.trophyResult === 'Trophy won' ? 1 : 0),
+        }
+      },
+      { matches: 0, wins: 0, draws: 0, losses: 0, perfect: 0, unbeaten: 0, trophies: 0 },
+    )
+
+    return {
+      averageWins: totals.wins / count,
+      averageDraws: totals.draws / count,
+      averageLosses: totals.losses / count,
+      winRate: (totals.wins / totals.matches) * 100,
+      drawRate: (totals.draws / totals.matches) * 100,
+      lossRate: (totals.losses / totals.matches) * 100,
+      perfectRate: (totals.perfect / count) * 100,
+      unbeatenRate: (totals.unbeaten / count) * 100,
+      trophyRate: (totals.trophies / count) * 100,
+    }
+  }
+
   function completeDraft(modeId: string) {
     const mode = getModeConfig(modeId)
     let state = createDraftState(mode, '4-3-3')
@@ -681,7 +728,7 @@ describe('simulation and sharing', () => {
     expect(result.dominanceReason.length).toBeGreaterThan(0)
     expect(result.failureReason.length).toBeGreaterThan(0)
     expect(result.simulationDetails.averageWinProbability + result.simulationDetails.averageDrawProbability + result.simulationDetails.averageLossProbability).toBe(100)
-    expect(result.simulationDetails.trophyProbability).toBeGreaterThanOrEqual(3)
+    expect(result.simulationDetails.trophyProbability).toBeGreaterThanOrEqual(1)
   })
 
   it('derives result summaries from actual simulated matches and drafted players', () => {
@@ -725,6 +772,65 @@ describe('simulation and sharing', () => {
 
     expect(state.picks.map((pick) => pick.player.displayName)).toContain(result.bestPlayer)
     expect(result.why).not.toMatch(/random|placeholder|lorem/i)
+  })
+
+  it('keeps summary-page result fields tied to actual simulated phases', () => {
+    const result = simulateRun(possessionTestXI(), 'world_xi', 'IXI-SUMMARY-AUDIT')
+    const phaseMatches = result.competitionPath.flatMap((phase) => phase.matches)
+    const phaseWins = phaseMatches.filter((match) => match.outcome === 'W').length
+    const phaseDraws = phaseMatches.filter((match) => match.outcome === 'D').length
+    const phaseLosses = phaseMatches.filter((match) => match.outcome === 'L').length
+
+    expect(result.record).toEqual({ wins: phaseWins, draws: phaseDraws, losses: phaseLosses })
+    expect(result.points).toBe(result.record.wins * 3 + result.record.draws)
+    expect(result.perfectionResult).toBe(result.record.losses === 0 && result.record.draws === 0 ? 'Perfect' : result.record.losses === 0 ? 'Invincible, not perfect' : 'Not invincible')
+    expect(result.trophyResult).toBe(result.stage?.toLowerCase().includes('champion') ? 'Trophy won' : result.stage)
+    expect(result.simulationDetails.averageWinProbability + result.simulationDetails.averageDrawProbability + result.simulationDetails.averageLossProbability).toBe(100)
+
+    for (const phase of result.competitionPath) {
+      expect(phase.record.wins).toBe(phase.matches.filter((match) => match.outcome === 'W').length)
+      expect(phase.record.draws).toBe(phase.matches.filter((match) => match.outcome === 'D').length)
+      expect(phase.record.losses).toBe(phase.matches.filter((match) => match.outcome === 'L').length)
+      expect(phase.goalsFor).toBe(phase.matches.reduce((sum, match) => sum + match.goalsFor, 0))
+      expect(phase.goalsAgainst).toBe(phase.matches.reduce((sum, match) => sum + match.goalsAgainst, 0))
+    }
+  })
+
+  it('separates elite, average, and weak XIs in long-run domestic calibration', () => {
+    const elite = sampleRuns(controlledXI(94), 'world_xi', 120)
+    const average = sampleRuns(controlledXI(82), 'world_xi', 120)
+    const weak = sampleRuns(controlledXI(70), 'world_xi', 120)
+
+    expect(elite.averageWins).toBeGreaterThan(average.averageWins + 8)
+    expect(average.averageWins).toBeGreaterThan(weak.averageWins + 10)
+    expect(elite.averageLosses).toBeLessThan(4)
+    expect(average.averageLosses).toBeGreaterThan(4)
+    expect(weak.averageLosses).toBeGreaterThan(16)
+    expect(elite.perfectRate).toBeLessThan(6)
+    expect(average.perfectRate).toBe(0)
+    expect(weak.unbeatenRate).toBe(0)
+  })
+
+  it('keeps reported match probabilities close to observed simulation rates', () => {
+    const picks = controlledXI(94)
+    const details = simulateRun(picks, 'world_xi', 'IXI-CAL-PROFILE').simulationDetails
+    const observed = sampleRuns(picks, 'world_xi', 160)
+
+    expect(Math.abs(observed.winRate - details.averageWinProbability)).toBeLessThanOrEqual(5)
+    expect(Math.abs(observed.drawRate - details.averageDrawProbability)).toBeLessThanOrEqual(5)
+    expect(Math.abs(observed.lossRate - details.averageLossProbability)).toBeLessThanOrEqual(5)
+  })
+
+  it('keeps perfect tournament runs difficult and strength-sensitive', () => {
+    const eliteWorldCup = sampleRuns(controlledXI(94), 'world_cup', 160)
+    const averageWorldCup = sampleRuns(controlledXI(82), 'world_cup', 160)
+    const weakWorldCup = sampleRuns(controlledXI(70), 'world_cup', 160)
+
+    expect(eliteWorldCup.trophyRate).toBeGreaterThan(averageWorldCup.trophyRate + 25)
+    expect(averageWorldCup.trophyRate).toBeGreaterThan(weakWorldCup.trophyRate)
+    expect(eliteWorldCup.perfectRate).toBeLessThan(25)
+    expect(averageWorldCup.perfectRate).toBe(0)
+    expect(weakWorldCup.perfectRate).toBe(0)
   })
 
   it('persists recent runs while keeping the best run per mode', () => {

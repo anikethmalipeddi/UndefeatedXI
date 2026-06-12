@@ -65,7 +65,7 @@ type PlayerFilter = 'all' | 'gk' | 'def' | 'mid' | 'att'
 type PlayerSort = 'best' | 'atk' | 'mid' | 'def' | 'gk' | 'big'
 type RollSpinScope = 'full' | 'team' | 'era'
 type LeaderboardStatus = 'idle' | 'submitting' | 'submitted' | 'error'
-const spinRevealMs = import.meta.env.MODE === 'test' ? 1 : 940
+const spinRevealMs = import.meta.env.MODE === 'test' ? 1 : 3000
 const legacyRulesDismissedKey = 'invinciblexi.rules.dismissed'
 const legacyRecordRulesDismissedKey = '38-0-0.rules.dismissed'
 const rulesDismissedKey = 'undefeatedxi.rules.dismissed'

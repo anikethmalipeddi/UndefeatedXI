@@ -104,16 +104,60 @@ function poisson(lambda: number, goals: number): number {
   return (Math.exp(-lambda) * lambda ** goals) / factorial
 }
 
-function estimateMatchProfile(strength: number, defense: number, pressure: number, mode: ModeConfig): SimulationDetails {
-  const adjusted = clamp(strength - pressure, 42, 99)
-  const expectedGoalsForPerMatch = round(clamp(0.55 + adjusted / 32, 0.4, 4.4), 2)
-  const expectedGoalsAgainstPerMatch = round(clamp(2.75 - defense / 42 + pressure / 35, 0.25, 2.9), 2)
+function samplePoisson(lambda: number, rng: ReturnType<typeof createRng>): number {
+  const limit = Math.exp(-lambda)
+  let product = 1
+  let goals = 0
+
+  do {
+    goals += 1
+    product *= rng.next()
+  } while (product > limit && goals < 10)
+
+  return goals - 1
+}
+
+function attackingBase(ratings: TeamRatings): number {
+  return ratings.attack * 0.46 + ratings.chanceCreation * 0.24 + ratings.midfield * 0.14 + ratings.bigGame * 0.1 + ratings.chemistry * 0.06
+}
+
+function controlBase(ratings: TeamRatings): number {
+  return ratings.midfield * 0.42 + ratings.pressResistance * 0.22 + ratings.tacticalCoherence * 0.2 + ratings.balance * 0.16
+}
+
+function expectedGoalProfile(ratings: TeamRatings, strength: number, defensiveBase: number, pressure: number) {
+  const attack = attackingBase(ratings)
+  const control = controlBase(ratings)
+  const netQuality = strength - pressure
+  const expectedGoalsFor = clamp(
+    1.56 +
+      (netQuality - 72) * 0.055 +
+      (attack - 82) * 0.035 +
+      (control - 82) * 0.014 +
+      (ratings.consistency - 82) * 0.006,
+    0.62,
+    3.55,
+  )
+  const expectedGoalsAgainst = clamp(
+    1.2 -
+      (defensiveBase - 78) * 0.038 +
+      (pressure - 6) * 0.04 -
+      (control - 82) * 0.012 -
+      (ratings.consistency - 82) * 0.006,
+    0.38,
+    2.65,
+  )
+
+  return { expectedGoalsFor, expectedGoalsAgainst }
+}
+
+function outcomeProbabilities(expectedGoalsForPerMatch: number, expectedGoalsAgainstPerMatch: number) {
   let win = 0
   let draw = 0
   let loss = 0
 
-  for (let gf = 0; gf <= 8; gf += 1) {
-    for (let ga = 0; ga <= 8; ga += 1) {
+  for (let gf = 0; gf <= 10; gf += 1) {
+    for (let ga = 0; ga <= 10; ga += 1) {
       const probability = poisson(expectedGoalsForPerMatch, gf) * poisson(expectedGoalsAgainstPerMatch, ga)
       if (gf > ga) win += probability
       else if (gf === ga) draw += probability
@@ -122,12 +166,68 @@ function estimateMatchProfile(strength: number, defense: number, pressure: numbe
   }
 
   const total = win + draw + loss || 1
-  const averageWinProbability = Math.round((win / total) * 100)
-  const averageDrawProbability = Math.round((draw / total) * 100)
+  return {
+    win: win / total,
+    draw: draw / total,
+    loss: loss / total,
+  }
+}
+
+function logistic(value: number): number {
+  return 1 / (1 + Math.exp(-value))
+}
+
+function estimateTrophyProbability(mode: ModeConfig, probabilities: ReturnType<typeof outcomeProbabilities>, strength: number, pressure: number): number {
+  const pointsPerMatch = probabilities.win * 3 + probabilities.draw
+  const penaltyEdge = clamp((strength - pressure - 55) / 38, 0.28, 0.78)
+  const oneMatchAdvance = clamp(probabilities.win + probabilities.draw * penaltyEdge, 0.03, 0.96)
+  const lateKnockoutAdvance = clamp(oneMatchAdvance - 0.06, 0.03, 0.94)
+  const splitTie = probabilities.win * probabilities.loss * 1.25
+  const twoLegAdvance = clamp(
+    probabilities.win ** 2 +
+      probabilities.win * probabilities.draw * 2 +
+      probabilities.draw ** 2 * penaltyEdge +
+      splitTie * penaltyEdge,
+    0.03,
+    0.96,
+  )
+
+  if (mode.simulationFormat === 'domestic') {
+    const titleLine = mode.matchCount >= 38 ? 2.42 : 2.34
+    return Math.round(clamp(logistic((pointsPerMatch - titleLine) * 8.5) * 100, 1, 98))
+  }
+
+  if (mode.simulationFormat === 'mls') {
+    const playoffChance = logistic((pointsPerMatch - 1.38) * 5.2)
+    return Math.round(clamp(playoffChance * oneMatchAdvance ** 4 * 100, 1, 96))
+  }
+
+  if (mode.simulationFormat === 'ucl') {
+    const leaguePhaseChance = logistic((pointsPerMatch - 1.38) * 4.2)
+    return Math.round(clamp(leaguePhaseChance * twoLegAdvance ** 3 * lateKnockoutAdvance * 100, 1, 96))
+  }
+
+  if (mode.simulationFormat === 'classic_european_cup') {
+    return Math.round(clamp(twoLegAdvance ** 3 * lateKnockoutAdvance * 100, 1, 96))
+  }
+
+  if (mode.usesGroupStage) {
+    const groupChance = logistic((pointsPerMatch - 1.28) * 4.8)
+    return Math.round(clamp(groupChance * oneMatchAdvance * lateKnockoutAdvance ** 3 * 100, 1, 96))
+  }
+
+  return Math.round(clamp(oneMatchAdvance ** Math.max(2, Math.min(5, mode.matchCount)) * 100, 1, 96))
+}
+
+function estimateMatchProfile(ratings: TeamRatings, strength: number, defense: number, pressure: number, mode: ModeConfig): SimulationDetails {
+  const { expectedGoalsFor, expectedGoalsAgainst } = expectedGoalProfile(ratings, strength, defense, pressure)
+  const expectedGoalsForPerMatch = round(expectedGoalsFor, 2)
+  const expectedGoalsAgainstPerMatch = round(expectedGoalsAgainst, 2)
+  const probabilities = outcomeProbabilities(expectedGoalsForPerMatch, expectedGoalsAgainstPerMatch)
+  const averageWinProbability = Math.round(probabilities.win * 100)
+  const averageDrawProbability = Math.round(probabilities.draw * 100)
   const averageLossProbability = Math.max(0, 100 - averageWinProbability - averageDrawProbability)
-  const trophyProbability = mode.usesKnockouts
-    ? Math.round(clamp(((averageWinProbability / 100) ** Math.min(5, Math.max(2, mode.matchCount - 3))) * 100 + (strength - pressure - 70) * 0.8, 3, 94))
-    : Math.round(clamp((strength - pressure - 58) * 2.8 + defense * 0.18, 3, 97))
+  const trophyProbability = estimateTrophyProbability(mode, probabilities, strength, pressure)
 
   return {
     averageWinProbability,
@@ -151,13 +251,17 @@ function matchNote(outcome: 'W' | 'D' | 'L', gf: number, ga: number, xgf: number
   return `The run cracked ${gf}-${ga}; pressure ${round(pressure, 1)} exposed the weakest unit.`
 }
 
-function simulateMatch(strength: number, defense: number, rngSeed: string, pressure = 0, match = 1, phase = 'Match'): MatchOutcome {
+function simulateMatch(ratings: TeamRatings, strength: number, defense: number, rngSeed: string, pressure = 0, match = 1, phase = 'Match'): MatchOutcome {
   const rng = createRng(rngSeed)
-  const adjusted = clamp(strength - pressure + rng.between(-10, 8), 42, 99)
-  const xgf = clamp(0.55 + adjusted / 32 + rng.between(-0.25, 0.45), 0.4, 4.4)
-  const xga = clamp(2.75 - defense / 42 + pressure / 35 + rng.between(-0.18, 0.35), 0.25, 2.9)
-  const gf = Math.max(0, Math.round(xgf + rng.between(-0.85, 1.1)))
-  const ga = Math.max(0, Math.round(xga + rng.between(-0.7, 1.05)))
+  const profile = expectedGoalProfile(ratings, strength, defense, pressure)
+  const stability = clamp((ratings.consistency + ratings.chemistry + ratings.balance) / 3, 50, 98)
+  const volatility = clamp(0.26 - (stability - 70) * 0.003 + pressure * 0.003, 0.14, 0.34)
+  const formSwing = (rng.next() - rng.next()) * volatility
+  const opponentSwing = (rng.next() - rng.next()) * (0.1 + pressure * 0.003)
+  const xgf = clamp(profile.expectedGoalsFor + formSwing * 0.45 + opponentSwing * 0.1, 0.35, 3.8)
+  const xga = clamp(profile.expectedGoalsAgainst - formSwing * 0.3 - opponentSwing * 0.08, 0.25, 3.1)
+  const gf = samplePoisson(xgf, rng)
+  const ga = samplePoisson(xga, rng)
   const outcome = gf > ga ? 'W' : gf === ga ? 'D' : 'L'
   const roundedXgf = round(xgf, 1)
   const roundedXga = round(xga, 1)
@@ -453,6 +557,7 @@ function totalsFromPhases(phases: CompetitionPhase[]) {
 
 function simulatePhaseMatches(
   count: number,
+  ratings: TeamRatings,
   strength: number,
   defensiveBase: number,
   seed: string,
@@ -471,6 +576,7 @@ function simulatePhaseMatches(
     }
 
     return simulateMatch(
+      ratings,
       strength,
       defensiveBase,
       `${seed}:match:${matchIndex}`,
@@ -493,6 +599,7 @@ function simulateKnockoutRounds({
   phases,
   rounds,
   championStage,
+  ratings,
   strength,
   defensiveBase,
   seed,
@@ -504,6 +611,7 @@ function simulateKnockoutRounds({
   phases: CompetitionPhase[]
   rounds: readonly KnockoutRound[]
   championStage: string
+  ratings: TeamRatings
   strength: number
   defensiveBase: number
   seed: string
@@ -516,7 +624,7 @@ function simulateKnockoutRounds({
 
   for (let index = 0; index < rounds.length; index += 1) {
     const [roundName, matchCount, exitStage] = rounds[index]
-    const matches = simulatePhaseMatches(matchCount, strength, defensiveBase, seed, pressure + index * pressureStep, nextOffset, roundName, chaosEvents)
+    const matches = simulatePhaseMatches(matchCount, ratings, strength, defensiveBase, seed, pressure + index * pressureStep, nextOffset, roundName, chaosEvents)
     nextOffset += matchCount
     const advanced = aggregateAdvance(matches, strength, `${seed}:${roundName}`)
     if (!advanced) {
@@ -534,6 +642,7 @@ function simulateGroupKnockoutPath({
   mode,
   groupPhaseName,
   championStage,
+  ratings,
   strength,
   defensiveBase,
   seed,
@@ -544,6 +653,7 @@ function simulateGroupKnockoutPath({
   mode: ModeConfig
   groupPhaseName: string
   championStage: string
+  ratings: TeamRatings
   strength: number
   defensiveBase: number
   seed: string
@@ -551,7 +661,7 @@ function simulateGroupKnockoutPath({
   rounds: readonly KnockoutRound[]
   chaosEvents?: ChaosEvent[]
 }): { phases: CompetitionPhase[]; stage: string } {
-  const group = simulatePhaseMatches(3, strength, defensiveBase, seed, pressure, 0, groupPhaseName, chaosEvents)
+  const group = simulatePhaseMatches(3, ratings, strength, defensiveBase, seed, pressure, 0, groupPhaseName, chaosEvents)
   const groupSummary = summarizePhase(groupPhaseName, group, 'Qualified for knockouts')
   const groupPoints = groupSummary.record.wins * 3 + groupSummary.record.draws
   if (groupPoints < 4) {
@@ -562,6 +672,7 @@ function simulateGroupKnockoutPath({
     phases: [groupSummary],
     rounds,
     championStage,
+    ratings,
     strength,
     defensiveBase,
     seed: `${seed}:${mode.modeId}`,
@@ -573,6 +684,7 @@ function simulateGroupKnockoutPath({
 
 function simulateCompetitionPath(
   mode: ModeConfig,
+  ratings: TeamRatings,
   strength: number,
   defensiveBase: number,
   seed: string,
@@ -580,7 +692,7 @@ function simulateCompetitionPath(
   chaosEvents?: ChaosEvent[],
 ): { phases: CompetitionPhase[]; stage: string } {
   if (mode.simulationFormat === 'domestic') {
-    const outcomes = simulatePhaseMatches(mode.matchCount, strength, defensiveBase, seed, pressure, 0, 'League season', chaosEvents)
+    const outcomes = simulatePhaseMatches(mode.matchCount, ratings, strength, defensiveBase, seed, pressure, 0, 'League season', chaosEvents)
     const wins = outcomes.filter((outcome) => outcome.outcome === 'W').length
     const draws = outcomes.filter((outcome) => outcome.outcome === 'D').length
     const losses = outcomes.filter((outcome) => outcome.outcome === 'L').length
@@ -589,7 +701,7 @@ function simulateCompetitionPath(
   }
 
   if (mode.simulationFormat === 'mls') {
-    const regularSeason = simulatePhaseMatches(mode.matchCount, strength, defensiveBase, seed, pressure, 0, 'Regular season', chaosEvents)
+    const regularSeason = simulatePhaseMatches(mode.matchCount, ratings, strength, defensiveBase, seed, pressure, 0, 'Regular season', chaosEvents)
     const regularSummary = summarizePhase('Regular season', regularSeason, 'Qualified for playoffs')
     const points = regularSummary.record.wins * 3 + regularSummary.record.draws
     if (points < mode.matchCount * 1.35) {
@@ -605,6 +717,7 @@ function simulateCompetitionPath(
         ['MLS Cup', 1, 'MLS Cup Finalist'],
       ],
       championStage: 'MLS Cup Champion',
+      ratings,
       strength,
       defensiveBase,
       seed,
@@ -619,6 +732,7 @@ function simulateCompetitionPath(
       mode,
       groupPhaseName: 'Group stage',
       championStage: mode.modeId === 'nation_xi' ? `${mode.modeName} Champion` : 'World Champion',
+      ratings,
       strength,
       defensiveBase,
       seed,
@@ -634,7 +748,7 @@ function simulateCompetitionPath(
   }
 
   if (mode.simulationFormat === 'ucl') {
-    const league = simulatePhaseMatches(8, strength, defensiveBase, seed, pressure, 0, 'League phase', chaosEvents)
+    const league = simulatePhaseMatches(8, ratings, strength, defensiveBase, seed, pressure, 0, 'League phase', chaosEvents)
     const leagueSummary = summarizePhase('League phase', league, 'Qualified for knockouts')
     const leaguePoints = leagueSummary.record.wins * 3 + leagueSummary.record.draws
     if (leaguePoints < 9) {
@@ -652,7 +766,7 @@ function simulateCompetitionPath(
     let offset = 8
     for (let index = 0; index < rounds.length; index += 1) {
       const [roundName, matchCount, exitStage] = rounds[index]
-      const matches = simulatePhaseMatches(matchCount, strength, defensiveBase, seed, pressure + 3 + index * 2.2, offset, roundName, chaosEvents)
+      const matches = simulatePhaseMatches(matchCount, ratings, strength, defensiveBase, seed, pressure + 3 + index * 2.2, offset, roundName, chaosEvents)
       offset += matchCount
       const advanced = aggregateAdvance(matches, strength, `${seed}:${roundName}`)
       if (!advanced) {
@@ -675,6 +789,7 @@ function simulateCompetitionPath(
         ['Final', 1, 'Finalist'],
       ],
       championStage: 'European Cup Champion',
+      ratings,
       strength,
       defensiveBase,
       seed,
@@ -690,6 +805,7 @@ function simulateCompetitionPath(
       mode,
       groupPhaseName: 'Group stage',
       championStage: `${mode.modeName} Champion`,
+      ratings,
       strength,
       defensiveBase,
       seed,
@@ -704,7 +820,7 @@ function simulateCompetitionPath(
     })
   }
 
-  const outcomes = simulatePhaseMatches(mode.matchCount, strength, defensiveBase, seed, pressure, 0, 'Campaign', chaosEvents)
+  const outcomes = simulatePhaseMatches(mode.matchCount, ratings, strength, defensiveBase, seed, pressure, 0, 'Campaign', chaosEvents)
   const wins = outcomes.filter((outcome) => outcome.outcome === 'W').length
   const draws = outcomes.filter((outcome) => outcome.outcome === 'D').length
   const losses = outcomes.filter((outcome) => outcome.outcome === 'L').length
@@ -721,15 +837,15 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
   const chemistryReport = calculateChemistry(tacticalPicks)
   const ratings = calculateTeamRatings(tacticalPicks, chemistryReport.score)
   const tacticReport = inferTactic(tacticalPicks, ratings)
-  const basePressure = mode.opponentDistribution === 'elite' ? 9 : mode.opponentDistribution === 'continental' ? 12 : mode.opponentDistribution === 'international' ? 10 : mode.opponentDistribution === 'chaos' ? 16 : 6
+  const basePressure = mode.opponentDistribution === 'elite' ? 9 : mode.opponentDistribution === 'continental' ? 12 : mode.opponentDistribution === 'international' ? 13 : mode.opponentDistribution === 'chaos' ? 16 : 6
   const pressure = basePressure + (mode.modeType === 'manager' ? 3 : 0) - (squadReport?.benchImpact ?? 0)
   const strength = ratings.overall + (squadReport?.benchImpact ?? 0) * 0.6
   const defensiveBase = ratings.defense * 0.46 + ratings.goalkeeping * 0.32 + ratings.chemistry * 0.22
-  const simulationDetails = estimateMatchProfile(strength, defensiveBase, pressure, mode)
+  const simulationDetails = estimateMatchProfile(ratings, strength, defensiveBase, pressure, mode)
   const chaosEvents: ChaosEvent[] = []
   const chaosEventSink = mode.opponentDistribution === 'chaos' ? chaosEvents : undefined
 
-  const { phases: competitionPath, stage } = simulateCompetitionPath(mode, strength, defensiveBase, seed, pressure, chaosEventSink)
+  const { phases: competitionPath, stage } = simulateCompetitionPath(mode, ratings, strength, defensiveBase, seed, pressure, chaosEventSink)
   const matchTrace = matchTraceFromPhases(competitionPath)
   const { wins, draws, losses } = recordFromPhases(competitionPath)
   const { goalsFor, goalsAgainst, xgFor, xgAgainst } = totalsFromPhases(competitionPath)
@@ -755,7 +871,7 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
     xgAgainst,
     grade,
     gradeLabel,
-    trophyResult: stage.includes('Champion') ? 'Trophy won' : stage,
+    trophyResult: stage.toLowerCase().includes('champion') ? 'Trophy won' : stage,
     perfectionResult,
     stage,
     bestPlayer: bestPlayer(tacticalPicks),
