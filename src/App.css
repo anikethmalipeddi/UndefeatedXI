@@ -454,6 +454,7 @@ main {
 
 .feedback-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -618,6 +619,7 @@ main {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  max-width: 100%;
   min-height: 42px;
   padding: 9px 16px;
   border: 1px solid var(--ui-line);
@@ -1476,6 +1478,7 @@ main {
   align-items: center;
   gap: 14px;
   width: 100%;
+  min-width: 0;
   min-height: 72px;
   padding: 11px 14px;
   border: 1px solid var(--ui-line);
@@ -1544,6 +1547,7 @@ main {
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+  min-width: 0;
 }
 
 .player-row-metrics > span {
@@ -2118,6 +2122,7 @@ main {
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
+  min-width: 0;
   min-height: 82px;
   overflow: hidden;
   padding: 14px 18px;
@@ -2183,12 +2188,14 @@ main {
   color: var(--ui-muted);
   font-size: 13px;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .result-player-metrics {
   display: flex;
   justify-content: flex-end;
   gap: 16px;
+  min-width: 0;
 }
 
 .result-player-metrics > span,
@@ -2307,9 +2314,16 @@ main {
 }
 
 .text-page table {
+  display: block;
   width: 100%;
   border-collapse: collapse;
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.text-page table tbody {
+  display: table;
+  width: 100%;
 }
 
 .text-page caption {
@@ -2377,18 +2391,21 @@ main {
 .leaderboard-row span {
   display: grid;
   gap: 3px;
+  min-width: 0;
 }
 
 .leaderboard-row strong {
   color: var(--ui-fg);
   font-size: 17px;
   font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .leaderboard-row small {
   color: var(--ui-muted);
   font-size: 12px;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .footer {
@@ -2556,10 +2573,20 @@ main {
 }
 
 @media (max-width: 460px) {
+  .topbar,
+  main {
+    padding-inline: 12px;
+  }
+
   .top-home-link {
     width: 1px;
     overflow: hidden;
     opacity: 0;
+  }
+
+  .icon-button {
+    width: 42px;
+    height: 42px;
   }
 
   .hero-section {
@@ -2575,6 +2602,22 @@ main {
     align-items: stretch;
   }
 
+  .hero-actions .button,
+  .draft-actions .button,
+  .support-strip .button {
+    width: 100%;
+  }
+
+  .home-mode-tabs {
+    gap: 6px;
+  }
+
+  .home-mode-tabs button {
+    min-width: 0;
+    padding-inline: 6px;
+    font-size: 13px;
+  }
+
   .mode-card {
     min-height: 190px;
     padding: 20px;
@@ -2588,6 +2631,16 @@ main {
     font-size: 16px;
   }
 
+  .recent-run-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel,
+  .text-page section,
+  .advanced details {
+    padding: 14px;
+  }
+
   .options-toolbar,
   .player-controls,
   .player-row {
@@ -2595,12 +2648,16 @@ main {
   }
 
   .roll-boxes {
-    gap: 12px;
+    width: 100%;
+    gap: clamp(8px, 2.6vw, 12px);
   }
 
   .roll-box {
-    width: min(44vw, 156px);
-    height: 106px;
+    flex: 1 1 0;
+    grid-template-rows: 16px minmax(34px, auto) 16px;
+    width: auto;
+    max-width: 156px;
+    height: 112px;
     padding: 14px 10px 12px;
     border-width: 7px;
   }
@@ -2617,6 +2674,18 @@ main {
     font-size: 12px;
   }
 
+  .position-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .position-tabs button {
+    min-width: 0;
+    padding-inline: 4px;
+    font-size: 12px;
+  }
+
   .options-toolbar {
     display: grid;
     gap: 4px;
@@ -2630,38 +2699,147 @@ main {
     width: 100%;
   }
 
+  .player-list {
+    padding-right: 0;
+    mask-image: none;
+  }
+
   .player-row {
+    align-items: stretch;
     gap: 10px;
+    height: max-content;
+    min-height: 122px;
+    padding: 12px;
+  }
+
+  .player-row h2 {
+    overflow: visible;
+    font-size: 18px;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .player-row small {
+    overflow-wrap: anywhere;
   }
 
   .player-row-metrics {
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
     gap: 6px;
   }
 
   .player-row-metrics > span {
     min-width: 0;
+    padding: 7px 4px;
+    border-radius: 6px;
+    background: var(--ui-panel-2);
+  }
+
+  .player-row-metrics strong {
+    font-size: 17px;
+  }
+
+  .player-row-metrics small {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .player-row-hidden {
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .result-player-row {
     grid-template-columns: auto minmax(0, 1fr);
     align-items: start;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .result-player-main strong {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .result-player-metrics {
     grid-column: 1 / -1;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 6px;
   }
 
+  .result-player-metrics > span {
+    min-width: 0;
+    padding: 7px 4px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--row-kit) 8%, var(--ui-panel));
+  }
+
   .result-team-totals {
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-content: stretch;
+    gap: 8px;
+  }
+
+  .result-team-totals > span {
+    min-width: 0;
   }
 
   .result-actions .button {
     width: 100%;
+  }
+
+  .feedback-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-actions .button {
+    width: 100%;
+  }
+
+  .modal-overlay {
+    align-items: start;
+    overflow: auto;
+    padding: 12px;
+  }
+
+  .auth-dialog {
+    max-height: calc(100dvh - 24px);
+    overflow: auto;
+    padding: 20px;
+  }
+
+  .auth-dialog h2 {
+    font-size: 24px;
+  }
+
+  .leaderboard-tabs {
+    gap: 6px;
+  }
+
+  .leaderboard-tabs button {
+    min-width: 0;
+    padding-inline: 6px;
+    font-size: 13px;
+  }
+
+  .leaderboard-row {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 8px 10px;
+  }
+
+  .leaderboard-row > span:last-child {
+    grid-column: 2;
+    justify-items: start;
+    text-align: left;
   }
 
   .pitch-popover {
@@ -2697,7 +2875,7 @@ main {
   }
 
   .pitch-board {
-    min-height: 370px;
+    min-height: clamp(310px, 94vw, 370px);
   }
 
   .slot-machine {
@@ -2742,15 +2920,42 @@ main {
     bottom: -22px;
     padding-bottom: 2px;
   }
+
+  .rules-actions .button {
+    width: 100%;
+  }
 }
 
 @media (max-width: 350px) {
+  .topbar,
+  main {
+    padding-inline: 10px;
+  }
+
   .mode-grid,
   .recent-run-grid,
   .result-grid,
   .breakdown-grid,
   .story-grid {
     grid-template-columns: 1fr;
+  }
+
+  .roll-box {
+    height: 108px;
+    padding-inline: 8px;
+  }
+
+  .roll-box strong {
+    font-size: 24px;
+  }
+
+  .player-row-metrics,
+  .result-player-metrics {
+    gap: 4px;
+  }
+
+  .result-record {
+    font-size: 52px;
   }
 }
 

@@ -329,6 +329,12 @@ function App() {
   useEffect(() => () => clearSpinTimers(), [])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('jsdom')) return
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [screen, routeState.modeId, routeState.shareId, routeState.localSharePayload])
+
+  useEffect(() => {
     if (!hasSupabaseConfig || !supabase) return undefined
     let mounted = true
 
@@ -563,6 +569,7 @@ function App() {
       )}
       {activeScreen === 'draft' && draftState && (
         <DraftScreen
+          key={`${draftState.roundIndex}:${draftState.currentRoll?.team.label ?? 'none'}:${draftState.currentRoll?.team.teamType ?? 'none'}:${draftState.currentRoll?.era ?? 'none'}`}
           mode={selectedMode}
           formation={selectedFormation}
           draftState={draftState}
@@ -1114,14 +1121,6 @@ function DraftScreen({
     })
     .sort((left, right) => playerSortValue(right, playerSort) - playerSortValue(left, playerSort) || left.displayName.localeCompare(right.displayName))
   const visibleSelectableCount = visibleOptions.filter(canSelectVisiblePlayer).length
-
-  useEffect(() => {
-    setPreviewPlayerId(null)
-    setPlacingPlayerId(null)
-    setPositionFilter('all')
-    setPlayerSearch('')
-    setPlayerSort('best')
-  }, [draftState.roundIndex, draftState.currentRoll?.team.label, draftState.currentRoll?.team.teamType, draftState.currentRoll?.era])
 
   const startPlacement = (player: PlayerContext) => {
     if (isSpinning) return
