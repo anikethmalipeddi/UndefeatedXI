@@ -1,4 +1,26 @@
 {
+  "rewrites": [
+    {
+      "source": "/82-0-soccer-game",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/how-to-play",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/leaderboard",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/:path*",

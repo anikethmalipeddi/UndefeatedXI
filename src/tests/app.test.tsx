@@ -1,5 +1,7 @@
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from '../App'
 
@@ -7,6 +9,10 @@ const draftLoadWait = { timeout: 45000 }
 
 function findDraftRound(round: number) {
   return screen.findByText(new RegExp(`Round ${round}/11`, 'i'), {}, draftLoadWait)
+}
+
+function metaContent(selector: string) {
+  return document.head.querySelector<HTMLMetaElement>(selector)?.content
 }
 
 async function completeWorldXiDraft(user: ReturnType<typeof userEvent.setup>) {
@@ -152,6 +158,34 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'How to Play' })).toBeInTheDocument()
   })
 
+  it('opens clean public routes with route-specific SEO metadata', () => {
+    window.history.replaceState(null, '', '/82-0-soccer-game')
+
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 1, name: /Official Soccer and Football Version of 82-0/i })).toBeInTheDocument()
+    expect(screen.getByText(/Is there a soccer version of 82-0\.com/i)).toBeInTheDocument()
+    expect(document.title).toBe('82-0 Soccer Game | Official Football Version by UndefeatedXI')
+    expect(metaContent('meta[name="description"]')).toBe('Looking for an 82-0.com game for soccer or football? Play UndefeatedXI, the official football version where you draft an all-time XI and chase unbeaten seasons, World Cup glory, and perfect records.')
+    expect(document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://undefeatedxi.com/82-0-soccer-game')
+    expect(metaContent('meta[property="og:image"]')).toBe('https://undefeatedxi.com/logo-640.png')
+    expect(document.getElementById('structured-data-faq')?.textContent).toContain('FAQPage')
+  })
+
+  it('uses homepage SEO copy and links to the soccer landing page', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 1, name: /UndefeatedXI: The Official Soccer Version of 82-0/i })).toBeInTheDocument()
+    expect(screen.getByText(/football version of the viral 82-0\.com game/i)).toBeInTheDocument()
+    expect(document.title).toBe('UndefeatedXI | Official Soccer Version of the 82-0 Game')
+    expect(metaContent('meta[name="description"]')).toContain('official soccer and football version')
+
+    await user.click(screen.getByRole('button', { name: /Learn about the 82-0 soccer game/i }))
+    expect(window.location.pathname).toBe('/82-0-soccer-game')
+    expect(screen.getByRole('heading', { level: 1, name: /Official Soccer and Football Version of 82-0/i })).toBeInTheDocument()
+  })
+
   it('shows and validates the feedback form', async () => {
     const user = userEvent.setup()
     window.location.hash = '#/contact'
@@ -165,6 +199,41 @@ describe('App', () => {
     expect(await screen.findByRole('status')).toHaveTextContent('Feedback is not configured on this local build.')
   })
 
+  it('shows one URL-backed leaderboard selector instead of duplicated mode boards', async () => {
+    const user = userEvent.setup()
+    window.history.replaceState(null, '', '/leaderboard?mode=premier-league')
+
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Leaderboard' })).toBeInTheDocument()
+    expect(screen.queryByText('Mode Leaderboards')).not.toBeInTheDocument()
+    expect(screen.queryByRole('tab', { name: /This Mode/i })).not.toBeInTheDocument()
+
+    const selector = screen.getByLabelText('Choose leaderboard') as HTMLSelectElement
+    expect(selector.value).toBe('premier_league')
+    expect(screen.getByRole('heading', { level: 2, name: 'Premier League' })).toBeInTheDocument()
+    expect(await screen.findByRole('status')).toHaveTextContent('Leaderboard needs Supabase env vars.')
+
+    await user.selectOptions(selector, 'global')
+    expect(window.location.pathname).toBe('/leaderboard')
+    expect(window.location.search).toBe('')
+    expect(screen.getByRole('heading', { level: 2, name: 'Global / All Modes' })).toBeInTheDocument()
+
+    await user.selectOptions(selector, 'world_xi')
+    expect(window.location.pathname).toBe('/leaderboard')
+    expect(window.location.search).toBe('?mode=world-xi')
+    expect(screen.getByRole('heading', { level: 2, name: 'World XI' })).toBeInTheDocument()
+  })
+
+  it('falls back invalid leaderboard mode query params to global', () => {
+    window.history.replaceState(null, '', '/leaderboard?mode=not-real')
+
+    render(<App />)
+
+    expect((screen.getByLabelText('Choose leaderboard') as HTMLSelectElement).value).toBe('global')
+    expect(screen.getByRole('heading', { level: 2, name: 'Global / All Modes' })).toBeInTheDocument()
+  })
+
   it('updates hash routes when choosing modes', async () => {
     const user = userEvent.setup()
     render(<App />)
@@ -175,7 +244,8 @@ describe('App', () => {
     const setupHeading = screen.getByRole('heading', { level: 1, name: 'Choose the run.' }).closest('section')
     if (!setupHeading) throw new Error('Missing setup heading')
     await user.click(within(setupHeading).getByRole('button', { name: /Go to UndefeatedXI home/i }))
-    expect(window.location.hash).toBe('#/')
+    expect(window.location.pathname).toBe('/')
+    expect(window.location.hash).toBe('')
 
     await user.click(screen.getByRole('button', { name: /^World XI$/i }))
     await user.click(screen.getByRole('button', { name: /Ball Knowledge/i }))
@@ -262,7 +332,7 @@ describe('App', () => {
     const sideMenu = screen.getByRole('complementary', { name: /Site menu/i })
     expect(sideMenu).toBeInTheDocument()
     await user.click(within(sideMenu).getByRole('button', { name: /Privacy Policy/i }))
-    expect(window.location.hash).toBe('#/privacy')
+    expect(window.location.pathname).toBe('/privacy')
   })
 
   it('loads saved recent runs from localStorage', () => {
@@ -299,5 +369,26 @@ describe('App', () => {
     expect(within(recentRuns).getByText('Recent Runs')).toBeInTheDocument()
     expect(within(recentRuns).getByText(/38-0-0/)).toBeInTheDocument()
     expect(within(recentRuns).getByText(/Lionel Messi/)).toBeInTheDocument()
+  })
+})
+
+describe('SEO public files', () => {
+  it('allows search and AI crawlers without noindexing public pages', () => {
+    const robots = readFileSync(join(process.cwd(), 'public/robots.txt'), 'utf8')
+
+    expect(robots).toContain('User-agent: Googlebot')
+    expect(robots).toContain('User-agent: OAI-SearchBot')
+    expect(robots).toContain('User-agent: GPTBot')
+    expect(robots).toContain('Sitemap: https://undefeatedxi.com/sitemap.xml')
+    expect(robots.toLowerCase()).not.toContain('noindex')
+  })
+
+  it('lists canonical public URLs in the sitemap', () => {
+    const sitemap = readFileSync(join(process.cwd(), 'public/sitemap.xml'), 'utf8')
+
+    for (const path of ['/', '/82-0-soccer-game', '/how-to-play', '/leaderboard', '/privacy', '/contact']) {
+      expect(sitemap).toContain(`https://undefeatedxi.com${path === '/' ? '/' : path}`)
+    }
+    expect(sitemap).not.toContain('www.undefeatedxi.com')
   })
 })

@@ -37,11 +37,11 @@ import {
 } from './services/shareLinks'
 import { sanitizeDisplayName } from './services/sanitize'
 import { hasSupabaseConfig } from './services/supabaseConfig'
-import type { AuthProfile, FeedbackCategory, LeaderboardRun, LeaderboardView } from './services/supabase'
+import type { AuthProfile, FeedbackCategory, LeaderboardRun } from './services/supabase'
 import type { DraftPick, DraftState, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings, TeamRollOption } from './types'
 import type { StoredRunSummary } from './engine/storage'
 
-type Screen = 'home' | 'how' | 'setup' | 'draft' | 'result' | 'sharedResult' | 'privacy' | 'contact' | 'leaderboard'
+type Screen = 'home' | 'seoLanding' | 'how' | 'setup' | 'draft' | 'result' | 'sharedResult' | 'privacy' | 'contact' | 'leaderboard' | 'notFound'
 type ThemeMode = 'light' | 'dark'
 type HomeModeTab = 'main' | 'leagues' | 'more'
 type PlayerFilter = 'all' | 'gk' | 'def' | 'mid' | 'att'
@@ -60,6 +60,33 @@ const logoImageSizes = '(min-width: 900px) 184px, 172px'
 const logoImageSrcSet = '/logo-160.avif 160w, /logo-320.avif 320w, /logo-640.avif 640w'
 const logoWebpSrcSet = '/logo-160.webp 160w, /logo-320.webp 320w, /logo-640.webp 640w'
 const logoPngSrcSet = '/logo-320.png 320w, /logo-640.png 640w'
+const siteUrl = 'https://undefeatedxi.com'
+const socialImageUrl = `${siteUrl}/logo-640.png`
+const homeSeoDescription = 'Play UndefeatedXI, the official soccer and football version of the viral 82-0.com game. Draft football legends, build an all-time XI, and chase unbeaten seasons, World Cup runs, perfect league records, leaderboards, and shareable results.'
+const landingSeoDescription = 'Looking for an 82-0.com game for soccer or football? Play UndefeatedXI, the official football version where you draft an all-time XI and chase unbeaten seasons, World Cup glory, and perfect records.'
+const faqItems = [
+  {
+    question: 'Is there a soccer version of 82-0.com?',
+    answer: 'Yes. UndefeatedXI is the official soccer and football version of the viral 82-0.com game.',
+  },
+  {
+    question: 'What is UndefeatedXI?',
+    answer: 'UndefeatedXI is a football history draft simulator where you build an all-time XI and simulate whether your team can go unbeaten across different football modes.',
+  },
+  {
+    question: 'Is UndefeatedXI free?',
+    answer: 'Yes. UndefeatedXI is free to play.',
+  },
+  {
+    question: 'What modes does UndefeatedXI have?',
+    answer: 'UndefeatedXI includes club, nation, league, World Cup, and all-time draft-style modes, plus leaderboards and shareable results.',
+  },
+  {
+    question: 'What does 38-0-0 mean?',
+    answer: '38-0-0 refers to a perfect unbeaten football league season, inspired by the same perfect-record idea behind 82-0.',
+  },
+]
+type LeaderboardSelection = 'global' | 'mine' | string
 
 function loadSupabaseService() {
   return import('./services/supabase')
@@ -96,27 +123,174 @@ function normalizeRouteMode(modeId?: string): string | undefined {
 
 function readRoute(): RouteState {
   if (typeof window === 'undefined') return { screen: 'home' }
-  const parts = window.location.hash.replace(/^#\/?/, '').split('/').filter(Boolean)
-  const [route, modeId] = parts
+  const hashParts = window.location.hash.replace(/^#\/?/, '').split('/').filter(Boolean)
+  const [hashRoute, hashModeId] = hashParts
 
-  if (!route) return { screen: 'home' }
-  if (route === 'how') return { screen: 'how' }
-  if (route === 'privacy') return { screen: 'privacy' }
-  if (route === 'contact') return { screen: 'contact' }
-  if (route === 'leaderboard') return { screen: 'leaderboard' }
-  if (route === 'r' && modeId === 'local' && parts[2]) return { screen: 'sharedResult', localSharePayload: parts[2] }
-  if (route === 'r' && modeId) return { screen: 'sharedResult', shareId: modeId }
-  if (route === 'modes' || route === 'setup') return { screen: 'setup', modeId: normalizeRouteMode(modeId) }
-  if (route === 'draft') return { screen: 'draft' }
-  if (route === 'result') return { screen: 'result' }
-  return { screen: 'home' }
+  if (hashRoute) {
+    if (hashRoute === 'how') return { screen: 'how' }
+    if (hashRoute === 'privacy') return { screen: 'privacy' }
+    if (hashRoute === 'contact') return { screen: 'contact' }
+    if (hashRoute === 'leaderboard') return { screen: 'leaderboard' }
+    if (hashRoute === '82-0-soccer-game') return { screen: 'seoLanding' }
+    if (hashRoute === 'r' && hashModeId === 'local' && hashParts[2]) return { screen: 'sharedResult', localSharePayload: hashParts[2] }
+    if (hashRoute === 'r' && hashModeId) return { screen: 'sharedResult', shareId: hashModeId }
+    if (hashRoute === 'modes' || hashRoute === 'setup') return { screen: 'setup', modeId: normalizeRouteMode(hashModeId) }
+    if (hashRoute === 'draft') return { screen: 'draft' }
+    if (hashRoute === 'result') return { screen: 'result' }
+    return { screen: 'notFound' }
+  }
+
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (path === '/' || path === '/index.html') return { screen: 'home' }
+  if (path === '/82-0-soccer-game') return { screen: 'seoLanding' }
+  if (path === '/how-to-play') return { screen: 'how' }
+  if (path === '/privacy') return { screen: 'privacy' }
+  if (path === '/contact') return { screen: 'contact' }
+  if (path === '/leaderboard') return { screen: 'leaderboard' }
+  return { screen: 'notFound' }
 }
 
 function routeFor(screen: Screen, modeId?: string): string {
-  if (screen === 'home') return '#/'
-  if (screen === 'setup') return `#/setup/${modeId ?? defaultModeId}`
-  if (screen === 'sharedResult') return modeId ? `#/r/${modeId}` : '#/leaderboard'
-  return `#/${screen}`
+  if (screen === 'home') return '/'
+  if (screen === 'seoLanding') return '/82-0-soccer-game'
+  if (screen === 'how') return '/how-to-play'
+  if (screen === 'privacy') return '/privacy'
+  if (screen === 'contact') return '/contact'
+  if (screen === 'leaderboard') return '/leaderboard'
+  if (screen === 'setup') return `/#/setup/${modeId ?? defaultModeId}`
+  if (screen === 'sharedResult') return modeId ? `/#/r/${modeId}` : '/leaderboard'
+  if (screen === 'draft') return '/#/draft'
+  if (screen === 'result') return '/#/result'
+  return '/404'
+}
+
+function canonicalFor(screen: Screen): string {
+  if (screen === 'seoLanding') return `${siteUrl}/82-0-soccer-game`
+  if (screen === 'how') return `${siteUrl}/how-to-play`
+  if (screen === 'leaderboard') return `${siteUrl}/leaderboard`
+  if (screen === 'privacy') return `${siteUrl}/privacy`
+  if (screen === 'contact') return `${siteUrl}/contact`
+  return `${siteUrl}/`
+}
+
+function titleFor(screen: Screen): string {
+  if (screen === 'seoLanding') return '82-0 Soccer Game | Official Football Version by UndefeatedXI'
+  if (screen === 'how') return 'How to Play UndefeatedXI | Football Draft Simulator'
+  if (screen === 'leaderboard') return 'UndefeatedXI Leaderboard | Perfect Season Football Drafts'
+  if (screen === 'privacy') return 'Privacy Policy | UndefeatedXI'
+  if (screen === 'contact') return 'Contact and Feedback | UndefeatedXI'
+  if (screen === 'notFound') return 'Page Not Found | UndefeatedXI'
+  return 'UndefeatedXI | Official Soccer Version of the 82-0 Game'
+}
+
+function descriptionFor(screen: Screen): string {
+  if (screen === 'seoLanding') return landingSeoDescription
+  if (screen === 'how') return 'Learn how to play UndefeatedXI, the soccer and football version of the 82-0 perfect-record idea. Draft legends, place them in an XI, and chase unbeaten runs.'
+  if (screen === 'leaderboard') return 'View UndefeatedXI leaderboards for perfect football draft runs, including global records, mode leaderboards, and shareable unbeaten results.'
+  if (screen === 'privacy') return 'Read the UndefeatedXI privacy policy for this football draft simulator, including local saves, optional accounts, and feedback handling.'
+  if (screen === 'contact') return 'Contact UndefeatedXI or send feedback about player data, bugs, modes, leaderboards, and shareable football draft results.'
+  if (screen === 'notFound') return 'The requested UndefeatedXI page could not be found.'
+  return homeSeoDescription
+}
+
+function gameSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: appName,
+    url: `${siteUrl}/`,
+    description: homeSeoDescription,
+    applicationCategory: 'Game',
+    operatingSystem: 'Web',
+    genre: ['Sports', 'Football', 'Soccer', 'Draft Simulator'],
+    isAccessibleForFree: true,
+    sameAs: 'https://82-0.com/',
+  }
+}
+
+function websiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: appName,
+    url: `${siteUrl}/`,
+    description: homeSeoDescription,
+  }
+}
+
+function faqSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+function setMeta(name: string, content: string, attribute: 'name' | 'property' = 'name') {
+  let meta = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${name}"]`)
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute(attribute, name)
+    document.head.appendChild(meta)
+  }
+  meta.content = content
+}
+
+function setCanonical(href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+  if (!link) {
+    link = document.createElement('link')
+    link.rel = 'canonical'
+    document.head.appendChild(link)
+  }
+  link.href = href
+}
+
+function setJsonLd(id: string, schema: object | null) {
+  const existing = document.getElementById(id)
+  if (!schema) {
+    existing?.remove()
+    return
+  }
+
+  const script = existing instanceof HTMLScriptElement ? existing : document.createElement('script')
+  script.id = id
+  script.type = 'application/ld+json'
+  script.textContent = JSON.stringify(schema)
+  if (!existing) document.head.appendChild(script)
+}
+
+function useRouteSeo(screen: Screen) {
+  useEffect(() => {
+    const title = titleFor(screen)
+    const description = descriptionFor(screen)
+    const canonical = canonicalFor(screen)
+
+    document.title = title
+    setMeta('description', description)
+    setCanonical(canonical)
+    setMeta('og:title', title, 'property')
+    setMeta('og:description', description, 'property')
+    setMeta('og:type', 'website', 'property')
+    setMeta('og:url', canonical, 'property')
+    setMeta('og:image', socialImageUrl, 'property')
+    setMeta('og:image:alt', 'UndefeatedXI soccer draft simulator logo', 'property')
+    setMeta('twitter:card', 'summary_large_image')
+    setMeta('twitter:title', title)
+    setMeta('twitter:description', description)
+    setMeta('twitter:image', socialImageUrl)
+    setMeta('twitter:image:alt', 'UndefeatedXI football history draft game logo')
+    setJsonLd('structured-data-game', gameSchema())
+    setJsonLd('structured-data-website', websiteSchema())
+    setJsonLd('structured-data-faq', screen === 'seoLanding' ? faqSchema() : null)
+  }, [screen])
 }
 
 function defaultSpecialSelection(mode: ModeConfig, teams = liveTeamsForMode(mode)): SpecialSelection {
@@ -194,9 +368,10 @@ function App() {
     setScreen(nextScreen)
     setRouteState({ screen: nextScreen, modeId: routeModeId })
     if (typeof window === 'undefined') return
-    const nextHash = routeFor(nextScreen, routeModeId)
-    if (window.location.hash !== nextHash) {
-      window.location.hash = nextHash
+    const nextRoute = routeFor(nextScreen, routeModeId)
+    const nextUrl = new URL(nextRoute, window.location.origin)
+    if (window.location.pathname !== nextUrl.pathname || window.location.hash !== nextUrl.hash) {
+      window.history.pushState(null, '', nextRoute)
     }
   }
 
@@ -278,7 +453,11 @@ function App() {
     }
 
     window.addEventListener('hashchange', syncRoute)
-    return () => window.removeEventListener('hashchange', syncRoute)
+    window.addEventListener('popstate', syncRoute)
+    return () => {
+      window.removeEventListener('hashchange', syncRoute)
+      window.removeEventListener('popstate', syncRoute)
+    }
   }, [])
 
   useEffect(() => {
@@ -518,6 +697,7 @@ function App() {
       : screen === 'result' && (!draftState || !result)
         ? 'home'
         : screen
+  useRouteSeo(activeScreen)
 
   return (
     <div className={['app-shell', `theme-${theme}`, showRules ? 'rules-active' : ''].filter(Boolean).join(' ')}>
@@ -530,14 +710,21 @@ function App() {
         onMenu={() => setMenuOpen(true)}
       />
 
-      {activeScreen === 'home' && <HomePage recentRuns={recentRuns} onMode={openSetup} onHome={() => navigate('home')} />}
+      {activeScreen === 'home' && (
+        <HomePage
+          recentRuns={recentRuns}
+          onMode={openSetup}
+          onHome={() => navigate('home')}
+          onSeoLanding={() => navigate('seoLanding')}
+        />
+      )}
+      {activeScreen === 'seoLanding' && <SeoLandingPage onPlay={() => navigate('home')} />}
       {activeScreen === 'how' && <HowToPlay onBack={() => navigate('home')} />}
       {activeScreen === 'privacy' && <SimplePage title="Privacy Policy" onBack={() => navigate('home')} />}
       {activeScreen === 'contact' && <ContactPage onBack={() => navigate('home')} />}
       {activeScreen === 'leaderboard' && (
         <LeaderboardScreen
           authProfile={authProfile}
-          selectedModeId={selectedModeId}
           onBack={() => navigate('home')}
           onSignIn={() => setAuthOpen(true)}
         />
@@ -604,12 +791,20 @@ function App() {
           onChangeMode={() => openSetup()}
         />
       )}
+      {activeScreen === 'notFound' && <NotFoundPage onHome={() => navigate('home')} />}
 
-      <Footer onHow={() => navigate('how')} onPrivacy={() => navigate('privacy')} onContact={() => navigate('contact')} />
+      <Footer
+        onSeoLanding={() => navigate('seoLanding')}
+        onHow={() => navigate('how')}
+        onLeaderboard={() => navigate('leaderboard')}
+        onPrivacy={() => navigate('privacy')}
+        onContact={() => navigate('contact')}
+      />
       {menuOpen && (
         <SideMenu
           onClose={() => setMenuOpen(false)}
           onHome={() => goToPage('home')}
+          onSeoLanding={() => goToPage('seoLanding')}
           onHow={() => goToPage('how')}
           onLeaderboard={() => goToPage('leaderboard')}
           onPrivacy={() => goToPage('privacy')}
@@ -702,6 +897,7 @@ function Header({
 function SideMenu({
   onClose,
   onHome,
+  onSeoLanding,
   onHow,
   onLeaderboard,
   onPrivacy,
@@ -709,6 +905,7 @@ function SideMenu({
 }: {
   onClose: () => void
   onHome: () => void
+  onSeoLanding: () => void
   onHow: () => void
   onLeaderboard: () => void
   onPrivacy: () => void
@@ -724,6 +921,7 @@ function SideMenu({
           </button>
         </div>
         <button type="button" onClick={onHome}>Home</button>
+        <button type="button" onClick={onSeoLanding}>82-0 Soccer Game</button>
         <button type="button" onClick={onHow}>How to Play</button>
         <button type="button" onClick={onLeaderboard}>Leaderboard</button>
         <button type="button" onClick={onPrivacy}>Privacy Policy</button>
@@ -738,10 +936,12 @@ function HomePage({
   recentRuns,
   onMode,
   onHome,
+  onSeoLanding,
 }: {
   recentRuns: StoredRunSummary[]
   onMode: (modeId: string) => void
   onHome: () => void
+  onSeoLanding: () => void
 }) {
   const worldValidation = modeValidations.find((validation) => validation.modeId === 'world_xi')
   const readyPublicModes = publicModeConfigs.filter((mode) => publicModeIsReady(mode.modeId)).length
@@ -760,9 +960,14 @@ function HomePage({
       <section className="hero-section">
         <BrandMark onClick={onHome} />
         <div className="hero-copy">
-          <h1>Can you go undefeated?</h1>
+          <h1>UndefeatedXI: The Official Soccer Version of 82-0</h1>
           <p className="hero-mode-title">Choose Your Mode</p>
-          <p className="hero-text">How do you want to build your all-time XI?</p>
+          <p className="hero-text">UndefeatedXI is the official soccer and football version of the viral 82-0.com game. Instead of chasing 82-0 in basketball, you draft football legends into a real XI and simulate whether your squad can finish unbeaten.</p>
+          <p className="hero-text">Build an all-time football team, test it across club, nation, league, and World Cup modes, then share your result and climb the leaderboard.</p>
+          <p className="hero-text">This football draft simulator is built around perfect records like 38-0-0, with shareable results for runs that deserve receipts.</p>
+          <button className="text-link-button" type="button" onClick={onSeoLanding}>
+            Learn about the 82-0 soccer game
+          </button>
         </div>
       </section>
 
@@ -812,6 +1017,61 @@ function HomePage({
   )
 }
 
+function SeoLandingPage({ onPlay }: { onPlay: () => void }) {
+  return (
+    <main className="text-page seo-landing-page">
+      <button className="button ghost" type="button" onClick={onPlay}>
+        <Home size={18} /> Back to Game
+      </button>
+      <section className="seo-hero">
+        <BrandMark />
+        <h1>The Official Soccer and Football Version of 82-0</h1>
+        <p>Looking for an 82-0.com game for soccer or football? UndefeatedXI takes the same perfect-record chase and rebuilds it for football history.</p>
+        <p>You draft an all-time XI from clubs, nations, eras, and competitions, then simulate whether your team can finish unbeaten.</p>
+        <button className="button primary" type="button" onClick={onPlay}>
+          <Play size={18} /> Play UndefeatedXI
+        </button>
+      </section>
+
+      <section>
+        <h2>What is UndefeatedXI?</h2>
+        <p>UndefeatedXI is a football history draft simulator. Each run gives you prompts, players, and lineup choices, then tests your XI across realistic football records, from 38-0-0 league seasons to World Cup glory.</p>
+      </section>
+
+      <section>
+        <h2>How it connects to 82-0</h2>
+        <p>82-0 made the perfect-season draft idea instantly understandable. UndefeatedXI is the soccer and football version: instead of building a basketball team for 82 wins, you build a football XI and chase unbeaten seasons, perfect tournament runs, trophies, leaderboards, and shareable results.</p>
+      </section>
+
+      <section>
+        <h2>Why soccer fans play it</h2>
+        <p>The fun is in the football knowledge. You balance legends, eras, chemistry, positions, and tactics while deciding whether to take the obvious superstar or trust a deeper cut from a club, nation, league, or World Cup prompt.</p>
+      </section>
+
+      <section>
+        <h2>Modes</h2>
+        <p>UndefeatedXI includes club, nation, league, World Cup, and all-time draft-style modes. It is free to play, and strong runs can be saved, shared, and submitted to leaderboards.</p>
+      </section>
+
+      <FaqSection />
+    </main>
+  )
+}
+
+function FaqSection() {
+  return (
+    <section className="faq-section" aria-label="UndefeatedXI FAQ">
+      <h2>FAQ</h2>
+      {faqItems.map((item) => (
+        <details key={item.question} open>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </section>
+  )
+}
+
 function modesForHomeTab(modes: ModeConfig[], tab: HomeModeTab) {
   const byId = new Map(modes.map((mode) => [mode.modeId, mode]))
 
@@ -858,14 +1118,15 @@ function modeMarkFor(modeId: string, modeName: string) {
 function BrandMark({ compact = false, onClick }: { compact?: boolean; onClick?: () => void }) {
   const className = [compact ? 'brand-mark compact' : 'brand-mark', onClick ? 'clickable' : ''].filter(Boolean).join(' ')
   const sizes = compact ? '54px' : logoImageSizes
+  const imageAlt = compact ? '' : 'UndefeatedXI soccer draft simulator logo'
   const content = (
     <picture>
       <source type="image/avif" srcSet={logoImageSrcSet} sizes={sizes} />
       <source type="image/webp" srcSet={logoWebpSrcSet} sizes={sizes} />
       <img
         className="brand-logo"
-        alt=""
-        aria-hidden="true"
+        alt={imageAlt}
+        aria-hidden={compact ? 'true' : undefined}
         src="/logo-320.png"
         srcSet={logoPngSrcSet}
         sizes={sizes}
@@ -2219,7 +2480,7 @@ function HowToPlay({ onBack }: { onBack: () => void }) {
         <Home size={18} /> Back to Game
       </button>
       <h1>How to Play</h1>
-      <p>Build an XI or full matchday squad from randomized football-history prompts, then see whether the side can go perfect, invincible, win the trophy, or fall apart.</p>
+      <p>UndefeatedXI is the soccer and football version of the 82-0 perfect-record idea: build an XI or full matchday squad from randomized football-history prompts, then see whether the side can go perfect, invincible, win the trophy, or fall apart.</p>
       {[
         ['Choose a Mode', 'World XI is the default. Champions League, World Cup, Premier League, and Ball Knowledge change the pool and target.'],
         ['Choose a Formation', 'Most runs draft 11 fixed slots. Manager Mode extends the same shape with a rotation bench.'],
@@ -2259,6 +2520,18 @@ function HowToPlay({ onBack }: { onBack: () => void }) {
           ))}
         </tbody>
       </table>
+    </main>
+  )
+}
+
+function NotFoundPage({ onHome }: { onHome: () => void }) {
+  return (
+    <main className="text-page">
+      <button className="button ghost" type="button" onClick={onHome}>
+        <Home size={18} /> Back to Game
+      </button>
+      <h1>Page Not Found</h1>
+      <p>That UndefeatedXI page does not exist. Head back to the game to draft an all-time XI and chase an unbeaten run.</p>
     </main>
   )
 }
@@ -2551,38 +2824,48 @@ function AuthModal({
 
 function LeaderboardScreen({
   authProfile,
-  selectedModeId,
   onBack,
   onSignIn,
 }: {
   authProfile: AuthProfile | null
-  selectedModeId: string
   onBack: () => void
   onSignIn: () => void
 }) {
-  const [view, setView] = useState<LeaderboardView>('global')
+  const leaderboardModeOptions = useMemo(() => publicModeConfigs.filter((mode) => publicModeIsReady(mode.modeId)), [])
+  const normalizeLeaderboardSelection = (value: string | null): LeaderboardSelection => {
+    if (!value) return 'global'
+    if (value === 'mine') return 'mine'
+    const normalized = value.replaceAll('-', '_')
+    return leaderboardModeOptions.some((mode) => mode.modeId === normalized) ? normalized : 'global'
+  }
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardSelection>(() => {
+    if (typeof window === 'undefined') return 'global'
+    return normalizeLeaderboardSelection(new URLSearchParams(window.location.search).get('mode'))
+  })
   const [runs, setRuns] = useState<LeaderboardRun[]>([])
   const [status, setStatus] = useState('')
-  const leaderboardModeOptions = useMemo(() => publicModeConfigs.filter((mode) => publicModeIsReady(mode.modeId)), [])
-  const defaultLeaderboardModeId = leaderboardModeOptions.some((mode) => mode.modeId === selectedModeId)
-    ? selectedModeId
-    : leaderboardModeOptions[0]?.modeId ?? defaultModeId
-  const [modeLeaderboardModeId, setModeLeaderboardModeId] = useState(defaultLeaderboardModeId)
-  const activeModeLeaderboardId = leaderboardModeOptions.some((mode) => mode.modeId === modeLeaderboardModeId)
-    ? modeLeaderboardModeId
-    : defaultLeaderboardModeId
-  const [modeRuns, setModeRuns] = useState<LeaderboardRun[]>([])
-  const [modeStatus, setModeStatus] = useState('')
+  const selectedMode = selectedLeaderboard !== 'global' && selectedLeaderboard !== 'mine'
+    ? leaderboardModeOptions.find((mode) => mode.modeId === selectedLeaderboard)
+    : undefined
 
   useEffect(() => {
     let mounted = true
 
     async function loadLeaderboard() {
       if (!hasSupabaseConfig) return { items: [], message: 'Leaderboard needs Supabase env vars.' }
-      if (view === 'mine' && !authProfile) return { items: [], message: 'Sign in to view your runs.' }
+      if (selectedLeaderboard === 'mine' && !authProfile) return { items: [], message: 'Sign in to view your runs.' }
       const { fetchLeaderboardRuns } = await loadSupabaseService()
-      const items = await fetchLeaderboardRuns(view, selectedModeId)
-      return { items, message: items.length ? '' : 'No runs submitted yet.' }
+      const items = selectedLeaderboard === 'global'
+        ? await fetchLeaderboardRuns('global')
+        : selectedLeaderboard === 'mine'
+          ? await fetchLeaderboardRuns('mine')
+          : await fetchLeaderboardRuns('mode', selectedLeaderboard)
+      const emptyMessage = selectedLeaderboard === 'global'
+        ? 'No runs submitted yet.'
+        : selectedLeaderboard === 'mine'
+          ? 'No runs submitted by your account yet.'
+          : `No runs submitted for ${selectedMode?.modeName ?? 'this mode'} yet.`
+      return { items, message: items.length ? '' : emptyMessage }
     }
 
     loadLeaderboard()
@@ -2597,31 +2880,16 @@ function LeaderboardScreen({
     return () => {
       mounted = false
     }
-  }, [authProfile, selectedModeId, view])
+  }, [authProfile, selectedLeaderboard, selectedMode?.modeName])
 
-  useEffect(() => {
-    let mounted = true
-
-    async function loadModeLeaderboard() {
-      if (!hasSupabaseConfig) return { items: [], message: 'Leaderboard needs Supabase env vars.' }
-      const { fetchLeaderboardRuns } = await loadSupabaseService()
-      const items = await fetchLeaderboardRuns('mode', activeModeLeaderboardId)
-      return { items, message: items.length ? '' : 'No runs submitted for this mode yet.' }
-    }
-
-    loadModeLeaderboard()
-      .then((items) => {
-        if (!mounted) return
-        setModeRuns(items.items)
-        setModeStatus(items.message)
-      })
-      .catch((error) => {
-        if (mounted) setModeStatus(error instanceof Error ? error.message : 'Could not load this mode leaderboard.')
-      })
-    return () => {
-      mounted = false
-    }
-  }, [activeModeLeaderboardId])
+  const updateSelection = (value: LeaderboardSelection) => {
+    setSelectedLeaderboard(value)
+    if (typeof window === 'undefined') return
+    const nextUrl = value === 'global'
+      ? '/leaderboard'
+      : `/leaderboard?mode=${value.replaceAll('_', '-')}`
+    window.history.replaceState(null, '', nextUrl)
+  }
 
   return (
     <main className="text-page leaderboard-page">
@@ -2629,48 +2897,39 @@ function LeaderboardScreen({
         <Home size={18} /> Back to Game
       </button>
       <h1>Leaderboard</h1>
-      <p>Runs are optional. Signed-out players can still play, share local links, and keep browser saves.</p>
-      <div className="leaderboard-tabs" role="tablist" aria-label="Leaderboard views">
-        {[
-          ['global', 'Global'],
-          ['mode', 'This Mode'],
-          ['mine', 'My Runs'],
-        ].map(([id, label]) => (
-          <button key={id} className={view === id ? 'selected' : ''} type="button" onClick={() => setView(id as LeaderboardView)}>
-            {label}
-          </button>
-        ))}
-      </div>
-      {!authProfile && (
-        <button className="button secondary" type="button" onClick={onSignIn}>
-          <User size={18} /> Sign in for My Runs
-        </button>
-      )}
-      {status && <p className="notice" role="status">{status}</p>}
-      <LeaderboardRows runs={runs} ariaLabel="Leaderboard runs" />
-
-      <section className="leaderboard-mode-board" aria-label="Mode leaderboards">
+      <p>Choose the overall leaderboard or a specific mode. Signed-out players can still play, share local links, and keep browser saves.</p>
+      <section className="leaderboard-board" aria-label="Leaderboard results">
         <div className="leaderboard-section-head">
-          <h2>Mode Leaderboards</h2>
+          <h2>{selectedLeaderboard === 'global' ? 'Global / All Modes' : selectedLeaderboard === 'mine' ? 'My Runs' : selectedMode?.modeName ?? 'Mode Leaderboard'}</h2>
           <label className="leaderboard-mode-select">
+            <span className="sr-only">Choose leaderboard</span>
             <select
-              value={activeModeLeaderboardId}
-              onChange={(event) => setModeLeaderboardModeId(event.target.value)}
-              aria-label="Choose leaderboard mode"
+              value={selectedLeaderboard}
+              onChange={(event) => updateSelection(event.target.value)}
+              aria-label="Choose leaderboard"
             >
+              <option value="global">Global / All Modes</option>
               {leaderboardModeOptions.map((mode) => (
                 <option key={mode.modeId} value={mode.modeId}>{mode.modeName}</option>
               ))}
+              <option value="mine">My Runs</option>
             </select>
             <ChevronDown size={16} aria-hidden="true" />
           </label>
         </div>
-        {modeStatus && <p className="notice">{modeStatus}</p>}
-        <LeaderboardRows
-          runs={modeRuns}
-          ariaLabel={`${getModeConfig(activeModeLeaderboardId).modeName} leaderboard runs`}
-        />
+        {selectedLeaderboard === 'mine' && !authProfile && (
+          <button className="button secondary" type="button" onClick={onSignIn}>
+            <User size={18} /> Sign in for My Runs
+          </button>
+        )}
+        {status && <p className="notice" role="status">{status}</p>}
+        <LeaderboardRows runs={runs} ariaLabel="Leaderboard runs" />
       </section>
+      {!authProfile && selectedLeaderboard !== 'mine' && (
+        <button className="button secondary" type="button" onClick={onSignIn}>
+          <User size={18} /> Sign in for My Runs
+        </button>
+      )}
     </main>
   )
 }
@@ -2848,11 +3107,25 @@ function getSharedPickMetrics(pick: SharedRunSnapshot['picks'][number]) {
   ]
 }
 
-function Footer({ onHow, onPrivacy, onContact }: { onHow: () => void; onPrivacy: () => void; onContact: () => void }) {
+function Footer({
+  onSeoLanding,
+  onHow,
+  onLeaderboard,
+  onPrivacy,
+  onContact,
+}: {
+  onSeoLanding: () => void
+  onHow: () => void
+  onLeaderboard: () => void
+  onPrivacy: () => void
+  onContact: () => void
+}) {
   return (
     <footer className="footer">
       <div>
+        <button type="button" onClick={onSeoLanding}>82-0 Soccer Game</button>
         <button type="button" onClick={onHow}>How to Play</button>
+        <button type="button" onClick={onLeaderboard}>Leaderboard</button>
         <button type="button" onClick={onPrivacy}>Privacy Policy</button>
         <button type="button" onClick={onContact}>Contact</button>
         <button type="button" onClick={onContact}>Feedback</button>
