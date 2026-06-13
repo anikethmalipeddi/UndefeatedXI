@@ -176,7 +176,8 @@ describe('App', () => {
     const user = userEvent.setup()
     render(<App />)
 
-    expect(screen.getByRole('heading', { level: 1, name: /UndefeatedXI: The Official Soccer Version of 82-0/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: /Can you go undefeated/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: /UndefeatedXI: The Official Soccer Version of 82-0/i })).toBeInTheDocument()
     expect(screen.getByText(/football version of the viral 82-0\.com game/i)).toBeInTheDocument()
     expect(document.title).toBe('UndefeatedXI | Official Soccer Version of the 82-0 Game')
     expect(metaContent('meta[name="description"]')).toContain('official soccer and football version')

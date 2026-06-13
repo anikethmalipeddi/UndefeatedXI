@@ -960,14 +960,9 @@ function HomePage({
       <section className="hero-section">
         <BrandMark onClick={onHome} />
         <div className="hero-copy">
-          <h1>UndefeatedXI: The Official Soccer Version of 82-0</h1>
+          <h1>Can you go undefeated?</h1>
           <p className="hero-mode-title">Choose Your Mode</p>
-          <p className="hero-text">UndefeatedXI is the official soccer and football version of the viral 82-0.com game. Instead of chasing 82-0 in basketball, you draft football legends into a real XI and simulate whether your squad can finish unbeaten.</p>
-          <p className="hero-text">Build an all-time football team, test it across club, nation, league, and World Cup modes, then share your result and climb the leaderboard.</p>
-          <p className="hero-text">This football draft simulator is built around perfect records like 38-0-0, with shareable results for runs that deserve receipts.</p>
-          <button className="text-link-button" type="button" onClick={onSeoLanding}>
-            Learn about the 82-0 soccer game
-          </button>
+          <p className="hero-text">How do you want to build your all-time XI?</p>
         </div>
       </section>
 
@@ -1010,6 +1005,17 @@ function HomePage({
       <section className="support-strip">
         <span>{worldValidation?.contextCount ?? 0} sourced contexts</span>
         <span>{readyPublicModes} playable modes</span>
+      </section>
+
+      <section className="home-seo-section" aria-labelledby="home-about-title">
+        <p className="section-kicker">Football version of 82-0</p>
+        <h2 id="home-about-title">UndefeatedXI: The Official Soccer Version of 82-0</h2>
+        <p>UndefeatedXI is the official soccer and football version of the viral 82-0.com game. Instead of chasing 82-0 in basketball, you draft football legends into a real XI and simulate whether your squad can finish unbeaten.</p>
+        <p>Build an all-time football team, test it across club, nation, league, and World Cup modes, then share your result and climb the leaderboard.</p>
+        <p>This football draft simulator is built around perfect records like 38-0-0, with shareable results for runs that deserve receipts.</p>
+        <button className="text-link-button" type="button" onClick={onSeoLanding}>
+          Learn about the 82-0 soccer game
+        </button>
       </section>
 
       {recentRuns.length > 0 && <RecentRuns runs={recentRuns.slice(0, 4)} />}
