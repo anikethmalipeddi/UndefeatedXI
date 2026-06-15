@@ -63,7 +63,7 @@ const logoPngSrcSet = '/logo-320.png 320w, /logo-640.png 640w'
 const siteUrl = 'https://www.undefeatedxi.com'
 const socialImageUrl = `${siteUrl}/og-image.png`
 const homeSeoDescription = 'Play UndefeatedXI, a free soccer and football draft simulator where you build a perfect XI, chase 38-0-0, and test football history teams across World Cup, Champions League, league, and all-time modes.'
-const landingSeoDescription = 'Play UndefeatedXI, the official soccer and football version of the viral 82-0 game. Draft legends, build a perfect XI, and chase 38-0-0 across World Cup, Champions League, Euros, AFCON, and more. Free with no ads.'
+const landingSeoDescription = 'Play UndefeatedXI, the soccer and football version of 82-0. Draft legends, build a perfect XI, and chase 38-0-0.'
 const footballLandingSeoDescription = 'Play UndefeatedXI, the official football version of the viral 82-0 game. Build a perfect football XI, draft legends from clubs and nations, and chase unbeaten league and tournament runs for free.'
 const faqItems = [
   {
