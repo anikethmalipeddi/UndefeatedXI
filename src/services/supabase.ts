@@ -23,6 +23,11 @@ export interface AuthProfile {
   id: string
   email?: string
   displayName: string
+  needsDisplayName?: boolean
+}
+
+interface ProfileRow {
+  display_name: string | null
 }
 
 export interface LeaderboardRun {
@@ -71,6 +76,32 @@ export interface FeedbackSubmission {
   pageUrl?: string
 }
 
+function profileDisplayName(value: string | null | undefined, fallback = 'Player'): string {
+  const clean = sanitizeDisplayName(value ?? '')
+  return clean.length >= 2 ? clean : fallback
+}
+
+function metadataDisplayName(session: Session): string {
+  const metadataName = typeof session.user.user_metadata?.display_name === 'string' ? session.user.user_metadata.display_name : ''
+  return profileDisplayName(metadataName, '')
+}
+
+function sessionDisplayName(session: Session): string {
+  const metadataName = metadataDisplayName(session)
+  const emailName = session.user.email?.split('@')[0] ?? 'Player'
+  return profileDisplayName(metadataName || emailName)
+}
+
+function authProfileFromSession(session: Session, displayName = sessionDisplayName(session), needsDisplayName = false): AuthProfile {
+  const profile: AuthProfile = {
+    id: session.user.id,
+    email: session.user.email,
+    displayName,
+  }
+  if (needsDisplayName) profile.needsDisplayName = true
+  return profile
+}
+
 function sanitizeOptionalText(value: string | undefined, limit: number): string | null {
   const clean = value?.replace(/\s+/g, ' ').trim().slice(0, limit) ?? ''
   return clean || null
@@ -89,13 +120,7 @@ function sanitizeFeedbackEmail(value: string | undefined): string | null {
 
 export function profileFromSession(session: Session | null): AuthProfile | null {
   if (!session?.user) return null
-  const metadataName = typeof session.user.user_metadata?.display_name === 'string' ? session.user.user_metadata.display_name : ''
-  const emailName = session.user.email?.split('@')[0] ?? 'Player'
-  return {
-    id: session.user.id,
-    email: session.user.email,
-    displayName: sanitizeDisplayName(metadataName || emailName) || 'Player',
-  }
+  return authProfileFromSession(session)
 }
 
 function isValidRecord(record: RunResult['record']): boolean {
@@ -157,22 +182,79 @@ export async function getCurrentSession(): Promise<Session | null> {
   return data.session
 }
 
-export async function signUp(email: string, password: string, displayName: string): Promise<void> {
+async function getProfileDisplayName(userId: string): Promise<string | null> {
+  if (!supabase) return null
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('display_name')
+    .eq('id', userId)
+    .maybeSingle()
+  if (error) throw error
+  return profileDisplayName((data as ProfileRow | null)?.display_name ?? null, '') || null
+}
+
+async function upsertProfileDisplayName(userId: string, displayName: string): Promise<string> {
   if (!supabase) throw new Error('Supabase is not configured.')
-  const cleanName = sanitizeDisplayName(displayName)
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: { data: { display_name: cleanName || 'Player' } },
-  })
+  const cleanName = profileDisplayName(displayName)
+  const { data, error } = await supabase
+    .from('profiles')
+    .upsert({ id: userId, display_name: cleanName }, { onConflict: 'id' })
+    .select('display_name')
+    .single()
+  if (error) throw error
+  return profileDisplayName((data as ProfileRow | null)?.display_name ?? cleanName)
+}
+
+async function syncAuthMetadata(session: Session, displayName: string): Promise<void> {
+  if (!supabase) return
+  if (sessionDisplayName(session) === displayName) return
+  const { error } = await supabase.auth.updateUser({ data: { display_name: displayName } })
   if (error) throw error
 }
 
-export async function signInAsGuest(displayName = 'Guest'): Promise<void> {
+export async function loadAuthProfile(session?: Session | null): Promise<AuthProfile | null> {
+  const activeSession = session === undefined ? await getCurrentSession() : session
+  if (!activeSession?.user) return null
+
+  const fallbackName = sessionDisplayName(activeSession)
+  const savedName = await getProfileDisplayName(activeSession.user.id)
+  const metadataName = metadataDisplayName(activeSession)
+  if (!savedName && !metadataName) return authProfileFromSession(activeSession, fallbackName, true)
+
+  const displayName = savedName ?? await upsertProfileDisplayName(activeSession.user.id, metadataName)
+  void syncAuthMetadata(activeSession, displayName).catch(() => undefined)
+  return authProfileFromSession(activeSession, displayName)
+}
+
+export function onAuthStateChange(callback: (session: Session | null) => void): () => void {
+  if (!supabase) return () => undefined
+  const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_OUT') {
+      callback(null)
+      return
+    }
+    if (session || event === 'INITIAL_SESSION') callback(session)
+  })
+  return () => data.subscription.unsubscribe()
+}
+
+export async function signUp(email: string, password: string, displayName: string): Promise<AuthProfile | null> {
   if (!supabase) throw new Error('Supabase is not configured.')
-  const cleanName = sanitizeDisplayName(displayName)
-  const { error } = await supabase.auth.signInAnonymously({
-    options: { data: { display_name: cleanName || 'Guest' } },
+  const cleanName = profileDisplayName(displayName)
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: { data: { display_name: cleanName } },
+  })
+  if (error) throw error
+  return data.session ? loadAuthProfile(data.session) : null
+}
+
+export async function signInAsGuest(displayName = 'Guest'): Promise<AuthProfile | null> {
+  if (!supabase) throw new Error('Supabase is not configured.')
+  const cleanName = profileDisplayName(displayName, 'Guest')
+  const { data, error } = await supabase.auth.signInAnonymously({
+    options: { data: { display_name: cleanName } },
   })
   if (error) {
     if (error.code === 'anonymous_provider_disabled') {
@@ -180,12 +262,14 @@ export async function signInAsGuest(displayName = 'Guest'): Promise<void> {
     }
     throw error
   }
+  return data.session ? loadAuthProfile(data.session) : null
 }
 
-export async function signIn(email: string, password: string): Promise<void> {
+export async function signIn(email: string, password: string): Promise<AuthProfile | null> {
   if (!supabase) throw new Error('Supabase is not configured.')
-  const { error } = await supabase.auth.signInWithPassword({ email, password })
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) throw error
+  return data.session ? loadAuthProfile(data.session) : null
 }
 
 export async function signOut(): Promise<void> {
@@ -205,18 +289,26 @@ export async function resetPassword(email: string): Promise<void> {
   if (error) throw error
 }
 
-export async function updateDisplayName(displayName: string): Promise<void> {
+export async function updateDisplayName(displayName: string): Promise<AuthProfile | null> {
   if (!supabase) throw new Error('Supabase is not configured.')
-  const cleanName = sanitizeDisplayName(displayName)
+  const cleanName = profileDisplayName(displayName, '')
   if (cleanName.length < 2) throw new Error('Display name must be at least 2 characters.')
-  const { error } = await supabase.auth.updateUser({ data: { display_name: cleanName } })
+  const { data, error } = await supabase.auth.updateUser({ data: { display_name: cleanName } })
   if (error) throw error
+  const session = await getCurrentSession()
+  const userId = data.user?.id ?? session?.user.id
+  if (!userId) throw new Error('Sign in again to update your profile.')
+  const savedName = await upsertProfileDisplayName(userId, cleanName)
+  return session ? authProfileFromSession(session, savedName) : { id: userId, email: data.user?.email, displayName: savedName }
 }
 
 export async function submitLeaderboardRun(payload: LeaderboardSubmission): Promise<void> {
   if (!supabase) throw new Error('Supabase is not configured.')
   const issues = validateLeaderboardSubmission(payload)
   if (issues.length > 0) throw new Error(issues[0])
+  const profile = await loadAuthProfile()
+  if (!profile) throw new Error('Sign in required.')
+  if (profile.needsDisplayName) throw new Error('Choose a display name before submitting.')
   const { error } = await supabase.functions.invoke('submit-run', { body: payload })
   if (!error) return
 

@@ -17,7 +17,7 @@ import {
   User,
   X,
 } from 'lucide-react'
-import { type CSSProperties, type FormEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from 'react'
+import { type CSSProperties, type FormEvent, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { brandName, targetRecordLabel } from './brand'
 import { defaultFormationId, formations, getFormation } from './data/formations'
@@ -402,7 +402,9 @@ function App() {
   })
   const [menuOpen, setMenuOpen] = useState(false)
   const [authOpen, setAuthOpen] = useState(false)
+  const [authReady, setAuthReady] = useState(!hasSupabaseConfig)
   const [authProfile, setAuthProfile] = useState<AuthProfile | null>(null)
+  const [pendingLeaderboardSubmit, setPendingLeaderboardSubmit] = useState(false)
   const [leaderboardStatus, setLeaderboardStatus] = useState<LeaderboardStatus>('idle')
   const [leaderboardMessage, setLeaderboardMessage] = useState('')
   const [isDraftLoading, setIsDraftLoading] = useState(false)
@@ -514,6 +516,59 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (!hasSupabaseConfig) return
+
+    let mounted = true
+    let authLoadId = 0
+    let unsubscribe: () => void = () => undefined
+
+    const applySession = async (session: Parameters<Awaited<ReturnType<typeof loadSupabaseService>>['loadAuthProfile']>[0]) => {
+      const loadId = authLoadId + 1
+      authLoadId = loadId
+      if (!session) {
+        if (mounted && loadId === authLoadId) {
+          setAuthProfile(null)
+          setAuthReady(true)
+        }
+        return
+      }
+
+      try {
+        const { loadAuthProfile } = await loadSupabaseService()
+        const profile = await loadAuthProfile(session)
+        if (mounted && loadId === authLoadId) {
+          setAuthProfile(profile)
+          setAuthReady(true)
+        }
+      } catch {
+        if (mounted && loadId === authLoadId) {
+          setAuthProfile(null)
+          setAuthReady(true)
+        }
+      }
+    }
+
+    loadSupabaseService()
+      .then(({ getCurrentSession, onAuthStateChange }) => {
+        unsubscribe = onAuthStateChange((session) => {
+          void applySession(session)
+        })
+        return getCurrentSession()
+      })
+      .then((session) => applySession(session))
+      .catch(() => {
+        if (!mounted) return
+        setAuthProfile(null)
+        setAuthReady(true)
+      })
+
+    return () => {
+      mounted = false
+      unsubscribe()
+    }
+  }, [])
+
+  useEffect(() => {
     savePreferences({
       modeId: selectedModeId,
       formationId: selectedFormationId,
@@ -592,6 +647,7 @@ function App() {
     setSpecialSelection(defaultSpecialSelection(getModeConfig(modeId)))
     setDraftState(null)
     setResult(null)
+    setPendingLeaderboardSubmit(false)
     navigate('setup', modeId)
     preloadDraftEngine(modeId)
   }
@@ -611,6 +667,7 @@ function App() {
       setShareFallbackValue('')
       setLeaderboardStatus('idle')
       setLeaderboardMessage('')
+      setPendingLeaderboardSubmit(false)
       navigate('draft')
     } finally {
       setIsDraftLoading(false)
@@ -661,6 +718,7 @@ function App() {
       setShareFallbackValue('')
       setLeaderboardStatus('idle')
       setLeaderboardMessage('')
+      setPendingLeaderboardSubmit(false)
       navigate('result')
       return
     }
@@ -722,14 +780,8 @@ function App() {
     navigate(nextScreen)
   }
 
-  const submitCurrentRun = async () => {
+  const submitRunToLeaderboard = useCallback(async () => {
     if (!result || !draftState) return
-    if (!authProfile) {
-      setLeaderboardStatus('error')
-      setLeaderboardMessage('Sign in to submit a leaderboard run.')
-      setAuthOpen(true)
-      return
-    }
 
     setLeaderboardStatus('submitting')
     setLeaderboardMessage('')
@@ -742,7 +794,51 @@ function App() {
       setLeaderboardStatus('error')
       setLeaderboardMessage(error instanceof Error ? error.message : 'Could not submit this run.')
     }
+  }, [draftState, result, selectedFormation.formationId])
+
+  const submitCurrentRun = async () => {
+    if (!result || !draftState) return
+    if (!hasSupabaseConfig) {
+      setLeaderboardStatus('error')
+      setLeaderboardMessage('Accounts are not configured on this build.')
+      return
+    }
+    if (!authReady) {
+      setPendingLeaderboardSubmit(true)
+      setLeaderboardStatus('submitting')
+      setLeaderboardMessage('Checking your saved sign-in.')
+      return
+    }
+    if (!authProfile) {
+      setPendingLeaderboardSubmit(true)
+      setLeaderboardStatus('idle')
+      setLeaderboardMessage('Sign in once and this run will submit automatically.')
+      setAuthOpen(true)
+      return
+    }
+    if (authProfile.needsDisplayName) {
+      setPendingLeaderboardSubmit(true)
+      setLeaderboardStatus('idle')
+      setLeaderboardMessage('Choose a display name once to submit this run.')
+      setAuthOpen(true)
+      return
+    }
+
+    await submitRunToLeaderboard()
   }
+
+  useEffect(() => {
+    if (!pendingLeaderboardSubmit || !authReady || !authProfile || authProfile.needsDisplayName) return
+    let cancelled = false
+    queueMicrotask(() => {
+      if (cancelled) return
+      setPendingLeaderboardSubmit(false)
+      void submitRunToLeaderboard()
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [authProfile, authReady, pendingLeaderboardSubmit, submitRunToLeaderboard])
 
   const activeScreen =
     screen === 'draft' && !draftState
@@ -758,6 +854,7 @@ function App() {
         theme={theme}
         onHome={() => navigate('home')}
         authProfile={authProfile}
+        authReady={authReady}
         onSignIn={() => setAuthOpen(true)}
         onToggleTheme={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
         onMenu={() => setMenuOpen(true)}
@@ -805,6 +902,7 @@ function App() {
       {activeScreen === 'leaderboard' && (
         <LeaderboardScreen
           authProfile={authProfile}
+          authReady={authReady}
           onBack={() => navigate('home')}
           onSignIn={() => setAuthOpen(true)}
         />
@@ -865,6 +963,7 @@ function App() {
           leaderboardStatus={leaderboardStatus}
           leaderboardMessage={leaderboardMessage}
           authProfile={authProfile}
+          authReady={authReady}
           onSubmitLeaderboard={submitCurrentRun}
           onRunBack={startDraft}
           onHome={() => navigate('home')}
@@ -895,7 +994,10 @@ function App() {
       )}
       {authOpen && (
         <AuthModal
+          key={authProfile ? `${authProfile.id}:${authProfile.needsDisplayName ? 'missing-name' : 'ready'}` : 'signed-out'}
           authProfile={authProfile}
+          authReady={authReady}
+          pendingLeaderboardSubmit={pendingLeaderboardSubmit}
           onClose={() => setAuthOpen(false)}
           onAuthProfile={setAuthProfile}
         />
@@ -946,6 +1048,7 @@ function RulesModal({ onClose, onNeverShow }: { onClose: () => void; onNeverShow
 function Header({
   theme,
   authProfile,
+  authReady,
   onHome,
   onSignIn,
   onToggleTheme,
@@ -953,6 +1056,7 @@ function Header({
 }: {
   theme: ThemeMode
   authProfile: AuthProfile | null
+  authReady: boolean
   onHome: () => void
   onSignIn: () => void
   onToggleTheme: () => void
@@ -962,7 +1066,7 @@ function Header({
     <header className="topbar">
       <button className="top-home-link" onClick={onHome} type="button" aria-label={`Go to ${appName} home`} />
       <nav className="top-actions" aria-label="Primary navigation">
-        <button className="icon-button" type="button" onClick={onSignIn} aria-label={authProfile ? `Signed in as ${authProfile.displayName}` : 'Sign in'}>
+        <button className="icon-button" type="button" onClick={onSignIn} aria-label={!authReady ? 'Checking signed-in account' : authProfile ? `Signed in as ${authProfile.displayName}` : 'Sign in'}>
           <User size={20} />
         </button>
         <button className="icon-button" type="button" onClick={onToggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
@@ -2349,6 +2453,7 @@ function ResultScreen({
   leaderboardStatus,
   leaderboardMessage,
   authProfile,
+  authReady,
   onSubmitLeaderboard,
   onRunBack,
   onHome,
@@ -2364,6 +2469,7 @@ function ResultScreen({
   leaderboardStatus: LeaderboardStatus
   leaderboardMessage: string
   authProfile: AuthProfile | null
+  authReady: boolean
   onSubmitLeaderboard: () => void
   onRunBack: () => void
   onHome: () => void
@@ -2399,7 +2505,7 @@ function ResultScreen({
           <Clipboard size={18} /> {copied ? 'Link copied' : 'Share Link'}
         </button>
         <button className="button secondary" type="button" onClick={onSubmitLeaderboard} disabled={leaderboardStatus === 'submitting'}>
-          <Trophy size={18} /> {leaderboardStatus === 'submitting' ? 'Submitting' : leaderboardStatus === 'submitted' ? 'Submitted' : authProfile ? 'Submit Run' : 'Sign in to submit'}
+          <Trophy size={18} /> {leaderboardStatus === 'submitting' ? 'Submitting' : leaderboardStatus === 'submitted' ? 'Submitted' : !authReady ? 'Checking account' : authProfile && !authProfile.needsDisplayName ? 'Submit Run' : 'Sign in to submit'}
         </button>
         <button className="button secondary" type="button" onClick={onRunBack}>
           Build Another
@@ -2815,10 +2921,14 @@ function ContactPage({ onBack }: { onBack: () => void }) {
 
 function AuthModal({
   authProfile,
+  authReady,
+  pendingLeaderboardSubmit,
   onClose,
   onAuthProfile,
 }: {
   authProfile: AuthProfile | null
+  authReady: boolean
+  pendingLeaderboardSubmit: boolean
   onClose: () => void
   onAuthProfile: (profile: AuthProfile | null) => void
 }) {
@@ -2828,25 +2938,7 @@ function AuthModal({
   const [displayName, setDisplayName] = useState(authProfile?.displayName ?? '')
   const [status, setStatus] = useState('')
   const [busy, setBusy] = useState(false)
-
-  useEffect(() => {
-    if (!hasSupabaseConfig || authProfile) return
-    let mounted = true
-
-    loadSupabaseService()
-      .then(({ getCurrentSession, profileFromSession }) => getCurrentSession().then(profileFromSession))
-      .then((profile) => {
-        if (!mounted || !profile) return
-        onAuthProfile(profile)
-        setDisplayName(profile.displayName)
-        setStatus('Signed in.')
-      })
-      .catch(() => undefined)
-
-    return () => {
-      mounted = false
-    }
-  }, [authProfile, onAuthProfile])
+  const formBusy = busy || !authReady
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -2858,19 +2950,37 @@ function AuthModal({
     setBusy(true)
     setStatus('')
     try {
-      const { getCurrentSession, profileFromSession, signIn, signUp, updateDisplayName } = await loadSupabaseService()
+      const { signIn, signUp, updateDisplayName } = await loadSupabaseService()
       if (authProfile) {
-        await updateDisplayName(displayName)
-        const session = await getCurrentSession()
-        onAuthProfile(profileFromSession(session))
-        setStatus('Profile updated.')
+        const profile = await updateDisplayName(displayName)
+        if (profile) onAuthProfile(profile)
+        setStatus(pendingLeaderboardSubmit ? 'Profile saved. Submitting run.' : 'Profile updated.')
+        if (pendingLeaderboardSubmit) onClose()
       } else if (mode === 'signup') {
-        await signUp(email, password, displayName)
-        setStatus('Check your email if confirmation is enabled, then sign in.')
+        const profile = await signUp(email, password, displayName)
+        if (profile) {
+          onAuthProfile(profile)
+          if (profile.needsDisplayName) {
+            setDisplayName(profile.displayName)
+            setStatus('Choose a display name to finish.')
+            return
+          }
+          onClose()
+          return
+        }
+        setStatus('Check your email, then sign in here to submit your run.')
       } else {
-        await signIn(email, password)
-        const session = await getCurrentSession()
-        onAuthProfile(profileFromSession(session))
+        const profile = await signIn(email, password)
+        if (!profile) {
+          setStatus('Sign-in needs one more step. Check your email, then sign in again.')
+          return
+        }
+        onAuthProfile(profile)
+        if (profile.needsDisplayName) {
+          setDisplayName(profile.displayName)
+          setStatus('Choose a display name to finish.')
+          return
+        }
         onClose()
       }
     } catch (error) {
@@ -2906,11 +3016,14 @@ function AuthModal({
     setBusy(true)
     setStatus('')
     try {
-      const { getCurrentSession, profileFromSession, signInAsGuest } = await loadSupabaseService()
-      await signInAsGuest(displayName || 'Guest')
-      const session = await getCurrentSession()
-      onAuthProfile(profileFromSession(session))
-      onClose()
+      const { signInAsGuest } = await loadSupabaseService()
+      const profile = await signInAsGuest(displayName || 'Guest')
+      if (profile) {
+        onAuthProfile(profile)
+        onClose()
+      } else {
+        setStatus('Could not start a persistent guest session.')
+      }
     } catch (error) {
       setStatus(error instanceof Error ? error.message : 'Could not start guest session.')
     } finally {
@@ -2939,58 +3052,67 @@ function AuthModal({
           <X size={22} />
         </button>
         <h2 id="auth-title">{authProfile ? 'Account' : mode === 'signin' ? 'Sign in' : 'Create account'}</h2>
-        <p>Play stays open without an account. Continue as guest to submit leaderboard runs without waiting on email.</p>
+        <p>
+          {authProfile
+            ? authProfile.needsDisplayName
+              ? 'Choose a display name once. Future leaderboard submissions will reuse it.'
+              : 'Your account stays signed in until you log out.'
+            : pendingLeaderboardSubmit
+              ? 'Sign in or create an account. This run will submit automatically after.'
+              : 'Create an account once, then leaderboard submissions stay one tap.'}
+        </p>
 
-        <form className="auth-form" onSubmit={submit}>
+        <form className="auth-form" onSubmit={submit} aria-busy={formBusy}>
           {authProfile ? (
             <>
               <label>
                 Display name
-                <input value={displayName} onChange={(event) => setDisplayName(sanitizeDisplayName(event.target.value))} maxLength={32} />
+                <input value={displayName} onChange={(event) => setDisplayName(sanitizeDisplayName(event.target.value))} maxLength={32} minLength={2} required disabled={formBusy} />
               </label>
-              <small>{authProfile.email}</small>
+              <small>{authProfile.email ?? 'Guest account'}</small>
             </>
           ) : (
             <>
               <label>
                 Email
-                <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" autoComplete="email" required />
+                <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" autoComplete="email" required disabled={formBusy} />
               </label>
               <label>
                 Password
-                <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" autoComplete={mode === 'signin' ? 'current-password' : 'new-password'} minLength={8} required />
+                <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" autoComplete={mode === 'signin' ? 'current-password' : 'new-password'} minLength={8} required disabled={formBusy} />
               </label>
               {mode === 'signup' && (
                 <label>
                   Display name
-                  <input value={displayName} onChange={(event) => setDisplayName(sanitizeDisplayName(event.target.value))} maxLength={32} />
+                  <input value={displayName} onChange={(event) => setDisplayName(sanitizeDisplayName(event.target.value))} maxLength={32} minLength={2} required disabled={formBusy} />
                 </label>
               )}
             </>
           )}
+          {!authReady && <p className="notice">Checking your saved sign-in.</p>}
           {!hasSupabaseConfig && <p className="notice">Supabase env vars are missing. Local play still works.</p>}
           {status && <p className="auth-status" role="status">{status}</p>}
           {!authProfile && (
-            <button className="button primary full" type="button" onClick={handleGuestSignIn} disabled={busy}>
+            <button className="button primary full" type="button" onClick={handleGuestSignIn} disabled={formBusy}>
               {busy ? 'Working' : 'Continue as Guest'}
             </button>
           )}
-          <button className="button primary full" type="submit" disabled={busy}>
-            {busy ? 'Working' : authProfile ? 'Save Profile' : mode === 'signin' ? 'Sign In' : 'Create Account'}
+          <button className="button primary full" type="submit" disabled={formBusy}>
+            {busy ? 'Working' : !authReady ? 'Checking' : authProfile ? 'Save Profile' : mode === 'signin' ? 'Sign In' : 'Create Account'}
           </button>
         </form>
 
         <div className="auth-switcher">
           {authProfile ? (
-            <button className="button ghost" type="button" onClick={handleSignOut} disabled={busy}>
+            <button className="button ghost" type="button" onClick={handleSignOut} disabled={formBusy}>
               <LogOut size={18} /> Sign Out
             </button>
           ) : (
             <>
-              <button className="button ghost" type="button" onClick={() => setMode((current) => (current === 'signin' ? 'signup' : 'signin'))}>
+              <button className="button ghost" type="button" onClick={() => setMode((current) => (current === 'signin' ? 'signup' : 'signin'))} disabled={formBusy}>
                 {mode === 'signin' ? 'Create account' : 'Already have one'}
               </button>
-              <button className="button ghost" type="button" onClick={handleReset} disabled={busy}>
+              <button className="button ghost" type="button" onClick={handleReset} disabled={formBusy}>
                 Reset password
               </button>
             </>
@@ -3003,10 +3125,12 @@ function AuthModal({
 
 function LeaderboardScreen({
   authProfile,
+  authReady,
   onBack,
   onSignIn,
 }: {
   authProfile: AuthProfile | null
+  authReady: boolean
   onBack: () => void
   onSignIn: () => void
 }) {
@@ -3032,6 +3156,7 @@ function LeaderboardScreen({
 
     async function loadLeaderboard() {
       if (!hasSupabaseConfig) return { items: [], message: 'Leaderboard needs Supabase env vars.' }
+      if (selectedLeaderboard === 'mine' && !authReady) return { items: [], message: 'Checking your saved sign-in.' }
       if (selectedLeaderboard === 'mine' && !authProfile) return { items: [], message: 'Sign in to view your runs.' }
       const { fetchLeaderboardRuns } = await loadSupabaseService()
       const items = selectedLeaderboard === 'global'
@@ -3059,7 +3184,7 @@ function LeaderboardScreen({
     return () => {
       mounted = false
     }
-  }, [authProfile, selectedLeaderboard, selectedMode?.modeName])
+  }, [authProfile, authReady, selectedLeaderboard, selectedMode?.modeName])
 
   const updateSelection = (value: LeaderboardSelection) => {
     setSelectedLeaderboard(value)
@@ -3098,7 +3223,7 @@ function LeaderboardScreen({
             <ChevronDown size={16} aria-hidden="true" />
           </label>
         </div>
-        {selectedLeaderboard === 'mine' && !authProfile && (
+        {selectedLeaderboard === 'mine' && authReady && !authProfile && (
           <button className="button secondary" type="button" onClick={onSignIn}>
             <User size={18} /> Sign in for My Runs
           </button>
@@ -3106,7 +3231,7 @@ function LeaderboardScreen({
         {status && <p className="notice" role="status">{status}</p>}
         <LeaderboardRows runs={runs} ariaLabel="Leaderboard runs" />
       </section>
-      {!authProfile && selectedLeaderboard !== 'mine' && (
+      {authReady && !authProfile && selectedLeaderboard !== 'mine' && (
         <button className="button secondary" type="button" onClick={onSignIn}>
           <User size={18} /> Sign in for My Runs
         </button>
