@@ -316,6 +316,69 @@ describe('draft engine', () => {
     expect(spun.currentOptions.every((player) => player.teamName === 'Barcelona')).toBe(true)
   })
 
+  it('dedupes accent variants from the same team-era roll', () => {
+    const mode = getModeConfig('world_xi')
+    const state = createDraftState(mode, '4-3-3', {
+      fixedTeam: { label: 'Chelsea', teamType: 'club' },
+      fixedEra: '2020s',
+    })
+    const spun = spinForSlot(mode, state)
+    const normalizedNames = spun.currentRollPool.map((player) =>
+      player.displayName
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/gi, '')
+        .toLowerCase(),
+    )
+
+    expect(spun.currentRoll?.team.label).toBe('Chelsea')
+    expect(spun.currentRoll?.era).toBe('2020s')
+    expect(normalizedNames.filter((name) => name === 'ngolokante')).toHaveLength(1)
+  })
+
+  it('dedupes generated and curated versions of Peter Schmeichel in the same roll', () => {
+    const mode = getModeConfig('world_xi')
+    const state = createDraftState(mode, '4-3-3', {
+      fixedTeam: { label: 'Denmark', teamType: 'nation' },
+      fixedEra: '1990s',
+    })
+    const spun = spinForSlot(mode, state)
+    const schmeichels = spun.currentRollPool.filter((player) => player.displayName === 'Peter Schmeichel')
+
+    expect(spun.currentRoll?.team.label).toBe('Denmark')
+    expect(spun.currentRoll?.era).toBe('1990s')
+    expect(schmeichels).toHaveLength(1)
+    expect(schmeichels[0].ratings.goalkeeping).toBeGreaterThanOrEqual(95)
+  })
+
+  it('does not show duplicate normalized player names in fixed team-era roll pools', () => {
+    const mode = getModeConfig('world_xi')
+    const checks = [
+      { label: 'Denmark', teamType: 'nation' as const, era: '1990s' },
+      { label: 'England', teamType: 'nation' as const, era: '2000s' },
+      { label: 'PSG', teamType: 'club' as const, era: '2010s' },
+      { label: 'Real Madrid', teamType: 'club' as const, era: '2010s' },
+    ]
+
+    for (const check of checks) {
+      const spun = spinForSlot(mode, createDraftState(mode, '4-3-3', {
+        fixedTeam: { label: check.label, teamType: check.teamType },
+        fixedEra: check.era,
+      }))
+      const duplicateNames = spun.currentRollPool
+        .map((player) =>
+          player.displayName
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/gi, '')
+            .toLowerCase(),
+        )
+        .filter((name, index, names) => names.indexOf(name) !== index)
+
+      expect(duplicateNames, `${check.label} ${check.era} has duplicate visible player names`).toEqual([])
+    }
+  })
+
   it('keeps exact-roll stars visible even when their positions are already filled', () => {
     const mode = getModeConfig('world_xi')
     const baseState = createDraftState(mode, '4-3-3', {
