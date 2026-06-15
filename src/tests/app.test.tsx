@@ -164,25 +164,37 @@ describe('App', () => {
     render(<App />)
 
     expect(screen.getByRole('heading', { level: 1, name: /Official Soccer and Football Version of 82-0/i })).toBeInTheDocument()
-    expect(screen.getByText(/Is there a soccer version of 82-0\.com/i)).toBeInTheDocument()
-    expect(document.title).toBe('82-0 Soccer Game | Official Football Version by UndefeatedXI')
-    expect(metaContent('meta[name="description"]')).toBe('Looking for an 82-0.com game for soccer or football? Play UndefeatedXI, the official football version where you draft an all-time XI and chase unbeaten seasons, World Cup glory, and perfect records.')
-    expect(document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://undefeatedxi.com/82-0-soccer-game')
-    expect(metaContent('meta[property="og:image"]')).toBe('https://undefeatedxi.com/logo-640.png')
+    expect(screen.getByText(/Is there a soccer version of 82-0\?/i)).toBeInTheDocument()
+    expect(document.title).toBe('UndefeatedXI | Official Soccer Version of the 82-0 Game')
+    expect(metaContent('meta[name="description"]')).toBe('Play UndefeatedXI, the official soccer and football version of the viral 82-0 game. Draft legends, build a perfect XI, and chase 38-0-0 across World Cup, Champions League, Euros, AFCON, and more. Free with no ads.')
+    expect(document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://www.undefeatedxi.com/82-0-soccer-game')
+    expect(metaContent('meta[property="og:image"]')).toBe('https://www.undefeatedxi.com/og-image.png')
     expect(document.getElementById('structured-data-faq')?.textContent).toContain('FAQPage')
+    expect(document.getElementById('structured-data-breadcrumb')?.textContent).toContain('BreadcrumbList')
+  })
+
+  it('opens the football landing page with unique metadata', () => {
+    window.history.replaceState(null, '', '/82-0-football-game')
+
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 1, name: /Official Football Version of 82-0/i })).toBeInTheDocument()
+    expect(document.title).toBe('UndefeatedXI | Official Football Version of the 82-0 Game')
+    expect(metaContent('meta[name="description"]')).toBe('Play UndefeatedXI, the official football version of the viral 82-0 game. Build a perfect football XI, draft legends from clubs and nations, and chase unbeaten league and tournament runs for free.')
+    expect(document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://www.undefeatedxi.com/82-0-football-game')
   })
 
   it('uses homepage SEO copy and links to the soccer landing page', async () => {
     const user = userEvent.setup()
     render(<App />)
 
-    expect(screen.getByRole('heading', { level: 1, name: /Can you go undefeated/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: /UndefeatedXI/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: /UndefeatedXI: The Official Soccer Version of 82-0/i })).toBeInTheDocument()
-    expect(screen.getByText(/football version of the viral 82-0\.com game/i)).toBeInTheDocument()
-    expect(document.title).toBe('UndefeatedXI | Official Soccer Version of the 82-0 Game')
-    expect(metaContent('meta[name="description"]')).toContain('official soccer and football version')
+    expect(screen.getByText(/football version of the viral 82-0 game/i)).toBeInTheDocument()
+    expect(document.title).toBe('UndefeatedXI | Football Draft Simulator and 82-0 Soccer Game')
+    expect(metaContent('meta[name="description"]')).toContain('free soccer and football draft simulator')
 
-    await user.click(screen.getByRole('button', { name: /Learn about the 82-0 soccer game/i }))
+    await user.click(screen.getAllByRole('link', { name: /82-0 Soccer Game/i })[0])
     expect(window.location.pathname).toBe('/82-0-soccer-game')
     expect(screen.getByRole('heading', { level: 1, name: /Official Soccer and Football Version of 82-0/i })).toBeInTheDocument()
   })
@@ -380,16 +392,17 @@ describe('SEO public files', () => {
     expect(robots).toContain('User-agent: Googlebot')
     expect(robots).toContain('User-agent: OAI-SearchBot')
     expect(robots).toContain('User-agent: GPTBot')
-    expect(robots).toContain('Sitemap: https://undefeatedxi.com/sitemap.xml')
+    expect(robots).toContain('Sitemap: https://www.undefeatedxi.com/sitemap.xml')
     expect(robots.toLowerCase()).not.toContain('noindex')
   })
 
   it('lists canonical public URLs in the sitemap', () => {
     const sitemap = readFileSync(join(process.cwd(), 'public/sitemap.xml'), 'utf8')
 
-    for (const path of ['/', '/82-0-soccer-game', '/how-to-play', '/leaderboard', '/privacy', '/contact']) {
-      expect(sitemap).toContain(`https://undefeatedxi.com${path === '/' ? '/' : path}`)
+    for (const path of ['/', '/82-0-soccer-game', '/82-0-football-game', '/how-to-play', '/leaderboard', '/privacy']) {
+      expect(sitemap).toContain(`https://www.undefeatedxi.com${path === '/' ? '/' : path}`)
     }
-    expect(sitemap).not.toContain('www.undefeatedxi.com')
+    expect(sitemap).not.toContain('https://undefeatedxi.com')
+    expect(sitemap).not.toContain('/contact')
   })
 })

@@ -7,6 +7,8 @@ import { sanitizeDisplayName } from './sanitize'
 export { hasSupabaseConfig } from './supabaseConfig'
 export { sanitizeDisplayName } from './sanitize'
 
+const canonicalSiteUrl = 'https://www.undefeatedxi.com/'
+
 export const supabase: SupabaseClient | null = hasSupabaseConfig
   ? createClient(supabaseUrl as string, supabaseAnonKey as string, {
       auth: {
@@ -194,7 +196,11 @@ export async function signOut(): Promise<void> {
 
 export async function resetPassword(email: string): Promise<void> {
   if (!supabase) throw new Error('Supabase is not configured.')
-  const redirectTo = typeof window === 'undefined' ? undefined : `${window.location.origin}${window.location.pathname}`
+  const redirectTo = typeof window === 'undefined'
+    ? canonicalSiteUrl
+    : ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)
+      ? `${window.location.origin}${window.location.pathname}`
+      : canonicalSiteUrl
   const { error } = await supabase.auth.resetPasswordForEmail(email, redirectTo ? { redirectTo } : undefined)
   if (error) throw error
 }

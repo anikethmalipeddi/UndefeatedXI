@@ -89,7 +89,7 @@ html[data-theme="dark"] .topbar {
 
 .top-home-link,
 .top-actions button,
-.footer button {
+.footer a {
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -120,7 +120,7 @@ html[data-theme="dark"] .topbar {
 }
 
 .icon-button,
-.footer button {
+.footer a {
   min-height: 38px;
   padding: 0 12px;
   border: 1px solid var(--ui-line);
@@ -642,6 +642,29 @@ main {
   color: var(--ui-brand-2);
 }
 
+.inline-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.inline-link-row a,
+.popular-link-grid a,
+.breadcrumbs a {
+  color: var(--ui-brand);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.inline-link-row a:hover,
+.popular-link-grid a:hover,
+.breadcrumbs a:hover {
+  color: var(--ui-brand-2);
+}
+
 .home-seo-section {
   display: grid;
   gap: 8px;
@@ -672,6 +695,16 @@ main {
 
 .seo-landing-page {
   max-width: 820px;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--ui-muted);
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .seo-hero {
@@ -706,6 +739,42 @@ main {
 .faq-section p {
   margin: 0;
   padding: 0 16px 16px;
+}
+
+.popular-pages {
+  display: grid;
+  gap: 12px;
+  max-width: 820px;
+  margin: 22px auto 0;
+  padding: 17px;
+  border: 1px solid var(--ui-line);
+  border-radius: 8px;
+  background: var(--ui-panel);
+}
+
+.popular-pages h2 {
+  margin: 0;
+  color: var(--ui-fg);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.popular-link-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.popular-link-grid a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--ui-line);
+  border-radius: 7px;
+  background: var(--ui-panel-2);
+  text-decoration: none;
 }
 
 .section-kicker,
@@ -767,7 +836,10 @@ main {
 .chip:focus-visible,
 .preview-mode:focus-visible,
 .topbar button:focus-visible,
-.footer button:focus-visible {
+.footer a:focus-visible,
+.popular-link-grid a:focus-visible,
+.inline-link-row a:focus-visible,
+.breadcrumbs a:focus-visible {
   outline: 3px solid rgba(23, 120, 63, 0.32);
   outline-offset: 3px;
 }
@@ -2589,10 +2661,19 @@ main {
   gap: 6px;
 }
 
-.footer button {
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
   min-height: 32px;
   padding: 0 10px;
   color: var(--ui-muted);
+}
+
+.footer a:hover {
+  border-color: rgba(15, 122, 67, 0.34);
+  color: var(--ui-brand);
+  background: var(--ui-panel);
 }
 
 .footer p {

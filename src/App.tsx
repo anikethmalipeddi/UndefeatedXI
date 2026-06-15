@@ -17,7 +17,7 @@ import {
   User,
   X,
 } from 'lucide-react'
-import { type CSSProperties, type FormEvent, useEffect, useMemo, useRef, useState } from 'react'
+import { type CSSProperties, type FormEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { brandName, targetRecordLabel } from './brand'
 import { defaultFormationId, formations, getFormation } from './data/formations'
@@ -41,14 +41,14 @@ import type { AuthProfile, FeedbackCategory, LeaderboardRun } from './services/s
 import type { DraftPick, DraftState, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings, TeamRollOption } from './types'
 import type { StoredRunSummary } from './engine/storage'
 
-type Screen = 'home' | 'seoLanding' | 'how' | 'setup' | 'draft' | 'result' | 'sharedResult' | 'privacy' | 'contact' | 'leaderboard' | 'notFound'
+type Screen = 'home' | 'seoLanding' | 'footballLanding' | 'how' | 'setup' | 'draft' | 'result' | 'sharedResult' | 'privacy' | 'contact' | 'leaderboard' | 'notFound'
 type ThemeMode = 'light' | 'dark'
 type HomeModeTab = 'main' | 'leagues' | 'more'
 type PlayerFilter = 'all' | 'gk' | 'def' | 'mid' | 'att'
 type PlayerSort = 'best' | 'atk' | 'mid' | 'def' | 'gk' | 'big'
 type RollSpinScope = 'full' | 'team' | 'era'
 type LeaderboardStatus = 'idle' | 'submitting' | 'submitted' | 'error'
-const spinRevealMs = import.meta.env.MODE === 'test' ? 1 : 2500
+const spinRevealMs = import.meta.env.MODE === 'test' ? 1 : 3000
 const legacyRulesDismissedKey = 'invinciblexi.rules.dismissed'
 const legacyRecordRulesDismissedKey = '38-0-0.rules.dismissed'
 const rulesDismissedKey = 'undefeatedxi.rules.dismissed'
@@ -60,36 +60,54 @@ const logoImageSizes = '(min-width: 900px) 184px, 172px'
 const logoImageSrcSet = '/logo-160.avif 160w, /logo-320.avif 320w, /logo-640.avif 640w'
 const logoWebpSrcSet = '/logo-160.webp 160w, /logo-320.webp 320w, /logo-640.webp 640w'
 const logoPngSrcSet = '/logo-320.png 320w, /logo-640.png 640w'
-const siteUrl = 'https://undefeatedxi.com'
-const socialImageUrl = `${siteUrl}/logo-640.png`
-const homeSeoDescription = 'Play UndefeatedXI, the official soccer and football version of the viral 82-0.com game. Draft football legends, build an all-time XI, and chase unbeaten seasons, World Cup runs, perfect league records, leaderboards, and shareable results.'
-const landingSeoDescription = 'Looking for an 82-0.com game for soccer or football? Play UndefeatedXI, the official football version where you draft an all-time XI and chase unbeaten seasons, World Cup glory, and perfect records.'
+const siteUrl = 'https://www.undefeatedxi.com'
+const socialImageUrl = `${siteUrl}/og-image.png`
+const homeSeoDescription = 'Play UndefeatedXI, a free soccer and football draft simulator where you build a perfect XI, chase 38-0-0, and test football history teams across World Cup, Champions League, league, and all-time modes.'
+const landingSeoDescription = 'Play UndefeatedXI, the official soccer and football version of the viral 82-0 game. Draft legends, build a perfect XI, and chase 38-0-0 across World Cup, Champions League, Euros, AFCON, and more. Free with no ads.'
+const footballLandingSeoDescription = 'Play UndefeatedXI, the official football version of the viral 82-0 game. Build a perfect football XI, draft legends from clubs and nations, and chase unbeaten league and tournament runs for free.'
 const faqItems = [
   {
-    question: 'Is there a soccer version of 82-0.com?',
-    answer: 'Yes. UndefeatedXI is the official soccer and football version of the viral 82-0.com game.',
+    question: 'Is there a soccer version of 82-0?',
+    answer: 'Yes. UndefeatedXI is the official soccer and football version of the viral 82-0 game.',
   },
   {
-    question: 'What is UndefeatedXI?',
-    answer: 'UndefeatedXI is a football history draft simulator where you build an all-time XI and simulate whether your team can go unbeaten across different football modes.',
+    question: 'What is the 82-0 football version?',
+    answer: 'UndefeatedXI turns the 82-0 concept into a football history draft game where you build an all-time XI and chase perfect seasons and tournaments.',
   },
   {
     question: 'Is UndefeatedXI free?',
-    answer: 'Yes. UndefeatedXI is free to play.',
+    answer: 'Yes. UndefeatedXI is free to play and has no ads.',
   },
   {
-    question: 'What modes does UndefeatedXI have?',
-    answer: 'UndefeatedXI includes club, nation, league, World Cup, and all-time draft-style modes, plus leaderboards and shareable results.',
+    question: 'What modes are in UndefeatedXI?',
+    answer: 'UndefeatedXI includes World Cup, Champions League, Euros, AFCON, World XI, Premier League, La Liga, Serie A, Bundesliga, and more.',
   },
   {
-    question: 'What does 38-0-0 mean?',
-    answer: '38-0-0 refers to a perfect unbeaten football league season, inspired by the same perfect-record idea behind 82-0.',
+    question: 'What is the goal of the game?',
+    answer: 'Build the best possible XI and see if your team can go undefeated, chase 38-0-0, or win perfect tournament runs.',
   },
 ]
+
+const popularPages = [
+  { label: '82-0 Soccer Game', screen: 'seoLanding' as const, href: '/82-0-soccer-game' },
+  { label: '82-0 Football Game', screen: 'footballLanding' as const, href: '/82-0-football-game' },
+  { label: 'Soccer Version of 82-0', screen: 'seoLanding' as const, href: '/82-0-soccer-game' },
+  { label: 'Football Version of 82-0', screen: 'footballLanding' as const, href: '/82-0-football-game' },
+  { label: 'Football Draft Simulator', screen: 'home' as const, href: '/' },
+  { label: 'World Cup Draft Game', screen: 'setup' as const, modeId: 'world_cup', href: '/#/setup/world_cup' },
+  { label: 'Champions League Draft Game', screen: 'setup' as const, modeId: 'champions_league', href: '/#/setup/champions_league' },
+  { label: 'How to Play', screen: 'how' as const, href: '/how-to-play' },
+  { label: 'Leaderboard', screen: 'leaderboard' as const, href: '/leaderboard' },
+]
+type PopularPage = (typeof popularPages)[number]
 type LeaderboardSelection = 'global' | 'mine' | string
 
 function loadSupabaseService() {
   return import('./services/supabase')
+}
+
+function popularPageModeId(page: PopularPage): string | undefined {
+  return 'modeId' in page ? page.modeId : undefined
 }
 
 interface RouteState {
@@ -132,6 +150,7 @@ function readRoute(): RouteState {
     if (hashRoute === 'contact') return { screen: 'contact' }
     if (hashRoute === 'leaderboard') return { screen: 'leaderboard' }
     if (hashRoute === '82-0-soccer-game') return { screen: 'seoLanding' }
+    if (hashRoute === '82-0-football-game') return { screen: 'footballLanding' }
     if (hashRoute === 'r' && hashModeId === 'local' && hashParts[2]) return { screen: 'sharedResult', localSharePayload: hashParts[2] }
     if (hashRoute === 'r' && hashModeId) return { screen: 'sharedResult', shareId: hashModeId }
     if (hashRoute === 'modes' || hashRoute === 'setup') return { screen: 'setup', modeId: normalizeRouteMode(hashModeId) }
@@ -143,6 +162,7 @@ function readRoute(): RouteState {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
   if (path === '/' || path === '/index.html') return { screen: 'home' }
   if (path === '/82-0-soccer-game') return { screen: 'seoLanding' }
+  if (path === '/82-0-football-game') return { screen: 'footballLanding' }
   if (path === '/how-to-play') return { screen: 'how' }
   if (path === '/privacy') return { screen: 'privacy' }
   if (path === '/contact') return { screen: 'contact' }
@@ -153,6 +173,7 @@ function readRoute(): RouteState {
 function routeFor(screen: Screen, modeId?: string): string {
   if (screen === 'home') return '/'
   if (screen === 'seoLanding') return '/82-0-soccer-game'
+  if (screen === 'footballLanding') return '/82-0-football-game'
   if (screen === 'how') return '/how-to-play'
   if (screen === 'privacy') return '/privacy'
   if (screen === 'contact') return '/contact'
@@ -166,6 +187,7 @@ function routeFor(screen: Screen, modeId?: string): string {
 
 function canonicalFor(screen: Screen): string {
   if (screen === 'seoLanding') return `${siteUrl}/82-0-soccer-game`
+  if (screen === 'footballLanding') return `${siteUrl}/82-0-football-game`
   if (screen === 'how') return `${siteUrl}/how-to-play`
   if (screen === 'leaderboard') return `${siteUrl}/leaderboard`
   if (screen === 'privacy') return `${siteUrl}/privacy`
@@ -174,20 +196,24 @@ function canonicalFor(screen: Screen): string {
 }
 
 function titleFor(screen: Screen): string {
-  if (screen === 'seoLanding') return '82-0 Soccer Game | Official Football Version by UndefeatedXI'
+  if (screen === 'seoLanding') return 'UndefeatedXI | Official Soccer Version of the 82-0 Game'
+  if (screen === 'footballLanding') return 'UndefeatedXI | Official Football Version of the 82-0 Game'
   if (screen === 'how') return 'How to Play UndefeatedXI | Football Draft Simulator'
   if (screen === 'leaderboard') return 'UndefeatedXI Leaderboard | Perfect Season Football Drafts'
+  if (screen === 'sharedResult') return 'Shared UndefeatedXI Result | Football Draft Simulator'
   if (screen === 'privacy') return 'Privacy Policy | UndefeatedXI'
   if (screen === 'contact') return 'Contact and Feedback | UndefeatedXI'
   if (screen === 'notFound') return 'Page Not Found | UndefeatedXI'
-  return 'UndefeatedXI | Official Soccer Version of the 82-0 Game'
+  return 'UndefeatedXI | Football Draft Simulator and 82-0 Soccer Game'
 }
 
 function descriptionFor(screen: Screen): string {
   if (screen === 'seoLanding') return landingSeoDescription
+  if (screen === 'footballLanding') return footballLandingSeoDescription
   if (screen === 'how') return 'Learn how to play UndefeatedXI, the soccer and football version of the 82-0 perfect-record idea. Draft legends, place them in an XI, and chase unbeaten runs.'
   if (screen === 'leaderboard') return 'View UndefeatedXI leaderboards for perfect football draft runs, including global records, mode leaderboards, and shareable unbeaten results.'
-  if (screen === 'privacy') return 'Read the UndefeatedXI privacy policy for this football draft simulator, including local saves, optional accounts, and feedback handling.'
+  if (screen === 'sharedResult') return 'Open a shared UndefeatedXI football draft result with the final XI, record, rating breakdown, key matches, and simulation summary.'
+  if (screen === 'privacy') return 'Read the UndefeatedXI privacy policy for this football draft simulator, including local saves, optional accounts, leaderboard runs, and feedback handling.'
   if (screen === 'contact') return 'Contact UndefeatedXI or send feedback about player data, bugs, modes, leaderboards, and shareable football draft results.'
   if (screen === 'notFound') return 'The requested UndefeatedXI page could not be found.'
   return homeSeoDescription
@@ -230,6 +256,29 @@ function faqSchema() {
         text: item.answer,
       },
     })),
+  }
+}
+
+function breadcrumbSchema(screen: Screen) {
+  const name = screen === 'footballLanding'
+    ? '82-0 Football Game'
+    : screen === 'seoLanding'
+      ? '82-0 Soccer Game'
+      : screen === 'how'
+        ? 'How to Play'
+        : screen === 'leaderboard'
+          ? 'Leaderboard'
+          : screen === 'privacy'
+            ? 'Privacy Policy'
+            : ''
+  if (!name) return null
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'UndefeatedXI', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name, item: canonicalFor(screen) },
+    ],
   }
 }
 
@@ -279,8 +328,11 @@ function useRouteSeo(screen: Screen) {
     setMeta('og:title', title, 'property')
     setMeta('og:description', description, 'property')
     setMeta('og:type', 'website', 'property')
+    setMeta('og:site_name', appName, 'property')
     setMeta('og:url', canonical, 'property')
     setMeta('og:image', socialImageUrl, 'property')
+    setMeta('og:image:width', '1200', 'property')
+    setMeta('og:image:height', '630', 'property')
     setMeta('og:image:alt', 'UndefeatedXI soccer draft simulator logo', 'property')
     setMeta('twitter:card', 'summary_large_image')
     setMeta('twitter:title', title)
@@ -289,7 +341,8 @@ function useRouteSeo(screen: Screen) {
     setMeta('twitter:image:alt', 'UndefeatedXI football history draft game logo')
     setJsonLd('structured-data-game', gameSchema())
     setJsonLd('structured-data-website', websiteSchema())
-    setJsonLd('structured-data-faq', screen === 'seoLanding' ? faqSchema() : null)
+    setJsonLd('structured-data-faq', screen === 'seoLanding' || screen === 'footballLanding' ? faqSchema() : null)
+    setJsonLd('structured-data-breadcrumb', breadcrumbSchema(screen))
   }, [screen])
 }
 
@@ -716,11 +769,38 @@ function App() {
           onMode={openSetup}
           onHome={() => navigate('home')}
           onSeoLanding={() => navigate('seoLanding')}
+          onFootballLanding={() => navigate('footballLanding')}
+          onNavigate={(page) => {
+            const modeId = popularPageModeId(page)
+            if (modeId) openSetup(modeId)
+            else navigate(page.screen)
+          }}
         />
       )}
-      {activeScreen === 'seoLanding' && <SeoLandingPage onPlay={() => navigate('home')} />}
+      {activeScreen === 'seoLanding' && (
+        <SeoLandingPage
+          variant="soccer"
+          onPlay={() => navigate('home')}
+          onNavigate={(page) => {
+            const modeId = popularPageModeId(page)
+            if (modeId) openSetup(modeId)
+            else navigate(page.screen)
+          }}
+        />
+      )}
+      {activeScreen === 'footballLanding' && (
+        <SeoLandingPage
+          variant="football"
+          onPlay={() => navigate('home')}
+          onNavigate={(page) => {
+            const modeId = popularPageModeId(page)
+            if (modeId) openSetup(modeId)
+            else navigate(page.screen)
+          }}
+        />
+      )}
       {activeScreen === 'how' && <HowToPlay onBack={() => navigate('home')} />}
-      {activeScreen === 'privacy' && <SimplePage title="Privacy Policy" onBack={() => navigate('home')} />}
+      {activeScreen === 'privacy' && <PrivacyPage onBack={() => navigate('home')} />}
       {activeScreen === 'contact' && <ContactPage onBack={() => navigate('home')} />}
       {activeScreen === 'leaderboard' && (
         <LeaderboardScreen
@@ -795,6 +875,7 @@ function App() {
 
       <Footer
         onSeoLanding={() => navigate('seoLanding')}
+        onFootballLanding={() => navigate('footballLanding')}
         onHow={() => navigate('how')}
         onLeaderboard={() => navigate('leaderboard')}
         onPrivacy={() => navigate('privacy')}
@@ -805,6 +886,7 @@ function App() {
           onClose={() => setMenuOpen(false)}
           onHome={() => goToPage('home')}
           onSeoLanding={() => goToPage('seoLanding')}
+          onFootballLanding={() => goToPage('footballLanding')}
           onHow={() => goToPage('how')}
           onLeaderboard={() => goToPage('leaderboard')}
           onPrivacy={() => goToPage('privacy')}
@@ -898,6 +980,7 @@ function SideMenu({
   onClose,
   onHome,
   onSeoLanding,
+  onFootballLanding,
   onHow,
   onLeaderboard,
   onPrivacy,
@@ -906,6 +989,7 @@ function SideMenu({
   onClose: () => void
   onHome: () => void
   onSeoLanding: () => void
+  onFootballLanding: () => void
   onHow: () => void
   onLeaderboard: () => void
   onPrivacy: () => void
@@ -922,6 +1006,7 @@ function SideMenu({
         </div>
         <button type="button" onClick={onHome}>Home</button>
         <button type="button" onClick={onSeoLanding}>82-0 Soccer Game</button>
+        <button type="button" onClick={onFootballLanding}>82-0 Football Game</button>
         <button type="button" onClick={onHow}>How to Play</button>
         <button type="button" onClick={onLeaderboard}>Leaderboard</button>
         <button type="button" onClick={onPrivacy}>Privacy Policy</button>
@@ -937,11 +1022,15 @@ function HomePage({
   onMode,
   onHome,
   onSeoLanding,
+  onFootballLanding,
+  onNavigate,
 }: {
   recentRuns: StoredRunSummary[]
   onMode: (modeId: string) => void
   onHome: () => void
   onSeoLanding: () => void
+  onFootballLanding: () => void
+  onNavigate: (page: PopularPage) => void
 }) {
   const worldValidation = modeValidations.find((validation) => validation.modeId === 'world_xi')
   const readyPublicModes = publicModeConfigs.filter((mode) => publicModeIsReady(mode.modeId)).length
@@ -960,9 +1049,9 @@ function HomePage({
       <section className="hero-section">
         <BrandMark onClick={onHome} />
         <div className="hero-copy">
-          <h1>Can you go undefeated?</h1>
-          <p className="hero-mode-title">Choose Your Mode</p>
-          <p className="hero-text">How do you want to build your all-time XI?</p>
+          <h1>UndefeatedXI</h1>
+          <p className="hero-mode-title">Can you build a perfect XI?</p>
+          <p className="hero-text">Draft football and soccer legends, build an all-time XI, and chase unbeaten records like 38-0-0 across clubs, nations, leagues, and tournaments.</p>
         </div>
       </section>
 
@@ -1010,29 +1099,49 @@ function HomePage({
       <section className="home-seo-section" aria-labelledby="home-about-title">
         <p className="section-kicker">Football version of 82-0</p>
         <h2 id="home-about-title">UndefeatedXI: The Official Soccer Version of 82-0</h2>
-        <p>UndefeatedXI is the official soccer and football version of the viral 82-0.com game. Instead of chasing 82-0 in basketball, you draft football legends into a real XI and simulate whether your squad can finish unbeaten.</p>
-        <p>Build an all-time football team, test it across club, nation, league, and World Cup modes, then share your result and climb the leaderboard.</p>
-        <p>This football draft simulator is built around perfect records like 38-0-0, with shareable results for runs that deserve receipts.</p>
-        <button className="text-link-button" type="button" onClick={onSeoLanding}>
-          Learn about the 82-0 soccer game
-        </button>
+        <p>UndefeatedXI is the official soccer and football version of the viral 82-0 game. Instead of chasing 82-0 in basketball, you draft football legends into a real XI and simulate whether your squad can finish unbeaten.</p>
+        <p>It works as a football draft simulator, a soccer history draft game, and a perfect-season challenge for fans who want to build a perfect XI and see if the engine respects it.</p>
+        <div className="inline-link-row" aria-label="Featured UndefeatedXI pages">
+          <a href="/82-0-soccer-game" onClick={(event) => { event.preventDefault(); onSeoLanding() }}>82-0 Soccer Game</a>
+          <a href="/82-0-football-game" onClick={(event) => { event.preventDefault(); onFootballLanding() }}>82-0 Football Game</a>
+        </div>
       </section>
+
+      <PopularPages onNavigate={onNavigate} />
 
       {recentRuns.length > 0 && <RecentRuns runs={recentRuns.slice(0, 4)} />}
     </main>
   )
 }
 
-function SeoLandingPage({ onPlay }: { onPlay: () => void }) {
+function SeoLandingPage({
+  variant,
+  onPlay,
+  onNavigate,
+}: {
+  variant: 'soccer' | 'football'
+  onPlay: () => void
+  onNavigate: (page: PopularPage) => void
+}) {
+  const isFootball = variant === 'football'
+  const headline = isFootball
+    ? 'The Official Football Version of 82-0'
+    : 'The Official Soccer and Football Version of 82-0'
+  const intro = isFootball
+    ? 'Looking for the football version of 82-0? UndefeatedXI turns the perfect-record idea into a football history draft game built around XIs, tactics, chemistry, leagues, and tournaments.'
+    : 'Looking for an 82-0 soccer game? UndefeatedXI takes the perfect-record chase and rebuilds it for football history, from all-time XIs to World Cup and Champions League runs.'
+
   return (
     <main className="text-page seo-landing-page">
+      <Breadcrumbs current={isFootball ? '82-0 Football Game' : '82-0 Soccer Game'} onHome={onPlay} />
       <button className="button ghost" type="button" onClick={onPlay}>
         <Home size={18} /> Back to Game
       </button>
       <section className="seo-hero">
         <BrandMark />
-        <h1>The Official Soccer and Football Version of 82-0</h1>
-        <p>Looking for an 82-0.com game for soccer or football? UndefeatedXI takes the same perfect-record chase and rebuilds it for football history.</p>
+        <p className="section-kicker">{isFootball ? '82-0 football game' : '82-0 soccer game'}</p>
+        <h1>{headline}</h1>
+        <p>{intro}</p>
         <p>You draft an all-time XI from clubs, nations, eras, and competitions, then simulate whether your team can finish unbeaten.</p>
         <button className="button primary" type="button" onClick={onPlay}>
           <Play size={18} /> Play UndefeatedXI
@@ -1041,26 +1150,72 @@ function SeoLandingPage({ onPlay }: { onPlay: () => void }) {
 
       <section>
         <h2>What is UndefeatedXI?</h2>
-        <p>UndefeatedXI is a football history draft simulator. Each run gives you prompts, players, and lineup choices, then tests your XI across realistic football records, from 38-0-0 league seasons to World Cup glory.</p>
+        <p>UndefeatedXI is a soccer draft simulator and football draft simulator for people who like football history arguments. Each run gives you prompts, player choices, and lineup decisions, then tests your XI across realistic records, from 38-0-0 league seasons to perfect tournament runs.</p>
       </section>
 
       <section>
-        <h2>How it connects to 82-0</h2>
-        <p>82-0 made the perfect-season draft idea instantly understandable. UndefeatedXI is the soccer and football version: instead of building a basketball team for 82 wins, you build a football XI and chase unbeaten seasons, perfect tournament runs, trophies, leaderboards, and shareable results.</p>
+        <h2>How the game works</h2>
+        <p>Pick a mode, choose a formation, spin a club, nation, or era prompt, then draft one player into a compatible slot. The sim scores attack, midfield, defense, goalkeeping, chemistry, tactical fit, position fit, and big-game quality before it produces your record.</p>
       </section>
 
       <section>
-        <h2>Why soccer fans play it</h2>
-        <p>The fun is in the football knowledge. You balance legends, eras, chemistry, positions, and tactics while deciding whether to take the obvious superstar or trust a deeper cut from a club, nation, league, or World Cup prompt.</p>
+        <h2>Why it is different from 82-0</h2>
+        <p>82-0 made the perfect-season draft idea instantly understandable. UndefeatedXI is the official soccer version of the 82-0 game and the official football version of the 82-0 game: instead of building a basketball roster, you build a perfect soccer XI or perfect football XI and chase unbeaten seasons, trophies, leaderboards, and shareable results.</p>
       </section>
 
       <section>
-        <h2>Modes</h2>
-        <p>UndefeatedXI includes club, nation, league, World Cup, and all-time draft-style modes. It is free to play, and strong runs can be saved, shared, and submitted to leaderboards.</p>
+        <h2>Modes included</h2>
+        <p>Play World Cup draft game runs, Champions League draft game runs, Euros, AFCON, World XI, Premier League, La Liga, Serie A, Bundesliga, and more. Some modes chase 38-0-0. Others care about tournament perfection, trophy paths, or pure ball knowledge.</p>
       </section>
 
+      <section>
+        <h2>Why soccer and football fans will like it</h2>
+        <p>The fun is in the choices. You balance legends, eras, chemistry, positions, and tactics while deciding whether to take the obvious superstar or trust a deeper cut from a club, nation, league, World Cup, or Champions League prompt.</p>
+      </section>
+
+      <section>
+        <h2>Free to play, no ads</h2>
+        <p>UndefeatedXI is free. There are no ads, no paywall, and no data selling. You can play a run, share the result, and come back later without creating an account.</p>
+      </section>
+
+      <PopularPages onNavigate={onNavigate} />
       <FaqSection />
     </main>
+  )
+}
+
+function Breadcrumbs({ current, onHome }: { current: string; onHome: () => void }) {
+  return (
+    <nav className="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/" onClick={(event) => { event.preventDefault(); onHome() }}>UndefeatedXI</a>
+      <span aria-hidden="true">/</span>
+      <span>{current}</span>
+    </nav>
+  )
+}
+
+function PopularPages({ onNavigate }: { onNavigate: (page: PopularPage) => void }) {
+  return (
+    <section className="popular-pages" aria-labelledby="popular-pages-title">
+      <div>
+        <p className="section-kicker">Popular pages</p>
+        <h2 id="popular-pages-title">Find the right UndefeatedXI run</h2>
+      </div>
+      <div className="popular-link-grid">
+        {popularPages.map((page) => (
+          <a
+            key={`${page.label}-${page.href}`}
+            href={page.href}
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigate(page)
+            }}
+          >
+            {page.label}
+          </a>
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -2482,6 +2637,7 @@ function Metric({ label, value }: { label: string; value: string | number }) {
 function HowToPlay({ onBack }: { onBack: () => void }) {
   return (
     <main className="text-page">
+      <Breadcrumbs current="How to Play" onHome={onBack} />
       <button className="button ghost" type="button" onClick={onBack}>
         <Home size={18} /> Back to Game
       </button>
@@ -2542,14 +2698,30 @@ function NotFoundPage({ onHome }: { onHome: () => void }) {
   )
 }
 
-function SimplePage({ title, onBack }: { title: string; onBack: () => void }) {
+function PrivacyPage({ onBack }: { onBack: () => void }) {
   return (
     <main className="text-page">
+      <Breadcrumbs current="Privacy Policy" onHome={onBack} />
       <button className="button ghost" type="button" onClick={onBack}>
         <Home size={18} /> Back to Game
       </button>
-      <h1>{title}</h1>
-      <p>{appName} does not require login, cookies, personalized ads, or tracking for this MVP. Local preferences and best-run data may be stored in your browser only.</p>
+      <h1>Privacy Policy</h1>
+      <section>
+        <h2>Short version</h2>
+        <p>{appName} is free to play. There are no ads, no paywall, and no data selling.</p>
+      </section>
+      <section>
+        <h2>Local game saves</h2>
+        <p>The app stores preferences, recent runs, theme choice, and best records in your browser so the game works quickly when you come back. Clearing browser storage removes those local saves.</p>
+      </section>
+      <section>
+        <h2>Accounts, leaderboards, and feedback</h2>
+        <p>You can play without an account. If you sign in, submit a leaderboard run, share a public run, or send feedback, Supabase stores the information needed for that feature, such as your display name, submitted result, share snapshot, or feedback text.</p>
+      </section>
+      <section>
+        <h2>Basic analytics</h2>
+        <p>The production site uses Vercel Analytics and Speed Insights for aggregate traffic and performance information. That helps spot broken pages and slow routes. UndefeatedXI does not use ad trackers or sell personal data.</p>
+      </section>
     </main>
   )
 }
@@ -2592,6 +2764,7 @@ function ContactPage({ onBack }: { onBack: () => void }) {
 
   return (
     <main className="text-page">
+      <Breadcrumbs current="Contact and Feedback" onHome={onBack} />
       <button className="button ghost" type="button" onClick={onBack}>
         <Home size={18} /> Back to Game
       </button>
@@ -2899,11 +3072,13 @@ function LeaderboardScreen({
 
   return (
     <main className="text-page leaderboard-page">
+      <Breadcrumbs current="Leaderboard" onHome={onBack} />
       <button className="button ghost" type="button" onClick={onBack}>
         <Home size={18} /> Back to Game
       </button>
       <h1>Leaderboard</h1>
-      <p>Choose the overall leaderboard or a specific mode. Signed-out players can still play, share local links, and keep browser saves.</p>
+      <p>Compare UndefeatedXI runs across World XI, World Cup, Champions League, Premier League, and the rest of the football draft simulator modes. The main leaderboard uses one filter so the page stays simple on mobile.</p>
+      <p>Signed-out players can still play, share local links, and keep browser saves. Sign in when you want a run saved publicly on the leaderboard.</p>
       <section className="leaderboard-board" aria-label="Leaderboard results">
         <div className="leaderboard-section-head">
           <h2>{selectedLeaderboard === 'global' ? 'Global / All Modes' : selectedLeaderboard === 'mine' ? 'My Runs' : selectedMode?.modeName ?? 'Mode Leaderboard'}</h2>
@@ -3115,26 +3290,33 @@ function getSharedPickMetrics(pick: SharedRunSnapshot['picks'][number]) {
 
 function Footer({
   onSeoLanding,
+  onFootballLanding,
   onHow,
   onLeaderboard,
   onPrivacy,
   onContact,
 }: {
   onSeoLanding: () => void
+  onFootballLanding: () => void
   onHow: () => void
   onLeaderboard: () => void
   onPrivacy: () => void
   onContact: () => void
 }) {
+  const follow = (event: MouseEvent<HTMLAnchorElement>, callback: () => void) => {
+    event.preventDefault()
+    callback()
+  }
+
   return (
     <footer className="footer">
       <div>
-        <button type="button" onClick={onSeoLanding}>82-0 Soccer Game</button>
-        <button type="button" onClick={onHow}>How to Play</button>
-        <button type="button" onClick={onLeaderboard}>Leaderboard</button>
-        <button type="button" onClick={onPrivacy}>Privacy Policy</button>
-        <button type="button" onClick={onContact}>Contact</button>
-        <button type="button" onClick={onContact}>Feedback</button>
+        <a href="/82-0-soccer-game" onClick={(event) => follow(event, onSeoLanding)}>82-0 Soccer Game</a>
+        <a href="/82-0-football-game" onClick={(event) => follow(event, onFootballLanding)}>82-0 Football Game</a>
+        <a href="/how-to-play" onClick={(event) => follow(event, onHow)}>How to Play</a>
+        <a href="/leaderboard" onClick={(event) => follow(event, onLeaderboard)}>Leaderboard</a>
+        <a href="/privacy" onClick={(event) => follow(event, onPrivacy)}>Privacy Policy</a>
+        <a href="/contact" onClick={(event) => follow(event, onContact)}>Feedback</a>
       </div>
       <p>{appName} is an independent fan project and is not affiliated with FIFA, UEFA, any league, club, federation, player association, or player.</p>
     </footer>

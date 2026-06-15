@@ -16,4 +16,4 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
-Sitemap: https://undefeatedxi.com/sitemap.xml
+Sitemap: https://www.undefeatedxi.com/sitemap.xml

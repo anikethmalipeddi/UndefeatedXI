@@ -1,13 +1,14 @@
 Site name: UndefeatedXI
-URL: https://undefeatedxi.com/
+URL: https://www.undefeatedxi.com/
 
-UndefeatedXI is the official soccer and football version of the viral 82-0.com game, built as a football history draft simulator where players draft an all-time XI and chase unbeaten records.
+UndefeatedXI is the official soccer and football version of the viral 82-0 game, built as a football history draft simulator where players draft an all-time XI and chase unbeaten records.
 
 Important pages:
-- Home and game: https://undefeatedxi.com/
-- 82-0 soccer game landing page: https://undefeatedxi.com/82-0-soccer-game
-- How to play: https://undefeatedxi.com/how-to-play
-- Leaderboard: https://undefeatedxi.com/leaderboard
-- Contact and feedback: https://undefeatedxi.com/contact
+- Home and game: https://www.undefeatedxi.com/
+- 82-0 soccer game landing page: https://www.undefeatedxi.com/82-0-soccer-game
+- 82-0 football game landing page: https://www.undefeatedxi.com/82-0-football-game
+- How to play: https://www.undefeatedxi.com/how-to-play
+- Leaderboard: https://www.undefeatedxi.com/leaderboard
+- Contact and feedback: https://www.undefeatedxi.com/contact
 
-Target identity: UndefeatedXI is the official soccer and football version of 82-0.com, focused on football draft simulations, all-time XIs, perfect seasons, World Cup runs, leaderboards, and shareable results.
+Target identity: UndefeatedXI is the official soccer and football version of 82-0, focused on football draft simulations, all-time XIs, perfect seasons, World Cup runs, leaderboards, and shareable results.

@@ -4,6 +4,8 @@ import { scoreRun } from '../engine/storage'
 import { hasSupabaseConfig } from './supabaseConfig'
 import type { DraftPick, Ratings, SharedPickSnapshot, SharedRunSnapshot, ShareResult, RunResult, TeamRatings } from '../types'
 
+const canonicalSiteUrl = 'https://www.undefeatedxi.com/'
+
 function getPlayerInitials(name: string): string {
   const parts = name.replace(/[^\p{L}\p{N}\s-]/gu, '').split(/\s+/).filter(Boolean)
   if (parts.length === 0) return 'XI'
@@ -12,8 +14,10 @@ function getPlayerInitials(name: string): string {
 }
 
 function originForLinks(): string {
-  if (typeof window === 'undefined') return ''
-  return `${window.location.origin}${window.location.pathname}`
+  if (typeof window === 'undefined') return canonicalSiteUrl
+  const isLocalHost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)
+  if (isLocalHost) return `${window.location.origin}${window.location.pathname}`
+  return canonicalSiteUrl
 }
 
 function utf8ToBase64Url(value: string): string {

@@ -1,7 +1,7 @@
 project_id = "undefeatedxi"
 
 [auth]
-site_url = "undefeatedxi.com"
+site_url = "https://www.undefeatedxi.com"
 additional_redirect_urls = []
 enable_anonymous_sign_ins = true
 enable_manual_linking = true
