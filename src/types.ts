@@ -277,6 +277,8 @@ export interface ChemistryReport {
   score: number
   sameTeamLinks: number
   sameNationLinks: number
+  eraLinks?: number
+  roleConflictPenalty?: number
   roleBalance: number
   warnings: string[]
   bonuses: string[]
@@ -286,6 +288,74 @@ export interface KeyMatch {
   label: string
   result: string
   note: string
+}
+
+export type ResultTierId =
+  | 'perfect'
+  | 'invincible'
+  | 'undefeated'
+  | 'perfect_near_miss'
+  | 'undefeated_near_miss'
+  | 'strong'
+  | 'respectable'
+  | 'exposed'
+
+export interface ResultTier {
+  id: ResultTierId
+  label: string
+  description: string
+  rank: number
+}
+
+export interface MatchProbabilitySet {
+  win: number
+  draw: number
+  loss: number
+}
+
+export interface EffectiveTeamQuality {
+  score: number
+  rawScore: number
+  rawTeamRating: number
+  positionFit: number
+  minimumPositionFit: number
+  chemistry: number
+  roleBalance: number
+  weakLinkCap: number
+  weakLinkPenalty: number
+  weakLinks: string[]
+}
+
+export interface StreakReport {
+  currentWinStreak: number
+  longestWinStreak: number
+  currentUnbeatenStreak: number
+  longestUnbeatenStreak: number
+  perfectEndedMatch?: number
+  unbeatenEndedMatch?: number
+}
+
+export interface SeasonTurningPoint {
+  match: number
+  phase: string
+  outcome: 'W' | 'D' | 'L'
+  result: string
+  opponentDifficulty?: number
+  note: string
+}
+
+export type TacticalReasonCategory = 'attack' | 'midfield' | 'defense' | 'goalkeeper' | 'chemistry' | 'position_fit' | 'pressure' | 'consistency' | 'variance'
+
+export interface TacticalReason {
+  category: TacticalReasonCategory
+  summary: string
+}
+
+export interface ProbabilityExample {
+  dominanceDelta: number
+  base: MatchProbabilitySet
+  conversionProbability: number
+  final: MatchProbabilitySet
 }
 
 export interface MatchTrace {
@@ -298,6 +368,16 @@ export interface MatchTrace {
   xgFor: number
   xgAgainst: number
   pressure: number
+  opponentDifficulty?: number
+  dominanceDelta?: number
+  matchImportance?: number
+  baseOutcome?: 'W' | 'D' | 'L'
+  convertedDrawToWin?: boolean
+  conversionProbability?: number
+  baseProbabilities?: MatchProbabilitySet
+  finalProbabilities?: MatchProbabilitySet
+  resolution?: 'regulation' | 'late_winner' | 'extra_time_win' | 'extra_time_loss' | 'penalties_win' | 'penalties_loss'
+  advanced?: boolean
   note: string
 }
 
@@ -343,6 +423,10 @@ export interface SimulationDetails {
   matchPressure: number
   expectedGoalsForPerMatch: number
   expectedGoalsAgainstPerMatch: number
+  averageOpponentDifficulty?: number
+  averageDominanceDelta?: number
+  averageConversionProbability?: number
+  probabilityExamples?: ProbabilityExample[]
 }
 
 export interface RunResult {
@@ -363,6 +447,8 @@ export interface RunResult {
   gradeLabel: string
   trophyResult: string
   perfectionResult: string
+  resultTier?: ResultTier
+  scoringVersion?: number
   stage?: string
   bestPlayer: string
   weakLink: string
@@ -370,7 +456,12 @@ export interface RunResult {
   weakestUnit: string
   dominanceReason: string
   failureReason: string
+  tacticalReason?: TacticalReason
   why: string
+  effectiveTeamQuality?: EffectiveTeamQuality
+  streaks?: StreakReport
+  matchThatChangedSeason?: SeasonTurningPoint
+  probabilityExamples?: ProbabilityExample[]
   teamRatings: TeamRatings
   tacticReport: TacticReport
   chemistryReport: ChemistryReport
@@ -414,12 +505,18 @@ export interface SharedRunSnapshot {
   gradeLabel: string
   trophyResult: string
   perfectionResult: string
+  resultTier?: ResultTier
+  scoringVersion?: number
   stage?: string
   bestPlayer: string
   weakLink: string
   strongestUnit: string
   weakestUnit: string
   why: string
+  effectiveTeamQuality?: EffectiveTeamQuality
+  streaks?: StreakReport
+  matchThatChangedSeason?: SeasonTurningPoint
+  tacticalReason?: TacticalReason
   teamRatings: TeamRatings
   tacticReport: TacticReport
   chemistryReport: ChemistryReport

@@ -145,6 +145,8 @@ interface SubmitRunPayload {
   formationId?: unknown
   score?: unknown
   grade?: unknown
+  resultTier?: unknown
+  scoringVersion?: unknown
   record?: { wins?: unknown; draws?: unknown; losses?: unknown }
   goalsFor?: unknown
   goalsAgainst?: unknown
@@ -165,7 +167,9 @@ function validate(payload: SubmitRunPayload | null): string | null {
   if (String(payload.modeName ?? '').length < 2 || String(payload.modeName ?? '').length > 64) return 'Invalid mode name.'
   if (!/^\d-\d-\d(?:-\d)?$/.test(String(payload.formationId ?? ''))) return 'Invalid formation.'
   if (!validGrades.has(String(payload.grade ?? ''))) return 'Invalid grade.'
-  if (numeric(payload.score) < -5000 || numeric(payload.score) > 20000) return 'Invalid score.'
+  if (numeric(payload.score) < -5000 || numeric(payload.score) > 50000) return 'Invalid score.'
+  if (!/^[a-z_ -]{2,64}$/i.test(String(payload.resultTier ?? ''))) return 'Invalid result tier.'
+  if (!Number.isInteger(numeric(payload.scoringVersion)) || numeric(payload.scoringVersion) < 1 || numeric(payload.scoringVersion) > 10) return 'Invalid scoring version.'
   if (!Number.isInteger(total) || total < 1 || total > 42) return 'Impossible record.'
   if (numeric(payload.goalsFor) < 0 || numeric(payload.goalsFor) > 250 || numeric(payload.goalsAgainst) < 0 || numeric(payload.goalsAgainst) > 250) return 'Invalid goals.'
   if (numeric(payload.teamRating) < 0 || numeric(payload.teamRating) > 100) return 'Invalid team rating.'
@@ -249,6 +253,8 @@ async function insertLeaderboardRun(env: SupabaseEnv, payload: SubmitRunPayload,
       formation_id: payload.formationId,
       score: payload.score,
       grade: payload.grade,
+      result_tier: payload.resultTier,
+      scoring_version: payload.scoringVersion,
       record: payload.record,
       goals_for: payload.goalsFor,
       goals_against: payload.goalsAgainst,

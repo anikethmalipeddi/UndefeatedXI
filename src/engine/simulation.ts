@@ -3,19 +3,52 @@ import { isBenchSlot } from '../data/squad'
 import { calculateChemistry } from './chemistry'
 import { clamp, createRng, round } from './random'
 import { createShareText } from './share'
+import {
+  baseDominanceProbabilities,
+  calculateEffectiveTeamQuality,
+  classifyResultTier,
+  drawConversionProbability,
+  finalProbabilities,
+  fixtureDifficulty,
+  matchImportance,
+  scoringVersion,
+} from './simulationModel'
 import { calculateTeamRatings, inferTactic } from './tactics'
-import type { ChaosEvent, CompetitionPhase, DraftPick, KeyMatch, MatchTrace, ModeConfig, RunResult, SimulationDetails, SquadReport, TeamRatings } from '../types'
+import type { ChaosEvent, CompetitionPhase, DraftPick, EffectiveTeamQuality, KeyMatch, MatchProbabilitySet, MatchTrace, ModeConfig, RunResult, SimulationDetails, SquadReport, StreakReport, TacticalReason, TeamRatings } from '../types'
 
 interface MatchOutcome {
   match: number
   phase: string
   outcome: 'W' | 'D' | 'L'
+  baseOutcome: 'W' | 'D' | 'L'
   gf: number
   ga: number
   xgf: number
   xga: number
   pressure: number
+  opponentDifficulty: number
+  dominanceDelta: number
+  matchImportance: number
+  conversionProbability: number
+  convertedDrawToWin: boolean
+  baseProbabilities: MatchProbabilitySet
+  finalProbabilities: MatchProbabilitySet
+  resolution: NonNullable<MatchTrace['resolution']>
+  advanced?: boolean
   note: string
+}
+
+interface RunProgress {
+  currentWinStreak: number
+  longestWinStreak: number
+  currentUnbeatenStreak: number
+  longestUnbeatenStreak: number
+  perfectActive: boolean
+  unbeatenActive: boolean
+  perfectEndedMatch?: number
+  unbeatenEndedMatch?: number
+  hadExtraTimeWin: boolean
+  hadPenaltyAdvance: boolean
 }
 
 type KnockoutRound = readonly [phase: string, matchCount: number, exitStage: string]
@@ -98,152 +131,54 @@ function average(values: number[]): number {
   return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0
 }
 
-function poisson(lambda: number, goals: number): number {
-  let factorial = 1
-  for (let value = 2; value <= goals; value += 1) factorial *= value
-  return (Math.exp(-lambda) * lambda ** goals) / factorial
-}
-
-function samplePoisson(lambda: number, rng: ReturnType<typeof createRng>): number {
-  const limit = Math.exp(-lambda)
-  let product = 1
-  let goals = 0
-
-  do {
-    goals += 1
-    product *= rng.next()
-  } while (product > limit && goals < 10)
-
-  return goals - 1
-}
-
-function attackingBase(ratings: TeamRatings): number {
-  return ratings.attack * 0.46 + ratings.chanceCreation * 0.24 + ratings.midfield * 0.14 + ratings.bigGame * 0.1 + ratings.chemistry * 0.06
-}
-
-function controlBase(ratings: TeamRatings): number {
-  return ratings.midfield * 0.42 + ratings.pressResistance * 0.22 + ratings.tacticalCoherence * 0.2 + ratings.balance * 0.16
-}
-
-function expectedGoalProfile(ratings: TeamRatings, strength: number, defensiveBase: number, pressure: number) {
-  const attack = attackingBase(ratings)
-  const control = controlBase(ratings)
-  const netQuality = strength - pressure
-  const expectedGoalsFor = clamp(
-    1.56 +
-      (netQuality - 72) * 0.055 +
-      (attack - 82) * 0.035 +
-      (control - 82) * 0.014 +
-      (ratings.consistency - 82) * 0.006,
-    0.62,
-    3.55,
-  )
-  const expectedGoalsAgainst = clamp(
-    1.2 -
-      (defensiveBase - 78) * 0.038 +
-      (pressure - 6) * 0.04 -
-      (control - 82) * 0.012 -
-      (ratings.consistency - 82) * 0.006,
-    0.38,
-    2.65,
-  )
-
-  return { expectedGoalsFor, expectedGoalsAgainst }
-}
-
-function outcomeProbabilities(expectedGoalsForPerMatch: number, expectedGoalsAgainstPerMatch: number) {
-  let win = 0
-  let draw = 0
-  let loss = 0
-
-  for (let gf = 0; gf <= 10; gf += 1) {
-    for (let ga = 0; ga <= 10; ga += 1) {
-      const probability = poisson(expectedGoalsForPerMatch, gf) * poisson(expectedGoalsAgainstPerMatch, ga)
-      if (gf > ga) win += probability
-      else if (gf === ga) draw += probability
-      else loss += probability
-    }
-  }
-
-  const total = win + draw + loss || 1
-  return {
-    win: win / total,
-    draw: draw / total,
-    loss: loss / total,
-  }
-}
-
 function logistic(value: number): number {
   return 1 / (1 + Math.exp(-value))
 }
 
-function estimateTrophyProbability(mode: ModeConfig, probabilities: ReturnType<typeof outcomeProbabilities>, strength: number, pressure: number): number {
-  const pointsPerMatch = probabilities.win * 3 + probabilities.draw
-  const penaltyEdge = clamp((strength - pressure - 55) / 38, 0.28, 0.78)
-  const oneMatchAdvance = clamp(probabilities.win + probabilities.draw * penaltyEdge, 0.03, 0.96)
-  const lateKnockoutAdvance = clamp(oneMatchAdvance - 0.06, 0.03, 0.94)
-  const splitTie = probabilities.win * probabilities.loss * 1.25
-  const twoLegAdvance = clamp(
-    probabilities.win ** 2 +
-      probabilities.win * probabilities.draw * 2 +
-      probabilities.draw ** 2 * penaltyEdge +
-      splitTie * penaltyEdge,
-    0.03,
-    0.96,
-  )
-
-  if (mode.simulationFormat === 'domestic') {
-    const titleLine = mode.matchCount >= 38 ? 2.42 : 2.34
-    return Math.round(clamp(logistic((pointsPerMatch - titleLine) * 8.5) * 100, 1, 98))
-  }
-
-  if (mode.simulationFormat === 'mls') {
-    const playoffChance = logistic((pointsPerMatch - 1.38) * 5.2)
-    return Math.round(clamp(playoffChance * oneMatchAdvance ** 4 * 100, 1, 96))
-  }
-
-  if (mode.simulationFormat === 'ucl') {
-    const leaguePhaseChance = logistic((pointsPerMatch - 1.38) * 4.2)
-    return Math.round(clamp(leaguePhaseChance * twoLegAdvance ** 3 * lateKnockoutAdvance * 100, 1, 96))
-  }
-
-  if (mode.simulationFormat === 'classic_european_cup') {
-    return Math.round(clamp(twoLegAdvance ** 3 * lateKnockoutAdvance * 100, 1, 96))
-  }
-
-  if (mode.usesGroupStage) {
-    const groupChance = logistic((pointsPerMatch - 1.28) * 4.8)
-    return Math.round(clamp(groupChance * oneMatchAdvance * lateKnockoutAdvance ** 3 * 100, 1, 96))
-  }
-
-  return Math.round(clamp(oneMatchAdvance ** Math.max(2, Math.min(5, mode.matchCount)) * 100, 1, 96))
+function sampleOutcome(probabilities: MatchProbabilitySet, rng: ReturnType<typeof createRng>): 'W' | 'D' | 'L' {
+  const roll = rng.next()
+  if (roll < probabilities.win) return 'W'
+  if (roll < probabilities.win + probabilities.draw) return 'D'
+  return 'L'
 }
 
-function estimateMatchProfile(ratings: TeamRatings, strength: number, defense: number, pressure: number, mode: ModeConfig): SimulationDetails {
-  const { expectedGoalsFor, expectedGoalsAgainst } = expectedGoalProfile(ratings, strength, defense, pressure)
-  const expectedGoalsForPerMatch = round(expectedGoalsFor, 2)
-  const expectedGoalsAgainstPerMatch = round(expectedGoalsAgainst, 2)
-  const probabilities = outcomeProbabilities(expectedGoalsForPerMatch, expectedGoalsAgainstPerMatch)
-  const averageWinProbability = Math.round(probabilities.win * 100)
-  const averageDrawProbability = Math.round(probabilities.draw * 100)
-  const averageLossProbability = Math.max(0, 100 - averageWinProbability - averageDrawProbability)
-  const trophyProbability = estimateTrophyProbability(mode, probabilities, strength, pressure)
-
-  return {
-    averageWinProbability,
-    averageDrawProbability,
-    averageLossProbability,
-    trophyProbability,
-    teamStrength: round(strength, 1),
-    defensiveBase: round(defense, 1),
-    matchPressure: round(pressure, 1),
-    expectedGoalsForPerMatch,
-    expectedGoalsAgainstPerMatch,
-  }
+function normalish(rng: ReturnType<typeof createRng>): number {
+  return rng.next() + rng.next() + rng.next() - 1.5
 }
 
-function matchNote(outcome: 'W' | 'D' | 'L', gf: number, ga: number, xgf: number, xga: number, pressure: number): string {
+function scorelineForOutcome(outcome: 'W' | 'D' | 'L', dominanceDelta: number, rng: ReturnType<typeof createRng>, resolution: NonNullable<MatchTrace['resolution']>) {
+  const expectedGoalsFor = clamp(1.45 + dominanceDelta * 0.024 + normalish(rng) * 0.22, 0.45, 3.8)
+  const expectedGoalsAgainst = clamp(1.2 - dominanceDelta * 0.018 + normalish(rng) * 0.2, 0.35, 3.2)
+  if (outcome === 'D') {
+    const drawGoals = rng.next() < 0.34 ? 0 : rng.next() < 0.78 ? 1 : 2
+    return {
+      gf: drawGoals,
+      ga: drawGoals,
+      xgf: round(expectedGoalsFor, 1),
+      xga: round(expectedGoalsAgainst, 1),
+    }
+  }
+
+  const margin = clamp(Math.round(Math.abs(dominanceDelta) * 0.055 + normalish(rng) * 1.35 + 1), 1, 6)
+  const loserGoals = clamp(Math.floor(rng.next() * 3), 0, 3)
+  const winnerGoals = clamp(loserGoals + margin + (resolution === 'extra_time_win' || resolution === 'extra_time_loss' ? 1 : 0), 1, 8)
+  return outcome === 'W'
+    ? { gf: winnerGoals, ga: loserGoals, xgf: round(expectedGoalsFor, 1), xga: round(expectedGoalsAgainst, 1) }
+    : { gf: loserGoals, ga: winnerGoals, xgf: round(expectedGoalsFor, 1), xga: round(expectedGoalsAgainst, 1) }
+}
+
+function tieBreakEdge(ratings: TeamRatings, effectiveTeamQuality: EffectiveTeamQuality, opponentDifficulty: number): number {
+  const mentality = ratings.goalkeeping * 0.22 + ratings.bigGame * 0.22 + ratings.consistency * 0.18 + ratings.pressResistance * 0.16 + ratings.chemistry * 0.12 + effectiveTeamQuality.score * 0.1
+  return clamp(0.5 + (mentality - opponentDifficulty - 18) / 95, 0.28, 0.78)
+}
+
+function matchNote(outcome: 'W' | 'D' | 'L', gf: number, ga: number, xgf: number, xga: number, pressure: number, resolution: NonNullable<MatchTrace['resolution']>): string {
   const margin = gf - ga
+  if (resolution === 'extra_time_win') return `Won after extra time, ${gf}-${ga}; the XI found one more gear under pressure.`
+  if (resolution === 'extra_time_loss') return `Lost after extra time, ${gf}-${ga}; pressure exposed the margin.`
+  if (resolution === 'penalties_win') return `Advanced on penalties after a ${gf}-${ga} draw.`
+  if (resolution === 'penalties_loss') return `Lost on penalties after a ${gf}-${ga} draw.`
+  if (resolution === 'late_winner') return `Turned a draw into a late ${gf}-${ga} win through control and nerve.`
   if (outcome === 'W' && margin >= 3) return `The XI controlled the game state and turned ${xgf.toFixed(1)} xG into a statement win.`
   if (outcome === 'W' && pressure >= 12) return `Won through pressure: ${gf}-${ga}, with the defensive base holding ${xga.toFixed(1)} xGA.`
   if (outcome === 'W') return `Professional win, ${gf}-${ga}, with the stronger unit protecting the margin.`
@@ -251,31 +186,93 @@ function matchNote(outcome: 'W' | 'D' | 'L', gf: number, ga: number, xgf: number
   return `The run cracked ${gf}-${ga}; pressure ${round(pressure, 1)} exposed the weakest unit.`
 }
 
-function simulateMatch(ratings: TeamRatings, strength: number, defense: number, rngSeed: string, pressure = 0, match = 1, phase = 'Match'): MatchOutcome {
+function simulateMatch({
+  mode,
+  ratings,
+  effectiveTeamQuality,
+  rngSeed,
+  pressure = 0,
+  match = 1,
+  phase = 'Match',
+  progress,
+  knockout = false,
+}: {
+  mode: ModeConfig
+  ratings: TeamRatings
+  effectiveTeamQuality: EffectiveTeamQuality
+  rngSeed: string
+  pressure?: number
+  match?: number
+  phase?: string
+  progress: RunProgress
+  knockout?: boolean
+}): MatchOutcome {
   const rng = createRng(rngSeed)
-  const profile = expectedGoalProfile(ratings, strength, defense, pressure)
-  const stability = clamp((ratings.consistency + ratings.chemistry + ratings.balance) / 3, 50, 98)
-  const volatility = clamp(0.26 - (stability - 70) * 0.003 + pressure * 0.003, 0.14, 0.34)
-  const formSwing = (rng.next() - rng.next()) * volatility
-  const opponentSwing = (rng.next() - rng.next()) * (0.1 + pressure * 0.003)
-  const xgf = clamp(profile.expectedGoalsFor + formSwing * 0.45 + opponentSwing * 0.1, 0.35, 3.8)
-  const xga = clamp(profile.expectedGoalsAgainst - formSwing * 0.3 - opponentSwing * 0.08, 0.25, 3.1)
-  const gf = samplePoisson(xgf, rng)
-  const ga = samplePoisson(xga, rng)
-  const outcome = gf > ga ? 'W' : gf === ga ? 'D' : 'L'
-  const roundedXgf = round(xgf, 1)
-  const roundedXga = round(xga, 1)
+  const fixture = fixtureDifficulty(mode, phase, rng)
+  const importance = matchImportance({
+    mode,
+    matchNumber: match,
+    phase,
+    opponentDifficulty: fixture.difficulty,
+    perfectActive: progress.perfectActive,
+    unbeatenActive: progress.unbeatenActive,
+  })
+  const pressureAdjustment = clamp((pressure * importance) / 4.5, 0, 9)
+  const dominanceDelta = round(effectiveTeamQuality.score - fixture.difficulty - pressureAdjustment, 1)
+  const baseProbabilities = baseDominanceProbabilities(dominanceDelta)
+  const conversionProbability = drawConversionProbability({
+    ratings,
+    effectiveScore: effectiveTeamQuality.score,
+    positionFit: effectiveTeamQuality.positionFit,
+    chemistry: effectiveTeamQuality.chemistry,
+    roleBalance: effectiveTeamQuality.roleBalance,
+    weakLinkPenalty: effectiveTeamQuality.weakLinkPenalty,
+    opponentDifficulty: fixture.difficulty,
+    dominanceDelta,
+    matchImportance: importance,
+  })
+  const adjustedProbabilities = finalProbabilities(baseProbabilities, conversionProbability)
+  const baseOutcome = sampleOutcome(baseProbabilities, rng)
+  const convertedDrawToWin = baseOutcome === 'D' && rng.next() < conversionProbability
+  let outcome: 'W' | 'D' | 'L' = convertedDrawToWin ? 'W' : baseOutcome
+  let resolution: NonNullable<MatchTrace['resolution']> = convertedDrawToWin ? 'late_winner' : 'regulation'
+  let advanced: boolean | undefined
+
+  if (knockout && outcome === 'D') {
+    const edge = tieBreakEdge(ratings, effectiveTeamQuality, fixture.difficulty)
+    const extraTimeDecisive = rng.next() < clamp(0.28 + Math.abs(dominanceDelta) / 140, 0.22, 0.52)
+    if (extraTimeDecisive) {
+      outcome = rng.next() < edge ? 'W' : 'L'
+      resolution = outcome === 'W' ? 'extra_time_win' : 'extra_time_loss'
+      advanced = outcome === 'W'
+    } else {
+      resolution = rng.next() < edge ? 'penalties_win' : 'penalties_loss'
+      advanced = resolution === 'penalties_win'
+    }
+  }
+
+  const { gf, ga, xgf: roundedXgf, xga: roundedXga } = scorelineForOutcome(outcome, dominanceDelta, rng, resolution)
 
   return {
     match,
     phase,
     outcome,
+    baseOutcome,
     gf,
     ga,
     xgf: roundedXgf,
     xga: roundedXga,
     pressure: round(pressure, 1),
-    note: matchNote(outcome, gf, ga, roundedXgf, roundedXga, pressure),
+    opponentDifficulty: fixture.difficulty,
+    dominanceDelta,
+    matchImportance: importance,
+    conversionProbability,
+    convertedDrawToWin,
+    baseProbabilities,
+    finalProbabilities: adjustedProbabilities,
+    resolution,
+    advanced,
+    note: matchNote(outcome, gf, ga, roundedXgf, roundedXga, pressure, resolution),
   }
 }
 
@@ -303,25 +300,6 @@ function createChaosEvent(seed: string, matchNumber: number, phase: string): Cha
     modifier: round(modifier, 1),
     note: template.note,
   }
-}
-
-function gradeDomestic(wins: number, _draws: number, losses: number, matchCount: number): [string, string] {
-  if (wins === matchCount) return ['SS', 'Perfect season']
-  if (losses === 0 && wins >= matchCount - 3) return ['S', 'Invincible, not perfect']
-  if (losses === 0) return ['A+', 'Invincible grind']
-  if (wins >= matchCount - 4) return ['A', 'Title-level machine']
-  if (wins >= Math.round(matchCount * 0.72)) return ['B', 'Great XI, flawed run']
-  if (wins >= Math.round(matchCount * 0.58)) return ['C', 'Star names, broken balance']
-  return ['D', 'The simulation exposed the gaps']
-}
-
-function gradeTournament(mode: ModeConfig, _wins: number, draws: number, losses: number, stage: string): [string, string] {
-  if (stage.includes('Champion') && losses === 0 && draws === 0) return ['SS', `Perfect ${mode.modeName} Champion`]
-  if (stage.includes('Champion')) return ['S', 'Champion, not perfect']
-  if (stage.includes('Finalist')) return ['A', 'Finalist']
-  if (stage.includes('Semi')) return ['B', 'Semi-final exit']
-  if (stage.includes('Quarter')) return ['C', 'Quarter-final exit']
-  return ['D', 'The run collapsed early']
 }
 
 function getDomesticStage(mode: ModeConfig, wins: number, draws: number, losses: number): string {
@@ -474,6 +452,16 @@ function toMatchTrace(outcome: MatchOutcome): MatchTrace {
     xgFor: outcome.xgf,
     xgAgainst: outcome.xga,
     pressure: outcome.pressure,
+    opponentDifficulty: outcome.opponentDifficulty,
+    dominanceDelta: outcome.dominanceDelta,
+    matchImportance: outcome.matchImportance,
+    baseOutcome: outcome.baseOutcome,
+    convertedDrawToWin: outcome.convertedDrawToWin,
+    conversionProbability: outcome.conversionProbability,
+    baseProbabilities: outcome.baseProbabilities,
+    finalProbabilities: outcome.finalProbabilities,
+    resolution: outcome.resolution,
+    advanced: outcome.advanced,
     note: outcome.note,
   }
 }
@@ -555,16 +543,63 @@ function totalsFromPhases(phases: CompetitionPhase[]) {
   )
 }
 
+function createRunProgress(): RunProgress {
+  return {
+    currentWinStreak: 0,
+    longestWinStreak: 0,
+    currentUnbeatenStreak: 0,
+    longestUnbeatenStreak: 0,
+    perfectActive: true,
+    unbeatenActive: true,
+    hadExtraTimeWin: false,
+    hadPenaltyAdvance: false,
+  }
+}
+
+function updateRunProgress(progress: RunProgress, outcome: MatchOutcome): void {
+  if (outcome.outcome === 'W') progress.currentWinStreak += 1
+  else {
+    if (progress.perfectActive) progress.perfectEndedMatch = outcome.match
+    progress.perfectActive = false
+    progress.currentWinStreak = 0
+  }
+
+  if (outcome.outcome !== 'L') progress.currentUnbeatenStreak += 1
+  else {
+    if (progress.unbeatenActive) progress.unbeatenEndedMatch = outcome.match
+    progress.unbeatenActive = false
+    progress.currentUnbeatenStreak = 0
+  }
+
+  progress.longestWinStreak = Math.max(progress.longestWinStreak, progress.currentWinStreak)
+  progress.longestUnbeatenStreak = Math.max(progress.longestUnbeatenStreak, progress.currentUnbeatenStreak)
+  if (outcome.resolution === 'extra_time_win') progress.hadExtraTimeWin = true
+  if (outcome.resolution === 'penalties_win') progress.hadPenaltyAdvance = true
+}
+
+function progressToStreaks(progress: RunProgress): StreakReport {
+  return {
+    currentWinStreak: progress.currentWinStreak,
+    longestWinStreak: progress.longestWinStreak,
+    currentUnbeatenStreak: progress.currentUnbeatenStreak,
+    longestUnbeatenStreak: progress.longestUnbeatenStreak,
+    perfectEndedMatch: progress.perfectEndedMatch,
+    unbeatenEndedMatch: progress.unbeatenEndedMatch,
+  }
+}
+
 function simulatePhaseMatches(
+  mode: ModeConfig,
   count: number,
   ratings: TeamRatings,
-  strength: number,
-  defensiveBase: number,
+  effectiveTeamQuality: EffectiveTeamQuality,
   seed: string,
   pressure: number,
+  progress: RunProgress,
   offset = 0,
   phase = 'Match',
   chaosEvents?: ChaosEvent[],
+  knockout = false,
 ): MatchOutcome[] {
   const eventSink = chaosEvents
   return Array.from({ length: count }, (_, index) => {
@@ -575,35 +610,50 @@ function simulatePhaseMatches(
       eventSink.push(chaosEvent)
     }
 
-    return simulateMatch(
+    const outcome = simulateMatch({
+      mode,
       ratings,
-      strength,
-      defensiveBase,
-      `${seed}:match:${matchIndex}`,
-      pressure + matchIndex * 0.03 + (chaosEvent?.modifier ?? 0),
-      matchNumber,
+      effectiveTeamQuality,
+      rngSeed: `${seed}:match:${matchIndex}`,
+      pressure: pressure + matchIndex * 0.03 + (chaosEvent?.modifier ?? 0),
+      match: matchNumber,
       phase,
-    )
+      progress,
+      knockout,
+    })
+    updateRunProgress(progress, outcome)
+    return outcome
   })
 }
 
-function aggregateAdvance(outcomes: MatchOutcome[], strength: number, seed: string): boolean {
+function aggregateAdvance(outcomes: MatchOutcome[], ratings: TeamRatings, effectiveTeamQuality: EffectiveTeamQuality, seed: string): boolean {
+  if (outcomes.length === 1 && typeof outcomes[0].advanced === 'boolean') return outcomes[0].advanced
   const gf = outcomes.reduce((sum, match) => sum + match.gf, 0)
   const ga = outcomes.reduce((sum, match) => sum + match.ga, 0)
   if (gf > ga) return true
   if (gf < ga) return false
-  return createRng(`${seed}:pens:${gf}:${ga}`).next() < clamp((strength - 62) / 36, 0.22, 0.82)
+  const rng = createRng(`${seed}:pens:${gf}:${ga}`)
+  const finalMatch = outcomes.at(-1)
+  const opponentDifficulty = finalMatch?.opponentDifficulty ?? 65
+  const advanced = rng.next() < tieBreakEdge(ratings, effectiveTeamQuality, opponentDifficulty)
+  if (finalMatch) {
+    finalMatch.resolution = advanced ? 'penalties_win' : 'penalties_loss'
+    finalMatch.advanced = advanced
+    finalMatch.note = advanced ? `Advanced on penalties after an aggregate draw.` : `Lost on penalties after an aggregate draw.`
+  }
+  return advanced
 }
 
 function simulateKnockoutRounds({
   phases,
   rounds,
   championStage,
+  mode,
   ratings,
-  strength,
-  defensiveBase,
+  effectiveTeamQuality,
   seed,
   pressure,
+  progress,
   offset,
   chaosEvents,
   pressureStep = 2.4,
@@ -611,11 +661,12 @@ function simulateKnockoutRounds({
   phases: CompetitionPhase[]
   rounds: readonly KnockoutRound[]
   championStage: string
+  mode: ModeConfig
   ratings: TeamRatings
-  strength: number
-  defensiveBase: number
+  effectiveTeamQuality: EffectiveTeamQuality
   seed: string
   pressure: number
+  progress: RunProgress
   offset: number
   chaosEvents?: ChaosEvent[]
   pressureStep?: number
@@ -624,9 +675,9 @@ function simulateKnockoutRounds({
 
   for (let index = 0; index < rounds.length; index += 1) {
     const [roundName, matchCount, exitStage] = rounds[index]
-    const matches = simulatePhaseMatches(matchCount, ratings, strength, defensiveBase, seed, pressure + index * pressureStep, nextOffset, roundName, chaosEvents)
+    const matches = simulatePhaseMatches(mode, matchCount, ratings, effectiveTeamQuality, seed, pressure + index * pressureStep, progress, nextOffset, roundName, chaosEvents, matchCount === 1)
     nextOffset += matchCount
-    const advanced = aggregateAdvance(matches, strength, `${seed}:${roundName}`)
+    const advanced = aggregateAdvance(matches, ratings, effectiveTeamQuality, `${seed}:${roundName}`)
     if (!advanced) {
       phases.push(summarizePhase(roundName, matches, exitStage))
       return { phases, stage: exitStage }
@@ -643,10 +694,10 @@ function simulateGroupKnockoutPath({
   groupPhaseName,
   championStage,
   ratings,
-  strength,
-  defensiveBase,
+  effectiveTeamQuality,
   seed,
   pressure,
+  progress,
   rounds,
   chaosEvents,
 }: {
@@ -654,14 +705,14 @@ function simulateGroupKnockoutPath({
   groupPhaseName: string
   championStage: string
   ratings: TeamRatings
-  strength: number
-  defensiveBase: number
+  effectiveTeamQuality: EffectiveTeamQuality
   seed: string
   pressure: number
+  progress: RunProgress
   rounds: readonly KnockoutRound[]
   chaosEvents?: ChaosEvent[]
 }): { phases: CompetitionPhase[]; stage: string } {
-  const group = simulatePhaseMatches(3, ratings, strength, defensiveBase, seed, pressure, 0, groupPhaseName, chaosEvents)
+  const group = simulatePhaseMatches(mode, 3, ratings, effectiveTeamQuality, seed, pressure, progress, 0, groupPhaseName, chaosEvents)
   const groupSummary = summarizePhase(groupPhaseName, group, 'Qualified for knockouts')
   const groupPoints = groupSummary.record.wins * 3 + groupSummary.record.draws
   if (groupPoints < 4) {
@@ -672,11 +723,12 @@ function simulateGroupKnockoutPath({
     phases: [groupSummary],
     rounds,
     championStage,
+    mode,
     ratings,
-    strength,
-    defensiveBase,
+    effectiveTeamQuality,
     seed: `${seed}:${mode.modeId}`,
     pressure: pressure + 2,
+    progress,
     offset: 3,
     chaosEvents,
   })
@@ -685,14 +737,14 @@ function simulateGroupKnockoutPath({
 function simulateCompetitionPath(
   mode: ModeConfig,
   ratings: TeamRatings,
-  strength: number,
-  defensiveBase: number,
+  effectiveTeamQuality: EffectiveTeamQuality,
   seed: string,
   pressure: number,
+  progress: RunProgress,
   chaosEvents?: ChaosEvent[],
 ): { phases: CompetitionPhase[]; stage: string } {
   if (mode.simulationFormat === 'domestic') {
-    const outcomes = simulatePhaseMatches(mode.matchCount, ratings, strength, defensiveBase, seed, pressure, 0, 'League season', chaosEvents)
+    const outcomes = simulatePhaseMatches(mode, mode.matchCount, ratings, effectiveTeamQuality, seed, pressure, progress, 0, 'League season', chaosEvents)
     const wins = outcomes.filter((outcome) => outcome.outcome === 'W').length
     const draws = outcomes.filter((outcome) => outcome.outcome === 'D').length
     const losses = outcomes.filter((outcome) => outcome.outcome === 'L').length
@@ -701,7 +753,7 @@ function simulateCompetitionPath(
   }
 
   if (mode.simulationFormat === 'mls') {
-    const regularSeason = simulatePhaseMatches(mode.matchCount, ratings, strength, defensiveBase, seed, pressure, 0, 'Regular season', chaosEvents)
+    const regularSeason = simulatePhaseMatches(mode, mode.matchCount, ratings, effectiveTeamQuality, seed, pressure, progress, 0, 'Regular season', chaosEvents)
     const regularSummary = summarizePhase('Regular season', regularSeason, 'Qualified for playoffs')
     const points = regularSummary.record.wins * 3 + regularSummary.record.draws
     if (points < mode.matchCount * 1.35) {
@@ -717,11 +769,12 @@ function simulateCompetitionPath(
         ['MLS Cup', 1, 'MLS Cup Finalist'],
       ],
       championStage: 'MLS Cup Champion',
+      mode,
       ratings,
-      strength,
-      defensiveBase,
+      effectiveTeamQuality,
       seed,
       pressure: pressure + 3,
+      progress,
       offset: mode.matchCount,
       chaosEvents,
     })
@@ -733,10 +786,10 @@ function simulateCompetitionPath(
       groupPhaseName: 'Group stage',
       championStage: mode.modeId === 'nation_xi' ? `${mode.modeName} Champion` : 'World Champion',
       ratings,
-      strength,
-      defensiveBase,
+      effectiveTeamQuality,
       seed,
       pressure,
+      progress,
       rounds: [
         ['Round of 16', 1, 'Round of 16 exit'],
         ['Quarter-final', 1, 'Quarter-final exit'],
@@ -748,7 +801,7 @@ function simulateCompetitionPath(
   }
 
   if (mode.simulationFormat === 'ucl') {
-    const league = simulatePhaseMatches(8, ratings, strength, defensiveBase, seed, pressure, 0, 'League phase', chaosEvents)
+    const league = simulatePhaseMatches(mode, 8, ratings, effectiveTeamQuality, seed, pressure, progress, 0, 'League phase', chaosEvents)
     const leagueSummary = summarizePhase('League phase', league, 'Qualified for knockouts')
     const leaguePoints = leagueSummary.record.wins * 3 + leagueSummary.record.draws
     if (leaguePoints < 9) {
@@ -766,9 +819,9 @@ function simulateCompetitionPath(
     let offset = 8
     for (let index = 0; index < rounds.length; index += 1) {
       const [roundName, matchCount, exitStage] = rounds[index]
-      const matches = simulatePhaseMatches(matchCount, ratings, strength, defensiveBase, seed, pressure + 3 + index * 2.2, offset, roundName, chaosEvents)
+      const matches = simulatePhaseMatches(mode, matchCount, ratings, effectiveTeamQuality, seed, pressure + 3 + index * 2.2, progress, offset, roundName, chaosEvents, matchCount === 1)
       offset += matchCount
-      const advanced = aggregateAdvance(matches, strength, `${seed}:${roundName}`)
+      const advanced = aggregateAdvance(matches, ratings, effectiveTeamQuality, `${seed}:${roundName}`)
       if (!advanced) {
         phases.push(summarizePhase(roundName, matches, exitStage))
         return { phases, stage: exitStage }
@@ -789,11 +842,12 @@ function simulateCompetitionPath(
         ['Final', 1, 'Finalist'],
       ],
       championStage: 'European Cup Champion',
+      mode,
       ratings,
-      strength,
-      defensiveBase,
+      effectiveTeamQuality,
       seed,
       pressure,
+      progress,
       offset: 0,
       chaosEvents,
       pressureStep: 2.5,
@@ -806,10 +860,10 @@ function simulateCompetitionPath(
       groupPhaseName: 'Group stage',
       championStage: `${mode.modeName} Champion`,
       ratings,
-      strength,
-      defensiveBase,
+      effectiveTeamQuality,
       seed,
       pressure,
+      progress,
       rounds: [
         ['Round of 16', 1, 'Round of 16 exit'],
         ['Quarter-final', 1, 'Quarter-final exit'],
@@ -820,12 +874,143 @@ function simulateCompetitionPath(
     })
   }
 
-  const outcomes = simulatePhaseMatches(mode.matchCount, ratings, strength, defensiveBase, seed, pressure, 0, 'Campaign', chaosEvents)
+  const outcomes = simulatePhaseMatches(mode, mode.matchCount, ratings, effectiveTeamQuality, seed, pressure, progress, 0, 'Campaign', chaosEvents)
   const wins = outcomes.filter((outcome) => outcome.outcome === 'W').length
   const draws = outcomes.filter((outcome) => outcome.outcome === 'D').length
   const losses = outcomes.filter((outcome) => outcome.outcome === 'L').length
   const stage = getDomesticStage(mode, wins, draws, losses)
   return { phases: [summarizePhase('Campaign', outcomes, stage)], stage }
+}
+
+function gradeFromTier(tierId: NonNullable<RunResult['resultTier']>['id'], wins: number, matchCount: number): [string, string] {
+  if (tierId === 'perfect') return ['SS', 'Perfect run']
+  if (tierId === 'invincible') return ['S', 'Invincible']
+  if (tierId === 'perfect_near_miss') return ['S', 'Perfect near-miss']
+  if (tierId === 'undefeated') return ['A+', 'Undefeated']
+  if (tierId === 'undefeated_near_miss') return ['A', 'Undefeated near-miss']
+  if (tierId === 'strong') return ['B', 'Strong run']
+  if (wins >= Math.round(matchCount * 0.55)) return ['C', 'Respectable']
+  return ['D', 'Exposed']
+}
+
+function perfectionResultFromTier(tier: NonNullable<RunResult['resultTier']>): string {
+  if (tier.id === 'perfect') return 'Perfect'
+  if (tier.id === 'invincible') return 'Invincible'
+  if (tier.id === 'undefeated') return 'Undefeated'
+  return tier.label
+}
+
+function probabilityExamples(ratings: TeamRatings, effectiveTeamQuality: EffectiveTeamQuality) {
+  return [-30, -10, 0, 15, 30, 45].map((dominanceDelta) => {
+    const base = baseDominanceProbabilities(dominanceDelta)
+    const conversionProbability = drawConversionProbability({
+      ratings,
+      effectiveScore: effectiveTeamQuality.score,
+      positionFit: effectiveTeamQuality.positionFit,
+      chemistry: effectiveTeamQuality.chemistry,
+      roleBalance: effectiveTeamQuality.roleBalance,
+      weakLinkPenalty: effectiveTeamQuality.weakLinkPenalty,
+      opponentDifficulty: effectiveTeamQuality.score - dominanceDelta,
+      dominanceDelta,
+      matchImportance: 1,
+    })
+    return {
+      dominanceDelta,
+      base,
+      conversionProbability,
+      final: finalProbabilities(base, conversionProbability),
+    }
+  })
+}
+
+function createSimulationDetails(matches: MatchTrace[], ratings: TeamRatings, effectiveTeamQuality: EffectiveTeamQuality, pressure: number, mode: ModeConfig): SimulationDetails {
+  const averageProbability = (key: keyof MatchProbabilitySet) => Math.round(average(matches.map((match) => match.finalProbabilities?.[key] ?? 0.33)) * 100)
+  const winProbability = averageProbability('win')
+  const drawProbability = averageProbability('draw')
+  const lossProbability = Math.max(0, 100 - winProbability - drawProbability)
+  const averageWin = average(matches.map((match) => match.finalProbabilities?.win ?? 0.45))
+  const trophyProbability = mode.simulationFormat === 'domestic'
+    ? Math.round(clamp(logistic(((averageWin * 3 + average(matches.map((match) => match.finalProbabilities?.draw ?? 0.18))) - 2.35) * 7) * 100, 1, 98))
+    : Math.round(clamp(averageWin ** Math.max(3, Math.min(7, mode.matchCount)) * 100, 1, 96))
+
+  return {
+    averageWinProbability: winProbability,
+    averageDrawProbability: drawProbability,
+    averageLossProbability: lossProbability,
+    trophyProbability,
+    teamStrength: effectiveTeamQuality.score,
+    defensiveBase: round(ratings.defense * 0.46 + ratings.goalkeeping * 0.32 + ratings.chemistry * 0.22, 1),
+    matchPressure: round(pressure, 1),
+    expectedGoalsForPerMatch: round(average(matches.map((match) => match.xgFor)), 2),
+    expectedGoalsAgainstPerMatch: round(average(matches.map((match) => match.xgAgainst)), 2),
+    averageOpponentDifficulty: round(average(matches.map((match) => match.opponentDifficulty ?? 0)), 1),
+    averageDominanceDelta: round(average(matches.map((match) => match.dominanceDelta ?? 0)), 1),
+    averageConversionProbability: round(average(matches.map((match) => match.conversionProbability ?? 0)) * 100, 1),
+    probabilityExamples: probabilityExamples(ratings, effectiveTeamQuality),
+  }
+}
+
+function matchThatChangedSeason(matches: MatchTrace[]) {
+  const firstDamage = matches.find((match) => match.outcome !== 'W')
+  const fallback = [...matches].filter((match) => match.outcome === 'L').sort((left, right) => (right.opponentDifficulty ?? 0) - (left.opponentDifficulty ?? 0))[0] ?? matches.find((match) => match.outcome === 'D')
+  const match = firstDamage ?? fallback
+  if (!match) return undefined
+  return {
+    match: match.match,
+    phase: match.phase,
+    outcome: match.outcome,
+    result: match.result,
+    opponentDifficulty: match.opponentDifficulty,
+    note: match.note,
+  }
+}
+
+function tacticalReasonForRun({
+  ratings,
+  effectiveTeamQuality,
+  matches,
+  losses,
+  draws,
+  chemistryWarnings,
+  tacticWeaknesses,
+}: {
+  ratings: TeamRatings
+  effectiveTeamQuality: EffectiveTeamQuality
+  matches: MatchTrace[]
+  losses: number
+  draws: number
+  chemistryWarnings: string[]
+  tacticWeaknesses: string[]
+}): TacticalReason {
+  const turningPoint = matchThatChangedSeason(matches)
+  const lateBreak = Boolean(turningPoint && turningPoint.match > Math.max(1, matches.length - 8))
+  const highDifficultyBreak = Boolean(turningPoint && (turningPoint.opponentDifficulty ?? 0) >= 68)
+
+  if (effectiveTeamQuality.minimumPositionFit < 80 || effectiveTeamQuality.weakLinks.some((link) => link.includes('fit'))) {
+    return { category: 'position_fit', summary: 'A weak position fit capped the XI when the schedule found it.' }
+  }
+  if (ratings.chemistry < 68 || chemistryWarnings.length) {
+    return { category: 'chemistry', summary: chemistryWarnings[0] ?? 'The XI had enough talent, but the links were too loose.' }
+  }
+  if (ratings.goalkeeping < 82 && highDifficultyBreak) {
+    return { category: 'goalkeeper', summary: 'The keeper profile did not steal enough in the hardest fixture.' }
+  }
+  if (lateBreak && (ratings.pressResistance < 82 || ratings.consistency < 82)) {
+    return { category: 'pressure', summary: 'Late-season pressure asked for more press resistance and consistency.' }
+  }
+  if (draws > losses && ratings.midfieldControl < 84) {
+    return { category: 'midfield', summary: 'Midfield control was not sharp enough to turn territory into wins.' }
+  }
+  if (draws > losses && ratings.attack < 84) {
+    return { category: 'attack', summary: 'The attack left too many tight matches alive.' }
+  }
+  if (ratings.defense < 82 || tacticWeaknesses.some((weakness) => weakness.includes('defensive') || weakness.includes('space'))) {
+    return { category: 'defense', summary: 'The defensive structure made the margins too thin.' }
+  }
+  if (losses === 0 && draws === 0) {
+    return { category: 'variance', summary: 'Everything clicked: quality, fit, chemistry, and the match luck all lined up.' }
+  }
+  return { category: 'variance', summary: 'Your XI was strong, but perfection still needs luck as well as quality.' }
 }
 
 export function simulateRun(picks: DraftPick[], modeId: string, seed: string): RunResult {
@@ -837,26 +1022,43 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
   const chemistryReport = calculateChemistry(tacticalPicks)
   const ratings = calculateTeamRatings(tacticalPicks, chemistryReport.score)
   const tacticReport = inferTactic(tacticalPicks, ratings)
-  const basePressure = mode.opponentDistribution === 'elite' ? 9 : mode.opponentDistribution === 'continental' ? 12 : mode.opponentDistribution === 'international' ? 13 : mode.opponentDistribution === 'chaos' ? 16 : 6
+  const effectiveTeamQuality = calculateEffectiveTeamQuality({ picks: tacticalPicks, ratings, chemistryReport })
+  const basePressure = mode.opponentDistribution === 'elite' ? 9 : mode.opponentDistribution === 'continental' ? 12 : mode.opponentDistribution === 'international' ? 13 : 6
   const pressure = basePressure + (mode.modeType === 'manager' ? 3 : 0) - (squadReport?.benchImpact ?? 0)
-  const strength = ratings.overall + (squadReport?.benchImpact ?? 0) * 0.6
-  const defensiveBase = ratings.defense * 0.46 + ratings.goalkeeping * 0.32 + ratings.chemistry * 0.22
-  const simulationDetails = estimateMatchProfile(ratings, strength, defensiveBase, pressure, mode)
+  const progress = createRunProgress()
   const chaosEvents: ChaosEvent[] = []
   const chaosEventSink = mode.opponentDistribution === 'chaos' ? chaosEvents : undefined
 
-  const { phases: competitionPath, stage } = simulateCompetitionPath(mode, ratings, strength, defensiveBase, seed, pressure, chaosEventSink)
+  const { phases: competitionPath, stage } = simulateCompetitionPath(mode, ratings, effectiveTeamQuality, seed, pressure, progress, chaosEventSink)
   const matchTrace = matchTraceFromPhases(competitionPath)
   const { wins, draws, losses } = recordFromPhases(competitionPath)
   const { goalsFor, goalsAgainst, xgFor, xgAgainst } = totalsFromPhases(competitionPath)
-  const [grade, gradeLabel] =
-    mode.simulationFormat === 'domestic'
-      ? gradeDomestic(wins, draws, losses, mode.matchCount)
-      : gradeTournament(mode, wins, draws, losses, stage)
-  const perfectionResult = losses === 0 && draws === 0 ? 'Perfect' : losses === 0 ? 'Invincible, not perfect' : 'Not invincible'
+  const resultTier = classifyResultTier({
+    mode,
+    wins,
+    draws,
+    losses,
+    stage,
+    hadExtraTimeWin: progress.hadExtraTimeWin,
+    hadPenaltyAdvance: progress.hadPenaltyAdvance,
+  })
+  const [grade, gradeLabel] = gradeFromTier(resultTier.id, wins, matchTrace.length || mode.matchCount)
+  const perfectionResult = perfectionResultFromTier(resultTier)
+  const simulationDetails = createSimulationDetails(matchTrace, ratings, effectiveTeamQuality, pressure, mode)
+  const streaks = progressToStreaks(progress)
+  const turningPoint = matchThatChangedSeason(matchTrace)
   const strongest = strongestUnit(ratings)
   const weakest = weakestUnit(ratings)
-  const failure = failureReason(weakest, chemistryReport.warnings, tacticReport.weaknesses, simulationDetails)
+  const tacticalReason = tacticalReasonForRun({
+    ratings,
+    effectiveTeamQuality,
+    matches: matchTrace,
+    losses,
+    draws,
+    chemistryWarnings: chemistryReport.warnings,
+    tacticWeaknesses: tacticReport.weaknesses,
+  })
+  const failure = tacticalReason.summary || failureReason(weakest, chemistryReport.warnings, tacticReport.weaknesses, simulationDetails)
   const firstDamage = matchTrace.find((match) => match.outcome !== 'W')
 
   const baseResult = {
@@ -873,6 +1075,8 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
     gradeLabel,
     trophyResult: stage.toLowerCase().includes('champion') ? 'Trophy won' : stage,
     perfectionResult,
+    resultTier,
+    scoringVersion,
     stage,
     bestPlayer: bestPlayer(tacticalPicks),
     weakLink: weakLink(tacticalPicks),
@@ -880,6 +1084,7 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
     weakestUnit: weakest,
     dominanceReason: dominanceReason(strongest, ratings),
     failureReason: failure,
+    tacticalReason,
     why: explain({
       losses,
       draws,
@@ -889,6 +1094,10 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
       weakestUnit: weakest,
       firstDamage,
     }),
+    effectiveTeamQuality,
+    streaks,
+    matchThatChangedSeason: turningPoint,
+    probabilityExamples: simulationDetails.probabilityExamples,
     teamRatings: ratings,
     tacticReport,
     chemistryReport,

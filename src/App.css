@@ -1993,6 +1993,31 @@ main {
   color: #ead391;
 }
 
+.pitch-slot.weak-fit .jersey {
+  border-color: color-mix(in srgb, #d99d24 76%, white);
+  background: rgba(181, 139, 43, 0.18);
+}
+
+.pitch-slot.wrong-fit .jersey {
+  border-color: color-mix(in srgb, #c44242 78%, white);
+  background: rgba(196, 66, 66, 0.18);
+}
+
+.fit-hint {
+  display: block;
+  width: max-content;
+  max-width: 90px;
+  margin-top: 2px;
+  padding: 3px 5px;
+  border-radius: 6px;
+  background: rgba(4, 42, 22, 0.72);
+  color: #fff8df;
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: normal;
+}
+
 .pitch-slot.placeable:hover .jersey,
 .pitch-slot.placeable:focus-visible .jersey {
   border-style: solid;
@@ -2190,6 +2215,20 @@ main {
   cursor: pointer;
 }
 
+.bench-slot.weak-fit {
+  border-color: color-mix(in srgb, var(--ui-gold) 78%, var(--ui-line));
+}
+
+.bench-slot.wrong-fit {
+  border-color: color-mix(in srgb, #c44242 78%, var(--ui-line));
+}
+
+.bench-fit-hint {
+  color: var(--ui-gold);
+  font-size: 11px;
+  font-weight: 900;
+}
+
 .bench-slot.placeable:hover,
 .bench-slot.placeable:focus-visible {
   transform: translateY(-1px);
@@ -2287,6 +2326,10 @@ main {
   color: var(--ui-muted);
   font-size: 14px;
   font-weight: 700;
+}
+
+.result-summary strong {
+  color: var(--ui-fg);
 }
 
 .result-grid,

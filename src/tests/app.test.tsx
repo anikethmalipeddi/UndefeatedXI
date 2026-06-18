@@ -57,6 +57,8 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: /^Spin$/i }))
     await screen.findAllByRole('button', { name: /Choose player/i })
+    await user.click((await screen.findAllByRole('button', { name: /Choose player/i }))[0])
+    expect((await screen.findAllByRole('button', { name: /Place .* at .* fit/i }))[0]).toHaveAccessibleName(/penalty/i)
     expect(screen.queryByRole('button', { name: /^Spin$/i })).not.toBeInTheDocument()
     expect(screen.getByRole('button', { name: /^Team$/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /^Era$/i })).toBeInTheDocument()

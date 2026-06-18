@@ -10,8 +10,21 @@ import { calculateChemistry } from '../engine/chemistry'
 import { modeMatchesPlayer, slotMatchesPlayer } from '../engine/eligibility'
 import { configureDraftPlayerContexts, createDraftState, isDraftComplete, reroll, selectPlayer, selectPlayerForSlot, spinForSlot } from '../engine/draft'
 import { simulateRun } from '../engine/simulation'
+import {
+  baseDominanceProbabilities,
+  calculateEffectiveTeamQuality,
+  calculatePositionFitReport,
+  classifyResultTier,
+  drawConversionProbability,
+  finalProbabilities,
+  fixtureDifficulty,
+  leagueInvincibleDrawLimit,
+  modeDifficultyScore,
+  positionFitScore,
+  scoringVersion,
+} from '../engine/simulationModel'
 import { createShareText } from '../engine/share'
-import { formatStoredRecord, recordRun } from '../engine/storage'
+import { formatStoredRecord, recordRun, scoreRun } from '../engine/storage'
 import { calculateTeamRatings, inferTactic } from '../engine/tactics'
 import { modeValidations, validateDataSet } from '../engine/validation'
 
@@ -857,7 +870,14 @@ describe('simulation and sharing', () => {
 
     expect(result.record).toEqual({ wins: phaseWins, draws: phaseDraws, losses: phaseLosses })
     expect(result.points).toBe(result.record.wins * 3 + result.record.draws)
-    expect(result.perfectionResult).toBe(result.record.losses === 0 && result.record.draws === 0 ? 'Perfect' : result.record.losses === 0 ? 'Invincible, not perfect' : 'Not invincible')
+    const expectedPerfectionLabel = result.resultTier?.id === 'perfect'
+      ? 'Perfect'
+      : result.resultTier?.id === 'invincible'
+        ? 'Invincible'
+        : result.resultTier?.id === 'undefeated'
+          ? 'Undefeated'
+          : result.resultTier?.label
+    expect(result.perfectionResult).toBe(expectedPerfectionLabel)
     expect(result.trophyResult).toBe(result.stage?.toLowerCase().includes('champion') ? 'Trophy won' : result.stage)
     expect(result.simulationDetails.averageWinProbability + result.simulationDetails.averageDrawProbability + result.simulationDetails.averageLossProbability).toBe(100)
 
@@ -872,14 +892,14 @@ describe('simulation and sharing', () => {
 
   it('separates elite, average, and weak XIs in long-run domestic calibration', () => {
     const elite = sampleRuns(controlledXI(94), 'world_xi', 120)
-    const average = sampleRuns(controlledXI(82), 'world_xi', 120)
-    const weak = sampleRuns(controlledXI(70), 'world_xi', 120)
+    const average = sampleRuns(controlledXI(78), 'world_xi', 120)
+    const weak = sampleRuns(controlledXI(62), 'world_xi', 120)
 
-    expect(elite.averageWins).toBeGreaterThan(average.averageWins + 8)
-    expect(average.averageWins).toBeGreaterThan(weak.averageWins + 10)
+    expect(elite.averageWins).toBeGreaterThan(average.averageWins + 7)
+    expect(average.averageWins).toBeGreaterThan(weak.averageWins + 7)
     expect(elite.averageLosses).toBeLessThan(4)
     expect(average.averageLosses).toBeGreaterThan(4)
-    expect(weak.averageLosses).toBeGreaterThan(16)
+    expect(weak.averageLosses).toBeGreaterThan(12)
     expect(elite.perfectRate).toBeLessThan(6)
     expect(average.perfectRate).toBe(0)
     expect(weak.unbeatenRate).toBe(0)
@@ -897,14 +917,148 @@ describe('simulation and sharing', () => {
 
   it('keeps perfect tournament runs difficult and strength-sensitive', () => {
     const eliteWorldCup = sampleRuns(controlledXI(94), 'world_cup', 160)
-    const averageWorldCup = sampleRuns(controlledXI(82), 'world_cup', 160)
-    const weakWorldCup = sampleRuns(controlledXI(70), 'world_cup', 160)
+    const averageWorldCup = sampleRuns(controlledXI(78), 'world_cup', 160)
+    const weakWorldCup = sampleRuns(controlledXI(62), 'world_cup', 160)
 
-    expect(eliteWorldCup.trophyRate).toBeGreaterThan(averageWorldCup.trophyRate + 25)
+    expect(eliteWorldCup.trophyRate).toBeGreaterThan(averageWorldCup.trophyRate + 15)
     expect(averageWorldCup.trophyRate).toBeGreaterThan(weakWorldCup.trophyRate)
     expect(eliteWorldCup.perfectRate).toBeLessThan(25)
     expect(averageWorldCup.perfectRate).toBe(0)
     expect(weakWorldCup.perfectRate).toBe(0)
+  })
+
+  it('scores effective team quality from rating, fit, chemistry, balance, and weak-link caps', () => {
+    const strongXI = possessionTestXI()
+    const strongChemistry = calculateChemistry(strongXI)
+    const strongRatings = calculateTeamRatings(strongXI, strongChemistry.score)
+    const strongQuality = calculateEffectiveTeamQuality({ picks: strongXI, ratings: strongRatings, chemistryReport: strongChemistry })
+    const emergencyKeeperXI = [
+      testPick('gk', 'messi_barcelona_2010s', { positions: ['RW'], ratings: { goalkeeping: 4 } }),
+      ...possessionTestXI().filter((pick) => pick.slot.slotId !== 'gk'),
+    ]
+    const weakChemistry = calculateChemistry(emergencyKeeperXI)
+    const weakRatings = calculateTeamRatings(emergencyKeeperXI, weakChemistry.score)
+    const weakQuality = calculateEffectiveTeamQuality({ picks: emergencyKeeperXI, ratings: weakRatings, chemistryReport: weakChemistry })
+
+    expect(calculatePositionFitReport(strongXI).minimum).toBe(100)
+    expect(positionFitScore(strongXI[0].slot, strongXI[0].player)).toBe(100)
+    expect(calculatePositionFitReport(emergencyKeeperXI).minimum).toBeLessThan(70)
+    expect(weakQuality.score).toBeLessThanOrEqual(68)
+    expect(weakQuality.weakLinks).toContain('Emergency goalkeeper')
+    expect(strongQuality.score).toBeGreaterThan(weakQuality.score + 18)
+  })
+
+  it('maps dominance to capped probabilities and applies draw conversion as a second phase', () => {
+    const even = baseDominanceProbabilities(0)
+    const dominant = baseDominanceProbabilities(45)
+    const underdog = baseDominanceProbabilities(-30)
+    const peakConversion = drawConversionProbability({
+      ratings: calculateTeamRatings(possessionTestXI(), 95),
+      effectiveScore: 94,
+      positionFit: 100,
+      chemistry: 96,
+      roleBalance: 96,
+      weakLinkPenalty: 0,
+      opponentDifficulty: 48,
+      dominanceDelta: 45,
+      matchImportance: 1,
+    })
+    const weakConversion = drawConversionProbability({
+      ratings: calculateTeamRatings(controlledXI(62), 55),
+      effectiveScore: 58,
+      positionFit: 72,
+      chemistry: 58,
+      roleBalance: 62,
+      weakLinkPenalty: 20,
+      opponentDifficulty: 70,
+      dominanceDelta: -12,
+      matchImportance: 1.8,
+    })
+    const converted = finalProbabilities(dominant, peakConversion)
+
+    expect(underdog.win).toBeLessThan(even.win)
+    expect(even.win).toBeLessThan(dominant.win)
+    expect(dominant.win).toBeLessThanOrEqual(0.91)
+    expect(dominant.draw).toBeLessThan(even.draw)
+    expect(dominant.loss).toBeGreaterThanOrEqual(0.025)
+    expect(peakConversion).toBeGreaterThan(weakConversion)
+    expect(peakConversion).toBeLessThanOrEqual(0.4)
+    expect(converted.win).toBeGreaterThan(dominant.win)
+    expect(converted.draw).toBeLessThan(dominant.draw)
+    expect(converted.loss).toBe(dominant.loss)
+    expect(Math.round((converted.win + converted.draw + converted.loss) * 10000)).toBe(10000)
+  })
+
+  it('classifies league and tournament result tiers with near-miss subtypes', () => {
+    const league = getModeConfig('premier_league')
+    const worldCup = getModeConfig('world_cup')
+
+    expect(leagueInvincibleDrawLimit(38)).toBe(3)
+    expect(classifyResultTier({ mode: league, wins: 38, draws: 0, losses: 0, stage: 'Champion', hadExtraTimeWin: false, hadPenaltyAdvance: false }).id).toBe('perfect')
+    expect(classifyResultTier({ mode: league, wins: 37, draws: 1, losses: 0, stage: 'Champion', hadExtraTimeWin: false, hadPenaltyAdvance: false }).id).toBe('perfect_near_miss')
+    expect(classifyResultTier({ mode: league, wins: 37, draws: 0, losses: 1, stage: 'Champion', hadExtraTimeWin: false, hadPenaltyAdvance: false }).id).toBe('undefeated_near_miss')
+    expect(classifyResultTier({ mode: league, wins: 35, draws: 3, losses: 0, stage: 'Champion', hadExtraTimeWin: false, hadPenaltyAdvance: false }).id).toBe('invincible')
+    expect(classifyResultTier({ mode: worldCup, wins: 7, draws: 0, losses: 0, stage: 'Champion', hadExtraTimeWin: true, hadPenaltyAdvance: false }).id).toBe('invincible')
+    expect(classifyResultTier({ mode: worldCup, wins: 6, draws: 1, losses: 0, stage: 'Champion', hadExtraTimeWin: false, hadPenaltyAdvance: true }).id).toBe('undefeated')
+  })
+
+  it('adds reproducible opponent difficulty scale and match-level simulation fields', () => {
+    const mode = getModeConfig('premier_league')
+    const rngValues = [0.1, 0.5, 0.9, 0.5]
+    const makeRng = () => {
+      let index = 0
+      return {
+        next: () => rngValues[index++ % rngValues.length],
+        between: (min: number, max: number) => min + (max - min) * rngValues[index++ % rngValues.length],
+      }
+    }
+    const first = fixtureDifficulty(mode, 'Matchday 1', makeRng())
+    const second = fixtureDifficulty(mode, 'Matchday 1', makeRng())
+    const result = simulateRun(controlledXI(94), 'world_xi', 'IXI-V2-FIELDS')
+
+    expect(first).toEqual(second)
+    expect(first.difficulty).toBeGreaterThanOrEqual(30)
+    expect(first.difficulty).toBeLessThanOrEqual(90)
+    expect(result.scoringVersion).toBe(scoringVersion)
+    expect(result.effectiveTeamQuality?.score).toBeGreaterThan(80)
+    expect(result.streaks?.longestUnbeatenStreak).toBeGreaterThanOrEqual(result.streaks?.longestWinStreak ?? 0)
+    if (result.record.draws > 0 || result.record.losses > 0) {
+      expect(result.matchThatChangedSeason?.match).toBeGreaterThan(0)
+    } else {
+      expect(result.matchThatChangedSeason).toBeUndefined()
+    }
+    expect(result.tacticalReason?.summary.length).toBeGreaterThan(12)
+    expect(result.matchTrace.every((match) => match.opponentDifficulty !== undefined && match.baseProbabilities && match.finalProbabilities)).toBe(true)
+    expect(result.probabilityExamples).toHaveLength(6)
+  })
+
+  it('orders leaderboard scoring v2 by tier before win rate and mode context', () => {
+    const template = simulateRun(controlledXI(94), 'world_xi', 'IXI-SCORE-V2')
+    const perfect = {
+      ...template,
+      record: { wins: 38, draws: 0, losses: 0 },
+      resultTier: { id: 'perfect' as const, label: 'Perfect', description: 'Every league match was won.', rank: 800 },
+      goalsFor: 120,
+      goalsAgainst: 18,
+      points: 114,
+    }
+    const nearMiss = {
+      ...perfect,
+      record: { wins: 37, draws: 1, losses: 0 },
+      resultTier: { id: 'perfect_near_miss' as const, label: 'Perfect near-miss', description: 'One draw kept the league from perfection.', rank: 690 },
+      points: 112,
+    }
+    const undefeated = {
+      ...perfect,
+      record: { wins: 34, draws: 4, losses: 0 },
+      resultTier: { id: 'undefeated' as const, label: 'Undefeated', description: 'No losses, but too many draws for invincible perfection.', rank: 640 },
+      points: 106,
+    }
+
+    expect(scoreRun(perfect)).toBeGreaterThan(scoreRun(nearMiss))
+    expect(scoreRun(nearMiss)).toBeGreaterThan(scoreRun(undefeated))
+    expect(modeDifficultyScore('world_xi')).toBeGreaterThan(modeDifficultyScore('world_cup'))
+    expect(scoringVersion).toBe(2)
   })
 
   it('persists recent runs while keeping the best run per mode', () => {

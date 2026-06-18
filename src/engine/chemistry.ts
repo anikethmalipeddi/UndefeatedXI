@@ -13,7 +13,11 @@ export function calculateChemistry(picks: DraftPick[]): ChemistryReport {
   }, 0)
 
   const sameNationLinks = picks.reduce((count, pick, index) => {
-    return count + picks.slice(index + 1).filter((other) => other.player.country === pick.player.country || other.player.teamName === pick.player.teamName).length
+    return count + picks.slice(index + 1).filter((other) => other.player.country === pick.player.country).length
+  }, 0)
+
+  const eraLinks = picks.reduce((count, pick, index) => {
+    return count + picks.slice(index + 1).filter((other) => other.player.decade === pick.player.decade).length
   }, 0)
 
   const creators = countRole(picks, ['creator', 'passing', 'tempo'])
@@ -26,6 +30,7 @@ export function calculateChemistry(picks: DraftPick[]): ChemistryReport {
   }).length
   const creatorOverload = Math.max(0, creators - 4)
   const finisherOverload = Math.max(0, finishers - 3)
+  const roleConflictPenalty = (creatorOverload + finisherOverload) * 2
 
   const roleBalance = clamp(
     55 +
@@ -40,8 +45,8 @@ export function calculateChemistry(picks: DraftPick[]): ChemistryReport {
     35,
     100,
   )
-  const linkScore = clamp(50 + sameTeamLinks * 3 + sameNationLinks * 1.5, 50, 94)
-  const score = Math.round(clamp(roleBalance * 0.72 + linkScore * 0.28, 35, 100))
+  const linkScore = clamp(50 + sameNationLinks * 3 + eraLinks * 2 + sameTeamLinks * 2 - roleConflictPenalty, 45, 96)
+  const score = Math.round(clamp(roleBalance * 0.66 + linkScore * 0.34, 35, 100))
 
   const warnings: string[] = []
   const bonuses: string[] = []
@@ -55,12 +60,15 @@ export function calculateChemistry(picks: DraftPick[]): ChemistryReport {
   if (defensiveCover < 3) warnings.push('Defensive cover is thin behind the stars.')
   if (sameTeamLinks >= 3) bonuses.push('Club links make the automatisms sharper.')
   if (sameNationLinks >= 3) bonuses.push('International familiarity gives the side a tournament feel.')
+  if (eraLinks >= 4) bonuses.push('Era overlap helps the timing feel natural.')
   if (hasRealKeeper && defensiveCover >= 3 && ballWinners > 0 && creators > 1 && finishers > 0) bonuses.push('The spine makes football sense.')
 
   return {
     score,
     sameTeamLinks,
     sameNationLinks,
+    eraLinks,
+    roleConflictPenalty,
     roleBalance: Math.round(roleBalance),
     warnings,
     bonuses,

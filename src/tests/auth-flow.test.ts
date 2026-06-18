@@ -70,6 +70,8 @@ function leaderboardPayload(): LeaderboardSubmission {
     formationId: '4-3-3',
     score: 1000,
     grade: 'A',
+    resultTier: 'strong',
+    scoringVersion: 2,
     record: { wins: 30, draws: 4, losses: 4 },
     goalsFor: 90,
     goalsAgainst: 32,

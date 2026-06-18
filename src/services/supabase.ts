@@ -39,6 +39,8 @@ export interface LeaderboardRun {
   formation_id: string
   score: number
   grade: string
+  result_tier?: string | null
+  scoring_version?: number
   record: RunResult['record']
   goals_for: number
   goals_against: number
@@ -57,6 +59,8 @@ export interface LeaderboardSubmission {
   formationId: string
   score: number
   grade: string
+  resultTier: string
+  scoringVersion: number
   record: RunResult['record']
   goalsFor: number
   goalsAgainst: number
@@ -151,10 +155,12 @@ export function createLeaderboardSubmission(result: RunResult, formationId: stri
     formationId,
     score: scoreRun(result),
     grade: result.grade,
+    resultTier: result.resultTier?.id ?? result.perfectionResult,
+    scoringVersion: result.scoringVersion ?? 2,
     record: result.record,
     goalsFor: result.goalsFor,
     goalsAgainst: result.goalsAgainst,
-    teamRating: result.teamRatings.overall,
+    teamRating: result.effectiveTeamQuality?.score ?? result.teamRatings.overall,
     picksDigest: buildPicksDigest(picks),
     shareText: result.shareText || `${summary.modeName}: ${summary.record.wins}-${summary.record.draws}-${summary.record.losses}`,
   }
@@ -165,7 +171,9 @@ export function validateLeaderboardSubmission(payload: LeaderboardSubmission): s
   if (!/^IXI-[A-Z0-9]{4,16}$/.test(payload.runId)) issues.push('Invalid run id.')
   if (!/^[a-z0-9_]+$/.test(payload.modeId)) issues.push('Invalid mode id.')
   if (!/^\d-\d-\d(?:-\d)?$/.test(payload.formationId)) issues.push('Invalid formation id.')
-  if (!Number.isFinite(payload.score) || payload.score < -5000 || payload.score > 20000) issues.push('Invalid score.')
+  if (!Number.isFinite(payload.score) || payload.score < -5000 || payload.score > 50000) issues.push('Invalid score.')
+  if (!/^[a-z_ -]{2,64}$/i.test(payload.resultTier)) issues.push('Invalid result tier.')
+  if (!Number.isInteger(payload.scoringVersion) || payload.scoringVersion < 1 || payload.scoringVersion > 10) issues.push('Invalid scoring version.')
   if (!isValidRecord(payload.record)) issues.push('Impossible record.')
   if (!Number.isFinite(payload.goalsFor) || payload.goalsFor < 0 || payload.goalsFor > 250) issues.push('Invalid goals for.')
   if (!Number.isFinite(payload.goalsAgainst) || payload.goalsAgainst < 0 || payload.goalsAgainst > 250) issues.push('Invalid goals against.')
@@ -324,10 +332,10 @@ export async function fetchLeaderboardRuns(view: LeaderboardView, modeId?: strin
   if (!supabase) return []
   let query = supabase
     .from('leaderboard_runs')
-    .select('run_id,user_id,display_name,mode_id,mode_name,formation_id,score,grade,record,goals_for,goals_against,team_rating,picks_digest,share_text,created_at')
+    .select('run_id,user_id,display_name,mode_id,mode_name,formation_id,score,grade,result_tier,scoring_version,record,goals_for,goals_against,team_rating,picks_digest,share_text,created_at')
     .order('score', { ascending: false })
     .order('created_at', { ascending: false })
-    .limit(50)
+    .limit(200)
 
   if (view === 'mode' && modeId) query = query.eq('mode_id', modeId)
   if (view === 'mine') {
@@ -338,7 +346,12 @@ export async function fetchLeaderboardRuns(view: LeaderboardView, modeId?: strin
 
   const { data, error } = await query
   if (error) throw error
-  return (data ?? []) as LeaderboardRun[]
+  const bestByUserMode = new Map<string, LeaderboardRun>()
+  for (const run of (data ?? []) as LeaderboardRun[]) {
+    const key = `${run.user_id}:${run.mode_id}`
+    if (!bestByUserMode.has(key)) bestByUserMode.set(key, run)
+  }
+  return Array.from(bestByUserMode.values()).slice(0, 50)
 }
 
 export async function submitFeedback(payload: FeedbackSubmission): Promise<void> {

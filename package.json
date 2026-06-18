@@ -15,6 +15,7 @@
     "data:audit": "node scripts/source-audit.mjs",
     "data:wikidata-facts": "tsx scripts/import-wikidata-facts.ts",
     "data:coverage": "tsx scripts/coverage-report.ts",
+    "audit:simulation": "tsx scripts/audit-simulation.ts",
     "smoke:supabase": "tsx scripts/smoke-supabase-flow.ts",
     "supabase:login": "npx supabase@latest login",
     "supabase:link": "npx supabase@latest link",

@@ -1,0 +1,2652 @@
+{
+  "startedAt": "2026-06-16T01:07:12.529Z",
+  "finishedAt": "2026-06-16T01:17:35.608Z",
+  "seeds": [
+    42,
+    1337,
+    99999,
+    12345,
+    7
+  ],
+  "config": {
+    "smartDraftTeamsPerMode": 8,
+    "smartDraftRerunsPerTeam": 5,
+    "bestObservedRerunsPerMode": 200,
+    "randomDraftsPerMode": 50,
+    "greedyDraftsPerMode": 50
+  },
+  "modes": [
+    {
+      "modeId": "world_xi",
+      "modeName": "World XI",
+      "format": "domestic",
+      "targetRecord": "38-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 7.74,
+          "draws": 10.04,
+          "losses": 20.22
+        },
+        "perMatchWinRate": 0.2036842105263158,
+        "averageGoalDifferential": -26,
+        "averageLongestWinStreak": 2.14,
+        "averageLongestUnbeatenStreak": 4.62,
+        "averageScore": -29.480000000000004
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 15.66,
+          "draws": 9.22,
+          "losses": 13.12
+        },
+        "perMatchWinRate": 0.41210526315789475,
+        "averageGoalDifferential": 6.42,
+        "averageLongestWinStreak": 3.9,
+        "averageLongestUnbeatenStreak": 7.24,
+        "averageScore": 17.353599999999997
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 15.875,
+          "draws": 10,
+          "losses": 12.125
+        },
+        "perMatchWinRate": 0.41776315789473684,
+        "averageGoalDifferential": 8.75,
+        "averageLongestWinStreak": 3.75,
+        "averageLongestUnbeatenStreak": 7.5,
+        "averageScore": 21.95
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.4532894736842105,
+        "averageGoalDifferential": 8.375
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 20.99,
+            "draws": 8.685,
+            "losses": 8.325
+          },
+          "perMatchWinRate": 0.5523684210526316,
+          "averageGoalDifferential": 28.445,
+          "averageLongestWinStreak": 5.25,
+          "averageLongestUnbeatenStreak": 10.715,
+          "averageScore": 48.9556
+        },
+        "formationId": "3-4-3",
+        "teamRatings": {
+          "attack": 84,
+          "finishing": 90,
+          "chanceCreation": 77,
+          "ballProgression": 79,
+          "midfield": 80,
+          "midfieldControl": 80,
+          "pressResistance": 81,
+          "defense": 83,
+          "defensiveSolidity": 85,
+          "defensiveTransitions": 82,
+          "pressing": 77,
+          "aerialSetPiece": 79,
+          "goalkeeping": 86,
+          "physicality": 82,
+          "consistency": 82,
+          "chemistry": 89,
+          "bigGame": 87,
+          "tacticalCoherence": 90,
+          "eraBalance": 98,
+          "dataConfidence": 86,
+          "balance": 95,
+          "overall": 85
+        },
+        "xi": [
+          "RW: George Best",
+          "CB: Daley Blind",
+          "GK: Diego López",
+          "ST: Raúl",
+          "LW: Jan Koller",
+          "CM: Wayne Rooney",
+          "CB: Virgil van Dijk",
+          "CB: Hong Myung-bo",
+          "CM: Graeme Souness",
+          "LM/LWB: Théo Hernandez",
+          "RM/RWB: Maxi Pereira"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "premier_league",
+      "modeName": "Premier League",
+      "format": "domestic",
+      "targetRecord": "38-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 13.48,
+          "draws": 9.7,
+          "losses": 14.82
+        },
+        "perMatchWinRate": 0.3547368421052632,
+        "averageGoalDifferential": -2.46,
+        "averageLongestWinStreak": 3.5,
+        "averageLongestUnbeatenStreak": 6.52,
+        "averageScore": 5.4832
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 19.98,
+          "draws": 9.2,
+          "losses": 8.82
+        },
+        "perMatchWinRate": 0.5257894736842105,
+        "averageGoalDifferential": 24.66,
+        "averageLongestWinStreak": 4.72,
+        "averageLongestUnbeatenStreak": 10.12,
+        "averageScore": 44.652799999999985
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 22.5,
+          "draws": 7.125,
+          "losses": 8.375
+        },
+        "perMatchWinRate": 0.5921052631578947,
+        "averageGoalDifferential": 33.25,
+        "averageLongestWinStreak": 5,
+        "averageLongestUnbeatenStreak": 10.5,
+        "averageScore": 52.16
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.4710526315789474,
+        "averageGoalDifferential": 17.5
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 23.79,
+            "draws": 8.13,
+            "losses": 6.08
+          },
+          "perMatchWinRate": 0.6260526315789474,
+          "averageGoalDifferential": 40.33,
+          "averageLongestWinStreak": 6.34,
+          "averageLongestUnbeatenStreak": 13.275,
+          "averageScore": 64.48639999999999
+        },
+        "formationId": "4-4-2",
+        "teamRatings": {
+          "attack": 81,
+          "finishing": 84,
+          "chanceCreation": 77,
+          "ballProgression": 79,
+          "midfield": 80,
+          "midfieldControl": 80,
+          "pressResistance": 80,
+          "defense": 83,
+          "defensiveSolidity": 85,
+          "defensiveTransitions": 81,
+          "pressing": 80,
+          "aerialSetPiece": 79,
+          "goalkeeping": 93,
+          "physicality": 82,
+          "consistency": 81,
+          "chemistry": 90,
+          "bigGame": 86,
+          "tacticalCoherence": 89,
+          "eraBalance": 100,
+          "dataConfidence": 84,
+          "balance": 89,
+          "overall": 85
+        },
+        "xi": [
+          "CM: N'Golo Kante",
+          "GK: Peter Schmeichel",
+          "CM: Ian Woan",
+          "ST: Ruud Gullit",
+          "ST: George Weah",
+          "CB: Sol Campbell",
+          "LM/LW: Morten Gamst Pedersen",
+          "LB: Leighton Baines",
+          "CB: Steve Walsh",
+          "RB: Chris Gunter",
+          "RM/RW: Mohamed Salah"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "champions_league",
+      "modeName": "Champions League",
+      "format": "ucl",
+      "targetRecord": "Perfect European campaign",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 2.8,
+          "draws": 2.9,
+          "losses": 4.16
+        },
+        "perMatchWinRate": 0.2839756592292089,
+        "averageGoalDifferential": -2.66,
+        "averageLongestWinStreak": 1.52,
+        "averageLongestUnbeatenStreak": 3.26,
+        "averageScore": -1.3928000000000003
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 4.62,
+          "draws": 2.7,
+          "losses": 3.64
+        },
+        "perMatchWinRate": 0.4215328467153285,
+        "averageGoalDifferential": 2.86,
+        "averageLongestWinStreak": 2.26,
+        "averageLongestUnbeatenStreak": 4.9,
+        "averageScore": 5.8688
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 5.5,
+          "draws": 3,
+          "losses": 2.875
+        },
+        "perMatchWinRate": 0.4835164835164835,
+        "averageGoalDifferential": 7,
+        "averageLongestWinStreak": 3.625,
+        "averageLongestUnbeatenStreak": 5.875,
+        "averageScore": 11.434999999999999
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.5093224789915967,
+        "averageGoalDifferential": 7.074999999999999
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.035,
+          "invincibleRate": 0.035,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 7.155,
+            "draws": 3.07,
+            "losses": 2.515
+          },
+          "perMatchWinRate": 0.5616169544740973,
+          "averageGoalDifferential": 10.9,
+          "averageLongestWinStreak": 3.83,
+          "averageLongestUnbeatenStreak": 7.3,
+          "averageScore": 17.862000000000005
+        },
+        "formationId": "4-4-2",
+        "teamRatings": {
+          "attack": 86,
+          "finishing": 89,
+          "chanceCreation": 81,
+          "ballProgression": 82,
+          "midfield": 85,
+          "midfieldControl": 87,
+          "pressResistance": 83,
+          "defense": 87,
+          "defensiveSolidity": 90,
+          "defensiveTransitions": 84,
+          "pressing": 80,
+          "aerialSetPiece": 81,
+          "goalkeeping": 90,
+          "physicality": 84,
+          "consistency": 85,
+          "chemistry": 91,
+          "bigGame": 91,
+          "tacticalCoherence": 91,
+          "eraBalance": 98,
+          "dataConfidence": 83,
+          "balance": 96,
+          "overall": 88
+        },
+        "xi": [
+          "CM: Zinedine Zidane",
+          "ST: Cristiano Ronaldo",
+          "GK: Petr Čech",
+          "CB: Franco Baresi",
+          "ST: César Rodríguez Álvarez",
+          "CB: Paolo Maldini",
+          "CM: Patrick Vieira",
+          "RB: Gianluca Zambrotta",
+          "LB: Ciro Ferrara",
+          "LM/LW: Eden Hazard",
+          "RM/RW: Ángel Di María"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "world_cup",
+      "modeName": "World Cup",
+      "format": "world_cup",
+      "targetRecord": "Perfect World Cup",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.04,
+        "invincibleRate": 0.04,
+        "nearPerfectRate": 0.02,
+        "averageRecord": {
+          "wins": 0.44,
+          "draws": 0.88,
+          "losses": 1.9
+        },
+        "perMatchWinRate": 0.13664596273291926,
+        "averageGoalDifferential": -2.94,
+        "averageLongestWinStreak": 0.44,
+        "averageLongestUnbeatenStreak": 1.2,
+        "averageScore": -3.7351999999999994
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.02,
+        "invincibleRate": 0.02,
+        "nearPerfectRate": 0.06,
+        "averageRecord": {
+          "wins": 1.34,
+          "draws": 0.74,
+          "losses": 1.7
+        },
+        "perMatchWinRate": 0.3544973544973545,
+        "averageGoalDifferential": -0.48,
+        "averageLongestWinStreak": 1.04,
+        "averageLongestUnbeatenStreak": 1.8,
+        "averageScore": -0.3784
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0.125,
+        "averageRecord": {
+          "wins": 1.625,
+          "draws": 0.75,
+          "losses": 1.625
+        },
+        "perMatchWinRate": 0.40625,
+        "averageGoalDifferential": 0.125,
+        "averageLongestWinStreak": 1.5,
+        "averageLongestUnbeatenStreak": 2.375,
+        "averageScore": 0.76
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0.07500000000000001,
+        "invincibleRate": 0.07500000000000001,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.3216050199464017,
+        "averageGoalDifferential": -0.55
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.115,
+          "invincibleRate": 0.115,
+          "nearPerfectRate": 0.13,
+          "averageRecord": {
+            "wins": 1.975,
+            "draws": 1.145,
+            "losses": 1.405
+          },
+          "perMatchWinRate": 0.43646408839779005,
+          "averageGoalDifferential": 1.1,
+          "averageLongestWinStreak": 1.635,
+          "averageLongestUnbeatenStreak": 2.82,
+          "averageScore": 2.942999999999999
+        },
+        "formationId": "4-3-3",
+        "teamRatings": {
+          "attack": 84,
+          "finishing": 88,
+          "chanceCreation": 78,
+          "ballProgression": 79,
+          "midfield": 82,
+          "midfieldControl": 84,
+          "pressResistance": 80,
+          "defense": 80,
+          "defensiveSolidity": 80,
+          "defensiveTransitions": 78,
+          "pressing": 79,
+          "aerialSetPiece": 79,
+          "goalkeeping": 93,
+          "physicality": 82,
+          "consistency": 81,
+          "chemistry": 90,
+          "bigGame": 86,
+          "tacticalCoherence": 89,
+          "eraBalance": 100,
+          "dataConfidence": 86,
+          "balance": 89,
+          "overall": 85
+        },
+        "xi": [
+          "AM/CM: Wayne Rooney",
+          "GK: Peter Schmeichel",
+          "CB: Paolo Maldini",
+          "ST: Daizen Maeda",
+          "DM/CM: Enzo Scifo",
+          "CB: Iván Córdoba",
+          "CM: Pierre-Emile Højbjerg",
+          "RW: Ruud Gullit",
+          "LW: Eden Hazard",
+          "LB: Yūto Nagatomo",
+          "RB: Taye Taiwo"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "ball_knowledge",
+      "modeName": "Ball Knowledge",
+      "format": "domestic",
+      "targetRecord": "38-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 8.4,
+          "draws": 9.46,
+          "losses": 20.14
+        },
+        "perMatchWinRate": 0.22105263157894736,
+        "averageGoalDifferential": -25.58,
+        "averageLongestWinStreak": 1.92,
+        "averageLongestUnbeatenStreak": 4.28,
+        "averageScore": -27.806400000000007
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 16.72,
+          "draws": 9.88,
+          "losses": 11.4
+        },
+        "perMatchWinRate": 0.44,
+        "averageGoalDifferential": 11.26,
+        "averageLongestWinStreak": 4.02,
+        "averageLongestUnbeatenStreak": 9.1,
+        "averageScore": 26.7408
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 16,
+          "draws": 8.25,
+          "losses": 13.75
+        },
+        "perMatchWinRate": 0.42105263157894735,
+        "averageGoalDifferential": 6.5,
+        "averageLongestWinStreak": 4.625,
+        "averageLongestUnbeatenStreak": 6.875,
+        "averageScore": 15.52
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.4342105263157895,
+        "averageGoalDifferential": 9.4
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 18.91,
+            "draws": 9.74,
+            "losses": 9.35
+          },
+          "perMatchWinRate": 0.4976315789473684,
+          "averageGoalDifferential": 20.755,
+          "averageLongestWinStreak": 4.555,
+          "averageLongestUnbeatenStreak": 9.745,
+          "averageScore": 40.0804
+        },
+        "formationId": "3-4-3",
+        "teamRatings": {
+          "attack": 81,
+          "finishing": 85,
+          "chanceCreation": 76,
+          "ballProgression": 78,
+          "midfield": 79,
+          "midfieldControl": 79,
+          "pressResistance": 79,
+          "defense": 82,
+          "defensiveSolidity": 83,
+          "defensiveTransitions": 81,
+          "pressing": 79,
+          "aerialSetPiece": 79,
+          "goalkeeping": 93,
+          "physicality": 81,
+          "consistency": 80,
+          "chemistry": 87,
+          "bigGame": 85,
+          "tacticalCoherence": 87,
+          "eraBalance": 98,
+          "dataConfidence": 83,
+          "balance": 89,
+          "overall": 83
+        },
+        "xi": [
+          "ST: Jarbas Faustinho",
+          "GK: Peter Schmeichel",
+          "CM: Thomas Partey",
+          "CB: Paolo Maldini",
+          "RW: Mohamed Salah",
+          "CM: Pedri",
+          "CB: Carlos Gamarra",
+          "LM/LWB: Leighton Baines",
+          "LW: Ruud Gullit",
+          "CB: Celso Ayala",
+          "RM/RWB: Ian Brightwell"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "english_top_flight",
+      "modeName": "English Top Flight",
+      "format": "domestic",
+      "targetRecord": "38-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 11.92,
+          "draws": 10.54,
+          "losses": 15.54
+        },
+        "perMatchWinRate": 0.3136842105263158,
+        "averageGoalDifferential": -6.18,
+        "averageLongestWinStreak": 2.66,
+        "averageLongestUnbeatenStreak": 5.92,
+        "averageScore": -0.8143999999999998
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 18.92,
+          "draws": 9.52,
+          "losses": 9.56
+        },
+        "perMatchWinRate": 0.4978947368421053,
+        "averageGoalDifferential": 20.98,
+        "averageLongestWinStreak": 4.88,
+        "averageLongestUnbeatenStreak": 9.22,
+        "averageScore": 39.2784
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 21.5,
+          "draws": 10.375,
+          "losses": 6.125
+        },
+        "perMatchWinRate": 0.5657894736842105,
+        "averageGoalDifferential": 30.875,
+        "averageLongestWinStreak": 4.875,
+        "averageLongestUnbeatenStreak": 14.625,
+        "averageScore": 58.96999999999999
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.5125,
+        "averageGoalDifferential": 26.924999999999997
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 24.725,
+            "draws": 7.995,
+            "losses": 5.28
+          },
+          "perMatchWinRate": 0.6506578947368421,
+          "averageGoalDifferential": 43.785,
+          "averageLongestWinStreak": 6.7,
+          "averageLongestUnbeatenStreak": 14.625,
+          "averageScore": 69.83280000000006
+        },
+        "formationId": "4-1-2-1-2",
+        "teamRatings": {
+          "attack": 80,
+          "finishing": 84,
+          "chanceCreation": 75,
+          "ballProgression": 77,
+          "midfield": 80,
+          "midfieldControl": 83,
+          "pressResistance": 79,
+          "defense": 82,
+          "defensiveSolidity": 84,
+          "defensiveTransitions": 82,
+          "pressing": 77,
+          "aerialSetPiece": 79,
+          "goalkeeping": 96,
+          "physicality": 83,
+          "consistency": 80,
+          "chemistry": 98,
+          "bigGame": 86,
+          "tacticalCoherence": 92,
+          "eraBalance": 98,
+          "dataConfidence": 84,
+          "balance": 87,
+          "overall": 86
+        },
+        "xi": [
+          "ST: Alan Shearer",
+          "GK: Peter Shilton",
+          "ST: Derek Hines",
+          "CM: John Barnes",
+          "AM: Ian Woan",
+          "LB: Renan Lodi",
+          "RB: Reece James",
+          "CB: Rio Ferdinand",
+          "CM: Roy Keane",
+          "DM: Moussa Sissoko",
+          "CB: Scott Dann"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "laliga",
+      "modeName": "LaLiga",
+      "format": "domestic",
+      "targetRecord": "38-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 15.44,
+          "draws": 9.72,
+          "losses": 12.84
+        },
+        "perMatchWinRate": 0.4063157894736842,
+        "averageGoalDifferential": 4.96,
+        "averageLongestWinStreak": 3.52,
+        "averageLongestUnbeatenStreak": 7.18,
+        "averageScore": 17.916799999999995
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 20.04,
+          "draws": 9.12,
+          "losses": 8.84
+        },
+        "perMatchWinRate": 0.5273684210526316,
+        "averageGoalDifferential": 24.26,
+        "averageLongestWinStreak": 5.22,
+        "averageLongestUnbeatenStreak": 11.06,
+        "averageScore": 44.66080000000001
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 20,
+          "draws": 8.75,
+          "losses": 9.25
+        },
+        "perMatchWinRate": 0.5263157894736842,
+        "averageGoalDifferential": 21.5,
+        "averageLongestWinStreak": 5.25,
+        "averageLongestUnbeatenStreak": 10.5,
+        "averageScore": 42.72
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.5072368421052632,
+        "averageGoalDifferential": 25.85
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 24.13,
+            "draws": 8.1,
+            "losses": 5.77
+          },
+          "perMatchWinRate": 0.635,
+          "averageGoalDifferential": 42.62,
+          "averageLongestWinStreak": 6.505,
+          "averageLongestUnbeatenStreak": 13.405,
+          "averageScore": 66.5896
+        },
+        "formationId": "3-5-2",
+        "teamRatings": {
+          "attack": 78,
+          "finishing": 79,
+          "chanceCreation": 77,
+          "ballProgression": 78,
+          "midfield": 80,
+          "midfieldControl": 81,
+          "pressResistance": 79,
+          "defense": 84,
+          "defensiveSolidity": 86,
+          "defensiveTransitions": 83,
+          "pressing": 79,
+          "aerialSetPiece": 79,
+          "goalkeeping": 88,
+          "physicality": 80,
+          "consistency": 82,
+          "chemistry": 98,
+          "bigGame": 87,
+          "tacticalCoherence": 93,
+          "eraBalance": 100,
+          "dataConfidence": 88,
+          "balance": 92,
+          "overall": 85
+        },
+        "xi": [
+          "ST: Raúl García",
+          "ST/CF: Gerard Moreno",
+          "GK: Marc-André ter Stegen",
+          "CB: Sergio Ramos",
+          "AM/CM: Pablo Orbaiz",
+          "CB: Ronald Koeman",
+          "CM: Geoffrey Kondogbia",
+          "CM: William Carvalho",
+          "CB: Gerard Piqué",
+          "LWB: Roberto Carlos",
+          "RWB: Andoni Iraola"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "serie_a",
+      "modeName": "Serie A",
+      "format": "domestic",
+      "targetRecord": "38-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 15.64,
+          "draws": 9.9,
+          "losses": 12.46
+        },
+        "perMatchWinRate": 0.41157894736842104,
+        "averageGoalDifferential": 7.62,
+        "averageLongestWinStreak": 3.58,
+        "averageLongestUnbeatenStreak": 7,
+        "averageScore": 20.0496
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.02,
+        "invincibleRate": 0.02,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 23.44,
+          "draws": 8.04,
+          "losses": 6.52
+        },
+        "perMatchWinRate": 0.6168421052631579,
+        "averageGoalDifferential": 41.38,
+        "averageLongestWinStreak": 6.6,
+        "averageLongestUnbeatenStreak": 13.46,
+        "averageScore": 62.11040000000002
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 25.75,
+          "draws": 8.25,
+          "losses": 4
+        },
+        "perMatchWinRate": 0.6776315789473685,
+        "averageGoalDifferential": 48.25,
+        "averageLongestWinStreak": 7.375,
+        "averageLongestUnbeatenStreak": 15.875,
+        "averageScore": 77.36
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.6578947368421052,
+        "averageGoalDifferential": 41.375
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.015,
+          "invincibleRate": 0.015,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 27.615,
+            "draws": 6.505,
+            "losses": 3.88
+          },
+          "perMatchWinRate": 0.7267105263157895,
+          "averageGoalDifferential": 58.24,
+          "averageLongestWinStreak": 9.17,
+          "averageLongestUnbeatenStreak": 17.945,
+          "averageScore": 82.36920000000002
+        },
+        "formationId": "3-4-3",
+        "teamRatings": {
+          "attack": 85,
+          "finishing": 88,
+          "chanceCreation": 80,
+          "ballProgression": 81,
+          "midfield": 84,
+          "midfieldControl": 86,
+          "pressResistance": 82,
+          "defense": 86,
+          "defensiveSolidity": 88,
+          "defensiveTransitions": 86,
+          "pressing": 82,
+          "aerialSetPiece": 82,
+          "goalkeeping": 89,
+          "physicality": 84,
+          "consistency": 84,
+          "chemistry": 97,
+          "bigGame": 89,
+          "tacticalCoherence": 93,
+          "eraBalance": 90,
+          "dataConfidence": 84,
+          "balance": 96,
+          "overall": 88
+        },
+        "xi": [
+          "CM: Marek Hamšík",
+          "CM: Pep Guardiola",
+          "LW: Stephan El Shaarawy",
+          "GK: Sébastien Frey",
+          "RM/RWB: Gianluca Zambrotta",
+          "ST: Marco Ferrante",
+          "RW: Ruud Gullit",
+          "CB: Giorgio Chiellini",
+          "CB: Paolo Maldini",
+          "CB: Alessandro Nesta",
+          "LM/LWB: Ricardo Rodriguez"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "bundesliga",
+      "modeName": "Bundesliga",
+      "format": "domestic",
+      "targetRecord": "34-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 11.5,
+          "draws": 9.7,
+          "losses": 12.8
+        },
+        "perMatchWinRate": 0.3382352941176471,
+        "averageGoalDifferential": -1.98,
+        "averageLongestWinStreak": 2.9,
+        "averageLongestUnbeatenStreak": 6.44,
+        "averageScore": 5.6415999999999995
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 18.08,
+          "draws": 8.1,
+          "losses": 7.82
+        },
+        "perMatchWinRate": 0.5317647058823529,
+        "averageGoalDifferential": 24.94,
+        "averageLongestWinStreak": 4.92,
+        "averageLongestUnbeatenStreak": 9.74,
+        "averageScore": 40.87519999999999
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 20.5,
+          "draws": 5.75,
+          "losses": 7.75
+        },
+        "perMatchWinRate": 0.6029411764705882,
+        "averageGoalDifferential": 25.875,
+        "averageLongestWinStreak": 4.875,
+        "averageLongestUnbeatenStreak": 9,
+        "averageScore": 46.06999999999999
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.5897058823529411,
+        "averageGoalDifferential": 29.2
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.005,
+          "invincibleRate": 0.005,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 20.61,
+            "draws": 7.325,
+            "losses": 6.065
+          },
+          "perMatchWinRate": 0.6061764705882353,
+          "averageGoalDifferential": 32.97,
+          "averageLongestWinStreak": 5.765,
+          "averageLongestUnbeatenStreak": 11.89,
+          "averageScore": 53.59760000000003
+        },
+        "formationId": "4-1-2-1-2",
+        "teamRatings": {
+          "attack": 80,
+          "finishing": 84,
+          "chanceCreation": 76,
+          "ballProgression": 77,
+          "midfield": 80,
+          "midfieldControl": 83,
+          "pressResistance": 79,
+          "defense": 80,
+          "defensiveSolidity": 82,
+          "defensiveTransitions": 79,
+          "pressing": 76,
+          "aerialSetPiece": 77,
+          "goalkeeping": 85,
+          "physicality": 80,
+          "consistency": 80,
+          "chemistry": 98,
+          "bigGame": 85,
+          "tacticalCoherence": 94,
+          "eraBalance": 100,
+          "dataConfidence": 88,
+          "balance": 96,
+          "overall": 85
+        },
+        "xi": [
+          "CM: Jay-Jay Okocha",
+          "ST: Erling Haaland",
+          "GK: René Adler",
+          "ST: Max Kruse",
+          "CM: Lothar Matthäus",
+          "AM: Lars Ricken",
+          "DM: Maximilian Arnold",
+          "CB: Benedikt Höwedes",
+          "RB: Philipp Lahm",
+          "CB: Konstantinos Mavropanos",
+          "LB: Jetro Willems"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "ligue_1",
+      "modeName": "Ligue 1",
+      "format": "domestic",
+      "targetRecord": "38-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 12.48,
+          "draws": 10.46,
+          "losses": 15.06
+        },
+        "perMatchWinRate": 0.32842105263157895,
+        "averageGoalDifferential": -4.92,
+        "averageLongestWinStreak": 3.18,
+        "averageLongestUnbeatenStreak": 6.6,
+        "averageScore": 2.3264000000000005
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 20.98,
+          "draws": 9.04,
+          "losses": 7.98
+        },
+        "perMatchWinRate": 0.5521052631578948,
+        "averageGoalDifferential": 28.12,
+        "averageLongestWinStreak": 5.72,
+        "averageLongestUnbeatenStreak": 10.54,
+        "averageScore": 50.2896
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 19.125,
+          "draws": 9.875,
+          "losses": 9
+        },
+        "perMatchWinRate": 0.5032894736842105,
+        "averageGoalDifferential": 19.625,
+        "averageLongestWinStreak": 5.75,
+        "averageLongestUnbeatenStreak": 12.125,
+        "averageScore": 41.82
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.46973684210526323,
+        "averageGoalDifferential": 14.9
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.005,
+          "invincibleRate": 0.005,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 22.845,
+            "draws": 8.465,
+            "losses": 6.69
+          },
+          "perMatchWinRate": 0.6011842105263158,
+          "averageGoalDifferential": 38.84,
+          "averageLongestWinStreak": 5.995,
+          "averageLongestUnbeatenStreak": 12.535,
+          "averageScore": 60.03719999999999
+        },
+        "formationId": "5-3-2",
+        "teamRatings": {
+          "attack": 83,
+          "finishing": 88,
+          "chanceCreation": 76,
+          "ballProgression": 78,
+          "midfield": 81,
+          "midfieldControl": 84,
+          "pressResistance": 79,
+          "defense": 83,
+          "defensiveSolidity": 85,
+          "defensiveTransitions": 82,
+          "pressing": 76,
+          "aerialSetPiece": 78,
+          "goalkeeping": 76,
+          "physicality": 81,
+          "consistency": 81,
+          "chemistry": 98,
+          "bigGame": 86,
+          "tacticalCoherence": 94,
+          "eraBalance": 100,
+          "dataConfidence": 84,
+          "balance": 94,
+          "overall": 85
+        },
+        "xi": [
+          "LWB: Benoît Trémoulinas",
+          "CM: Dimitri Payet",
+          "ST: Thierry Henry",
+          "GK: Jérémie Janot",
+          "RWB: Rod Fanni",
+          "CM: Zinedine Zidane",
+          "CM: Michael Essien",
+          "CB: Thiago Silva",
+          "ST/CF: Mamadou Niang Babacar Ndiaye",
+          "CB: Jérôme Boateng",
+          "CB: Hiroki Sakai"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "mls",
+      "modeName": "MLS",
+      "format": "mls",
+      "targetRecord": "34-0-0",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 4.58,
+          "draws": 8.24,
+          "losses": 21.18
+        },
+        "perMatchWinRate": 0.13470588235294118,
+        "averageGoalDifferential": -35.28,
+        "averageLongestWinStreak": 1.56,
+        "averageLongestUnbeatenStreak": 3.18,
+        "averageScore": -44.382400000000004
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 14.74,
+          "draws": 8.66,
+          "losses": 11.94
+        },
+        "perMatchWinRate": 0.41709111488398415,
+        "averageGoalDifferential": 6.74,
+        "averageLongestWinStreak": 3.8,
+        "averageLongestUnbeatenStreak": 7.24,
+        "averageScore": 17.5992
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 12.625,
+          "draws": 9.25,
+          "losses": 12.625
+        },
+        "perMatchWinRate": 0.36594202898550726,
+        "averageGoalDifferential": 0.125,
+        "averageLongestWinStreak": 3.375,
+        "averageLongestUnbeatenStreak": 6.125,
+        "averageScore": 9.259999999999998
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.35409748393735774,
+        "averageGoalDifferential": -2.675
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 16.64,
+            "draws": 8.65,
+            "losses": 10.5
+          },
+          "perMatchWinRate": 0.4649343392008941,
+          "averageGoalDifferential": 13.51,
+          "averageLongestWinStreak": 4.27,
+          "averageLongestUnbeatenStreak": 8.1,
+          "averageScore": 28.150800000000007
+        },
+        "formationId": "4-2-3-1",
+        "teamRatings": {
+          "attack": 81,
+          "finishing": 87,
+          "chanceCreation": 72,
+          "ballProgression": 73,
+          "midfield": 78,
+          "midfieldControl": 82,
+          "pressResistance": 74,
+          "defense": 78,
+          "defensiveSolidity": 80,
+          "defensiveTransitions": 77,
+          "pressing": 73,
+          "aerialSetPiece": 75,
+          "goalkeeping": 70,
+          "physicality": 78,
+          "consistency": 75,
+          "chemistry": 98,
+          "bigGame": 81,
+          "tacticalCoherence": 91,
+          "eraBalance": 90,
+          "dataConfidence": 83,
+          "balance": 91,
+          "overall": 82
+        },
+        "xi": [
+          "ST: Josef Martinez",
+          "AM: Hristo Stoichkov",
+          "GK: Adin Brown",
+          "CB: Drew Moor",
+          "RW/AM: Gonzalo Martínez",
+          "DM: Osvaldo Alonso",
+          "CM: Lothar Matthäus",
+          "CB: Jimmy Conrad",
+          "LW/AM: Tim Cahill",
+          "LB: DaMarcus Beasley",
+          "RB: Jalil Anibaba"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "classic_european_cup",
+      "modeName": "European Cup",
+      "format": "classic_european_cup",
+      "targetRecord": "Perfect European Cup run",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.02,
+        "invincibleRate": 0.02,
+        "nearPerfectRate": 0.08,
+        "averageRecord": {
+          "wins": 0.68,
+          "draws": 0.7,
+          "losses": 1.64
+        },
+        "perMatchWinRate": 0.2251655629139073,
+        "averageGoalDifferential": -1.84,
+        "averageLongestWinStreak": 0.5,
+        "averageLongestUnbeatenStreak": 1.22,
+        "averageScore": -2.3271999999999995
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.1,
+        "invincibleRate": 0.1,
+        "nearPerfectRate": 0.16,
+        "averageRecord": {
+          "wins": 1.54,
+          "draws": 0.8,
+          "losses": 1.4
+        },
+        "perMatchWinRate": 0.4117647058823529,
+        "averageGoalDifferential": 0.3,
+        "averageLongestWinStreak": 1.26,
+        "averageLongestUnbeatenStreak": 2.02,
+        "averageScore": 1.2440000000000007
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0.25,
+        "averageRecord": {
+          "wins": 2,
+          "draws": 0.75,
+          "losses": 1.375
+        },
+        "perMatchWinRate": 0.48484848484848486,
+        "averageGoalDifferential": 0.75,
+        "averageLongestWinStreak": 1.625,
+        "averageLongestUnbeatenStreak": 2.125,
+        "averageScore": 2.6850000000000005
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0.575,
+        "perMatchWinRate": 0.4017857142857142,
+        "averageGoalDifferential": -1.1749999999999998
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0.005,
+          "undefeatedRate": 0.095,
+          "invincibleRate": 0.09,
+          "nearPerfectRate": 0.165,
+          "averageRecord": {
+            "wins": 1.66,
+            "draws": 1.12,
+            "losses": 1.295
+          },
+          "perMatchWinRate": 0.40736196319018403,
+          "averageGoalDifferential": 0.68,
+          "averageLongestWinStreak": 1.255,
+          "averageLongestUnbeatenStreak": 2.36,
+          "averageScore": 2.269399999999999
+        },
+        "formationId": "5-3-2",
+        "teamRatings": {
+          "attack": 78,
+          "finishing": 81,
+          "chanceCreation": 73,
+          "ballProgression": 75,
+          "midfield": 78,
+          "midfieldControl": 81,
+          "pressResistance": 76,
+          "defense": 79,
+          "defensiveSolidity": 80,
+          "defensiveTransitions": 79,
+          "pressing": 76,
+          "aerialSetPiece": 76,
+          "goalkeeping": 83,
+          "physicality": 79,
+          "consistency": 77,
+          "chemistry": 96,
+          "bigGame": 82,
+          "tacticalCoherence": 92,
+          "eraBalance": 96,
+          "dataConfidence": 82,
+          "balance": 96,
+          "overall": 82
+        },
+        "xi": [
+          "ST: Oscar Más",
+          "ST/CF: Carlos Tevez",
+          "GK: Morgan De Sanctis",
+          "CM: Steven Gerrard",
+          "CM: Víctor Zapata",
+          "CB: Peter Boeve",
+          "CB: Gerard Wiekens",
+          "CM: John Hollins",
+          "CB: Paulo Ferrari",
+          "LWB: Ronald Koeman",
+          "RWB: Gonzalo Montiel"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "euros",
+      "modeName": "Euros",
+      "format": "generic_tournament",
+      "targetRecord": "Perfect tournament",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.04,
+        "invincibleRate": 0.04,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 0.64,
+          "draws": 1,
+          "losses": 1.8
+        },
+        "perMatchWinRate": 0.18604651162790697,
+        "averageGoalDifferential": -2.28,
+        "averageLongestWinStreak": 0.6,
+        "averageLongestUnbeatenStreak": 1.54,
+        "averageScore": -2.6623999999999994
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.12,
+        "invincibleRate": 0.12,
+        "nearPerfectRate": 0.08,
+        "averageRecord": {
+          "wins": 1.68,
+          "draws": 1.14,
+          "losses": 1.46
+        },
+        "perMatchWinRate": 0.3925233644859813,
+        "averageGoalDifferential": 0.44,
+        "averageLongestWinStreak": 1.48,
+        "averageLongestUnbeatenStreak": 2.62,
+        "averageScore": 1.8352000000000002
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0.125,
+        "invincibleRate": 0.125,
+        "nearPerfectRate": 0.25,
+        "averageRecord": {
+          "wins": 2.625,
+          "draws": 0.875,
+          "losses": 1.375
+        },
+        "perMatchWinRate": 0.5384615384615384,
+        "averageGoalDifferential": 1.5,
+        "averageLongestWinStreak": 2.25,
+        "averageLongestUnbeatenStreak": 2.875,
+        "averageScore": 4.745
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.34074754901960785,
+        "averageGoalDifferential": -1.1250000000000002
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.125,
+          "invincibleRate": 0.125,
+          "nearPerfectRate": 0.06,
+          "averageRecord": {
+            "wins": 1.86,
+            "draws": 1.18,
+            "losses": 1.42
+          },
+          "perMatchWinRate": 0.4170403587443946,
+          "averageGoalDifferential": 0.995,
+          "averageLongestWinStreak": 1.56,
+          "averageLongestUnbeatenStreak": 2.75,
+          "averageScore": 2.5796000000000006
+        },
+        "formationId": "3-4-3",
+        "teamRatings": {
+          "attack": 81,
+          "finishing": 86,
+          "chanceCreation": 75,
+          "ballProgression": 76,
+          "midfield": 77,
+          "midfieldControl": 77,
+          "pressResistance": 77,
+          "defense": 79,
+          "defensiveSolidity": 80,
+          "defensiveTransitions": 78,
+          "pressing": 75,
+          "aerialSetPiece": 76,
+          "goalkeeping": 88,
+          "physicality": 77,
+          "consistency": 78,
+          "chemistry": 87,
+          "bigGame": 82,
+          "tacticalCoherence": 87,
+          "eraBalance": 100,
+          "dataConfidence": 84,
+          "balance": 91,
+          "overall": 82
+        },
+        "xi": [
+          "CM: Hakan Çalhanoğlu",
+          "ST: Davor Šuker",
+          "GK: David Seaman",
+          "CM: Marouane Fellaini",
+          "CB: Domiciano Cavém",
+          "LW: Andrey Arshavin",
+          "RW: Raúl",
+          "RM/RWB: Stephan Lichtsteiner",
+          "CB: Oleh Husiev",
+          "CB: Branislav Ivanović",
+          "LM/LWB: Germano de Figueiredo"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "copa_america",
+      "modeName": "Copa America",
+      "format": "generic_tournament",
+      "targetRecord": "Perfect tournament",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.04,
+        "invincibleRate": 0.04,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 0.36,
+          "draws": 0.74,
+          "losses": 2.02
+        },
+        "perMatchWinRate": 0.11538461538461539,
+        "averageGoalDifferential": -3.62,
+        "averageLongestWinStreak": 0.32,
+        "averageLongestUnbeatenStreak": 1.02,
+        "averageScore": -4.5296
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.02,
+        "invincibleRate": 0.02,
+        "nearPerfectRate": 0.02,
+        "averageRecord": {
+          "wins": 0.94,
+          "draws": 0.92,
+          "losses": 1.74
+        },
+        "perMatchWinRate": 0.2611111111111111,
+        "averageGoalDifferential": -1.82,
+        "averageLongestWinStreak": 0.82,
+        "averageLongestUnbeatenStreak": 1.68,
+        "averageScore": -1.6255999999999993
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0.125,
+        "averageRecord": {
+          "wins": 1.875,
+          "draws": 1.125,
+          "losses": 1.25
+        },
+        "perMatchWinRate": 0.4411764705882353,
+        "averageGoalDifferential": 1,
+        "averageLongestWinStreak": 1.625,
+        "averageLongestUnbeatenStreak": 2.625,
+        "averageScore": 3.08
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0.05,
+        "invincibleRate": 0.05,
+        "nearPerfectRate": 0.025,
+        "perMatchWinRate": 0.35930735930735935,
+        "averageGoalDifferential": 0.675
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.125,
+          "invincibleRate": 0.125,
+          "nearPerfectRate": 0.075,
+          "averageRecord": {
+            "wins": 1.775,
+            "draws": 1.04,
+            "losses": 1.42
+          },
+          "perMatchWinRate": 0.41912632821723733,
+          "averageGoalDifferential": 0.9,
+          "averageLongestWinStreak": 1.525,
+          "averageLongestUnbeatenStreak": 2.59,
+          "averageScore": 2.1770000000000005
+        },
+        "formationId": "4-3-3",
+        "teamRatings": {
+          "attack": 78,
+          "finishing": 80,
+          "chanceCreation": 75,
+          "ballProgression": 77,
+          "midfield": 76,
+          "midfieldControl": 74,
+          "pressResistance": 78,
+          "defense": 78,
+          "defensiveSolidity": 80,
+          "defensiveTransitions": 75,
+          "pressing": 76,
+          "aerialSetPiece": 76,
+          "goalkeeping": 85,
+          "physicality": 79,
+          "consistency": 78,
+          "chemistry": 94,
+          "bigGame": 82,
+          "tacticalCoherence": 90,
+          "eraBalance": 96,
+          "dataConfidence": 83,
+          "balance": 93,
+          "overall": 82
+        },
+        "xi": [
+          "GK: Tim Howard",
+          "ST: Luis Suárez",
+          "LW: Hugo Sánchez",
+          "AM/CM: Luis Cubilla",
+          "CB: Jeff Agoos",
+          "CB: Piero Hincapié",
+          "DM/CM: Pável Perro",
+          "CM: Julio César Baldivieso",
+          "LB: Roberto Carlos",
+          "RW: Raúl Avilés",
+          "RB: Antonio Valencia"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "afcon",
+      "modeName": "AFCON",
+      "format": "generic_tournament",
+      "targetRecord": "Perfect tournament",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 0.32,
+          "draws": 0.66,
+          "losses": 2.18
+        },
+        "perMatchWinRate": 0.10126582278481013,
+        "averageGoalDifferential": -3.82,
+        "averageLongestWinStreak": 0.32,
+        "averageLongestUnbeatenStreak": 0.94,
+        "averageScore": -5.225600000000001
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.1,
+        "invincibleRate": 0.1,
+        "nearPerfectRate": 0.02,
+        "averageRecord": {
+          "wins": 1.24,
+          "draws": 1.28,
+          "losses": 1.46
+        },
+        "perMatchWinRate": 0.31155778894472363,
+        "averageGoalDifferential": -0.36,
+        "averageLongestWinStreak": 1.1,
+        "averageLongestUnbeatenStreak": 2.38,
+        "averageScore": 0.5912000000000002
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0.125,
+        "averageRecord": {
+          "wins": 1.5,
+          "draws": 0.875,
+          "losses": 1.375
+        },
+        "perMatchWinRate": 0.4,
+        "averageGoalDifferential": 1.25,
+        "averageLongestWinStreak": 1.5,
+        "averageLongestUnbeatenStreak": 2.125,
+        "averageScore": 1.35
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0.1,
+        "invincibleRate": 0.1,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.30843653250773995,
+        "averageGoalDifferential": -0.8999999999999999
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0.005,
+          "undefeatedRate": 0.1,
+          "invincibleRate": 0.095,
+          "nearPerfectRate": 0.03,
+          "averageRecord": {
+            "wins": 1.665,
+            "draws": 1.1,
+            "losses": 1.425
+          },
+          "perMatchWinRate": 0.39737470167064437,
+          "averageGoalDifferential": 0.71,
+          "averageLongestWinStreak": 1.405,
+          "averageLongestUnbeatenStreak": 2.48,
+          "averageScore": 1.8768000000000007
+        },
+        "formationId": "4-1-2-1-2",
+        "teamRatings": {
+          "attack": 80,
+          "finishing": 85,
+          "chanceCreation": 73,
+          "ballProgression": 74,
+          "midfield": 78,
+          "midfieldControl": 82,
+          "pressResistance": 75,
+          "defense": 77,
+          "defensiveSolidity": 78,
+          "defensiveTransitions": 75,
+          "pressing": 74,
+          "aerialSetPiece": 75,
+          "goalkeeping": 85,
+          "physicality": 78,
+          "consistency": 76,
+          "chemistry": 91,
+          "bigGame": 81,
+          "tacticalCoherence": 89,
+          "eraBalance": 100,
+          "dataConfidence": 89,
+          "balance": 93,
+          "overall": 82
+        },
+        "xi": [
+          "CM: Abedi Pele",
+          "AM: Hakim Ziyech",
+          "GK: Vincent Enyeama",
+          "CM: Seydou Keita",
+          "ST: Frédéric Kanouté",
+          "DM: Kalusha Bwalya",
+          "ST: Éric Maxim Choupo-Moting",
+          "CB: Elijah Tana",
+          "CB: Michael Ngadeu-Ngadjui",
+          "LB: Arthur Boka",
+          "RB: John Paintsil"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "club_world_cup",
+      "modeName": "Club World Cup",
+      "format": "generic_tournament",
+      "targetRecord": "Perfect Club World Cup",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.12,
+        "invincibleRate": 0.12,
+        "nearPerfectRate": 0.04,
+        "averageRecord": {
+          "wins": 1.06,
+          "draws": 1.02,
+          "losses": 1.66
+        },
+        "perMatchWinRate": 0.28342245989304815,
+        "averageGoalDifferential": -1.1,
+        "averageLongestWinStreak": 0.98,
+        "averageLongestUnbeatenStreak": 1.82,
+        "averageScore": -0.8680000000000001
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.12,
+        "invincibleRate": 0.12,
+        "nearPerfectRate": 0.1,
+        "averageRecord": {
+          "wins": 1.92,
+          "draws": 0.98,
+          "losses": 1.38
+        },
+        "perMatchWinRate": 0.4485981308411215,
+        "averageGoalDifferential": 1.14,
+        "averageLongestWinStreak": 1.5,
+        "averageLongestUnbeatenStreak": 2.72,
+        "averageScore": 2.6912000000000003
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0.25,
+        "invincibleRate": 0.25,
+        "nearPerfectRate": 0.125,
+        "averageRecord": {
+          "wins": 2,
+          "draws": 1.25,
+          "losses": 1.125
+        },
+        "perMatchWinRate": 0.45714285714285713,
+        "averageGoalDifferential": 1.25,
+        "averageLongestWinStreak": 1.875,
+        "averageLongestUnbeatenStreak": 3.125,
+        "averageScore": 3.975
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0.15,
+        "invincibleRate": 0.15,
+        "nearPerfectRate": 0.25,
+        "perMatchWinRate": 0.4866741320273929,
+        "averageGoalDifferential": 2.4749999999999996
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0.01,
+          "undefeatedRate": 0.145,
+          "invincibleRate": 0.135,
+          "nearPerfectRate": 0.165,
+          "averageRecord": {
+            "wins": 2.485,
+            "draws": 1.06,
+            "losses": 1.235
+          },
+          "perMatchWinRate": 0.5198744769874477,
+          "averageGoalDifferential": 2.67,
+          "averageLongestWinStreak": 2.1,
+          "averageLongestUnbeatenStreak": 3.285,
+          "averageScore": 5.023600000000003
+        },
+        "formationId": "4-2-3-1",
+        "teamRatings": {
+          "attack": 81,
+          "finishing": 84,
+          "chanceCreation": 78,
+          "ballProgression": 79,
+          "midfield": 81,
+          "midfieldControl": 82,
+          "pressResistance": 80,
+          "defense": 82,
+          "defensiveSolidity": 84,
+          "defensiveTransitions": 79,
+          "pressing": 79,
+          "aerialSetPiece": 78,
+          "goalkeeping": 83,
+          "physicality": 80,
+          "consistency": 81,
+          "chemistry": 94,
+          "bigGame": 86,
+          "tacticalCoherence": 92,
+          "eraBalance": 100,
+          "dataConfidence": 86,
+          "balance": 98,
+          "overall": 84
+        },
+        "xi": [
+          "ST: Ruud Gullit",
+          "LW/AM: Douglas Costa",
+          "GK: Edwin van der Sar",
+          "RW/AM: Santi Cazorla",
+          "DM: Nobby Stiles",
+          "CM: Yaya Touré",
+          "AM: John Hollins",
+          "LB: Théo Hernandez",
+          "CB: Thiago Silva",
+          "CB: Aldair",
+          "RB: Shay Brennan"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "one_club",
+      "modeName": "One-Club XI",
+      "format": "domestic",
+      "targetRecord": "Invincible run",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 15.16,
+          "draws": 8.78,
+          "losses": 14.06
+        },
+        "perMatchWinRate": 0.3989473684210526,
+        "averageGoalDifferential": 1.72,
+        "averageLongestWinStreak": 3.82,
+        "averageLongestUnbeatenStreak": 7.14,
+        "averageScore": 12.217599999999996
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 20.26,
+          "draws": 9.02,
+          "losses": 8.72
+        },
+        "perMatchWinRate": 0.533157894736842,
+        "averageGoalDifferential": 27.66,
+        "averageLongestWinStreak": 5.4,
+        "averageLongestUnbeatenStreak": 10.86,
+        "averageScore": 45.85279999999999
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 21.75,
+          "draws": 8.625,
+          "losses": 7.625
+        },
+        "perMatchWinRate": 0.5723684210526315,
+        "averageGoalDifferential": 33.25,
+        "averageLongestWinStreak": 5.25,
+        "averageLongestUnbeatenStreak": 10.75,
+        "averageScore": 53.660000000000004
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.5960526315789474,
+        "averageGoalDifferential": 36.3
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 22.145,
+            "draws": 8.355,
+            "losses": 7.5
+          },
+          "perMatchWinRate": 0.5827631578947369,
+          "averageGoalDifferential": 35.35,
+          "averageLongestWinStreak": 5.88,
+          "averageLongestUnbeatenStreak": 11.39,
+          "averageScore": 55.118
+        },
+        "formationId": "4-2-3-1",
+        "teamRatings": {
+          "attack": 88,
+          "finishing": 94,
+          "chanceCreation": 81,
+          "ballProgression": 81,
+          "midfield": 83,
+          "midfieldControl": 85,
+          "pressResistance": 82,
+          "defense": 82,
+          "defensiveSolidity": 85,
+          "defensiveTransitions": 78,
+          "pressing": 75,
+          "aerialSetPiece": 78,
+          "goalkeeping": 75,
+          "physicality": 79,
+          "consistency": 84,
+          "chemistry": 98,
+          "bigGame": 90,
+          "tacticalCoherence": 92,
+          "eraBalance": 98,
+          "dataConfidence": 84,
+          "balance": 89,
+          "overall": 86
+        },
+        "xi": [
+          "RW/AM: Lionel Messi",
+          "CB: Ronald Koeman",
+          "GK: Antoni Ramallets",
+          "ST: Marcus Rashford",
+          "AM: Johan Cruyff",
+          "LW/AM: Diego Maradona",
+          "DM: Franck Kessié",
+          "CB: Samuel Umtiti",
+          "CM: Sergio Busquets",
+          "LB: João Cancelo",
+          "RB: Frank de Boer"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "nation_xi",
+      "modeName": "Nation XI",
+      "format": "world_cup",
+      "targetRecord": "Perfect nation tournament",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.06,
+        "invincibleRate": 0.06,
+        "nearPerfectRate": 0.04,
+        "averageRecord": {
+          "wins": 1.3,
+          "draws": 1.08,
+          "losses": 1.54
+        },
+        "perMatchWinRate": 0.33163265306122447,
+        "averageGoalDifferential": -0.2,
+        "averageLongestWinStreak": 1.06,
+        "averageLongestUnbeatenStreak": 2.14,
+        "averageScore": 0.3440000000000001
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0.28,
+        "invincibleRate": 0.28,
+        "nearPerfectRate": 0.22,
+        "averageRecord": {
+          "wins": 3.28,
+          "draws": 1.3,
+          "losses": 0.84
+        },
+        "perMatchWinRate": 0.6051660516605166,
+        "averageGoalDifferential": 5.74,
+        "averageLongestWinStreak": 2.64,
+        "averageLongestUnbeatenStreak": 4.42,
+        "averageScore": 9.0792
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0.125,
+        "averageRecord": {
+          "wins": 3,
+          "draws": 1.375,
+          "losses": 1.125
+        },
+        "perMatchWinRate": 0.5454545454545454,
+        "averageGoalDifferential": 4.875,
+        "averageLongestWinStreak": 2.25,
+        "averageLongestUnbeatenStreak": 3.75,
+        "averageScore": 7.390000000000001
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0.35000000000000003,
+        "invincibleRate": 0.35000000000000003,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.48148148148148145,
+        "averageGoalDifferential": 4.800000000000001
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0.01,
+          "undefeatedRate": 0.345,
+          "invincibleRate": 0.335,
+          "nearPerfectRate": 0.27,
+          "averageRecord": {
+            "wins": 3.64,
+            "draws": 1.22,
+            "losses": 0.83
+          },
+          "perMatchWinRate": 0.6397188049209139,
+          "averageGoalDifferential": 6.525,
+          "averageLongestWinStreak": 2.91,
+          "averageLongestUnbeatenStreak": 4.575,
+          "averageScore": 10.172000000000006
+        },
+        "formationId": "3-4-3",
+        "teamRatings": {
+          "attack": 87,
+          "finishing": 92,
+          "chanceCreation": 80,
+          "ballProgression": 81,
+          "midfield": 84,
+          "midfieldControl": 87,
+          "pressResistance": 82,
+          "defense": 85,
+          "defensiveSolidity": 87,
+          "defensiveTransitions": 85,
+          "pressing": 79,
+          "aerialSetPiece": 80,
+          "goalkeeping": 92,
+          "physicality": 82,
+          "consistency": 84,
+          "chemistry": 98,
+          "bigGame": 90,
+          "tacticalCoherence": 94,
+          "eraBalance": 100,
+          "dataConfidence": 79,
+          "balance": 94,
+          "overall": 88
+        },
+        "xi": [
+          "ST: Ronaldo",
+          "RW: Pelé",
+          "LM/LWB: Nílton Santos",
+          "GK: Gilmar",
+          "CM: Sócrates",
+          "LW: Romário",
+          "RM/RWB: Djalma Santos",
+          "CB: Thiago Silva",
+          "CM: Zito",
+          "CB: Aldair",
+          "CB: Cafu"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "era_lock",
+      "modeName": "Era Lock",
+      "format": "domestic",
+      "targetRecord": "Invincible run",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 12.94,
+          "draws": 10.44,
+          "losses": 14.62
+        },
+        "perMatchWinRate": 0.3405263157894737,
+        "averageGoalDifferential": -5.22,
+        "averageLongestWinStreak": 2.88,
+        "averageLongestUnbeatenStreak": 5.8,
+        "averageScore": 4.982399999999999
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 21.02,
+          "draws": 8.64,
+          "losses": 8.34
+        },
+        "perMatchWinRate": 0.5531578947368421,
+        "averageGoalDifferential": 28.1,
+        "averageLongestWinStreak": 5.52,
+        "averageLongestUnbeatenStreak": 11.12,
+        "averageScore": 48.928000000000004
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 22,
+          "draws": 7.875,
+          "losses": 8.125
+        },
+        "perMatchWinRate": 0.5789473684210527,
+        "averageGoalDifferential": 32.125,
+        "averageLongestWinStreak": 5.625,
+        "averageLongestUnbeatenStreak": 12.25,
+        "averageScore": 52.07
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.5875,
+        "averageGoalDifferential": 31.949999999999996
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 23.885,
+            "draws": 8.405,
+            "losses": 5.71
+          },
+          "perMatchWinRate": 0.6285526315789474,
+          "averageGoalDifferential": 42.655,
+          "averageLongestWinStreak": 6.46,
+          "averageLongestUnbeatenStreak": 14.01,
+          "averageScore": 66.34240000000003
+        },
+        "formationId": "3-4-3",
+        "teamRatings": {
+          "attack": 86,
+          "finishing": 91,
+          "chanceCreation": 79,
+          "ballProgression": 81,
+          "midfield": 82,
+          "midfieldControl": 82,
+          "pressResistance": 82,
+          "defense": 86,
+          "defensiveSolidity": 88,
+          "defensiveTransitions": 83,
+          "pressing": 81,
+          "aerialSetPiece": 81,
+          "goalkeeping": 94,
+          "physicality": 84,
+          "consistency": 84,
+          "chemistry": 92,
+          "bigGame": 90,
+          "tacticalCoherence": 87,
+          "eraBalance": 70,
+          "dataConfidence": 89,
+          "balance": 90,
+          "overall": 87
+        },
+        "xi": [
+          "ST: Diego Costa",
+          "GK: Manuel Neuer",
+          "CB: Paolo Maldini",
+          "RW: Daizen Maeda",
+          "CM: James Rodríguez",
+          "CM: Daniele De Rossi",
+          "CB: Fabio Cannavaro",
+          "LW: Neymar",
+          "CB: John Terry",
+          "RM/RWB: Ignazio Abate",
+          "LM/LWB: David Alaba"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "chaos",
+      "modeName": "Chaos Mode",
+      "format": "domestic",
+      "targetRecord": "Invincible run",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 5.38,
+          "draws": 8.38,
+          "losses": 24.24
+        },
+        "perMatchWinRate": 0.14157894736842105,
+        "averageGoalDifferential": -42.52,
+        "averageLongestWinStreak": 1.58,
+        "averageLongestUnbeatenStreak": 3.34,
+        "averageScore": -51.6016
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 9.58,
+          "draws": 9.82,
+          "losses": 18.6
+        },
+        "perMatchWinRate": 0.2521052631578947,
+        "averageGoalDifferential": -20.02,
+        "averageLongestWinStreak": 2.42,
+        "averageLongestUnbeatenStreak": 5.08,
+        "averageScore": -18.8416
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 10.5,
+          "draws": 8.375,
+          "losses": 19.125
+        },
+        "perMatchWinRate": 0.27631578947368424,
+        "averageGoalDifferential": -21.75,
+        "averageLongestWinStreak": 2.625,
+        "averageLongestUnbeatenStreak": 5.125,
+        "averageScore": -19.24
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.19605263157894737,
+        "averageGoalDifferential": -22.175
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0,
+          "invincibleRate": 0,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 11.915,
+            "draws": 9.445,
+            "losses": 16.64
+          },
+          "perMatchWinRate": 0.31355263157894736,
+          "averageGoalDifferential": -10.16,
+          "averageLongestWinStreak": 2.815,
+          "averageLongestUnbeatenStreak": 5.435,
+          "averageScore": -5.5428
+        },
+        "formationId": "3-5-2",
+        "teamRatings": {
+          "attack": 86,
+          "finishing": 94,
+          "chanceCreation": 75,
+          "ballProgression": 77,
+          "midfield": 79,
+          "midfieldControl": 81,
+          "pressResistance": 78,
+          "defense": 82,
+          "defensiveSolidity": 83,
+          "defensiveTransitions": 82,
+          "pressing": 78,
+          "aerialSetPiece": 78,
+          "goalkeeping": 76,
+          "physicality": 79,
+          "consistency": 81,
+          "chemistry": 87,
+          "bigGame": 86,
+          "tacticalCoherence": 87,
+          "eraBalance": 95,
+          "dataConfidence": 83,
+          "balance": 92,
+          "overall": 83
+        },
+        "xi": [
+          "ST: Luis Suárez",
+          "GK: Eiji Kawashima",
+          "CB: Darijo Srna",
+          "ST/CF: Thierry Henry",
+          "AM/CM: Marek Hamšík",
+          "CM: Alan A'Court",
+          "CM: Michael Essien",
+          "LWB: Nílton Santos",
+          "CB: Jean-Marc Pilorget",
+          "CB: Diego Godín",
+          "RWB: Lucas Veríssimo"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    },
+    {
+      "modeId": "manager",
+      "modeName": "Manager Mode",
+      "format": "domestic",
+      "targetRecord": "Invincible full-squad season",
+      "randomDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 8.2,
+          "draws": 9.64,
+          "losses": 20.16
+        },
+        "perMatchWinRate": 0.21578947368421053,
+        "averageGoalDifferential": -25.6,
+        "averageLongestWinStreak": 2.08,
+        "averageLongestUnbeatenStreak": 4.18,
+        "averageScore": -28.287999999999997
+      },
+      "greedyRawDraft": {
+        "runs": 50,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 17.4,
+          "draws": 9.16,
+          "losses": 11.44
+        },
+        "perMatchWinRate": 0.45789473684210524,
+        "averageGoalDifferential": 12.48,
+        "averageLongestWinStreak": 4.48,
+        "averageLongestUnbeatenStreak": 8.26,
+        "averageScore": 28.03839999999999
+      },
+      "smartDraftOneRun": {
+        "runs": 8,
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "averageRecord": {
+          "wins": 17.25,
+          "draws": 9.5,
+          "losses": 11.25
+        },
+        "perMatchWinRate": 0.45394736842105265,
+        "averageGoalDifferential": 11.75,
+        "averageLongestWinStreak": 4.5,
+        "averageLongestUnbeatenStreak": 8.5,
+        "averageScore": 28.439999999999998
+      },
+      "smartDraftRerunAverage": {
+        "perfectRate": 0,
+        "undefeatedRate": 0,
+        "invincibleRate": 0,
+        "nearPerfectRate": 0,
+        "perMatchWinRate": 0.44342105263157894,
+        "averageGoalDifferential": 11.25
+      },
+      "bestObserved": {
+        "summary": {
+          "runs": 200,
+          "perfectRate": 0,
+          "undefeatedRate": 0.005,
+          "invincibleRate": 0.005,
+          "nearPerfectRate": 0,
+          "averageRecord": {
+            "wins": 20.65,
+            "draws": 9.155,
+            "losses": 8.195
+          },
+          "perMatchWinRate": 0.5434210526315789,
+          "averageGoalDifferential": 27.565,
+          "averageLongestWinStreak": 5.075,
+          "averageLongestUnbeatenStreak": 10.62,
+          "averageScore": 48.725200000000015
+        },
+        "formationId": "3-4-3",
+        "teamRatings": {
+          "attack": 83,
+          "finishing": 90,
+          "chanceCreation": 73,
+          "ballProgression": 75,
+          "midfield": 78,
+          "midfieldControl": 80,
+          "pressResistance": 77,
+          "defense": 81,
+          "defensiveSolidity": 82,
+          "defensiveTransitions": 82,
+          "pressing": 75,
+          "aerialSetPiece": 78,
+          "goalkeeping": 98,
+          "physicality": 80,
+          "consistency": 80,
+          "chemistry": 89,
+          "bigGame": 87,
+          "tacticalCoherence": 87,
+          "eraBalance": 100,
+          "dataConfidence": 84,
+          "balance": 84,
+          "overall": 85
+        },
+        "xi": [
+          "CM: Zinedine Zidane",
+          "GK: Peter Schmeichel",
+          "CM: Emmanuel Petit",
+          "Bench Wide FWD: Marco Reus",
+          "ST: Samuel Eto'o",
+          "Bench ST/CF: Gerd Müller",
+          "Bench Creator: Cha Bum-kun",
+          "Bench DM/CM: Willington Ortiz",
+          "CB: Sergio Manente",
+          "CB: Hugo Campagnaro",
+          "CB: Dario Šimić",
+          "Bench CB: Medhi Benatia",
+          "RW: Christopher Nkunku",
+          "Bench GK: Samir Handanović",
+          "LW: Brian Laudrup",
+          "LM/LWB: Filipe Luís",
+          "Bench FB/WB: Juan Camilo Zúñiga",
+          "RM/RWB: Sergio Cervato"
+        ],
+        "probabilityExamples": []
+      },
+      "topOnePercentPerfectRate": 0,
+      "topTenthPercentPerfectRate": 0
+    }
+  ]
+}

@@ -26,6 +26,7 @@ import { defaultModeId, previewModeConfigs, publicModeConfigs, getModeConfig } f
 import coverageReport from './data/generated/coverageReport.json'
 import { isBenchSlot } from './data/squad'
 import { slotMatchesPlayer } from './engine/eligibility'
+import { positionFitImpact, positionFitLabel, positionFitScore } from './engine/simulationModel'
 import { formatStoredRecord, loadPreferences, recordRun, savePreferences } from './engine/storage'
 import { randomPick } from './engine/random'
 import {
@@ -38,7 +39,7 @@ import {
 import { sanitizeDisplayName } from './services/sanitize'
 import { hasSupabaseConfig } from './services/supabaseConfig'
 import type { AuthProfile, FeedbackCategory, LeaderboardRun } from './services/supabase'
-import type { DraftPick, DraftState, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings, TeamRollOption } from './types'
+import type { DraftPick, DraftState, FormationSlot, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings, TeamRollOption } from './types'
 import type { StoredRunSummary } from './engine/storage'
 
 type Screen = 'home' | 'seoLanding' | 'footballLanding' | 'how' | 'setup' | 'draft' | 'result' | 'sharedResult' | 'privacy' | 'contact' | 'leaderboard' | 'notFound'
@@ -1810,7 +1811,7 @@ function DraftScreen({
                       className="quick-place-button"
                       type="button"
                       onClick={() => placePlayer(quickPlaceSlot.slotId)}
-                      aria-label={`Place selected player at ${quickPlaceSlot.label}`}
+                      aria-label={`Place selected player at ${slotAccessibleLabel(quickPlaceSlot, draftState.draftSlots)}`}
                     >
                       <Target size={15} />
                       Place at {quickPlaceSlot.label}
@@ -1963,6 +1964,10 @@ function PitchBoard({
         const pick = pickBySlot.get(slot.slotId)
         const canPlace = Boolean(placingPlayer && compatibleSlots.has(slot.slotId) && !pick)
         const previewCompatible = Boolean(activePlayer && compatibleSlots.has(slot.slotId) && !pick)
+        const fitScore = placingPlayer && !pick && compatibleSlots.has(slot.slotId) ? positionFitScore(slot, placingPlayer) : undefined
+        const fitLabel = fitScore === undefined ? undefined : positionFitLabel(fitScore)
+        const fitImpact = fitScore === undefined ? undefined : positionFitImpact(fitScore)
+        const accessibleSlotLabel = slotAccessibleLabel(slot, formation.slots)
         const kit = pick ? getTeamKitColors(pick.roll.team.label) : undefined
         const slotStyle = {
           left: `${slot.x}%`,
@@ -1983,6 +1988,7 @@ function PitchBoard({
               pick && hoveredSlotId === slot.slotId ? 'tooltip-active' : '',
               previewCompatible ? 'compatible' : '',
               canPlace ? 'placeable' : '',
+              fitScore !== undefined ? fitClassForScore(fitScore) : '',
             ].filter(Boolean).join(' ')}
             style={slotStyle}
             type="button"
@@ -2003,12 +2009,13 @@ function PitchBoard({
               if (pick) setHoveredSlotId((current) => current === slot.slotId ? undefined : current)
             }}
             aria-describedby={pick && hoveredSlotId === slot.slotId ? 'pitch-player-popover' : undefined}
-            aria-label={pick ? `${slot.label}: ${pick.player.displayName}` : canPlace ? `Place ${placingPlayer?.displayName} at ${slot.label}` : `${slot.label} empty`}
+            aria-label={pick ? `${accessibleSlotLabel}: ${pick.player.displayName}` : canPlace ? `Place ${placingPlayer?.displayName} at ${accessibleSlotLabel}. ${fitLabel}. ${fitImpact}.` : `${accessibleSlotLabel} empty`}
           >
             <span className="jersey" aria-hidden="true">
               <strong>{pick ? getPlayerInitials(pick.player.displayName) : slot.label}</strong>
               {pick && <small>{slot.label}</small>}
             </span>
+            {canPlace && fitLabel && <small className="fit-hint">{fitLabel}</small>}
           </button>
         )
       })}
@@ -2371,6 +2378,19 @@ function getPlayerInitials(name: string) {
   return `${parts[0][0]}${parts.at(-1)?.[0] ?? ''}`.toUpperCase()
 }
 
+function fitClassForScore(score: number): string {
+  if (score < 76) return 'wrong-fit'
+  if (score < 96) return 'weak-fit'
+  return 'natural-fit'
+}
+
+function slotAccessibleLabel(slot: FormationSlot, slots: FormationSlot[]): string {
+  const matchingSlots = slots.filter((candidate) => candidate.label === slot.label)
+  if (matchingSlots.length <= 1) return slot.label
+  const index = matchingSlots.findIndex((candidate) => candidate.slotId === slot.slotId)
+  return `${slot.label} ${index + 1}`
+}
+
 function BenchBoard({
   picks,
   benchSlots,
@@ -2397,6 +2417,10 @@ function BenchBoard({
         {benchSlots.map((slot) => {
           const pick = pickBySlot.get(slot.slotId)
           const canPlace = Boolean(placingPlayer && compatibleSlots.has(slot.slotId) && !pick)
+          const fitScore = placingPlayer && canPlace ? positionFitScore(slot, placingPlayer) : undefined
+          const fitLabel = fitScore === undefined ? undefined : positionFitLabel(fitScore)
+          const fitImpact = fitScore === undefined ? undefined : positionFitImpact(fitScore)
+          const accessibleSlotLabel = slotAccessibleLabel(slot, benchSlots)
 
           return (
             <button
@@ -2405,14 +2429,16 @@ function BenchBoard({
                 'bench-slot',
                 pick ? 'filled' : 'empty',
                 canPlace ? 'placeable' : '',
+                fitScore !== undefined ? fitClassForScore(fitScore) : '',
               ].filter(Boolean).join(' ')}
               type="button"
               disabled={!canPlace}
               onClick={() => onPlace(slot.slotId)}
-              aria-label={pick ? `${slot.label}: ${pick.player.displayName}` : canPlace ? `Place ${placingPlayer?.displayName} at ${slot.label}` : `${slot.label} empty`}
+              aria-label={pick ? `${accessibleSlotLabel}: ${pick.player.displayName}` : canPlace ? `Place ${placingPlayer?.displayName} at ${accessibleSlotLabel}. ${fitLabel}. ${fitImpact}.` : `${accessibleSlotLabel} empty`}
             >
               <strong>{slot.label}</strong>
               <span>{pick ? pick.player.displayName : slot.accepts.join(' / ')}</span>
+              {canPlace && fitLabel && <small className="bench-fit-hint">{fitLabel} · {fitImpact}</small>}
             </button>
           )
         })}
@@ -2478,6 +2504,9 @@ function ResultScreen({
   const record = `${result.record.wins}-${result.record.draws}-${result.record.losses}`
   const isPersonalBest = bestRecord?.runId === result.runId
   const teamSummary = calculateResultTeamSummary(result.teamRatings)
+  const tierLabel = result.resultTier?.label ?? result.perfectionResult
+  const tierDescription = result.resultTier?.description ?? result.perfectionResult
+  const turningPoint = result.matchThatChangedSeason
   const resultPicks = orderResultPicks(picks)
   return (
     <main className="result-page">
@@ -2492,7 +2521,9 @@ function ResultScreen({
           {result.gradeLabel}
           <small>{result.points ? `· ${result.points} pts` : ''}</small>
         </p>
-        <p className="result-summary">{result.perfectionResult}</p>
+        <p className="result-summary">
+          <strong>{tierLabel}</strong>{tierDescription === tierLabel ? '' : ` · ${tierDescription}`}
+        </p>
         {bestRecord && (
           <p className="best-record">
             {isPersonalBest ? 'New personal best for this mode.' : `Personal best: ${formatStoredRecord(bestRecord.record)} (${bestRecord.grade})`}
@@ -2549,6 +2580,10 @@ function ResultScreen({
         <Metric label="xG For" value={result.xgFor} />
         <Metric label="xG Against" value={result.xgAgainst} />
         <Metric label="Trophy %" value={`${result.simulationDetails.trophyProbability}%`} />
+        <Metric label="Longest W" value={result.streaks?.longestWinStreak ?? 0} />
+        <Metric label="Unbeaten" value={result.streaks?.longestUnbeatenStreak ?? 0} />
+        {result.effectiveTeamQuality && <Metric label="Team Q" value={result.effectiveTeamQuality.score} />}
+        {result.simulationDetails.averageOpponentDifficulty !== undefined && <Metric label="Avg Opp" value={result.simulationDetails.averageOpponentDifficulty} />}
       </section>
 
       <section className="panel result-story">
@@ -2560,6 +2595,9 @@ function ResultScreen({
           <span><strong>Strongest unit</strong>{result.strongestUnit}</span>
           <span><strong>Weakest unit</strong>{result.weakestUnit}</span>
           <span><strong>Tactic</strong>{result.tacticReport.identity}</span>
+          {result.tacticalReason && <span><strong>Why it broke</strong>{result.tacticalReason.summary}</span>}
+          {turningPoint && <span><strong>Changed match</strong>Match {turningPoint.match}: {turningPoint.outcome} vs {turningPoint.opponentDifficulty}</span>}
+          {result.effectiveTeamQuality && <span><strong>Weak-link cap</strong>{result.effectiveTeamQuality.weakLinkCap} ceiling · {result.effectiveTeamQuality.weakLinks[0] ?? 'No major weak link'}</span>}
           {result.squadReport && <span><strong>Squad depth</strong>{result.squadReport.depthScore}</span>}
           <span><strong>Run ID</strong>{result.runId}</span>
         </div>
@@ -2603,6 +2641,9 @@ function ResultScreen({
             <Metric label="xGA / match" value={result.simulationDetails.expectedGoalsAgainstPerMatch} />
             <Metric label="Pressure" value={result.simulationDetails.matchPressure} />
             <Metric label="Strength" value={result.simulationDetails.teamStrength} />
+            {result.simulationDetails.averageOpponentDifficulty !== undefined && <Metric label="Avg Opp" value={result.simulationDetails.averageOpponentDifficulty} />}
+            {result.simulationDetails.averageDominanceDelta !== undefined && <Metric label="Avg Delta" value={result.simulationDetails.averageDominanceDelta} />}
+            {result.simulationDetails.averageConversionProbability !== undefined && <Metric label="Draw Convert" value={`${result.simulationDetails.averageConversionProbability}%`} />}
           </div>
         </details>
         <details>
@@ -2652,6 +2693,7 @@ function ResultScreen({
         <details>
           <summary>View chemistry report</summary>
           <p>Score: {result.chemistryReport.score}</p>
+          <p>Role balance: {result.chemistryReport.roleBalance}</p>
           {[...result.chemistryReport.bonuses, ...result.chemistryReport.warnings].map((line) => <p key={line}>{line}</p>)}
         </details>
         <details>
@@ -3252,7 +3294,7 @@ function LeaderboardRows({ runs, ariaLabel }: { runs: LeaderboardRun[]; ariaLabe
           </span>
           <span>
             <strong>{run.score}</strong>
-            <small>{run.grade} · OVR {run.team_rating}</small>
+            <small>{run.result_tier ?? run.grade} · v{run.scoring_version ?? 1} · Q {Math.round(run.team_rating)}</small>
           </span>
         </article>
       ))}
@@ -3283,6 +3325,8 @@ function SharedResultScreen({
 
   const record = `${snapshot.record.wins}-${snapshot.record.draws}-${snapshot.record.losses}`
   const teamSummary = calculateResultTeamSummary(snapshot.teamRatings)
+  const tierLabel = snapshot.resultTier?.label ?? snapshot.perfectionResult
+  const tierDescription = snapshot.resultTier?.description ?? snapshot.perfectionResult
 
   return (
     <main className="result-page shared-result-page">
@@ -3297,7 +3341,9 @@ function SharedResultScreen({
           {snapshot.gradeLabel}
           <small>{snapshot.points ? `· ${snapshot.points} pts` : ''}</small>
         </p>
-        <p className="result-summary">{snapshot.perfectionResult}</p>
+        <p className="result-summary">
+          <strong>{tierLabel}</strong>{tierDescription === tierLabel ? '' : ` · ${tierDescription}`}
+        </p>
       </section>
 
       <section className="result-roster" aria-label="Shared squad">
@@ -3325,6 +3371,9 @@ function SharedResultScreen({
           <span><strong>Strongest unit</strong>{snapshot.strongestUnit}</span>
           <span><strong>Weakest unit</strong>{snapshot.weakestUnit}</span>
           <span><strong>Tactic</strong>{snapshot.tacticReport.identity}</span>
+          {snapshot.tacticalReason && <span><strong>Why it broke</strong>{snapshot.tacticalReason.summary}</span>}
+          {snapshot.streaks && <span><strong>Streaks</strong>{snapshot.streaks.longestWinStreak} wins · {snapshot.streaks.longestUnbeatenStreak} unbeaten</span>}
+          {snapshot.effectiveTeamQuality && <span><strong>Team Q</strong>{snapshot.effectiveTeamQuality.score}</span>}
           <span><strong>Run ID</strong>{snapshot.runId}</span>
         </div>
       </section>

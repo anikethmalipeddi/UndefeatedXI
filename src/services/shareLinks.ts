@@ -74,7 +74,7 @@ type CompactPick = [
 ]
 
 interface CompactSharedRunSnapshot {
-  v: 1
+  v: 1 | 2
   b: string
   c: string
   id: string
@@ -92,6 +92,12 @@ interface CompactSharedRunSnapshot {
   km: Array<[string, string, string]>
   cp: Array<[string, number, number, number, number, number, number, number, string]>
   pk: CompactPick[]
+  rt?: SharedRunSnapshot['resultTier']
+  sv?: number
+  eq?: SharedRunSnapshot['effectiveTeamQuality']
+  st?: SharedRunSnapshot['streaks']
+  ms?: SharedRunSnapshot['matchThatChangedSeason']
+  tc?: SharedRunSnapshot['tacticalReason']
 }
 
 function ratingsToArray(ratings: Ratings): number[] {
@@ -112,7 +118,7 @@ function teamRatingsFromArray(values: number[]): TeamRatings {
 
 function compactSharedRunSnapshot(snapshot: SharedRunSnapshot): CompactSharedRunSnapshot {
   return {
-    v: 1,
+    v: 2,
     b: snapshot.brandVersion,
     c: snapshot.createdAt,
     id: snapshot.runId,
@@ -159,6 +165,12 @@ function compactSharedRunSnapshot(snapshot: SharedRunSnapshot): CompactSharedRun
       pick.positions,
       ratingsToArray(pick.ratings),
     ]),
+    rt: snapshot.resultTier,
+    sv: snapshot.scoringVersion,
+    eq: snapshot.effectiveTeamQuality,
+    st: snapshot.streaks,
+    ms: snapshot.matchThatChangedSeason,
+    tc: snapshot.tacticalReason,
   }
 }
 
@@ -185,12 +197,18 @@ function expandCompactSharedRunSnapshot(compact: CompactSharedRunSnapshot): Shar
     gradeLabel: compact.gr[1],
     trophyResult: compact.res[0],
     perfectionResult: compact.res[1],
+    resultTier: compact.rt,
+    scoringVersion: compact.sv,
     stage: compact.res[2],
     bestPlayer: compact.res[3],
     weakLink: compact.res[4],
     strongestUnit: compact.res[5],
     weakestUnit: compact.res[6],
     why: compact.res[7],
+    effectiveTeamQuality: compact.eq,
+    streaks: compact.st,
+    matchThatChangedSeason: compact.ms,
+    tacticalReason: compact.tc,
     teamRatings: teamRatingsFromArray(compact.tr),
     tacticReport: compact.ta,
     chemistryReport: compact.ch,
@@ -221,7 +239,7 @@ function expandCompactSharedRunSnapshot(compact: CompactSharedRunSnapshot): Shar
 }
 
 function isCompactSharedRunSnapshot(value: unknown): value is CompactSharedRunSnapshot {
-  return Boolean(value && typeof value === 'object' && (value as CompactSharedRunSnapshot).v === 1 && Array.isArray((value as CompactSharedRunSnapshot).m))
+  return Boolean(value && typeof value === 'object' && ((value as CompactSharedRunSnapshot).v === 1 || (value as CompactSharedRunSnapshot).v === 2) && Array.isArray((value as CompactSharedRunSnapshot).m))
 }
 
 function pickSnapshot(pick: DraftPick): SharedPickSnapshot {
@@ -257,12 +275,18 @@ export function createSharedRunSnapshot(result: RunResult, formationId: string, 
     gradeLabel: result.gradeLabel,
     trophyResult: result.trophyResult,
     perfectionResult: result.perfectionResult,
+    resultTier: result.resultTier,
+    scoringVersion: result.scoringVersion,
     stage: result.stage,
     bestPlayer: result.bestPlayer,
     weakLink: result.weakLink,
     strongestUnit: result.strongestUnit,
     weakestUnit: result.weakestUnit,
     why: result.why,
+    effectiveTeamQuality: result.effectiveTeamQuality,
+    streaks: result.streaks,
+    matchThatChangedSeason: result.matchThatChangedSeason,
+    tacticalReason: result.tacticalReason,
     teamRatings: result.teamRatings,
     tacticReport: result.tacticReport,
     chemistryReport: result.chemistryReport,
@@ -285,7 +309,8 @@ export function validateSharedRunSnapshot(snapshot: SharedRunSnapshot): string[]
   if (matchTotal < 1 || matchTotal > 42) issues.push('Impossible match count.')
   if (snapshot.picks.length < 1 || snapshot.picks.length > 18) issues.push('Invalid pick count.')
   if (snapshot.goalsFor < 0 || snapshot.goalsAgainst < 0 || snapshot.goalsFor > 250 || snapshot.goalsAgainst > 250) issues.push('Impossible goals.')
-  if (scoreRun(snapshot) < -5000 || scoreRun(snapshot) > 20000) issues.push('Invalid score.')
+  const score = scoreRun(snapshot)
+  if (score < -5000 || score > 50000) issues.push('Invalid score.')
   if (serializedLength > 50000) issues.push('Snapshot too large.')
 
   return issues
@@ -344,5 +369,6 @@ export async function createShareLink(snapshot: SharedRunSnapshot, text: string)
 }
 
 export function sharedResultTitle(snapshot: SharedRunSnapshot): string {
-  return `${snapshot.modeName} ${formatRecord(snapshot.record)} (${snapshot.grade})`
+  const tier = snapshot.resultTier?.label ?? snapshot.grade
+  return `${snapshot.modeName} ${formatRecord(snapshot.record)} (${tier})`
 }

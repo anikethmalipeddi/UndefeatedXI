@@ -1,4 +1,5 @@
 import type { RunResult } from '../types'
+import { modeDifficultyScore, scoringVersion } from './simulationModel'
 
 const legacyStorageKeys = ['38-0-0.preferences', 'invinciblexi.preferences']
 const storageKey = 'undefeatedxi.preferences'
@@ -14,6 +15,8 @@ export interface StoredRunSummary {
   gradeLabel: string
   trophyResult: string
   perfectionResult: string
+  resultTier?: RunResult['resultTier']
+  scoringVersion?: number
   points?: number
   goalsFor: number
   goalsAgainst: number
@@ -31,33 +34,41 @@ export interface StoredPreferences {
   recentRuns: StoredRunSummary[]
 }
 
-const gradeWeights: Record<string, number> = {
-  SS: 800,
-  S: 650,
-  'A+': 560,
-  A: 500,
-  B: 360,
-  C: 220,
-  D: 80,
-}
-
-function gradeWeight(grade: string): number {
-  return gradeWeights[grade] ?? 0
-}
-
 export function formatStoredRecord(record: RunResult['record']): string {
   return `${record.wins}-${record.draws}-${record.losses}`
 }
 
-export function scoreRun(result: Pick<RunResult, 'record' | 'grade' | 'points' | 'goalsFor' | 'goalsAgainst' | 'xgFor' | 'xgAgainst' | 'trophyResult' | 'perfectionResult'>): number {
-  const recordScore = result.record.wins * 140 + result.record.draws * 24 - result.record.losses * 180
-  const goalScore = (result.goalsFor - result.goalsAgainst) * 6
-  const xgScore = (result.xgFor - result.xgAgainst) * 3
-  const pointsScore = result.points ?? result.record.wins * 3 + result.record.draws
-  const trophyBonus = result.trophyResult === 'Trophy won' ? 420 : result.trophyResult.includes('Champion') ? 360 : 0
-  const perfectionBonus = result.perfectionResult === 'Perfect' ? 720 : result.perfectionResult.includes('Invincible') ? 380 : 0
+function legacyTierRank(result: Pick<RunResult, 'grade' | 'perfectionResult'>): number {
+  if (result.perfectionResult === 'Perfect') return 800
+  if (result.perfectionResult.includes('Invincible')) return 700
+  if (result.grade === 'A+') return 640
+  if (result.grade === 'A') return 560
+  if (result.grade === 'B') return 470
+  if (result.grade === 'C') return 320
+  return 120
+}
 
-  return Math.round(recordScore + goalScore + xgScore + pointsScore + gradeWeight(result.grade) + trophyBonus + perfectionBonus)
+export function scoreRun(result: Pick<RunResult, 'modeId' | 'record' | 'grade' | 'points' | 'goalsFor' | 'goalsAgainst' | 'xgFor' | 'xgAgainst' | 'trophyResult' | 'perfectionResult'> & Partial<Pick<RunResult, 'resultTier' | 'effectiveTeamQuality' | 'scoringVersion'>>): number {
+  const matches = Math.max(1, result.record.wins + result.record.draws + result.record.losses)
+  const tierRank = result.resultTier?.rank ?? legacyTierRank(result)
+  const winRate = result.record.wins / matches
+  const goalDifferential = result.goalsFor - result.goalsAgainst
+  const xgDifferential = result.xgFor - result.xgAgainst
+  const pointsScore = result.points ?? result.record.wins * 3 + result.record.draws
+  const trophyBonus = result.trophyResult === 'Trophy won' ? 850 : result.trophyResult.includes('Champion') ? 700 : 0
+  const teamQuality = result.effectiveTeamQuality?.score ?? 0
+
+  return Math.round(
+    tierRank * 14 +
+      winRate * 2100 +
+      modeDifficultyScore(result.modeId) * 14 +
+      goalDifferential * 7 +
+      xgDifferential * 2 +
+      pointsScore * 3 +
+      teamQuality * 8 -
+      result.record.losses * 180 +
+      trophyBonus,
+  )
 }
 
 export function summarizeRun(result: RunResult, formationId: string, createdAt = new Date().toISOString()): StoredRunSummary {
@@ -71,6 +82,8 @@ export function summarizeRun(result: RunResult, formationId: string, createdAt =
     gradeLabel: result.gradeLabel,
     trophyResult: result.trophyResult,
     perfectionResult: result.perfectionResult,
+    resultTier: result.resultTier,
+    scoringVersion: result.scoringVersion ?? scoringVersion,
     points: result.points,
     goalsFor: result.goalsFor,
     goalsAgainst: result.goalsAgainst,
