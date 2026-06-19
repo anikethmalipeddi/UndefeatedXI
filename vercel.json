@@ -15,6 +15,11 @@
       "source": "/index.html",
       "destination": "https://www.undefeatedxi.com/",
       "permanent": true
+    },
+    {
+      "source": "/share/:shareId",
+      "destination": "https://www.undefeatedxi.com/r/:shareId",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -41,6 +46,14 @@
     {
       "source": "/contact",
       "destination": "/contact.html"
+    },
+    {
+      "source": "/r/:shareId",
+      "destination": "/r.html"
+    },
+    {
+      "source": "/r/local/:payload",
+      "destination": "/r.html"
     }
   ],
   "headers": [

@@ -8,9 +8,12 @@ const shell = readFileSync(join(distDir, 'index.html'), 'utf8')
 const siteUrl = 'https://www.undefeatedxi.com'
 const socialImage = `${siteUrl}/og-image.png`
 
-const homeDescription = 'Play UndefeatedXI, a free soccer and football draft simulator where you build a perfect XI, chase 38-0-0, and test football history teams across World Cup, Champions League, league, and all-time modes.'
-const soccerDescription = 'Play UndefeatedXI, the soccer and football version of 82-0. Draft legends, build a perfect XI, and chase 38-0-0.'
-const footballDescription = 'Play UndefeatedXI, the official football version of the viral 82-0 game. Build a perfect football XI, draft legends from clubs and nations, and chase unbeaten league and tournament runs for free.'
+const homeDescription = 'Play UndefeatedXI, a free soccer and football draft simulator. Build a perfect XI, chase 38-0-0, and test football history teams across top modes.'
+const soccerDescription = 'Play UndefeatedXI, the official soccer and football version of 82-0. Draft legends, build a perfect XI, and chase 38-0-0 across football history.'
+const footballDescription = 'Play UndefeatedXI, the official football version of 82-0. Build a perfect XI, draft legends, and chase unbeaten league and tournament runs.'
+const howDescription = 'Learn how to play UndefeatedXI. Draft soccer and football legends, place a perfect XI, and chase 38-0-0, World Cup, and Champions League runs.'
+const leaderboardDescription = 'View UndefeatedXI leaderboards for perfect XI runs, 38-0-0 seasons, and unbeaten soccer and football drafts across every mode.'
+const sharedResultDescription = 'Open a shared UndefeatedXI football draft result with the final XI, record, streaks, tactical reason, and shareable run summary.'
 
 const faqItems = [
   ['Is there a soccer version of 82-0?', 'Yes. UndefeatedXI is the official soccer and football version of the viral 82-0 game.'],
@@ -131,6 +134,11 @@ const popularLinks = `
         <p>
           <a href="/82-0-soccer-game">82-0 Soccer Game</a>
           <a href="/82-0-football-game">82-0 Football Game</a>
+          <a href="/82-0-soccer-game">Soccer Version of 82-0</a>
+          <a href="/82-0-football-game">Football Version of 82-0</a>
+          <a href="/">Football Draft Simulator</a>
+          <a href="/#/setup/world_cup">World Cup Draft Game</a>
+          <a href="/#/setup/champions_league">Champions League Draft Game</a>
           <a href="/how-to-play">How to Play</a>
           <a href="/leaderboard">Leaderboard</a>
         </p>
@@ -141,19 +149,21 @@ const routeContent = {
     <main>
       <h1>UndefeatedXI</h1>
       <p>Draft football and soccer legends, build a perfect XI, and chase unbeaten records like 38-0-0 across World Cup, Champions League, league, and all-time modes.</p>
-      <p>UndefeatedXI is a free football draft simulator and soccer history draft game with no ads.</p>
+      <p>UndefeatedXI is a free soccer draft simulator, football draft simulator, football history draft game, and soccer history draft game with no ads and no data selling.</p>
+      <section><h2>Build an undefeated football XI</h2><p>Choose a mode, pick a formation, draft legends from clubs, nations, and eras, then see if your XI can survive the run. The challenge rewards position fit, chemistry, balance, and a little luck.</p></section>
       ${popularLinks}
     </main>`,
   '/82-0-soccer-game': `
     <main>
       <nav><a href="/">UndefeatedXI</a> / <span>82-0 Soccer Game</span></nav>
-      <h1>The Official Soccer and Football Version of 82-0</h1>
+      <h1>UndefeatedXI: The Official Soccer Version of the 82-0 Game</h1>
       <p>${escapeHtml(soccerDescription)}</p>
-      <section><h2>What is UndefeatedXI?</h2><p>UndefeatedXI is a soccer draft simulator and football draft simulator for football history fans. Draft legends into a real XI and chase unbeaten seasons, 38-0-0, and perfect tournament runs.</p></section>
-      <section><h2>How the game works</h2><p>Pick a mode, choose a formation, spin clubs, nations, and eras, then draft one player into a compatible slot. Position fit, ratings, chemistry, tactics, and mode rules all matter.</p></section>
-      <section><h2>Why it is different from 82-0</h2><p>Instead of building a basketball roster for 82 wins, you build a perfect soccer XI or perfect football XI and test it across football records, trophies, leaderboards, and shareable results.</p></section>
-      <section><h2>Modes included</h2><p>Play World Cup draft game runs, Champions League draft game runs, Euros, AFCON, World XI, Premier League, La Liga, Serie A, Bundesliga, and more.</p></section>
-      <section><h2>Free to play, no ads</h2><p>UndefeatedXI is free to play, has no ads, and does not sell data.</p></section>
+      <section><h2>What is UndefeatedXI?</h2><p>UndefeatedXI is a soccer draft simulator and football draft simulator for football history fans. You draft legends into a real XI, balance the lineup, and chase unbeaten seasons, 38-0-0, and perfect tournament runs.</p></section>
+      <section><h2>How the game works</h2><p>Pick a mode, choose a formation, spin clubs, nations, and eras, then draft one player into a compatible slot. Position fit, ratings, chemistry, tactics, goalkeeper quality, and mode rules all affect the final run.</p></section>
+      <section><h2>How it relates to 82-0</h2><p>82-0 made the perfect-season draft idea instantly readable. UndefeatedXI is the official soccer version of 82-0 and the official football version of 82-0: instead of building a basketball roster, you build a perfect soccer XI or perfect football XI and test it across football history.</p></section>
+      <section><h2>Modes included</h2><p>Play World Cup draft game runs, Champions League draft game runs, Euros, AFCON, Copa America, Club World Cup, Nation XI, World XI, Premier League, La Liga, Serie A, Bundesliga, Ligue 1, MLS, and more.</p></section>
+      <section><h2>Why soccer and football fans will like it</h2><p>The fun is in the argument. Do you take the highest-rated player, a natural fit, a chemistry link, a stronger goalkeeper, or the clutch midfielder who can turn draws into wins?</p></section>
+      <section><h2>Free to play, no ads</h2><p>UndefeatedXI is free to play, has no ads, and does not sell data. You can play, share a result, and come back later without creating an account.</p></section>
       ${popularLinks}
       ${renderFaq()}
     </main>`,
@@ -174,15 +184,19 @@ const routeContent = {
       <nav><a href="/">UndefeatedXI</a> / <span>How to Play</span></nav>
       <h1>How to Play UndefeatedXI</h1>
       <p>Choose a mode, choose a formation, spin football-history prompts, draft one player per round, and build an XI that can chase 38-0-0 or perfect tournament runs.</p>
-      <section><h2>Core loop</h2><p>Spin a club, nation, or era, pick a player, place them in a compatible slot, and repeat until your XI is complete.</p></section>
-      <section><h2>What matters</h2><p>Ratings, chemistry, position fit, tactical balance, squad depth, and mode rules all affect the final simulation.</p></section>
+      <section><h2>Core loop</h2><p>Spin a club, nation, or era, pick a player, place them in a compatible slot, and repeat until your XI is complete. Some modes lock you to one club, one nation, or one era.</p></section>
+      <section><h2>What matters</h2><p>Ratings, chemistry, position fit, tactical balance, squad depth, goalkeeper quality, and mode rules all affect the final simulation.</p></section>
+      <section><h2>Records and modes</h2><p>League modes chase 38-0-0 or similar perfect seasons. Tournament modes care about regulation wins, extra time, penalties, and trophy paths across World Cup, Champions League, Euros, AFCON, and more.</p></section>
+      ${popularLinks}
     </main>`,
   '/leaderboard': `
     <main>
       <nav><a href="/">UndefeatedXI</a> / <span>Leaderboard</span></nav>
       <h1>UndefeatedXI Leaderboard</h1>
-      <p>Compare perfect-season football draft runs across World XI, World Cup, Champions League, Premier League, and other UndefeatedXI modes.</p>
-      <section><h2>One main leaderboard</h2><p>The live app loads one filterable leaderboard with global, mode-specific, and signed-in player views.</p></section>
+      <p>Compare perfect XI runs, 38-0-0 seasons, invincible records, and unbeaten soccer and football drafts across UndefeatedXI modes.</p>
+      <section><h2>One main leaderboard</h2><p>The live app loads one filterable leaderboard with global, mode-specific, and signed-in player views. It keeps the page simple on mobile while still letting you compare World XI, World Cup, Champions League, Premier League, La Liga, Serie A, Bundesliga, and more.</p></section>
+      <section><h2>What ranks well</h2><p>Perfect records rank first, but elite near-misses, invincible runs, goal difference, mode difficulty, and team quality still matter. A 37-1-0 season should feel worth sharing.</p></section>
+      ${popularLinks}
     </main>`,
   '/privacy': `
     <main>
@@ -198,6 +212,14 @@ const routeContent = {
       <nav><a href="/">UndefeatedXI</a> / <span>Contact and Feedback</span></nav>
       <h1>Feedback</h1>
       <p>Send player corrections, mode ideas, bug reports, and rating arguments from the live app.</p>
+    </main>`,
+  '/r': `
+    <main>
+      <nav><a href="/">UndefeatedXI</a> / <span>Shared Result</span></nav>
+      <h1>Shared UndefeatedXI Result</h1>
+      <p>${escapeHtml(sharedResultDescription)}</p>
+      <section><h2>Open the run</h2><p>The live app loads the shared football draft result, including the final XI, W-D-L record, result tier, longest win streak, and tactical reason.</p></section>
+      <p><a href="/leaderboard">View the leaderboard</a> or <a href="/">play UndefeatedXI</a>.</p>
     </main>`,
 }
 
@@ -238,7 +260,7 @@ const routes = [
   {
     path: '/how-to-play',
     title: 'How to Play UndefeatedXI | Football Draft Simulator',
-    description: 'Learn how to play UndefeatedXI, the soccer and football version of the 82-0 perfect-record idea. Draft legends, place them in an XI, and chase unbeaten runs.',
+    description: howDescription,
     schemas: [
       ['structured-data-game', gameSchema()],
       ['structured-data-website', websiteSchema()],
@@ -249,7 +271,7 @@ const routes = [
   {
     path: '/leaderboard',
     title: 'UndefeatedXI Leaderboard | Perfect Season Football Drafts',
-    description: 'View UndefeatedXI leaderboards for perfect football draft runs, including global records, mode leaderboards, and shareable unbeaten results.',
+    description: leaderboardDescription,
     schemas: [
       ['structured-data-game', gameSchema()],
       ['structured-data-website', websiteSchema()],
@@ -279,6 +301,18 @@ const routes = [
       ['structured-data-breadcrumb', breadcrumbSchema('/contact', 'Contact and Feedback')],
     ],
   },
+  {
+    path: '/r',
+    title: 'Shared UndefeatedXI Result | Football Draft Simulator',
+    description: sharedResultDescription,
+    robots: 'noindex,follow',
+    schemas: [
+      ['structured-data-game', gameSchema()],
+      ['structured-data-website', websiteSchema()],
+      ['structured-data-faq', null],
+      ['structured-data-breadcrumb', null],
+    ],
+  },
 ]
 
 function setRouteHtml(route) {
@@ -287,6 +321,7 @@ function setRouteHtml(route) {
 
   html = setTitle(html, route.title)
   html = setCanonical(html, canonical)
+  html = setMeta(html, 'robots', route.robots ?? 'index,follow')
   html = setMeta(html, 'description', route.description)
   html = setMeta(html, 'og:title', route.title, 'property')
   html = setMeta(html, 'og:description', route.description, 'property')
@@ -294,12 +329,16 @@ function setRouteHtml(route) {
   html = setMeta(html, 'og:site_name', 'UndefeatedXI', 'property')
   html = setMeta(html, 'og:url', canonical, 'property')
   html = setMeta(html, 'og:image', socialImage, 'property')
+  html = setMeta(html, 'og:image:secure_url', socialImage, 'property')
+  html = setMeta(html, 'og:image:type', 'image/png', 'property')
   html = setMeta(html, 'og:image:width', '1200', 'property')
   html = setMeta(html, 'og:image:height', '630', 'property')
   html = setMeta(html, 'og:image:alt', 'UndefeatedXI soccer and football draft simulator share image', 'property')
+  html = setMeta(html, 'og:locale', 'en_US', 'property')
   html = setMeta(html, 'twitter:card', 'summary_large_image')
   html = setMeta(html, 'twitter:title', route.title)
   html = setMeta(html, 'twitter:description', route.description)
+  html = setMeta(html, 'twitter:url', canonical)
   html = setMeta(html, 'twitter:image', socialImage)
   html = setMeta(html, 'twitter:image:alt', 'UndefeatedXI football history draft game share image')
 

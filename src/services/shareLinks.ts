@@ -16,8 +16,12 @@ function getPlayerInitials(name: string): string {
 function originForLinks(): string {
   if (typeof window === 'undefined') return canonicalSiteUrl
   const isLocalHost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)
-  if (isLocalHost) return `${window.location.origin}${window.location.pathname}`
+  if (isLocalHost) return `${window.location.origin}/`
   return canonicalSiteUrl
+}
+
+function publicRoute(path: string): string {
+  return new URL(path.replace(/^\/+/, ''), originForLinks()).toString()
 }
 
 function utf8ToBase64Url(value: string): string {
@@ -358,7 +362,7 @@ export async function createShareLink(snapshot: SharedRunSnapshot, text: string)
       const { data, error } = await supabase.functions.invoke('share-run', { body: snapshot })
       const shareId = typeof data?.share_id === 'string' ? data.share_id : typeof data?.shareId === 'string' ? data.shareId : ''
       if (!error && shareId) {
-        return { url: `${originForLinks()}#/r/${shareId}`, text, source: 'supabase' }
+        return { url: publicRoute(`/r/${shareId}`), text, source: 'supabase' }
       }
     } catch {
       // Local URLs keep signed-out/offline play shareable.

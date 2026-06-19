@@ -2,11 +2,13 @@
   "name": "UndefeatedXI",
   "short_name": "UndefeatedXI",
   "description": "Free soccer and football draft simulator for building a perfect XI and chasing unbeaten records.",
+  "id": "https://www.undefeatedxi.com/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#f4f6f1",
   "theme_color": "#0f7a43",
+  "categories": ["games", "sports"],
   "icons": [
     {
       "src": "/web-app/icon-192.png",

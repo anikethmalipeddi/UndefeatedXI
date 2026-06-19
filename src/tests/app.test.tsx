@@ -168,9 +168,10 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 1, name: /Official Soccer and Football Version of 82-0/i })).toBeInTheDocument()
     expect(screen.getByText(/Is there a soccer version of 82-0\?/i)).toBeInTheDocument()
     expect(document.title).toBe('UndefeatedXI | Official Soccer Version of the 82-0 Game')
-    expect(metaContent('meta[name="description"]')).toBe('Play UndefeatedXI, the soccer and football version of 82-0. Draft legends, build a perfect XI, and chase 38-0-0.')
+    expect(metaContent('meta[name="description"]')).toBe('Play UndefeatedXI, the official soccer and football version of 82-0. Draft legends, build a perfect XI, and chase 38-0-0 across football history.')
     expect(document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://www.undefeatedxi.com/82-0-soccer-game')
     expect(metaContent('meta[property="og:image"]')).toBe('https://www.undefeatedxi.com/og-image.png')
+    expect(metaContent('meta[name="twitter:url"]')).toBe('https://www.undefeatedxi.com/82-0-soccer-game')
     expect(document.getElementById('structured-data-faq')?.textContent).toContain('FAQPage')
     expect(document.getElementById('structured-data-breadcrumb')?.textContent).toContain('BreadcrumbList')
   })
@@ -182,8 +183,18 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { level: 1, name: /Official Football Version of 82-0/i })).toBeInTheDocument()
     expect(document.title).toBe('UndefeatedXI | Official Football Version of the 82-0 Game')
-    expect(metaContent('meta[name="description"]')).toBe('Play UndefeatedXI, the official football version of the viral 82-0 game. Build a perfect football XI, draft legends from clubs and nations, and chase unbeaten league and tournament runs for free.')
+    expect(metaContent('meta[name="description"]')).toBe('Play UndefeatedXI, the official football version of 82-0. Build a perfect XI, draft legends, and chase unbeaten league and tournament runs.')
     expect(document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://www.undefeatedxi.com/82-0-football-game')
+  })
+
+  it('opens clean shared result routes without a hash URL', async () => {
+    window.history.replaceState(null, '', '/r/testshare123')
+
+    render(<App />)
+
+    expect(document.title).toBe('Shared UndefeatedXI Result | Football Draft Simulator')
+    expect(document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://www.undefeatedxi.com/leaderboard')
+    expect(await screen.findByText(/That shared run could not be found|Supabase is not configured/i)).toBeInTheDocument()
   })
 
   it('uses homepage SEO copy and links to the soccer landing page', async () => {

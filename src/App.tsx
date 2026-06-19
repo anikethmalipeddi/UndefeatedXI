@@ -63,9 +63,9 @@ const logoWebpSrcSet = '/logo-160.webp 160w, /logo-320.webp 320w, /logo-640.webp
 const logoPngSrcSet = '/logo-320.png 320w, /logo-640.png 640w'
 const siteUrl = 'https://www.undefeatedxi.com'
 const socialImageUrl = `${siteUrl}/og-image.png`
-const homeSeoDescription = 'Play UndefeatedXI, a free soccer and football draft simulator where you build a perfect XI, chase 38-0-0, and test football history teams across World Cup, Champions League, league, and all-time modes.'
-const landingSeoDescription = 'Play UndefeatedXI, the soccer and football version of 82-0. Draft legends, build a perfect XI, and chase 38-0-0.'
-const footballLandingSeoDescription = 'Play UndefeatedXI, the official football version of the viral 82-0 game. Build a perfect football XI, draft legends from clubs and nations, and chase unbeaten league and tournament runs for free.'
+const homeSeoDescription = 'Play UndefeatedXI, a free soccer and football draft simulator. Build a perfect XI, chase 38-0-0, and test football history teams across top modes.'
+const landingSeoDescription = 'Play UndefeatedXI, the official soccer and football version of 82-0. Draft legends, build a perfect XI, and chase 38-0-0 across football history.'
+const footballLandingSeoDescription = 'Play UndefeatedXI, the official football version of 82-0. Build a perfect XI, draft legends, and chase unbeaten league and tournament runs.'
 const faqItems = [
   {
     question: 'Is there a soccer version of 82-0?',
@@ -168,6 +168,10 @@ function readRoute(): RouteState {
   if (path === '/privacy') return { screen: 'privacy' }
   if (path === '/contact') return { screen: 'contact' }
   if (path === '/leaderboard') return { screen: 'leaderboard' }
+  const cleanShareParts = path.split('/').filter(Boolean)
+  if (cleanShareParts[0] === 'r' && cleanShareParts.length === 1) return { screen: 'sharedResult' }
+  if (cleanShareParts[0] === 'r' && cleanShareParts[1] === 'local' && cleanShareParts[2]) return { screen: 'sharedResult', localSharePayload: cleanShareParts[2] }
+  if (cleanShareParts[0] === 'r' && cleanShareParts[1]) return { screen: 'sharedResult', shareId: cleanShareParts[1] }
   return { screen: 'notFound' }
 }
 
@@ -180,7 +184,7 @@ function routeFor(screen: Screen, modeId?: string): string {
   if (screen === 'contact') return '/contact'
   if (screen === 'leaderboard') return '/leaderboard'
   if (screen === 'setup') return `/#/setup/${modeId ?? defaultModeId}`
-  if (screen === 'sharedResult') return modeId ? `/#/r/${modeId}` : '/leaderboard'
+  if (screen === 'sharedResult') return modeId ? `/r/${modeId}` : '/leaderboard'
   if (screen === 'draft') return '/#/draft'
   if (screen === 'result') return '/#/result'
   return '/404'
@@ -193,6 +197,7 @@ function canonicalFor(screen: Screen): string {
   if (screen === 'leaderboard') return `${siteUrl}/leaderboard`
   if (screen === 'privacy') return `${siteUrl}/privacy`
   if (screen === 'contact') return `${siteUrl}/contact`
+  if (screen === 'sharedResult') return `${siteUrl}/leaderboard`
   return `${siteUrl}/`
 }
 
@@ -211,9 +216,9 @@ function titleFor(screen: Screen): string {
 function descriptionFor(screen: Screen): string {
   if (screen === 'seoLanding') return landingSeoDescription
   if (screen === 'footballLanding') return footballLandingSeoDescription
-  if (screen === 'how') return 'Learn how to play UndefeatedXI, the soccer and football version of the 82-0 perfect-record idea. Draft legends, place them in an XI, and chase unbeaten runs.'
-  if (screen === 'leaderboard') return 'View UndefeatedXI leaderboards for perfect football draft runs, including global records, mode leaderboards, and shareable unbeaten results.'
-  if (screen === 'sharedResult') return 'Open a shared UndefeatedXI football draft result with the final XI, record, rating breakdown, key matches, and simulation summary.'
+  if (screen === 'how') return 'Learn how to play UndefeatedXI. Draft soccer and football legends, place a perfect XI, and chase 38-0-0, World Cup, and Champions League runs.'
+  if (screen === 'leaderboard') return 'View UndefeatedXI leaderboards for perfect XI runs, 38-0-0 seasons, and unbeaten soccer and football drafts across every mode.'
+  if (screen === 'sharedResult') return 'Open a shared UndefeatedXI football draft result with the final XI, record, streaks, tactical reason, and shareable run summary.'
   if (screen === 'privacy') return 'Read the UndefeatedXI privacy policy for this football draft simulator, including local saves, optional accounts, leaderboard runs, and feedback handling.'
   if (screen === 'contact') return 'Contact UndefeatedXI or send feedback about player data, bugs, modes, leaderboards, and shareable football draft results.'
   if (screen === 'notFound') return 'The requested UndefeatedXI page could not be found.'
@@ -324,6 +329,7 @@ function useRouteSeo(screen: Screen) {
     const canonical = canonicalFor(screen)
 
     document.title = title
+    setMeta('robots', screen === 'sharedResult' || screen === 'notFound' ? 'noindex,follow' : 'index,follow')
     setMeta('description', description)
     setCanonical(canonical)
     setMeta('og:title', title, 'property')
@@ -334,12 +340,16 @@ function useRouteSeo(screen: Screen) {
     setMeta('og:image', socialImageUrl, 'property')
     setMeta('og:image:width', '1200', 'property')
     setMeta('og:image:height', '630', 'property')
-    setMeta('og:image:alt', 'UndefeatedXI soccer draft simulator logo', 'property')
+    setMeta('og:image:secure_url', socialImageUrl, 'property')
+    setMeta('og:image:type', 'image/png', 'property')
+    setMeta('og:image:alt', 'UndefeatedXI soccer and football draft simulator share card', 'property')
+    setMeta('og:locale', 'en_US', 'property')
     setMeta('twitter:card', 'summary_large_image')
     setMeta('twitter:title', title)
     setMeta('twitter:description', description)
+    setMeta('twitter:url', canonical)
     setMeta('twitter:image', socialImageUrl)
-    setMeta('twitter:image:alt', 'UndefeatedXI football history draft game logo')
+    setMeta('twitter:image:alt', 'UndefeatedXI football history draft game share card')
     setJsonLd('structured-data-game', gameSchema())
     setJsonLd('structured-data-website', websiteSchema())
     setJsonLd('structured-data-faq', screen === 'seoLanding' || screen === 'footballLanding' ? faqSchema() : null)
