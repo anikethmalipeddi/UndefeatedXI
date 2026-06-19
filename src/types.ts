@@ -290,6 +290,19 @@ export interface KeyMatch {
   note: string
 }
 
+export interface ReportPlayerDetail {
+  playerName: string
+  slotLabel: string
+  score: number
+  reason: string
+}
+
+export interface UnitScoreDetail {
+  label: string
+  score: number
+  reason: string
+}
+
 export type ResultTierId =
   | 'perfect'
   | 'invincible'
@@ -418,6 +431,9 @@ export interface SimulationDetails {
   averageDrawProbability: number
   averageLossProbability: number
   trophyProbability: number
+  trophyEstimateLabel?: string
+  trophyEstimateMethod?: string
+  perfectRunProbability?: number
   teamStrength: number
   defensiveBase: number
   matchPressure: number
@@ -451,9 +467,12 @@ export interface RunResult {
   scoringVersion?: number
   stage?: string
   bestPlayer: string
+  bestPlayerDetail?: ReportPlayerDetail
   weakLink: string
+  weakLinkDetail?: ReportPlayerDetail
   strongestUnit: string
   weakestUnit: string
+  unitScores?: UnitScoreDetail[]
   dominanceReason: string
   failureReason: string
   tacticalReason?: TacticalReason
@@ -509,9 +528,12 @@ export interface SharedRunSnapshot {
   scoringVersion?: number
   stage?: string
   bestPlayer: string
+  bestPlayerDetail?: ReportPlayerDetail
   weakLink: string
+  weakLinkDetail?: ReportPlayerDetail
   strongestUnit: string
   weakestUnit: string
+  unitScores?: UnitScoreDetail[]
   why: string
   effectiveTeamQuality?: EffectiveTeamQuality
   streaks?: StreakReport

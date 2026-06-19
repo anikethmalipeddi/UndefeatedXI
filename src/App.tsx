@@ -2517,6 +2517,7 @@ function ResultScreen({
   const tierLabel = result.resultTier?.label ?? result.perfectionResult
   const tierDescription = result.resultTier?.description ?? result.perfectionResult
   const turningPoint = result.matchThatChangedSeason
+  const trophyEstimateLabel = result.simulationDetails.trophyEstimateLabel ?? 'Trophy %'
   const resultPicks = orderResultPicks(picks)
   return (
     <main className="result-page">
@@ -2589,7 +2590,8 @@ function ResultScreen({
         <Metric label="GD" value={result.goalsFor - result.goalsAgainst} />
         <Metric label="xG For" value={result.xgFor} />
         <Metric label="xG Against" value={result.xgAgainst} />
-        <Metric label="Trophy %" value={`${result.simulationDetails.trophyProbability}%`} />
+        <Metric label={trophyEstimateLabel} value={`${result.simulationDetails.trophyProbability}%`} />
+        {result.simulationDetails.perfectRunProbability !== undefined && <Metric label="Perfect %" value={`${result.simulationDetails.perfectRunProbability}%`} />}
         <Metric label="Longest W" value={result.streaks?.longestWinStreak ?? 0} />
         <Metric label="Unbeaten" value={result.streaks?.longestUnbeatenStreak ?? 0} />
         {result.effectiveTeamQuality && <Metric label="Team Q" value={result.effectiveTeamQuality.score} />}
@@ -2600,10 +2602,10 @@ function ResultScreen({
         <h2>{result.trophyResult}</h2>
         <p>{result.why}</p>
         <div className="story-grid">
-          <span><strong>Best player</strong>{result.bestPlayer}</span>
-          <span><strong>Weak link</strong>{result.weakLink}</span>
-          <span><strong>Strongest unit</strong>{result.strongestUnit}</span>
-          <span><strong>Weakest unit</strong>{result.weakestUnit}</span>
+          <span><strong>Best player</strong>{result.bestPlayer}{result.bestPlayerDetail && <small>{result.bestPlayerDetail.reason}</small>}</span>
+          <span><strong>Weak link</strong>{result.weakLink}{result.weakLinkDetail && <small>{result.weakLinkDetail.reason}</small>}</span>
+          <span><strong>Strongest unit</strong>{result.strongestUnit}{result.unitScores?.find((unit) => unit.label === result.strongestUnit) && <small>{result.unitScores.find((unit) => unit.label === result.strongestUnit)?.reason}</small>}</span>
+          <span><strong>Weakest unit</strong>{result.weakestUnit}{result.unitScores?.find((unit) => unit.label === result.weakestUnit) && <small>{result.unitScores.find((unit) => unit.label === result.weakestUnit)?.reason}</small>}</span>
           <span><strong>Tactic</strong>{result.tacticReport.identity}</span>
           {result.tacticalReason && <span><strong>Why it broke</strong>{result.tacticalReason.summary}</span>}
           {turningPoint && <span><strong>Changed match</strong>Match {turningPoint.match}: {turningPoint.outcome} vs {turningPoint.opponentDifficulty}</span>}
@@ -2622,6 +2624,19 @@ function ResultScreen({
             ))}
           </div>
         </details>
+        {result.unitScores && (
+          <details>
+            <summary>View unit report</summary>
+            <div className="key-match-list">
+              {result.unitScores.map((unit) => (
+                <article key={unit.label}>
+                  <strong>{unit.label}: {unit.score}</strong>
+                  <p>{unit.reason}</p>
+                </article>
+              ))}
+            </div>
+          </details>
+        )}
         {result.squadReport && (
           <details>
             <summary>View squad depth</summary>
@@ -2646,7 +2661,8 @@ function ResultScreen({
             <Metric label="Win %" value={`${result.simulationDetails.averageWinProbability}%`} />
             <Metric label="Draw %" value={`${result.simulationDetails.averageDrawProbability}%`} />
             <Metric label="Loss %" value={`${result.simulationDetails.averageLossProbability}%`} />
-            <Metric label="Trophy %" value={`${result.simulationDetails.trophyProbability}%`} />
+            <Metric label={trophyEstimateLabel} value={`${result.simulationDetails.trophyProbability}%`} />
+            {result.simulationDetails.perfectRunProbability !== undefined && <Metric label="Perfect %" value={`${result.simulationDetails.perfectRunProbability}%`} />}
             <Metric label="xG / match" value={result.simulationDetails.expectedGoalsForPerMatch} />
             <Metric label="xGA / match" value={result.simulationDetails.expectedGoalsAgainstPerMatch} />
             <Metric label="Pressure" value={result.simulationDetails.matchPressure} />
@@ -2655,6 +2671,7 @@ function ResultScreen({
             {result.simulationDetails.averageDominanceDelta !== undefined && <Metric label="Avg Delta" value={result.simulationDetails.averageDominanceDelta} />}
             {result.simulationDetails.averageConversionProbability !== undefined && <Metric label="Draw Convert" value={`${result.simulationDetails.averageConversionProbability}%`} />}
           </div>
+          {result.simulationDetails.trophyEstimateMethod && <p>{result.simulationDetails.trophyEstimateMethod}</p>}
         </details>
         <details>
           <summary>View key matches</summary>
@@ -3376,10 +3393,10 @@ function SharedResultScreen({
         <h2>{snapshot.trophyResult}</h2>
         <p>{snapshot.why}</p>
         <div className="story-grid">
-          <span><strong>Best player</strong>{snapshot.bestPlayer}</span>
-          <span><strong>Weak link</strong>{snapshot.weakLink}</span>
-          <span><strong>Strongest unit</strong>{snapshot.strongestUnit}</span>
-          <span><strong>Weakest unit</strong>{snapshot.weakestUnit}</span>
+          <span><strong>Best player</strong>{snapshot.bestPlayer}{snapshot.bestPlayerDetail && <small>{snapshot.bestPlayerDetail.reason}</small>}</span>
+          <span><strong>Weak link</strong>{snapshot.weakLink}{snapshot.weakLinkDetail && <small>{snapshot.weakLinkDetail.reason}</small>}</span>
+          <span><strong>Strongest unit</strong>{snapshot.strongestUnit}{snapshot.unitScores?.find((unit) => unit.label === snapshot.strongestUnit) && <small>{snapshot.unitScores.find((unit) => unit.label === snapshot.strongestUnit)?.reason}</small>}</span>
+          <span><strong>Weakest unit</strong>{snapshot.weakestUnit}{snapshot.unitScores?.find((unit) => unit.label === snapshot.weakestUnit) && <small>{snapshot.unitScores.find((unit) => unit.label === snapshot.weakestUnit)?.reason}</small>}</span>
           <span><strong>Tactic</strong>{snapshot.tacticReport.identity}</span>
           {snapshot.tacticalReason && <span><strong>Why it broke</strong>{snapshot.tacticalReason.summary}</span>}
           {snapshot.streaks && <span><strong>Streaks</strong>{snapshot.streaks.longestWinStreak} wins · {snapshot.streaks.longestUnbeatenStreak} unbeaten</span>}
@@ -3400,6 +3417,19 @@ function SharedResultScreen({
             ))}
           </div>
         </details>
+        {snapshot.unitScores && (
+          <details>
+            <summary>View unit report</summary>
+            <div className="key-match-list">
+              {snapshot.unitScores.map((unit) => (
+                <article key={unit.label}>
+                  <strong>{unit.label}: {unit.score}</strong>
+                  <p>{unit.reason}</p>
+                </article>
+              ))}
+            </div>
+          </details>
+        )}
         <details>
           <summary>View competition path</summary>
           <div className="key-match-list">

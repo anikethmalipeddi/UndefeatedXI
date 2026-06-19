@@ -11,10 +11,12 @@ import {
   finalProbabilities,
   fixtureDifficulty,
   matchImportance,
+  positionFitLabel,
+  positionFitScore,
   scoringVersion,
 } from './simulationModel'
 import { calculateTeamRatings, inferTactic } from './tactics'
-import type { ChaosEvent, CompetitionPhase, DraftPick, EffectiveTeamQuality, KeyMatch, MatchProbabilitySet, MatchTrace, ModeConfig, RunResult, SimulationDetails, SquadReport, StreakReport, TacticalReason, TeamRatings } from '../types'
+import type { ChaosEvent, CompetitionPhase, DraftPick, EffectiveTeamQuality, KeyMatch, MatchProbabilitySet, MatchTrace, ModeConfig, ReportPlayerDetail, RunResult, SimulationDetails, SquadReport, StreakReport, TacticalReason, TeamRatings, UnitScoreDetail } from '../types'
 
 interface MatchOutcome {
   match: number
@@ -146,9 +148,67 @@ function normalish(rng: ReturnType<typeof createRng>): number {
   return rng.next() + rng.next() + rng.next() - 1.5
 }
 
-function scorelineForOutcome(outcome: 'W' | 'D' | 'L', dominanceDelta: number, rng: ReturnType<typeof createRng>, resolution: NonNullable<MatchTrace['resolution']>) {
-  const expectedGoalsFor = clamp(1.45 + dominanceDelta * 0.024 + normalish(rng) * 0.22, 0.45, 3.8)
-  const expectedGoalsAgainst = clamp(1.2 - dominanceDelta * 0.018 + normalish(rng) * 0.2, 0.35, 3.2)
+function scorelineForOutcome({
+  outcome,
+  dominanceDelta,
+  rng,
+  resolution,
+  ratings,
+  opponentDifficulty,
+  pressure,
+  matchImportance: importance,
+  conversionProbability,
+}: {
+  outcome: 'W' | 'D' | 'L'
+  dominanceDelta: number
+  rng: ReturnType<typeof createRng>
+  resolution: NonNullable<MatchTrace['resolution']>
+  ratings: TeamRatings
+  opponentDifficulty: number
+  pressure: number
+  matchImportance: number
+  conversionProbability: number
+}) {
+  const attackEngine = (
+    ratings.attack * 0.22 +
+    ratings.finishing * 0.2 +
+    ratings.chanceCreation * 0.18 +
+    ratings.midfieldControl * 0.14 +
+    ratings.ballProgression * 0.1 +
+    ratings.pressResistance * 0.08 +
+    ratings.chemistry * 0.08
+  )
+  const defensiveSecurity = (
+    ratings.defense * 0.24 +
+    ratings.defensiveSolidity * 0.22 +
+    ratings.goalkeeping * 0.2 +
+    ratings.defensiveTransitions * 0.14 +
+    ratings.pressResistance * 0.1 +
+    ratings.chemistry * 0.1
+  )
+  const pressureLoad = clamp((pressure * importance) / 18, 0, 1.15)
+  const pressureComposure = clamp((ratings.bigGame * 0.36 + ratings.consistency * 0.34 + ratings.pressResistance * 0.3) / 100, 0.35, 1)
+  const expectedGoalsFor = clamp(
+    1.16 +
+      dominanceDelta * 0.016 +
+      (attackEngine - 78) * 0.025 -
+      Math.max(0, opponentDifficulty - 58) * 0.006 -
+      pressureLoad * (1 - pressureComposure) * 0.74 +
+      conversionProbability * 0.82 +
+      normalish(rng) * 0.18,
+    0.25,
+    4.4,
+  )
+  const expectedGoalsAgainst = clamp(
+    1.08 -
+      dominanceDelta * 0.012 +
+      (opponentDifficulty - 55) * 0.017 -
+      (defensiveSecurity - 78) * 0.022 +
+      pressureLoad * (1 - defensiveSecurity / 105) * 0.68 +
+      normalish(rng) * 0.17,
+    0.2,
+    4,
+  )
   if (outcome === 'D') {
     const drawGoals = rng.next() < 0.34 ? 0 : rng.next() < 0.78 ? 1 : 2
     return {
@@ -159,8 +219,10 @@ function scorelineForOutcome(outcome: 'W' | 'D' | 'L', dominanceDelta: number, r
     }
   }
 
-  const margin = clamp(Math.round(Math.abs(dominanceDelta) * 0.055 + normalish(rng) * 1.35 + 1), 1, 6)
-  const loserGoals = clamp(Math.floor(rng.next() * 3), 0, 3)
+  const expectedMargin = expectedGoalsFor - expectedGoalsAgainst
+  const margin = clamp(Math.round(Math.abs(expectedMargin) * 0.72 + Math.abs(dominanceDelta) * 0.035 + normalish(rng) * 1.25 + 1), 1, 6)
+  const losingXg = outcome === 'W' ? expectedGoalsAgainst : expectedGoalsFor
+  const loserGoals = clamp(Math.floor(Math.max(0, losingXg + normalish(rng) * 0.9)), 0, 3)
   const winnerGoals = clamp(loserGoals + margin + (resolution === 'extra_time_win' || resolution === 'extra_time_loss' ? 1 : 0), 1, 8)
   return outcome === 'W'
     ? { gf: winnerGoals, ga: loserGoals, xgf: round(expectedGoalsFor, 1), xga: round(expectedGoalsAgainst, 1) }
@@ -251,7 +313,17 @@ function simulateMatch({
     }
   }
 
-  const { gf, ga, xgf: roundedXgf, xga: roundedXga } = scorelineForOutcome(outcome, dominanceDelta, rng, resolution)
+  const { gf, ga, xgf: roundedXgf, xga: roundedXga } = scorelineForOutcome({
+    outcome,
+    dominanceDelta,
+    rng,
+    resolution,
+    ratings,
+    opponentDifficulty: fixture.difficulty,
+    pressure,
+    matchImportance: importance,
+    conversionProbability,
+  })
 
   return {
     match,
@@ -311,30 +383,85 @@ function getDomesticStage(mode: ModeConfig, wins: number, draws: number, losses:
   return 'Top-four fight'
 }
 
-function bestPlayer(picks: DraftPick[]): string {
-  return [...picks].sort((left, right) => {
-    const leftScore = scorePickForSlot(left) + left.player.ratings.bigGame * 0.08
-    const rightScore = scorePickForSlot(right) + right.player.ratings.bigGame * 0.08
-    return rightScore - leftScore
-  })[0]?.player.displayName ?? 'No standout'
+function pickUnit(pick: DraftPick): 'goalkeeper' | 'defense' | 'midfield' | 'attack' {
+  if (pick.slot.accepts.includes('GK')) return 'goalkeeper'
+  if (pick.slot.accepts.some((position) => ['CB', 'LB', 'RB', 'LWB', 'RWB'].includes(position))) return 'defense'
+  if (pick.slot.accepts.some((position) => ['DM', 'CM', 'AM', 'LM', 'RM'].includes(position))) return 'midfield'
+  return 'attack'
 }
 
-function weakLink(picks: DraftPick[]): string {
-  const sorted = [...picks].sort((left, right) => {
-    const slotScore = (pick: DraftPick) => {
-      if (pick.slot.accepts.includes('GK')) return pick.player.ratings.goalkeeping
-      if (pick.slot.accepts.some((position) => ['CB', 'LB', 'RB', 'DM'].includes(position))) return pick.player.ratings.defense
-      if (pick.slot.accepts.some((position) => ['CM', 'AM'].includes(position))) return pick.player.ratings.control
-      return pick.player.ratings.attack
-    }
-    return slotScore(left) - slotScore(right)
+function chemistryContributionForPick(pick: DraftPick, picks: DraftPick[]): number {
+  return picks.reduce((score, teammate) => {
+    if (teammate.player.contextId === pick.player.contextId) return score
+    let nextScore = score
+    if (teammate.player.teamName === pick.player.teamName) nextScore += 2
+    if (teammate.player.country === pick.player.country) nextScore += 1.5
+    if (teammate.player.eraLabel === pick.player.eraLabel) nextScore += 1
+    return nextScore
+  }, 0)
+}
+
+function playerContributionDetail(picks: DraftPick[], type: 'best' | 'weak', excludePlayerName?: string): ReportPlayerDetail {
+  if (picks.length === 0) {
+    return { playerName: 'No standout', slotLabel: 'XI', score: 0, reason: 'No completed XI was available to evaluate.' }
+  }
+
+  const teamAverage = average(picks.map(scorePickForSlot))
+  const details = picks.map((pick) => {
+    const fit = positionFitScore(pick.slot, pick.player)
+    const roleScore = scorePickForSlot(pick)
+    const chemistryBoost = chemistryContributionForPick(pick, picks)
+    const clutch = pick.player.ratings.bigGame * 0.42 + pick.player.ratings.press * 0.34 + pick.player.ratings.physical * 0.24
+    const unit = pickUnit(pick)
+    const spineWeight = unit === 'goalkeeper' ? 1.18 : pick.slot.accepts.some((position) => ['CB', 'DM', 'CM', 'ST'].includes(position)) ? 1.08 : 1
+    const contribution = round((roleScore * 0.5 + fit * 0.18 + clutch * 0.14 + Math.min(chemistryBoost, 18) * 0.7 + teamAverage * 0.08) * spineWeight, 1)
+    const weakCost = round(
+      Math.max(0, 100 - fit) * 0.38 +
+        Math.max(0, teamAverage - roleScore) * 0.5 +
+        Math.max(0, 78 - clutch) * 0.15 +
+        (unit === 'goalkeeper' ? Math.max(0, 86 - pick.player.ratings.goalkeeping) * 0.28 : 0) -
+        Math.min(chemistryBoost, 14) * 0.25,
+      1,
+    )
+    return { pick, fit, roleScore, chemistryBoost, clutch, contribution, weakCost, unit }
   })
 
-  const weakest = sorted[0]
-  if (!weakest) return 'No weak link found'
-  if (weakest.player.ratings.defense < 76 && weakest.slot.accepts.some((position) => ['CB', 'LB', 'RB', 'DM'].includes(position))) return `${weakest.slot.label}: exposed defensively`
-  if (weakest.player.ratings.goalkeeping < 86 && weakest.slot.accepts.includes('GK')) return 'Keeper did not steal enough points'
-  return `${weakest.slot.label}: ${weakest.player.displayName}`
+  if (type === 'best') {
+    const best = [...details].sort((left, right) => (
+      right.contribution - left.contribution ||
+      right.chemistryBoost - left.chemistryBoost ||
+      right.pick.player.ratings.bigGame - left.pick.player.ratings.bigGame ||
+      right.roleScore - left.roleScore
+    ))[0]
+    const fitLine = positionFitLabel(best.fit).toLowerCase()
+    const chemistryLine = best.chemistryBoost >= 8 ? ` and ${round(best.chemistryBoost, 1)} chemistry-link points` : ''
+    return {
+      playerName: best.pick.player.displayName,
+      slotLabel: best.pick.slot.label,
+      score: best.contribution,
+      reason: `${best.pick.slot.label} was a ${fitLine}; role score ${round(best.roleScore, 1)}, clutch profile ${round(best.clutch, 1)}${chemistryLine}.`,
+    }
+  }
+
+  const weakPool = excludePlayerName && details.length > 1 ? details.filter((detail) => detail.pick.player.displayName !== excludePlayerName) : details
+  const weak = [...weakPool].sort((left, right) => (
+    right.weakCost - left.weakCost ||
+    left.fit - right.fit ||
+    left.roleScore - right.roleScore
+  ))[0]
+  const fitPenalty = 100 - weak.fit
+  let reason = `${weak.pick.slot.label} carried the lowest support cost: role score ${round(weak.roleScore, 1)} vs XI average ${round(teamAverage, 1)}.`
+  if (weak.weakCost < 6) reason = `No major single weak link; ${weak.pick.slot.label} was just the smallest edge in a balanced XI.`
+  else if (fitPenalty >= 14) reason = `${weak.pick.slot.label} was a ${positionFitLabel(weak.fit).toLowerCase()} with a ${round(fitPenalty, 1)}-point position-fit drag.`
+  else if (weak.unit === 'goalkeeper' && weak.pick.player.ratings.goalkeeping < 82) reason = `Goalkeeper security was light at ${weak.pick.player.ratings.goalkeeping}, so high-difficulty fixtures had less safety net.`
+  else if (weak.chemistryBoost < 2) reason = `${weak.pick.slot.label} was isolated chemically and did not add enough links to the XI.`
+
+  return {
+    playerName: weak.pick.player.displayName,
+    slotLabel: weak.pick.slot.label,
+    score: weak.weakCost,
+    reason,
+  }
 }
 
 function unitScores(ratings: TeamRatings): Array<{ label: string; score: number }> {
@@ -345,6 +472,50 @@ function unitScores(ratings: TeamRatings): Array<{ label: string; score: number 
     { label: 'Goalkeeping', score: ratings.goalkeeping },
     { label: 'Chemistry', score: ratings.chemistry },
     { label: 'Big-game mentality', score: ratings.bigGame },
+  ]
+}
+
+function unitScoreDetails(ratings: TeamRatings, matches: MatchTrace[]): UnitScoreDetail[] {
+  const xgFor = round(average(matches.map((match) => match.xgFor)), 2)
+  const xgAgainst = round(average(matches.map((match) => match.xgAgainst)), 2)
+  const drawShare = matches.length ? matches.filter((match) => match.outcome === 'D').length / matches.length : 0
+  const lossShare = matches.length ? matches.filter((match) => match.outcome === 'L').length / matches.length : 0
+  return [
+    {
+      label: 'Attack',
+      score: ratings.attack,
+      reason: `Finishing ${ratings.finishing} and chance creation ${ratings.chanceCreation} produced ${xgFor} xG per match.`,
+    },
+    {
+      label: 'Midfield',
+      score: ratings.midfield,
+      reason: `Control ${ratings.midfieldControl}, progression ${ratings.ballProgression}, and press resistance ${ratings.pressResistance} shaped the dominance delta.`,
+    },
+    {
+      label: 'Defense',
+      score: ratings.defense,
+      reason: `Solidity ${ratings.defensiveSolidity} and transition defense ${ratings.defensiveTransitions} held xGA to ${xgAgainst} per match.`,
+    },
+    {
+      label: 'Goalkeeping',
+      score: ratings.goalkeeping,
+      reason: `Keeper quality ${ratings.goalkeeping} influenced loss risk and knockout tie-break edges.`,
+    },
+    {
+      label: 'Chemistry',
+      score: ratings.chemistry,
+      reason: `Chemistry ${ratings.chemistry} fed team quality and draw-to-win conversion gates.`,
+    },
+    {
+      label: 'Big-game mentality',
+      score: ratings.bigGame,
+      reason: `Big-game rating ${ratings.bigGame} and consistency ${ratings.consistency} mattered most in high-pressure matches.`,
+    },
+    {
+      label: 'Balance',
+      score: ratings.balance,
+      reason: `Balance ${ratings.balance} kept role overloads in check; draws ${Math.round(drawShare * 100)}%, losses ${Math.round(lossShare * 100)}%.`,
+    },
   ]
 }
 
@@ -362,6 +533,7 @@ function dominanceReason(unit: string, ratings: TeamRatings): string {
   if (unit === 'Defense') return `The defensive base traveled well: solidity ${ratings.defensiveSolidity}, transitions ${ratings.defensiveTransitions}.`
   if (unit === 'Goalkeeping') return `The keeper profile gave the run a safety net at ${ratings.goalkeeping}.`
   if (unit === 'Chemistry') return `The XI made football sense, with chemistry at ${ratings.chemistry}.`
+  if (unit === 'Balance') return `The role balance kept every unit connected at ${ratings.balance}.`
   return `The big-game profile gave the run nerve at ${ratings.bigGame}.`
 }
 
@@ -372,6 +544,7 @@ function failureReason(unit: string, chemistryWarnings: string[], tacticWeakness
   if (unit === 'Defense') return `Defensive pressure built up: xGA sat near ${details.expectedGoalsAgainstPerMatch} per match.`
   if (unit === 'Midfield') return 'The midfield could not always turn territory into control.'
   if (unit === 'Attack') return `The attack left too many matches alive: xG settled near ${details.expectedGoalsForPerMatch} per match.`
+  if (unit === 'Balance') return 'The XI had talent, but the unit balance did not keep every phase connected.'
   return 'The run lacked one dominant phase when the schedule got mean.'
 }
 
@@ -472,35 +645,48 @@ function matchTraceFromPhases(phases: CompetitionPhase[]): MatchTrace[] {
 
 function keyMatches(mode: ModeConfig, matches: MatchTrace[]): KeyMatch[] {
   if (matches.length === 0) return []
+  const keyMatches: KeyMatch[] = []
+  const seen = new Set<string>()
   const wins = matches.filter((match) => match.outcome === 'W')
-  const damage = matches.filter((match) => match.outcome !== 'W')
+  const nonWins = matches.filter((match) => match.outcome !== 'W')
+  const losses = matches.filter((match) => match.outcome === 'L')
+  const addMatch = (label: string, match?: MatchTrace, extra = '') => {
+    if (!match || seen.has(label)) return
+    seen.add(label)
+    keyMatches.push({
+      label,
+      result: match.result,
+      note: `${match.phase} match ${match.match}. ${extra}${match.note}`,
+    })
+  }
   const statement = [...wins].sort((left, right) => (
     (right.goalsFor - right.goalsAgainst) - (left.goalsFor - left.goalsAgainst)
     || right.xgFor - left.xgFor
   ))[0]
-  const trap = damage[0] ?? [...wins].sort((left, right) => (
+  const closestEscape = [...wins].sort((left, right) => (
     (left.goalsFor - left.goalsAgainst) - (right.goalsFor - right.goalsAgainst)
-    || right.pressure - left.pressure
+    || (right.xgAgainst - right.xgFor) - (left.xgAgainst - left.xgFor)
+    || (right.pressure * (right.matchImportance ?? 1)) - (left.pressure * (left.matchImportance ?? 1))
+  ))[0]
+  const worstResult = [...matches].sort((left, right) => (
+    (left.outcome === 'L' ? -20 : left.outcome === 'D' ? -8 : 0) - (right.outcome === 'L' ? -20 : right.outcome === 'D' ? -8 : 0)
+    || (left.goalsFor - left.goalsAgainst) - (right.goalsFor - right.goalsAgainst)
+    || (right.opponentDifficulty ?? 0) - (left.opponentDifficulty ?? 0)
+  ))[0]
+  const highestPressure = [...matches].sort((left, right) => (
+    (right.pressure * (right.matchImportance ?? 1)) - (left.pressure * (left.matchImportance ?? 1))
+    || (right.opponentDifficulty ?? 0) - (left.opponentDifficulty ?? 0)
   ))[0]
   const finalMatch = matches.at(-1)
 
-  return [
-    statement && {
-      label: 'Statement win',
-      result: statement.result,
-      note: `${statement.phase} match ${statement.match}. ${statement.note}`,
-    },
-    trap && {
-      label: damage.length ? 'Record damage' : 'Trap game survived',
-      result: trap.result,
-      note: `${trap.phase} match ${trap.match}. ${trap.note}`,
-    },
-    finalMatch && {
-      label: mode.usesKnockouts ? finalMatch.phase : 'Run-in',
-      result: finalMatch.result,
-      note: `Match ${finalMatch.match}. ${finalMatch.note}`,
-    },
-  ].filter((match): match is KeyMatch => Boolean(match))
+  addMatch('Perfect run ended', nonWins[0])
+  addMatch('Undefeated run ended', losses[0])
+  addMatch('Biggest win', statement)
+  addMatch(losses.length || nonWins.length ? 'Worst result' : 'Closest escape', losses.length || nonWins.length ? worstResult : closestEscape)
+  addMatch('Highest pressure', highestPressure, `Pressure ${round(highestPressure?.pressure ?? 0, 1)}, opponent ${round(highestPressure?.opponentDifficulty ?? 0, 1)}. `)
+  addMatch(mode.usesKnockouts ? finalMatch?.phase ?? 'Final match' : 'Run-in', finalMatch)
+
+  return keyMatches.slice(0, 6)
 }
 
 function summarizePhase(phase: string, outcomes: MatchOutcome[], outcome: string): CompetitionPhase {
@@ -929,21 +1115,47 @@ function createSimulationDetails(matches: MatchTrace[], ratings: TeamRatings, ef
   const drawProbability = averageProbability('draw')
   const lossProbability = Math.max(0, 100 - winProbability - drawProbability)
   const averageWin = average(matches.map((match) => match.finalProbabilities?.win ?? 0.45))
-  const trophyProbability = mode.simulationFormat === 'domestic'
-    ? Math.round(clamp(logistic(((averageWin * 3 + average(matches.map((match) => match.finalProbabilities?.draw ?? 0.18))) - 2.35) * 7) * 100, 1, 98))
-    : Math.round(clamp(averageWin ** Math.max(3, Math.min(7, mode.matchCount)) * 100, 1, 96))
+  const averageDraw = average(matches.map((match) => match.finalProbabilities?.draw ?? 0.18))
+  const averageOpponent = average(matches.map((match) => match.opponentDifficulty ?? 55))
+  const perfectRunProbability = round(clamp(matches.reduce((product, match) => product * (match.finalProbabilities?.win ?? averageWin), 1) * 100, 0, 99.99), 2)
+  const tieBreakEstimate = clamp(
+    0.42 +
+      (ratings.goalkeeping - 82) * 0.004 +
+      (ratings.bigGame - 82) * 0.003 +
+      (ratings.consistency - 82) * 0.003 +
+      (effectiveTeamQuality.score - averageOpponent) * 0.004,
+    0.3,
+    0.78,
+  )
+  const trophyRaw = mode.simulationFormat === 'domestic' || mode.simulationFormat === 'mls'
+    ? logistic(((averageWin * 3 + averageDraw) - 2.35) * 7)
+    : matches.reduce((product, match) => {
+      const win = match.finalProbabilities?.win ?? averageWin
+      const draw = match.finalProbabilities?.draw ?? averageDraw
+      const isKnockout = mode.usesKnockouts && !/group|league phase|regular/i.test(match.phase)
+      const survival = isKnockout ? win + draw * tieBreakEstimate : win + draw * 0.42
+      return product * clamp(survival, 0.08, 0.96)
+    }, 1)
+  const trophyProbability = Math.round(clamp(trophyRaw * 100, 1, 98))
+  const trophyEstimateLabel = mode.simulationFormat === 'domestic' ? 'Title %' : mode.simulationFormat === 'mls' ? 'Playoff %' : 'Trophy %'
+  const trophyEstimateMethod = mode.simulationFormat === 'domestic' || mode.simulationFormat === 'mls'
+    ? 'Logistic estimate from stored fixture win/draw probabilities and the mode title pace; perfect chance is the product of stored win probabilities.'
+    : 'Path estimate from stored fixture win/draw probabilities, with knockout draws weighted by the XI tie-break profile.'
 
   return {
     averageWinProbability: winProbability,
     averageDrawProbability: drawProbability,
     averageLossProbability: lossProbability,
     trophyProbability,
+    trophyEstimateLabel,
+    trophyEstimateMethod,
+    perfectRunProbability,
     teamStrength: effectiveTeamQuality.score,
     defensiveBase: round(ratings.defense * 0.46 + ratings.goalkeeping * 0.32 + ratings.chemistry * 0.22, 1),
     matchPressure: round(pressure, 1),
     expectedGoalsForPerMatch: round(average(matches.map((match) => match.xgFor)), 2),
     expectedGoalsAgainstPerMatch: round(average(matches.map((match) => match.xgAgainst)), 2),
-    averageOpponentDifficulty: round(average(matches.map((match) => match.opponentDifficulty ?? 0)), 1),
+    averageOpponentDifficulty: round(averageOpponent, 1),
     averageDominanceDelta: round(average(matches.map((match) => match.dominanceDelta ?? 0)), 1),
     averageConversionProbability: round(average(matches.map((match) => match.conversionProbability ?? 0)) * 100, 1),
     probabilityExamples: probabilityExamples(ratings, effectiveTeamQuality),
@@ -1047,8 +1259,11 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
   const simulationDetails = createSimulationDetails(matchTrace, ratings, effectiveTeamQuality, pressure, mode)
   const streaks = progressToStreaks(progress)
   const turningPoint = matchThatChangedSeason(matchTrace)
-  const strongest = strongestUnit(ratings)
-  const weakest = weakestUnit(ratings)
+  const bestPlayerDetail = playerContributionDetail(tacticalPicks, 'best')
+  const weakLinkDetail = playerContributionDetail(tacticalPicks, 'weak', bestPlayerDetail.playerName)
+  const reportUnitScores = unitScoreDetails(ratings, matchTrace)
+  const strongest = [...reportUnitScores].sort((left, right) => right.score - left.score)[0]?.label ?? strongestUnit(ratings)
+  const weakest = [...reportUnitScores].sort((left, right) => left.score - right.score)[0]?.label ?? weakestUnit(ratings)
   const tacticalReason = tacticalReasonForRun({
     ratings,
     effectiveTeamQuality,
@@ -1078,10 +1293,13 @@ export function simulateRun(picks: DraftPick[], modeId: string, seed: string): R
     resultTier,
     scoringVersion,
     stage,
-    bestPlayer: bestPlayer(tacticalPicks),
-    weakLink: weakLink(tacticalPicks),
+    bestPlayer: bestPlayerDetail.playerName,
+    bestPlayerDetail,
+    weakLink: `${weakLinkDetail.slotLabel}: ${weakLinkDetail.playerName}`,
+    weakLinkDetail,
     strongestUnit: strongest,
     weakestUnit: weakest,
+    unitScores: reportUnitScores,
     dominanceReason: dominanceReason(strongest, ratings),
     failureReason: failure,
     tacticalReason,
