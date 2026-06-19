@@ -78,7 +78,7 @@ type CompactPick = [
 ]
 
 interface CompactSharedRunSnapshot {
-  v: 1 | 2
+  v: 1 | 2 | 3
   b: string
   c: string
   id: string
@@ -102,6 +102,9 @@ interface CompactSharedRunSnapshot {
   st?: SharedRunSnapshot['streaks']
   ms?: SharedRunSnapshot['matchThatChangedSeason']
   tc?: SharedRunSnapshot['tacticalReason']
+  bd?: SharedRunSnapshot['bestPlayerDetail']
+  wd?: SharedRunSnapshot['weakLinkDetail']
+  us?: SharedRunSnapshot['unitScores']
 }
 
 function ratingsToArray(ratings: Ratings): number[] {
@@ -122,7 +125,7 @@ function teamRatingsFromArray(values: number[]): TeamRatings {
 
 function compactSharedRunSnapshot(snapshot: SharedRunSnapshot): CompactSharedRunSnapshot {
   return {
-    v: 2,
+    v: 3,
     b: snapshot.brandVersion,
     c: snapshot.createdAt,
     id: snapshot.runId,
@@ -175,6 +178,9 @@ function compactSharedRunSnapshot(snapshot: SharedRunSnapshot): CompactSharedRun
     st: snapshot.streaks,
     ms: snapshot.matchThatChangedSeason,
     tc: snapshot.tacticalReason,
+    bd: snapshot.bestPlayerDetail,
+    wd: snapshot.weakLinkDetail,
+    us: snapshot.unitScores,
   }
 }
 
@@ -205,9 +211,12 @@ function expandCompactSharedRunSnapshot(compact: CompactSharedRunSnapshot): Shar
     scoringVersion: compact.sv,
     stage: compact.res[2],
     bestPlayer: compact.res[3],
+    bestPlayerDetail: compact.bd,
     weakLink: compact.res[4],
+    weakLinkDetail: compact.wd,
     strongestUnit: compact.res[5],
     weakestUnit: compact.res[6],
+    unitScores: compact.us,
     why: compact.res[7],
     effectiveTeamQuality: compact.eq,
     streaks: compact.st,
@@ -243,7 +252,7 @@ function expandCompactSharedRunSnapshot(compact: CompactSharedRunSnapshot): Shar
 }
 
 function isCompactSharedRunSnapshot(value: unknown): value is CompactSharedRunSnapshot {
-  return Boolean(value && typeof value === 'object' && ((value as CompactSharedRunSnapshot).v === 1 || (value as CompactSharedRunSnapshot).v === 2) && Array.isArray((value as CompactSharedRunSnapshot).m))
+  return Boolean(value && typeof value === 'object' && ([1, 2, 3] as number[]).includes((value as CompactSharedRunSnapshot).v) && Array.isArray((value as CompactSharedRunSnapshot).m))
 }
 
 function pickSnapshot(pick: DraftPick): SharedPickSnapshot {
@@ -283,9 +292,12 @@ export function createSharedRunSnapshot(result: RunResult, formationId: string, 
     scoringVersion: result.scoringVersion,
     stage: result.stage,
     bestPlayer: result.bestPlayer,
+    bestPlayerDetail: result.bestPlayerDetail,
     weakLink: result.weakLink,
+    weakLinkDetail: result.weakLinkDetail,
     strongestUnit: result.strongestUnit,
     weakestUnit: result.weakestUnit,
+    unitScores: result.unitScores,
     why: result.why,
     effectiveTeamQuality: result.effectiveTeamQuality,
     streaks: result.streaks,

@@ -27,6 +27,7 @@ import { createShareText } from '../engine/share'
 import { formatStoredRecord, recordRun, scoreRun } from '../engine/storage'
 import { calculateTeamRatings, inferTactic } from '../engine/tactics'
 import { modeValidations, validateDataSet } from '../engine/validation'
+import { createSharedRunSnapshot } from '../services/shareLinks'
 
 configureDraftPlayerContexts(playerContexts)
 
@@ -888,6 +889,56 @@ describe('simulation and sharing', () => {
       expect(phase.goalsFor).toBe(phase.matches.reduce((sum, match) => sum + match.goalsFor, 0))
       expect(phase.goalsAgainst).toBe(phase.matches.reduce((sum, match) => sum + match.goalsAgainst, 0))
     }
+  })
+
+  it('adds traceable report details for players, units, estimates, and sharing', () => {
+    const state = completeDraft('world_xi')
+    const picks = state.picks
+    const result = simulateRun(picks, 'world_xi', 'IXI-REPORT-DETAILS')
+    const snapshot = createSharedRunSnapshot(result, '4-3-3', picks, '2026-06-18T00:00:00.000Z')
+
+    expect(result.bestPlayerDetail?.playerName).toBe(result.bestPlayer)
+    expect(result.bestPlayerDetail?.reason).toContain(result.bestPlayerDetail?.slotLabel)
+    expect(result.weakLinkDetail?.playerName.length).toBeGreaterThan(0)
+    expect(result.weakLink).toContain(result.weakLinkDetail?.playerName ?? '')
+    expect(result.unitScores?.some((unit) => unit.label === result.strongestUnit)).toBe(true)
+    expect(result.unitScores?.some((unit) => unit.label === result.weakestUnit)).toBe(true)
+    expect(result.unitScores?.every((unit) => unit.reason.length > 20)).toBe(true)
+    expect(result.simulationDetails.trophyEstimateLabel).toMatch(/Title|Trophy|Playoff/)
+    expect(result.simulationDetails.trophyEstimateMethod?.length).toBeGreaterThan(40)
+    expect(result.simulationDetails.perfectRunProbability).toBeGreaterThanOrEqual(0)
+    expect(snapshot.bestPlayerDetail).toEqual(result.bestPlayerDetail)
+    expect(snapshot.weakLinkDetail).toEqual(result.weakLinkDetail)
+    expect(snapshot.unitScores).toEqual(result.unitScores)
+    expect(scoreRun(snapshot)).toBe(scoreRun(result))
+  })
+
+  it('keeps xG and trophy estimates connected to team strength and mode shape', () => {
+    const eliteLeague = simulateRun(controlledXI(94), 'world_xi', 'IXI-XG-STRENGTH')
+    const weakLeague = simulateRun(controlledXI(62), 'world_xi', 'IXI-XG-STRENGTH')
+    const eliteWorldCup = simulateRun(controlledXI(94), 'world_cup', 'IXI-XG-STRENGTH')
+
+    const eliteMatches = eliteLeague.record.wins + eliteLeague.record.draws + eliteLeague.record.losses
+    const weakMatches = weakLeague.record.wins + weakLeague.record.draws + weakLeague.record.losses
+    expect(eliteLeague.xgFor / eliteMatches).toBeGreaterThan(weakLeague.xgFor / weakMatches + 0.35)
+    expect(eliteLeague.xgAgainst / eliteMatches).toBeLessThan(weakLeague.xgAgainst / weakMatches - 0.3)
+    expect(eliteLeague.simulationDetails.trophyProbability).toBeGreaterThan(weakLeague.simulationDetails.trophyProbability)
+    expect(eliteLeague.simulationDetails.trophyEstimateLabel).toBe('Title %')
+    expect(eliteWorldCup.simulationDetails.trophyEstimateLabel).toBe('Trophy %')
+    expect(eliteLeague.simulationDetails.perfectRunProbability).toBeLessThan(eliteLeague.simulationDetails.trophyProbability)
+  })
+
+  it('does not pick a wrong-position high-OVR player as best when role cost is real', () => {
+    const emergencyKeeperXI = [
+      testPick('gk', 'messi_barcelona_2010s', { positions: ['RW'], ratings: { goalkeeping: 4, attack: 99, creation: 99, control: 99 } }),
+      ...possessionTestXI().filter((pick) => pick.slot.slotId !== 'gk'),
+    ]
+    const result = simulateRun(emergencyKeeperXI, 'world_xi', 'IXI-WRONG-POSITION-REPORT')
+
+    expect(result.bestPlayer).not.toBe('Lionel Messi')
+    expect(result.weakLinkDetail?.playerName).toBe('Lionel Messi')
+    expect(result.weakLinkDetail?.reason).toMatch(/fit|Goalkeeper|goalkeeper/)
+    expect(result.tacticalReason?.category).toBe('position_fit')
   })
 
   it('separates elite, average, and weak XIs in long-run domestic calibration', () => {

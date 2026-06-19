@@ -2509,6 +2509,11 @@ main {
   font-size: 12px;
 }
 
+.story-grid small {
+  color: var(--ui-muted);
+  line-height: 1.35;
+}
+
 .advanced {
   display: grid;
   gap: 10px;
