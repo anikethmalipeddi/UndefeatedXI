@@ -19,6 +19,13 @@ max_frequency = "1m0s"
 otp_length = 8
 otp_expiry = 3600
 
+# Uncomment and fill these when running local Supabase with Google OAuth.
+# [auth.external.google]
+# enabled = true
+# client_id = "YOUR_GOOGLE_WEB_CLIENT_ID"
+# secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_SECRET)"
+# skip_nonce_check = false
+
 [functions.submit-run]
 verify_jwt = true
 

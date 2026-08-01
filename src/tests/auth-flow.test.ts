@@ -1,6 +1,6 @@
 import type { Session } from '@supabase/supabase-js'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { loadAuthProfile, signIn, submitLeaderboardRun, type LeaderboardSubmission } from '../services/supabase'
+import { loadAuthProfile, signIn, signInWithGoogle, submitLeaderboardRun, type LeaderboardSubmission } from '../services/supabase'
 
 const mocks = vi.hoisted(() => {
   const profileBuilder = {
@@ -18,6 +18,7 @@ const mocks = vi.hoisted(() => {
     auth: {
       getSession: vi.fn(),
       signInWithPassword: vi.fn(),
+      signInWithOAuth: vi.fn(),
       updateUser: vi.fn(),
       onAuthStateChange: vi.fn(),
     },
@@ -92,6 +93,7 @@ describe('Supabase auth profile flow', () => {
     mocks.profileBuilder.single.mockResolvedValue({ data: { display_name: 'Captain' }, error: null })
     mocks.supabase.auth.getSession.mockResolvedValue({ data: { session: null }, error: null })
     mocks.supabase.auth.signInWithPassword.mockResolvedValue({ data: { session: null }, error: null })
+    mocks.supabase.auth.signInWithOAuth.mockResolvedValue({ data: {}, error: null })
     mocks.supabase.auth.updateUser.mockResolvedValue({ data: { user: makeSession('Captain').user }, error: null })
     mocks.supabase.auth.onAuthStateChange.mockReturnValue({ data: { subscription: { unsubscribe: vi.fn() } } })
     mocks.supabase.functions.invoke.mockResolvedValue({ error: null })
@@ -130,5 +132,18 @@ describe('Supabase auth profile flow', () => {
 
     await expect(submitLeaderboardRun(leaderboardPayload())).rejects.toThrow('Choose a display name')
     expect(mocks.supabase.functions.invoke).not.toHaveBeenCalled()
+  })
+
+  it('starts Google OAuth with a clean redirect URL', async () => {
+    window.history.replaceState(null, '', '/leaderboard?mode=world-xi#/draft')
+
+    await signInWithGoogle()
+
+    expect(mocks.supabase.auth.signInWithOAuth).toHaveBeenCalledWith({
+      provider: 'google',
+      options: {
+        redirectTo: 'http://localhost:3000/leaderboard?mode=world-xi',
+      },
+    })
   })
 })

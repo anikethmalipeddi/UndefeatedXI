@@ -280,6 +280,24 @@ export async function signIn(email: string, password: string): Promise<AuthProfi
   return data.session ? loadAuthProfile(data.session) : null
 }
 
+function oauthRedirectUrl(): string {
+  if (typeof window === 'undefined') return canonicalSiteUrl
+  const url = new URL(window.location.href)
+  url.hash = ''
+  return url.toString()
+}
+
+export async function signInWithGoogle(): Promise<void> {
+  if (!supabase) throw new Error('Supabase is not configured.')
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: oauthRedirectUrl(),
+    },
+  })
+  if (error) throw error
+}
+
 export async function signOut(): Promise<void> {
   if (!supabase) return
   const { error } = await supabase.auth.signOut()

@@ -38,7 +38,7 @@ import {
 } from './services/shareLinks'
 import { sanitizeDisplayName } from './services/sanitize'
 import { hasSupabaseConfig } from './services/supabaseConfig'
-import type { AuthProfile, FeedbackCategory, LeaderboardRun } from './services/supabase'
+import type { AuthProfile, FeedbackCategory, LeaderboardRun, LeaderboardSubmission } from './services/supabase'
 import type { DraftPick, DraftState, FormationSlot, ModeConfig, ModeValidation, PlayerContext, Position, RunResult, SharedRunSnapshot, SpecialSelection, TeamRatings, TeamRollOption } from './types'
 import type { StoredRunSummary } from './engine/storage'
 
@@ -56,6 +56,7 @@ const rulesDismissedKey = 'undefeatedxi.rules.dismissed'
 const legacyThemeKey = 'invinciblexi.theme'
 const legacyRecordThemeKey = '38-0-0.theme'
 const themeKey = 'undefeatedxi.theme'
+const pendingLeaderboardSubmissionKey = 'undefeatedxi.pendingLeaderboardSubmission'
 const appName = brandName
 const logoImageSizes = '(min-width: 900px) 184px, 172px'
 const logoImageSrcSet = '/logo-160.avif 160w, /logo-320.avif 320w, /logo-640.avif 640w'
@@ -799,6 +800,7 @@ function App() {
     try {
       const { createLeaderboardSubmission, submitLeaderboardRun } = await loadSupabaseService()
       await submitLeaderboardRun(createLeaderboardSubmission(result, selectedFormation.formationId, draftState.picks))
+      localStorage.removeItem(pendingLeaderboardSubmissionKey)
       setLeaderboardStatus('submitted')
       setLeaderboardMessage('Run submitted to the leaderboard.')
     } catch (error) {
@@ -806,6 +808,13 @@ function App() {
       setLeaderboardMessage(error instanceof Error ? error.message : 'Could not submit this run.')
     }
   }, [draftState, result, selectedFormation.formationId])
+
+  const savePendingLeaderboardSubmission = async () => {
+    if (!result || !draftState || !hasSupabaseConfig) return
+    const { createLeaderboardSubmission } = await loadSupabaseService()
+    const payload = createLeaderboardSubmission(result, selectedFormation.formationId, draftState.picks)
+    localStorage.setItem(pendingLeaderboardSubmissionKey, JSON.stringify(payload))
+  }
 
   const submitCurrentRun = async () => {
     if (!result || !draftState) return
@@ -815,12 +824,14 @@ function App() {
       return
     }
     if (!authReady) {
+      await savePendingLeaderboardSubmission()
       setPendingLeaderboardSubmit(true)
       setLeaderboardStatus('submitting')
       setLeaderboardMessage('Checking your saved sign-in.')
       return
     }
     if (!authProfile) {
+      await savePendingLeaderboardSubmission()
       setPendingLeaderboardSubmit(true)
       setLeaderboardStatus('idle')
       setLeaderboardMessage('Sign in once and this run will submit automatically.')
@@ -828,6 +839,7 @@ function App() {
       return
     }
     if (authProfile.needsDisplayName) {
+      await savePendingLeaderboardSubmission()
       setPendingLeaderboardSubmit(true)
       setLeaderboardStatus('idle')
       setLeaderboardMessage('Choose a display name once to submit this run.')
@@ -850,6 +862,37 @@ function App() {
       cancelled = true
     }
   }, [authProfile, authReady, pendingLeaderboardSubmit, submitRunToLeaderboard])
+
+  useEffect(() => {
+    if (!hasSupabaseConfig || !authReady || !authProfile || authProfile.needsDisplayName) return
+    const raw = localStorage.getItem(pendingLeaderboardSubmissionKey)
+    if (!raw) return
+    const storedSubmission = raw
+
+    let cancelled = false
+    async function submitStoredLeaderboardRun() {
+      try {
+        const payload = JSON.parse(storedSubmission) as LeaderboardSubmission
+        const { submitLeaderboardRun } = await loadSupabaseService()
+        setLeaderboardStatus('submitting')
+        setLeaderboardMessage('Submitting your saved run.')
+        await submitLeaderboardRun(payload)
+        if (cancelled) return
+        localStorage.removeItem(pendingLeaderboardSubmissionKey)
+        setLeaderboardStatus('submitted')
+        setLeaderboardMessage('Run submitted to the leaderboard.')
+      } catch (error) {
+        if (cancelled) return
+        setLeaderboardStatus('error')
+        setLeaderboardMessage(error instanceof Error ? error.message : 'Could not submit your saved run.')
+      }
+    }
+
+    void submitStoredLeaderboardRun()
+    return () => {
+      cancelled = true
+    }
+  }, [authProfile, authReady])
 
   const activeScreen =
     screen === 'draft' && !draftState
@@ -3100,6 +3143,24 @@ function AuthModal({
     }
   }
 
+  const handleGoogleSignIn = async () => {
+    if (!hasSupabaseConfig) {
+      setStatus('Accounts are not configured on this local build.')
+      return
+    }
+
+    setBusy(true)
+    setStatus('')
+    try {
+      const { signInWithGoogle } = await loadSupabaseService()
+      await signInWithGoogle()
+      setStatus('Redirecting to Google.')
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : 'Could not start Google sign-in.')
+      setBusy(false)
+    }
+  }
+
   const handleSignOut = async () => {
     setBusy(true)
     try {
@@ -3162,9 +3223,15 @@ function AuthModal({
           {!hasSupabaseConfig && <p className="notice">Supabase env vars are missing. Local play still works.</p>}
           {status && <p className="auth-status" role="status">{status}</p>}
           {!authProfile && (
-            <button className="button primary full" type="button" onClick={handleGuestSignIn} disabled={formBusy}>
-              {busy ? 'Working' : 'Continue as Guest'}
-            </button>
+            <>
+              <button className="button google full" type="button" onClick={handleGoogleSignIn} disabled={formBusy}>
+                <span className="google-mark" aria-hidden="true">G</span>
+                {busy ? 'Working' : 'Continue with Google'}
+              </button>
+              <button className="button primary full" type="button" onClick={handleGuestSignIn} disabled={formBusy}>
+                {busy ? 'Working' : 'Continue as Guest'}
+              </button>
+            </>
           )}
           <button className="button primary full" type="submit" disabled={formBusy}>
             {busy ? 'Working' : !authReady ? 'Checking' : authProfile ? 'Save Profile' : mode === 'signin' ? 'Sign In' : 'Create Account'}
