@@ -29,9 +29,15 @@ Then restart `npm run dev`.
    - anon/publishable key
    - service_role key
 3. In Authentication > Providers, keep Email enabled.
-4. In Authentication > URL Configuration, set:
+4. To enable Google sign-in:
+   - Create a Google OAuth Web client in Google Cloud.
+   - Add your site origin, for example `https://www.undefeatedxi.com`, under Authorized JavaScript origins.
+   - Add the Supabase Google callback URL under Authorized redirect URIs. It looks like `https://YOUR_PROJECT_REF.supabase.co/auth/v1/callback`.
+   - In Supabase Authentication > Providers > Google, enable Google and paste the Google Client ID and Client Secret.
+   - In Supabase Authentication > URL Configuration, allow your production URL, local dev URL, and any public paths that can start sign-in.
+5. In Authentication > URL Configuration, set:
    - Site URL: your production Vercel URL once you have it
-   - Redirect URLs: `http://localhost:5173`, your Vercel preview URL, and your production domain
+   - Redirect URLs: `http://localhost:5173`, `http://localhost:5173/**`, your Vercel preview URL, your production domain, and public app paths such as `https://www.undefeatedxi.com/leaderboard`
 
 ## Push Database And Functions
 
