@@ -16,12 +16,14 @@
     "data:wikidata-facts": "tsx scripts/import-wikidata-facts.ts",
     "data:coverage": "tsx scripts/coverage-report.ts",
     "audit:simulation": "tsx scripts/audit-simulation.ts",
+    "agents:eval": "tsx scripts/evaluate-agent-manager.ts",
     "smoke:supabase": "tsx scripts/smoke-supabase-flow.ts",
     "supabase:login": "npx supabase@latest login",
     "supabase:link": "npx supabase@latest link",
     "supabase:db:push": "npx supabase@latest db push",
     "supabase:function:submit": "npx supabase@latest functions deploy submit-run",
     "supabase:function:share": "npx supabase@latest functions deploy share-run",
+    "supabase:function:agents": "npx supabase@latest functions deploy agent-manager",
     "preview": "vite preview"
   },
   "dependencies": {

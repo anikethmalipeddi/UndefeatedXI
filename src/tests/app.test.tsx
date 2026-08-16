@@ -316,6 +316,7 @@ describe('App', () => {
     expect(screen.getByText(/New personal best for this mode/i)).toBeInTheDocument()
     expect(screen.getByText(/Strongest unit/i)).toBeInTheDocument()
     expect(screen.getAllByText(/Weakest unit/i).length).toBeGreaterThan(0)
+    expect(screen.getByRole('heading', { name: /Let an agent team audit your XI/i })).toBeInTheDocument()
     await waitFor(() => {
       const stored = JSON.parse(localStorage.getItem('undefeatedxi.preferences') ?? '{}') as { recentRuns?: unknown[] }
       expect(stored.recentRuns?.length).toBeGreaterThan(0)
@@ -326,6 +327,13 @@ describe('App', () => {
     expect(await screen.findByRole('button', { name: /Link copied/i })).toBeInTheDocument()
     const copiedUrl = String(writeText.mock.calls[0][0])
     expect(copiedUrl.length).toBeLessThan(12000)
+
+    await user.click(screen.getByRole('button', { name: /Run agent team/i }))
+    expect(await screen.findByText(/Deterministic local evaluator/i)).toBeInTheDocument()
+    expect(screen.getByText(/Manager plan/i)).toBeInTheDocument()
+    await user.click(screen.getByText(/Inspect agent trace and guardrails/i))
+    expect(screen.getByText('Squad scout')).toBeInTheDocument()
+    expect(screen.getByText('Risk critic')).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: /Build Another/i }))
     expect(screen.getByText(/Round 1\/11/i)).toBeInTheDocument()

@@ -1,0 +1,82 @@
+import type { AgentManagerInput, AgentObjective } from './types'
+
+const slots = ['GK', 'RB', 'CB', 'CB', 'LB', 'CM', 'CM', 'CAM', 'RW', 'ST', 'LW']
+
+export function makeAgentEvalInput(
+  objective: AgentObjective = 'balanced',
+  runId = 'IXI-EVAL2027',
+): AgentManagerInput {
+  return {
+    version: 1,
+    runId,
+    modeId: 'world_xi',
+    modeName: 'World XI',
+    formationId: '4-3-3',
+    objective,
+    targetRecord: '38-0-0',
+    record: { wins: 32, draws: 4, losses: 2 },
+    teamRatings: {
+      attack: 92,
+      finishing: 91,
+      chanceCreation: 94,
+      ballProgression: 89,
+      midfield: 88,
+      midfieldControl: 90,
+      pressResistance: 82,
+      defense: 78,
+      defensiveSolidity: 80,
+      defensiveTransitions: 72,
+      pressing: 86,
+      aerialSetPiece: 75,
+      goalkeeping: 84,
+      physicality: 81,
+      consistency: 87,
+      chemistry: 85,
+      bigGame: 91,
+      tacticalCoherence: 83,
+      eraBalance: 88,
+      dataConfidence: 93,
+      balance: 79,
+      overall: 86,
+    },
+    tactic: {
+      identity: 'High-control press',
+      summary: 'Controls possession and counter-presses aggressively.',
+      strengths: ['Elite chance creation', 'Strong final-third pressure'],
+      weaknesses: ['Space behind the fullbacks', 'Transition exposure'],
+    },
+    chemistry: {
+      score: 85,
+      roleBalance: 82,
+      warnings: ['The right side can become too attack-heavy.'],
+      bonuses: ['Complementary midfield roles.'],
+    },
+    simulation: {
+      trophyProbability: 76,
+      perfectRunProbability: 8,
+      expectedGoalsForPerMatch: 2.7,
+      expectedGoalsAgainstPerMatch: 1.1,
+      averageWinProbability: 74,
+      averageLossProbability: 8,
+    },
+    squad: slots.map((slot, index) => ({
+      player: `Eval Player ${index + 1}`,
+      slot,
+      team: index % 2 === 0 ? 'Barcelona' : 'Milan',
+      era: index < 6 ? '2010s' : '2000s',
+      primaryPositions: [slot],
+      roleTags: slot === 'GK' ? ['shot stopper'] : slot === 'ST' ? ['finisher'] : ['progressor'],
+      positionFit: index === 1 ? 72 : 92 - (index % 4),
+      ratings: {
+        attack: slot === 'ST' || slot === 'RW' || slot === 'LW' ? 94 : 78,
+        creation: slot === 'CAM' || slot === 'CM' ? 93 : 81,
+        control: slot === 'CM' || slot === 'CAM' ? 92 : 82,
+        defense: slot === 'CB' || slot === 'LB' || slot === 'RB' ? 90 : 74,
+        goalkeeping: slot === 'GK' ? 92 : 20,
+        physical: 84,
+        press: 87,
+        bigGame: 90,
+      },
+    })),
+  }
+}

@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import { type CSSProperties, type FormEvent, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
+import { AgentManagerPanel } from './components/AgentManagerPanel'
 import { brandName, targetRecordLabel } from './brand'
 import { defaultFormationId, formations, getFormation } from './data/formations'
 import { loadModePlayerContexts } from './data/modeContextLoader'
@@ -1009,6 +1010,7 @@ function App() {
         <ResultScreen
           result={result}
           picks={draftState.picks}
+          formationId={selectedFormation.formationId}
           bestRecord={bestRecords[result.modeId]}
           onShare={shareResult}
           copied={copied}
@@ -1018,6 +1020,7 @@ function App() {
           leaderboardMessage={leaderboardMessage}
           authProfile={authProfile}
           authReady={authReady}
+          onSignIn={() => setAuthOpen(true)}
           onSubmitLeaderboard={submitCurrentRun}
           onRunBack={startDraft}
           onHome={() => navigate('home')}
@@ -2524,6 +2527,7 @@ function DraftHistory({ picks }: { picks: DraftPick[] }) {
 function ResultScreen({
   result,
   picks,
+  formationId,
   bestRecord,
   onShare,
   copied,
@@ -2533,6 +2537,7 @@ function ResultScreen({
   leaderboardMessage,
   authProfile,
   authReady,
+  onSignIn,
   onSubmitLeaderboard,
   onRunBack,
   onHome,
@@ -2540,6 +2545,7 @@ function ResultScreen({
 }: {
   result: RunResult
   picks: DraftPick[]
+  formationId: string
   bestRecord?: StoredRunSummary
   onShare: () => void
   copied: boolean
@@ -2549,6 +2555,7 @@ function ResultScreen({
   leaderboardMessage: string
   authProfile: AuthProfile | null
   authReady: boolean
+  onSignIn: () => void
   onSubmitLeaderboard: () => void
   onRunBack: () => void
   onHome: () => void
@@ -2657,6 +2664,15 @@ function ResultScreen({
           <span><strong>Run ID</strong>{result.runId}</span>
         </div>
       </section>
+
+      <AgentManagerPanel
+        key={result.runId}
+        result={result}
+        picks={picks}
+        formationId={formationId}
+        cloudEnabled={Boolean(authProfile && hasSupabaseConfig)}
+        onSignIn={onSignIn}
+      />
 
       <section className="advanced">
         <details>
@@ -2935,6 +2951,10 @@ function PrivacyPage({ onBack }: { onBack: () => void }) {
       <section>
         <h2>Accounts, leaderboards, and feedback</h2>
         <p>You can play without an account. If you sign in, submit a leaderboard run, share a public run, or send feedback, Supabase stores the information needed for that feature, such as your display name, submitted result, share snapshot, or feedback text.</p>
+      </section>
+      <section>
+        <h2>Agent Lab</h2>
+        <p>The Agent Lab works locally without an account. If you sign in and choose to run the model-backed version, the app sends only the current squad, formation, ratings, tactic report, and simulation metrics to the AI service through a protected server function. It does not send your email, display name, or account profile.</p>
       </section>
       <section>
         <h2>Basic analytics</h2>

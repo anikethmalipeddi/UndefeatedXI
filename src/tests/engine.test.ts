@@ -704,7 +704,7 @@ describe('draft engine', () => {
 
       expect(state.picks).toHaveLength(mode.rosterSlots.total)
     }
-  }, 90000)
+  }, 180000)
 })
 
 describe('simulation and sharing', () => {

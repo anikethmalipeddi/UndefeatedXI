@@ -1,10 +1,36 @@
 # UndefeatedXI
 
-Can your XI go 38-0-0?
+[Play the live game](https://www.undefeatedxi.com/) · Can your XI go 38-0-0?
 
-UndefeatedXI is a mobile-first football-history draft simulator built with Vite, React, and TypeScript. Spin clubs, nations, and eras, draft legends into a real formation, then simulate whether the XI can chase 38-0-0, a perfect European run, or World Cup immortality.
+UndefeatedXI is a shipped, mobile-first football-history draft and simulation platform built with React and TypeScript. Spin clubs, nations, and eras, draft legends into a real formation, then simulate whether the XI can chase 38-0-0, a perfect European run, or World Cup immortality.
 
-This is an independent fan project. It does not use official logos, crests, player photos, FIFA-style card art, paid APIs, analytics, or cookies. Accounts, leaderboards, and durable shared links are optional Supabase features; local play works without them.
+The Agent Lab turns each completed simulation into a grounded multi-agent workflow: a scout and tactician inspect structured run data in parallel, a critic challenges their plan, and a manager produces three evidence-backed changes with an inspectable trace and rollback gate. Local deterministic agents keep it usable without an account or model key; signed-in runs can use OpenAI Structured Outputs through an authenticated, rate-limited Supabase Edge Function.
+
+This is an independent fan project. It does not use official logos, crests, player photos, FIFA-style card art, paid football APIs, ad trackers, or data-selling cookies. Accounts, leaderboards, durable shared links, and model-backed agents are optional Supabase features; the core game and local agent evaluator work without them.
+
+## Agent Lab
+
+```mermaid
+flowchart LR
+  A["Structured squad + simulation"] --> B["Context builder"]
+  B --> C["Squad scout"]
+  B --> D["Tactical analyst"]
+  C --> E["Risk critic"]
+  D --> E
+  E --> F["Manager synthesis"]
+  F --> G["3 changes + evidence + trace"]
+  C -. timeout or schema failure .-> H["Deterministic specialist"]
+  D -. timeout or schema failure .-> H
+  F -. failure .-> I["Deterministic synthesis"]
+```
+
+- Parallel specialist execution, strict JSON schemas, input/output validation, and bounded context
+- Per-user rate limiting, server-only model secrets, request timeouts, one retry, and stage-level fallbacks
+- Objective-sensitive plans for balance, attack, or resilience
+- Five-stage traces, grounded confidence, evidence on every recommendation, and regression/rollback guardrails
+- A repeatable six-case eval harness covering schemas, traces, evidence, objective sensitivity, and roster grounding
+
+See [Agent Manager architecture](docs/agent-manager.md) and [agent evals](docs/agent-evals.md).
 
 ## Playable Scope
 
@@ -39,6 +65,7 @@ npm run dev
 npm test
 npm run lint
 npm run build
+npm run agents:eval
 ```
 
 Data and provenance commands:
@@ -67,10 +94,13 @@ The app uses one shared engine with mode configs rather than separate games per 
 - `src/services/shareLinks.ts`: Supabase shared-run links with local encoded URL fallback
 - `src/engine/storage.ts`: localStorage preferences, recent runs, best records
 - `src/engine/validation.ts`: mode coverage and dataset gates
+- `src/agents/`: grounded context, deterministic multi-agent runtime, schemas, and eval fixtures
+- `src/services/agentManager.ts`: cloud orchestration with validated local recovery
+- `supabase/functions/agent-manager/`: authenticated model-backed orchestration and failure recovery
 
 ## Optional Supabase Features
 
-The core game runs fully client-side. Add these env vars only when you want guest auth, leaderboard submissions, feedback, and durable public result links:
+The core game runs fully client-side. Add these browser-safe env vars only when you want guest auth, leaderboard submissions, feedback, durable public result links, and model-backed Agent Lab runs:
 
 ```bash
 VITE_SUPABASE_URL=
@@ -78,6 +108,8 @@ VITE_SUPABASE_ANON_KEY=
 ```
 
 Supabase SQL, auth config, and Edge Function source lives under `supabase/`. Never expose a service-role key in the frontend. Full setup is in [`docs/deploy-supabase-vercel.md`](docs/deploy-supabase-vercel.md).
+
+Keep `OPENAI_API_KEY` server-side as a Supabase secret. The optional model defaults to `gpt-4.1-mini`; the local evaluator remains the fallback when the key, network, specialist, or manager stage is unavailable.
 
 ## Data Provenance
 
@@ -112,6 +144,7 @@ Before handoff or deploy:
 npm run data:ratings
 npm run data:generate
 npm run data:coverage
+npm run agents:eval
 npm test
 npm run lint
 npm run build
