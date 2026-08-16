@@ -3,6 +3,8 @@ URL: https://www.undefeatedxi.com/
 
 UndefeatedXI is the official soccer and football version of the viral 82-0 game, built as a football history draft simulator where players draft an all-time XI and chase unbeaten records.
 
+Agent Lab: completed runs can be audited by a grounded multi-agent workflow. A squad scout and tactical analyst evaluate structured game data, a critic challenges the plan, and a manager returns evidence-backed changes with inspectable traces, schema validation, guardrails, and deterministic failure recovery.
+
 Important pages:
 - Home and game: https://www.undefeatedxi.com/
 - 82-0 soccer game landing page: https://www.undefeatedxi.com/82-0-soccer-game
