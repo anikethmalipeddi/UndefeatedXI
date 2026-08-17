@@ -17,6 +17,7 @@ Every stage appears in an expandable trace. This makes the workflow understandab
 ## Failure recovery
 
 - Model requests time out after 18 seconds and retry once for rate-limit or server failures.
+- GPT-OSS uses low reasoning effort and bounded per-stage completion budgets so the three-call workflow fits Groq's Free-tier token-per-minute limit.
 - Specialists execute with `Promise.allSettled`, so one failed role cannot discard the other role's work.
 - Each specialist has a deterministic, data-grounded implementation.
 - The manager has a complete deterministic synthesis path.
