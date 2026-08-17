@@ -310,6 +310,7 @@ function groqOutputText(body: unknown): string {
 async function groqStructured<T>(
   apiKey: string,
   model: string,
+  maxCompletionTokens: number,
   name: string,
   schema: Record<string, unknown>,
   instructions: string,
@@ -330,8 +331,10 @@ async function groqStructured<T>(
             { role: 'system', content: instructions },
             { role: 'user', content: JSON.stringify(payload) },
           ],
-          max_completion_tokens: 1600,
+          max_completion_tokens: maxCompletionTokens,
           temperature: 0.2,
+          reasoning_effort: 'low',
+          include_reasoning: false,
           response_format: { type: 'json_schema', json_schema: { name, strict: true, schema } },
         }),
       })
@@ -450,6 +453,7 @@ Deno.serve(async (request) => {
         timed(() => groqStructured<SpecialistOutput>(
           apiKey,
           model,
+          800,
           'squad_scout_report',
           specialistSchema,
           'You are the squad scout in a multi-agent football simulation audit. Use only supplied facts. Identify position-fit and role-balance leverage. Never invent players or transfers. Keep recommendations concrete and concise.',
@@ -458,6 +462,7 @@ Deno.serve(async (request) => {
         timed(() => groqStructured<SpecialistOutput>(
           apiKey,
           model,
+          800,
           'tactical_analyst_report',
           specialistSchema,
           'You are the tactical analyst in a multi-agent football simulation audit. Use only supplied ratings, tactic, chemistry, and probabilities. Optimize the stated objective. Make a reversible formation or role recommendation and cite numbers.',
@@ -488,11 +493,13 @@ Deno.serve(async (request) => {
     let manager = managerFallback(input, scout, tactician)
     let managerStatus: AgentTrace['status'] = 'fallback'
     let managerDuration = 0
+    let managerFailure = ''
     if (apiKey) {
       try {
         const run = await timed(() => groqStructured<ManagerOutput>(
           apiKey,
           model,
+          1200,
           'agent_manager_report',
           managerSchema,
           'You manage a scout, tactical analyst, and risk critic. Reconcile their evidence into exactly three prioritized changes. Use only the supplied context and specialist reports. Preserve a measurable rollback gate. Do not invent players, statistics, or outside facts.',
@@ -501,7 +508,8 @@ Deno.serve(async (request) => {
         manager = run.value
         managerDuration = run.durationMs
         managerStatus = 'completed'
-      } catch {
+      } catch (error) {
+        managerFailure = error instanceof Error ? error.message : 'Groq synthesis was unavailable.'
         // The deterministic synthesis below is the intentional failure-recovery path.
       }
     }
@@ -525,7 +533,7 @@ Deno.serve(async (request) => {
       ],
       traces,
       generatedAt: new Date().toISOString(),
-      fallbackReason: managerStatus === 'fallback' ? (apiKey ? 'Groq synthesis was unavailable.' : 'The free Groq API is not configured.') : undefined,
+      fallbackReason: managerStatus === 'fallback' ? (apiKey ? managerFailure || 'Groq synthesis was unavailable.' : 'The free Groq API is not configured.') : undefined,
     })
   } catch (error) {
     return json({ error: error instanceof Error ? error.message : 'Agent workflow failed.' }, 500)
