@@ -300,18 +300,14 @@ function compactContext(input: AgentInput): Record<string, unknown> {
   }
 }
 
-function outputText(body: unknown): string {
-  if (!isRecord(body) || !Array.isArray(body.output)) return ''
-  for (const item of body.output) {
-    if (!isRecord(item) || !Array.isArray(item.content)) continue
-    for (const content of item.content) {
-      if (isRecord(content) && typeof content.text === 'string') return content.text
-    }
-  }
-  return ''
+function groqOutputText(body: unknown): string {
+  if (!isRecord(body) || !Array.isArray(body.choices)) return ''
+  const firstChoice = body.choices[0]
+  if (!isRecord(firstChoice) || !isRecord(firstChoice.message)) return ''
+  return typeof firstChoice.message.content === 'string' ? firstChoice.message.content : ''
 }
 
-async function openAiStructured<T>(
+async function groqStructured<T>(
   apiKey: string,
   model: string,
   name: string,
@@ -319,30 +315,33 @@ async function openAiStructured<T>(
   instructions: string,
   payload: unknown,
 ): Promise<T> {
-  let lastError = 'Model request failed.'
+  let lastError = 'Groq request failed.'
   for (let attempt = 0; attempt < 2; attempt += 1) {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), 18000)
     try {
-      const response = await fetch('https://api.openai.com/v1/responses', {
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         signal: controller.signal,
         headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model,
-          instructions,
-          input: JSON.stringify(payload),
-          max_output_tokens: 1600,
-          text: { format: { type: 'json_schema', name, strict: true, schema } },
+          messages: [
+            { role: 'system', content: instructions },
+            { role: 'user', content: JSON.stringify(payload) },
+          ],
+          max_completion_tokens: 1600,
+          temperature: 0.2,
+          response_format: { type: 'json_schema', json_schema: { name, strict: true, schema } },
         }),
       })
       const body = await readBody(response)
       if (response.ok) {
-        const text = outputText(body)
-        if (!text) throw new Error('Model returned no structured output.')
+        const text = groqOutputText(body)
+        if (!text) throw new Error('Groq returned no structured output.')
         return JSON.parse(text) as T
       }
-      lastError = `Model request failed with ${response.status}.`
+      lastError = `Groq request failed with ${response.status}.`
       if (response.status !== 429 && response.status < 500) break
     } catch (error) {
       lastError = error instanceof Error ? error.message : lastError
@@ -435,8 +434,8 @@ Deno.serve(async (request) => {
     const input = await request.json().catch(() => null)
     if (!validateInput(input)) return json({ error: 'Invalid agent context.' }, 400)
 
-    const model = Deno.env.get('OPENAI_MODEL') ?? 'gpt-4.1-mini'
-    const apiKey = Deno.env.get('OPENAI_API_KEY')
+    const model = Deno.env.get('GROQ_MODEL') ?? 'openai/gpt-oss-120b'
+    const apiKey = Deno.env.get('GROQ_API_KEY')
     const context = compactContext(input)
     const traces: AgentTrace[] = [trace('context', 'Context builder', 'completed', 0, `Grounded ${input.squad.length} squad profiles without account data.`)]
     let scout = specialistFallback(input, 'scout')
@@ -448,7 +447,7 @@ Deno.serve(async (request) => {
 
     if (apiKey) {
       const [scoutRun, tacticRun] = await Promise.allSettled([
-        timed(() => openAiStructured<SpecialistOutput>(
+        timed(() => groqStructured<SpecialistOutput>(
           apiKey,
           model,
           'squad_scout_report',
@@ -456,7 +455,7 @@ Deno.serve(async (request) => {
           'You are the squad scout in a multi-agent football simulation audit. Use only supplied facts. Identify position-fit and role-balance leverage. Never invent players or transfers. Keep recommendations concrete and concise.',
           context,
         )),
-        timed(() => openAiStructured<SpecialistOutput>(
+        timed(() => groqStructured<SpecialistOutput>(
           apiKey,
           model,
           'tactical_analyst_report',
@@ -491,7 +490,7 @@ Deno.serve(async (request) => {
     let managerDuration = 0
     if (apiKey) {
       try {
-        const run = await timed(() => openAiStructured<ManagerOutput>(
+        const run = await timed(() => groqStructured<ManagerOutput>(
           apiKey,
           model,
           'agent_manager_report',
@@ -512,7 +511,7 @@ Deno.serve(async (request) => {
       version: 1,
       runId: input.runId,
       objective: input.objective,
-      source: managerStatus === 'completed' ? 'openai' : 'local',
+      source: managerStatus === 'completed' ? 'groq' : 'local',
       model: managerStatus === 'completed' ? model : undefined,
       ...manager,
       risks: manager.risks.length ? manager.risks : criticRisks,
@@ -526,7 +525,7 @@ Deno.serve(async (request) => {
       ],
       traces,
       generatedAt: new Date().toISOString(),
-      fallbackReason: managerStatus === 'fallback' ? (apiKey ? 'Model synthesis was unavailable.' : 'Model-backed agents are not configured.') : undefined,
+      fallbackReason: managerStatus === 'fallback' ? (apiKey ? 'Groq synthesis was unavailable.' : 'The free Groq API is not configured.') : undefined,
     })
   } catch (error) {
     return json({ error: error instanceof Error ? error.message : 'Agent workflow failed.' }, 500)

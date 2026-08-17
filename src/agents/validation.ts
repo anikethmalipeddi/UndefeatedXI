@@ -73,7 +73,7 @@ export function parseAgentManagerReport(value: unknown, input: AgentManagerInput
     version: 1,
     runId: cleanText(value.runId, 32),
     objective: cleanObjective(value.objective, input.objective),
-    source: value.source === 'openai' ? 'openai' : 'local',
+    source: value.source === 'groq' ? 'groq' : 'local',
     model: cleanText(value.model, 80) || undefined,
     headline: cleanText(value.headline, 180),
     summary: cleanText(value.summary, 600),

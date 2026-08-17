@@ -7,7 +7,7 @@ export const agentObjectives = [
 ] as const
 
 export type AgentObjective = (typeof agentObjectives)[number]['id']
-export type AgentReportSource = 'openai' | 'local'
+export type AgentReportSource = 'groq' | 'local'
 export type AgentTraceStatus = 'completed' | 'fallback'
 
 export interface AgentSquadMember {

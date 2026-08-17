@@ -109,7 +109,7 @@ export function AgentManagerPanel({
       {report && !busy && (
         <div className="agent-report" aria-live="polite">
           <div className="agent-report-hero">
-            <span>{report.source === 'openai' ? `Model-backed · ${report.model ?? 'OpenAI'}` : 'Deterministic local evaluator'}</span>
+            <span>{report.source === 'groq' ? `Groq Free API · ${report.model ?? 'GPT-OSS 120B'}` : 'Deterministic local evaluator'}</span>
             <h3>{report.headline}</h3>
             <p>{report.summary}</p>
             <div className="agent-confidence">
