@@ -27,6 +27,7 @@ import { defaultModeId, previewModeConfigs, publicModeConfigs, getModeConfig } f
 import coverageReport from './data/generated/coverageReport.json'
 import { isBenchSlot } from './data/squad'
 import { slotMatchesPlayer } from './engine/eligibility'
+import { simulateRun } from './engine/simulation'
 import { positionFitImpact, positionFitLabel, positionFitScore } from './engine/simulationModel'
 import { formatStoredRecord, loadPreferences, recordRun, savePreferences } from './engine/storage'
 import { randomPick } from './engine/random'
@@ -711,7 +712,6 @@ function App() {
     const nextState = selectPlayerForSlot(draftState, player, slotId)
 
     if (isDraftComplete(nextState)) {
-      const { simulateRun } = await import('./engine/simulation')
       const nextResult = simulateRun(nextState.picks, selectedMode.modeId, nextState.seed)
       const nextPreferences = recordRun(
         {
