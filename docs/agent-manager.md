@@ -25,19 +25,19 @@ Every stage appears in an expandable trace. This makes the workflow understandab
 
 ## Security and privacy
 
-- `OPENAI_API_KEY` is read only inside the Supabase Edge Function and is never placed in a `VITE_` variable or browser bundle.
+- `GROQ_API_KEY` is read only inside the Supabase Edge Function and is never placed in a `VITE_` variable or browser bundle.
 - Cloud execution requires a valid Supabase user JWT; administrative database access uses server-side secrets.
 - The model receives only squad and simulation context. Email, display name, user ID, and profile metadata are excluded.
 - Input is size-bounded and field-validated; model output uses strict JSON Schema and is validated again by the client.
 - The existing `rate_limits` table is protected with RLS and unavailable to anonymous/authenticated database clients.
 
-The implementation follows the current [OpenAI Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) and [Supabase Edge Function authentication guidance](https://supabase.com/docs/guides/functions/auth).
+The implementation follows the current [Groq Structured Outputs guide](https://console.groq.com/docs/structured-outputs), [Groq Free Plan limits](https://console.groq.com/docs/rate-limits), and [Supabase Edge Function authentication guidance](https://supabase.com/docs/guides/functions/auth). Groq inference requests are not retained by default; Zero Data Retention can also be enabled in Groq's Data Controls.
 
 ## Deployment
 
 ```bash
-supabase secrets set OPENAI_API_KEY=... OPENAI_MODEL=gpt-4.1-mini
+supabase secrets set GROQ_API_KEY=... GROQ_MODEL=openai/gpt-oss-120b
 npm run supabase:function:agents
 ```
 
-The function remains usable without an OpenAI key by returning the deterministic report, but the UI labels that recovery path transparently.
+The function remains usable without a Groq key or after the free quota is exhausted by returning the deterministic report, and the UI labels that recovery path transparently. The `openai/` prefix in the default model ID names the open-weight GPT-OSS model; requests are served and metered by Groq, so no OpenAI API key or OpenAI billing account is involved.

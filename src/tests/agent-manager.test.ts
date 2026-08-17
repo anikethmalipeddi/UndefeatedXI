@@ -38,4 +38,13 @@ describe('agent manager', () => {
     expect(parseAgentManagerReport({ ...report, headline: '<script> noisy\u0000 headline </script>' }, input)?.headline)
       .toBe('<script> noisy headline </script>')
   })
+
+  it('preserves Groq as the cloud report source', () => {
+    const input = makeAgentEvalInput()
+    const report = runLocalAgentManager(input)
+    const parsed = parseAgentManagerReport({ ...report, source: 'groq', model: 'openai/gpt-oss-120b' }, input)
+
+    expect(parsed?.source).toBe('groq')
+    expect(parsed?.model).toBe('openai/gpt-oss-120b')
+  })
 })

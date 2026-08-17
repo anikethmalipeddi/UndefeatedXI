@@ -4,7 +4,7 @@
 
 UndefeatedXI is a shipped, mobile-first football-history draft and simulation platform built with React and TypeScript. Spin clubs, nations, and eras, draft legends into a real formation, then simulate whether the XI can chase 38-0-0, a perfect European run, or World Cup immortality.
 
-The Agent Lab turns each completed simulation into a grounded multi-agent workflow: a scout and tactician inspect structured run data in parallel, a critic challenges their plan, and a manager produces three evidence-backed changes with an inspectable trace and rollback gate. Local deterministic agents keep it usable without an account or model key; signed-in runs can use OpenAI Structured Outputs through an authenticated, rate-limited Supabase Edge Function.
+The Agent Lab turns each completed simulation into a grounded multi-agent workflow: a scout and tactician inspect structured run data in parallel, a critic challenges their plan, and a manager produces three evidence-backed changes with an inspectable trace and rollback gate. Local deterministic agents keep it usable without an account or model key; signed-in runs can use the Groq Free API with strict structured outputs through an authenticated, rate-limited Supabase Edge Function.
 
 This is an independent fan project. It does not use official logos, crests, player photos, FIFA-style card art, paid football APIs, ad trackers, or data-selling cookies. Accounts, leaderboards, durable shared links, and model-backed agents are optional Supabase features; the core game and local agent evaluator work without them.
 
@@ -109,7 +109,7 @@ VITE_SUPABASE_ANON_KEY=
 
 Supabase SQL, auth config, and Edge Function source lives under `supabase/`. Never expose a service-role key in the frontend. Full setup is in [`docs/deploy-supabase-vercel.md`](docs/deploy-supabase-vercel.md).
 
-Keep `OPENAI_API_KEY` server-side as a Supabase secret. The optional model defaults to `gpt-4.1-mini`; the local evaluator remains the fallback when the key, network, specialist, or manager stage is unavailable.
+Keep `GROQ_API_KEY` server-side as a Supabase secret. The optional model defaults to `openai/gpt-oss-120b`, Groq's highest-capability strict-output model currently included in its Free tier. It is an open-weight model served through Groq rather than the paid OpenAI API. The local evaluator remains the fallback when the key, free-tier quota, network, specialist, or manager stage is unavailable.
 
 ## Data Provenance
 
